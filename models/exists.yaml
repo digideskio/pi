@@ -1,0 +1,20 @@
+title: Existant
+fields:
+  text:
+    label: Texte en ligne
+    type: text
+  textarea:
+    label: Texte long
+    type: textarea
+  categories:
+    label: Catégories
+    type: checkboxes
+    options:
+      design: Design
+      programming: Programmation
+  category:
+    label: Catégorie unique
+    type: choice
+    options:
+      design: Design
+      programming: Programmation

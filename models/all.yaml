@@ -1,0 +1,53 @@
+title: Tout
+fields:
+  title:
+    label: Titre
+    type: title
+  date:
+    label: Date
+    type: date
+  author:
+    label: Utilisateur
+    type: user
+  tags:
+    label: Etiquettes
+    type: tags
+  text:
+    label: Texte long
+    type: textarea
+  street:
+    label: Texte en ligne
+    type: text
+  zip:
+    label: Nombre
+    type: number
+  phone:
+    label: Téléphone
+    type: tel
+  email:
+    label: Courriel
+    type: email
+  website:
+    label: Site
+    type: url
+  time:
+    label: Heure
+    type: time
+  categories:
+    label: Catégories
+    type: checkboxes
+    options:
+      corporate-design: Corporate design
+      illustration: Illustration
+      logo: Logo design
+      photography: Photography
+      web: Web design
+  category:
+    label: Catégories unique
+    type: choice
+    options:
+      corporate-design: Corporate design
+      illustration: Illustration
+      logo: Logo design
+      photography: Photography
+      web: Web design
