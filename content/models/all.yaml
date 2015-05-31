@@ -37,17 +37,11 @@ fields:
     label: Catégories
     type: checkboxes
     options:
-      corporate-design: Corporate design
-      illustration: Illustration
-      logo: Logo design
-      photography: Photography
-      web: Web design
+      design: Design
+      programming: Programmation
   category:
     label: Catégories unique
     type: choice
     options:
-      corporate-design: Corporate design
-      illustration: Illustration
-      logo: Logo design
-      photography: Photography
-      web: Web design
+      design: Design
+      programming: Programmation

@@ -3,16 +3,14 @@
 namespace Pi\Field;
 
 class CheckboxesField extends BaseField {
-	protected $options;
+	public $options;
 
-	public function __construct($name) {
+	public function __construct($name, $infos) {
 		$this->name         = $name;
 		$this->defaultValue = 'defaultValue';
-		
-		$this->options = [
-			'design'      => 'Design',
-			'programming' => 'Programmation'
-		];
+
+		$this->label   = $infos['label'];
+		$this->options = $infos['options'];
 	}
 
 	public function validate() {

@@ -3,9 +3,9 @@
 namespace Pi\Field;
 
 abstract class BaseField {
-	protected $name;
-	protected $label;
-	protected $defaultValue;
+	public $name;
+	public $label;
+	public $defaultValue;
 
 	public abstract function html();
 

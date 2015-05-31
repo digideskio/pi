@@ -14,14 +14,17 @@ class Form {
 			$class = ucfirst($field['type']) . 'Field';
 			$class = 'Pi\Field\\' . $class;
 
-			$this->fields[] = new $class($name);
+			$this->fields[] = new $class($name, $field);
 		}
 	}
 
 	public function html() {
 		$html = '<form method="post" action="">';
 
+		$html .= '<h1>Formulaire &laquo; ' . $this->model['title'] . ' &raquo;</h1>';
+
 		foreach ($this->fields as $name => $field) {
+			$html .= '<label>' . $field->label . '</label><br />';
 			$html .= $field->html();
 			$html .= '<br /><br />';
 		}
@@ -37,7 +40,7 @@ class Form {
 		$errors = [];
 
 		foreach ($this->fields as $field)
-			array_push($errors, $field->validate());
+			$errors[] = $field->validate();
 
 		return $errors;
 	}
