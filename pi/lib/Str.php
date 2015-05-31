@@ -32,7 +32,7 @@ class Str {
 	}
 
 	public static function lines($txt) {
-		return split(PHP_EOL, $txt);
+		return split(EOL, $txt);
 	}
 
 	public static function isURL($string) {

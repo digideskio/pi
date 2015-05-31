@@ -1,6 +1,7 @@
 <?php
 
-define('DS', DIRECTORY_SEPARATOR);
+const DS  = DIRECTORY_SEPARATOR;
+const EOL = PHP_EOL;
 
 spl_autoload_register(function($class) {
 	$el = explode('\\', $class);
@@ -21,7 +22,7 @@ spl_autoload_register(function($class) {
 	if (file_exists($file))
 		require $file;
 	else
-		throw new Exception('Le fichier "' . $file . '" n\'existe pas.');
+		throw new Exception('Le fichier &laquo; ' . $file . ' &raquo; n\'existe pas.');
 });
 
 require 'pi/vendors/spyc/Spyc.php';
@@ -29,4 +30,12 @@ require 'pi/vendors/spyc/Spyc.php';
 require 'pi/vendors/parsedown/Parsedown.php';
 require 'pi/vendors/parsedown/ParsedownExtra.php';
 
-require 'pi/pi.php';
+try {
+	require 'pi/pi.php';
+} catch (Exception $e) {
+	echo '<pre>';
+	echo $e->getMessage();
+	echo '<br /><br />';
+	echo $e->getTraceAsString();
+	echo '</pre>';
+}
