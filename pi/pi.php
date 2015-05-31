@@ -2,19 +2,14 @@
 
 namespace Pi;
 
+use Pi\Core\Form;
 use Pi\Lib\Yaml;
-use Pi\Lib\Markdown;
-use Pi\Core\Model;
 
 $model = Yaml::read('models/exists.yaml');
-$fields = $model['fields'];
 
-foreach ($fields as $name => $field) {
-	$class = ucfirst($field['type']) . 'Field';
+$form = new Form($model);
 
-	$class = 'Pi\Field\\' . $class;
+echo $form->html();
 
-	$f = new $class($name);
-
-	echo $f->html();
-}
+if (!empty($_POST))
+	var_dump($form->validate());
