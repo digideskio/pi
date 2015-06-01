@@ -4,17 +4,19 @@ namespace Pi\Field;
 
 class CheckboxesField extends BaseField {
 	public $options;
+	public $min;
+	public $max;
 
 	public function __construct($name, $infos) {
-		$this->name         = $name;
-		$this->defaultValue = 'defaultValue';
+		parent::__construct($name, $infos);
 
-		$this->label   = $infos['label'];
 		$this->options = $infos['options'];
+		$this->min     = isset($field['min']) ? $field['min'] : 0;
+		$this->max     = isset($field['max']) ? $field['max'] : false;
 	}
 
 	public function validate() {
-		return true;
+		return is_array($this->value());
 	}
 
 	public function value() {

@@ -6,10 +6,8 @@ class ChoiceField extends BaseField {
 	public $options;
 
 	public function __construct($name, $infos) {
-		$this->name         = $name;
-		$this->defaultValue = 'defaultValue';
+		parent::__construct($name, $infos);
 
-		$this->label   = $infos['label'];
 		$this->options = $infos['options'];
 	}
 

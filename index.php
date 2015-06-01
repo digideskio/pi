@@ -4,11 +4,11 @@ const DS  = DIRECTORY_SEPARATOR;
 const EOL = PHP_EOL;
 
 spl_autoload_register(function($class) {
-	$el = explode('\\', $class);
-
+	$el   = explode('\\', $class);
 	$file = __DIR__;
 
 	end($el);
+
 	$lastElementKey = key($el);
 
 	foreach ($el as $k => $e)

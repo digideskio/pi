@@ -12,7 +12,7 @@ class Form {
 
 		foreach ($this->model['fields'] as $name => $field) {
 			$class = ucfirst($field['type']) . 'Field';
-			$class = 'Pi\Field\\' . $class;
+			$class = 'Pi\\Field\\' . $class;
 
 			$this->fields[] = new $class($name, $field);
 		}
@@ -43,5 +43,14 @@ class Form {
 			$errors[] = $field->validate();
 
 		return $errors;
+	}
+
+	public function save() {
+		$infos = [];
+
+		foreach ($this->fields as $field)
+			$infos[] = $field->save();
+
+		return $infos;
 	}
 }

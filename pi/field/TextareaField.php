@@ -5,11 +5,16 @@ namespace Pi\Field;
 use Pi\Lib\Html;
 
 class TextareaField extends BaseField {
-	public function __construct($name, $infos) {
-		$this->name         = $name;
-		$this->defaultValue = 'defaultValue';
+	public $placeholder;
+	public $minLength;
+	public $maxLength;
 
-		$this->label = $infos['label'];
+	public function __construct($name, $infos) {
+		parent::__construct($name, $infos);
+
+		$this->placeholder = isset($field['placeholder']) ? $field['placeholder'] : '';
+		$this->minLength   = isset($field['minLength'])   ? $field['minLength']   : 0;
+		$this->maxLength   = isset($field['maxLength'])   ? $field['maxLength']   : false;
 	}
 
 	public function html() {

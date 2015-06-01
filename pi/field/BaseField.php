@@ -2,12 +2,23 @@
 
 namespace Pi\Field;
 
-abstract class BaseField {
+class BaseField {
 	public $name;
 	public $label;
-	public $defaultValue;
+	public $default;
+	public $required;
 
-	public abstract function html();
+	public function __construct($name, $field) {
+		$this->name = $name;
+
+		$this->label    = isset($field['label'])    ? $field['label']    : '';
+		$this->default  = isset($field['default'])  ? $field['default']  : '';
+		$this->required = isset($field['required']) ? $field['required'] : '';
+	}
+
+	public function html() {
+		return '';
+	}
 
 	public function validate() {
 		return !empty($this->value());
