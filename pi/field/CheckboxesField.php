@@ -7,12 +7,12 @@ class CheckboxesField extends BaseField {
 	public $min;
 	public $max;
 
-	public function __construct($name, $infos) {
-		parent::__construct($name, $infos);
+	public function __construct($data) {
+		parent::__construct($data);
 
-		$this->options = $infos['options'];
-		$this->min     = isset($field['min']) ? $field['min'] : 0;
-		$this->max     = isset($field['max']) ? $field['max'] : false;
+		$this->options = isset($data['options']) ? $data['options'] : [];
+		$this->min     = isset($data['min'])     ? $data['min']     : 0;
+		$this->max     = isset($data['max'])     ? $data['max']     : false;
 	}
 
 	public function validate() {

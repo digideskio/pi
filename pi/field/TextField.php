@@ -10,12 +10,12 @@ class TextField extends BaseField {
 	public $minLength;
 	public $maxLength;
 
-	public function __construct($name, $infos) {
-		parent::__construct($name, $infos);
+	public function __construct($data) {
+		parent::__construct($data);
 
-		$this->placeholder = isset($field['placeholder']) ? $field['placeholder'] : '';
-		$this->minLength   = isset($field['minLength'])   ? $field['minLength']   : 0;
-		$this->maxLength   = isset($field['maxLength'])   ? $field['maxLength']   : false;
+		$this->placeholder = isset($data['placeholder']) ? $data['placeholder'] : '';
+		$this->minLength   = isset($data['minLength'])   ? $data['minLength']   : 0;
+		$this->maxLength   = isset($data['maxLength'])   ? $data['maxLength']   : false;
 	}
 
 	public function html() {

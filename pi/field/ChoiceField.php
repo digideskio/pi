@@ -5,10 +5,10 @@ namespace Pi\Field;
 class ChoiceField extends BaseField {
 	public $options;
 
-	public function __construct($name, $infos) {
-		parent::__construct($name, $infos);
+	public function __construct($data) {
+		parent::__construct($data);
 
-		$this->options = $infos['options'];
+		$this->options = isset($data['options']) ? $data['options'] : [];
 	}
 
 	public function html() {

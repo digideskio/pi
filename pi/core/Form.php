@@ -14,7 +14,9 @@ class Form {
 			$class = ucfirst($field['type']) . 'Field';
 			$class = 'Pi\\Field\\' . $class;
 
-			$this->fields[] = new $class($name, $field);
+			$field['name'] = $name;
+
+			$this->fields[] = new $class($field);
 		}
 	}
 
