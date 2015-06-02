@@ -20,9 +20,10 @@ class TextField extends BaseField {
 
 	public function html() {
 		return Html::tag('input', [
-			'type'  => 'text',
-			'name'  => $this->name,
-			'value' => $this->value()
+			'type'     => 'text',
+			'name'     => $this->name,
+			'value'    => $this->value(),
+			'required' => $this->required
 		]);
 	}
 }

@@ -12,7 +12,7 @@ abstract class BaseField {
 		$this->name     = isset($data['name'])     ? $data['name']     : '';
 		$this->label    = isset($data['label'])    ? $data['label']    : '';
 		$this->default  = isset($data['default'])  ? $data['default']  : '';
-		$this->required = isset($data['required']) ? $data['required'] : '';
+		$this->required = isset($data['required']) ? $data['required'] : false;
 	}
 
 	public function html() {
@@ -20,7 +20,10 @@ abstract class BaseField {
 	}
 
 	public function validate() {
-		return !empty($this->value());
+		if ($this->required)
+			return !empty($this->value());
+		else
+			return true;
 	}
 
 	public function value() {

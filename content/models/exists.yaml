@@ -3,9 +3,11 @@ fields:
   text:
     label: Texte en ligne
     type: text
+    required: true
   textarea:
     label: Texte long
     type: textarea
+    required: true
   categories:
     label: Catégories
     type: checkboxes

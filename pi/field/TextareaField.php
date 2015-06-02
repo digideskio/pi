@@ -19,8 +19,9 @@ class TextareaField extends BaseField {
 
 	public function html() {
 		return Html::tag('textarea', [
-			'type' => 'text',
-			'name' => $this->name
+			'type'     => 'text',
+			'name'     => $this->name,
+			'required' => $this->required
 		], $this->value());
 	}
 }

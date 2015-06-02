@@ -14,7 +14,10 @@ class Html {
 		$html = '<' . $name;
 
 		foreach ($attr as $key => $value)
-			$html .= ' ' . $key . '="' . $value . '"';
+			if (is_bool($value) && $value)
+				$html .= ' ' . $key;
+			else
+				$html .= ' ' . $key . '="' . $value . '"';
 
 		if (in_array($name, static::$inlineTags))
 			$html .= ' />';
