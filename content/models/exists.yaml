@@ -63,3 +63,19 @@ fields:
   time:
     label: Heure
     type: time
+  title:
+    label: Titre
+    type: title
+  author:
+    label: Utilisateur
+    type: user
+  tags:
+    label: Etiquettes
+    type: tags
+  color:
+    label: Couleur
+    type: color
+    format: rgb|rgba|hex
+  slug:
+    label: Slug
+    type: slug
