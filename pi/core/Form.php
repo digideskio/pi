@@ -51,7 +51,7 @@ class Form {
 		$infos = [];
 
 		foreach ($this->fields as $field)
-			$infos[] = $field->save();
+			$infos[$field->name] = $field->save();
 
 		return $infos;
 	}

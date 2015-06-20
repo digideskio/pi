@@ -19,11 +19,15 @@ class TextField extends BaseField {
 	}
 
 	public function html() {
-		return Html::tag('input', [
-			'type'     => 'text',
-			'name'     => $this->name,
-			'value'    => $this->value(),
-			'required' => $this->required
-		]);
+		$attr = [
+			'type'  => 'text',
+			'name'  => $this->name,
+			'value' => $this->value()
+		];
+
+		if ($this->required)
+			$attr['required'] = 'required';
+
+		return Html::tag('input', $attr);
 	}
 }

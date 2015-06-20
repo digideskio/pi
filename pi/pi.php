@@ -11,5 +11,11 @@ $form = new Form($model);
 
 echo $form->html();
 
-if (!empty($_POST))
+if (!empty($_POST)) {
+	echo '<pre>';
 	var_dump($form->validate());
+
+	Yaml::write(time() . '.yaml', $form->save());
+
+	echo '</pre>';
+}

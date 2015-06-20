@@ -2,6 +2,8 @@
 
 namespace Pi\Field;
 
+use Pi\Lib\Html;
+
 class CheckboxesField extends BaseField {
 	public $options;
 	public $min;
@@ -26,10 +28,18 @@ class CheckboxesField extends BaseField {
 	public function html() {
 		$html = '';
 
-		foreach ($this->options as $key => $value)
-			$html .= '<input type="checkbox" name="' . $this->name . '[]" value="' . $key . '" /> ' . $value;
+		foreach ($this->options as $key => $value) {
+			$attr = [
+				'type'  => 'checkbox',
+				'name'  => $this->name . '[]',
+				'value' => $key
+			];
 
-		$html .= '</select>';
+			if ($this->required)
+				$attr['required'] = 'required';
+
+			$html .= Html::tag('input', $attr) . ' ' . $value;
+		}
 
 		return $html;
 	}
