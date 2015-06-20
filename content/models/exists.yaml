@@ -4,13 +4,20 @@ fields:
     label: Texte en ligne
     type: text
     required: true
+    default: Bonjour
+    placeholder: Texte en ligne
   textarea:
     label: Texte long
     type: textarea
     required: true
+    default: Message
+    placeholder: Message
   categories:
     label: Catégories
     type: checkboxes
+    default:
+      - design
+      - programming
     options:
       design: Design
       programming: Programmation
@@ -18,7 +25,15 @@ fields:
   category:
     label: Catégorie unique
     type: choice
+    default: graphics
     options:
       design: Design
       programming: Programmation
       graphics: Graphisme
+  progression:
+    label: Avancement
+    type: range
+    min: 0
+    max: 10
+    range: 2
+    default: 8

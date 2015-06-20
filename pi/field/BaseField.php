@@ -9,14 +9,16 @@ abstract class BaseField {
 	public $label;
 	public $default;
 	public $required;
+	public $placeholder;
 
 	public function __construct($data) {
 		self::$num++;
 
-		$this->name     = isset($data['name'])     ? $data['name']     : '';
-		$this->label    = isset($data['label'])    ? $data['label']    : '';
-		$this->default  = isset($data['default'])  ? $data['default']  : '';
-		$this->required = isset($data['required']) ? $data['required'] : false;
+		$this->name        = isset($data['name'])        ? $data['name']        : '';
+		$this->label       = isset($data['label'])       ? $data['label']       : '';
+		$this->default     = isset($data['default'])     ? $data['default']     : '';
+		$this->required    = isset($data['required'])    ? $data['required']    : false;
+		$this->placeholder = isset($data['placeholder']) ? $data['placeholder'] : '';
 	}
 
 	public function html() {
@@ -31,7 +33,7 @@ abstract class BaseField {
 	}
 
 	public function value() {
-		return isset($_POST[$this->name]) ? $_POST[$this->name] : '';
+		return isset($_POST[$this->name]) ? $_POST[$this->name] : $this->default;
 	}
 
 	public function save() {

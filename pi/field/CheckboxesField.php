@@ -23,21 +23,33 @@ class CheckboxesField extends BaseField {
 	}
 
 	public function value() {
-		return isset($_POST[$this->name]) ? $_POST[$this->name] : [];
+		if (isset($_POST)) {
+			if (isset($_POST[$this->name]))
+				return $_POST[$this->name];
+			else
+				return [];
+		} else {
+			return $this->default;
+		}
 	}
 
 	public function html() {
+		$values = $this->value();
+
 		$html = '';
 
 		foreach ($this->options as $key => $value) {
 			$tag = new Tag('input', [
 				'type'  => 'checkbox',
 				'name'  => $this->name . '[]',
-				'value' => 'dev'
+				'value' => $key
 			]);
 
 			if ($this->required)
 				$tag->addAttr('required');
+
+			if (in_array($key, $values))
+				$tag->addAttr('checked');
 
 			$html .= $tag . ' ' . $value;
 		}

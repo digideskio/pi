@@ -28,6 +28,9 @@ class TextField extends BaseField {
 		if ($this->required)
 			$tag->addAttr('required');
 
+		if ($this->placeholder)
+			$tag->addAttr('placeholder', $this->placeholder);
+
 		return $tag;
 	}
 }

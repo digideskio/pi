@@ -43,6 +43,10 @@ class Tag {
       $this->removeAttr($key);
   }
 
+	public function setContent($content) {
+		$this->content = $content;
+	}
+
   public function __toString() {
 		$html = '<' . $this->name;
 

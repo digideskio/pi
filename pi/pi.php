@@ -13,9 +13,11 @@ echo $form->html();
 
 if (!empty($_POST)) {
 	echo '<pre>';
-	var_dump($form->validate());
+	//var_dump($form->validate());
 
-	Yaml::write(time() . '.yaml', $form->save());
+	var_dump($form->save());
+
+	// Yaml::write(time() . '.yaml', $form->save());
 
 	echo '</pre>';
 }

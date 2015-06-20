@@ -12,10 +12,15 @@ class ChoiceField extends BaseField {
 	}
 
 	public function html() {
+		$val = $this->value();
+
 		$html = '<select name="' . $this->name . '"' . ($this->required ? ' required' : '') . '>';
 
-		foreach ($this->options as $key => $value)
-			$html .= '<option value="' . $key . '">' . $value . '</option>';
+		foreach ($this->options as $key => $value) {
+		 	$selected = $key == $val ? ' selected' : '';
+
+			$html .= '<option value="' . $key . '"' . $selected . '>' . $value . '</option>';
+		}
 
 		$html .= '</select>';
 
