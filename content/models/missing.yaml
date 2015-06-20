@@ -1,0 +1,29 @@
+title: Tout
+fields:
+  title:
+    label: Titre
+    type: title
+  date:
+    label: Date
+    type: date
+  author:
+    label: Utilisateur
+    type: user
+  tags:
+    label: Etiquettes
+    type: tags
+  number:
+    label: Nombre
+    type: number
+  phone:
+    label: Téléphone
+    type: tel
+  email:
+    label: Courriel
+    type: email
+  website:
+    label: Site
+    type: url
+  time:
+    label: Heure
+    type: time
