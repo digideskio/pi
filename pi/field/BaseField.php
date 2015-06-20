@@ -3,12 +3,16 @@
 namespace Pi\Field;
 
 abstract class BaseField {
+	private static $num = 0;
+
 	public $name;
 	public $label;
 	public $default;
 	public $required;
 
 	public function __construct($data) {
+		self::$num++;
+
 		$this->name     = isset($data['name'])     ? $data['name']     : '';
 		$this->label    = isset($data['label'])    ? $data['label']    : '';
 		$this->default  = isset($data['default'])  ? $data['default']  : '';

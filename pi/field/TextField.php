@@ -2,7 +2,7 @@
 
 namespace Pi\Field;
 
-use Pi\Lib\Html;
+use Pi\Lib\Html\Tag;
 use Pi\Field\BaseField;
 
 class TextField extends BaseField {
@@ -19,15 +19,15 @@ class TextField extends BaseField {
 	}
 
 	public function html() {
-		$attr = [
+		$tag = new Tag('input', [
 			'type'  => 'text',
 			'name'  => $this->name,
 			'value' => $this->value()
-		];
+		]);
 
 		if ($this->required)
-			$attr['required'] = 'required';
+			$tag->addAttr('required');
 
-		return Html::tag('input', $attr);
+		return $tag;
 	}
 }

@@ -2,7 +2,7 @@
 
 namespace Pi\Field;
 
-use Pi\Lib\Html;
+use Pi\Lib\Html\Tag;
 
 class TextareaField extends BaseField {
 	public $placeholder;
@@ -18,14 +18,14 @@ class TextareaField extends BaseField {
 	}
 
 	public function html() {
-		$attr = [
+		$tag = new Tag('textarea', [
 			'type' => 'text',
 			'name' => $this->name
-		];
+		], $this->value());
 
 		if ($this->required)
-			$attr['required'] = 'required';
+			$tag->addAttr('required');
 
-		return Html::tag('textarea', $attr, $this->value());
+		return $tag;
 	}
 }

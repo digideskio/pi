@@ -3,6 +3,7 @@
 namespace Pi\Field;
 
 use Pi\Lib\Html;
+use Pi\Lib\Html\Tag;
 
 class CheckboxesField extends BaseField {
 	public $options;
@@ -29,16 +30,16 @@ class CheckboxesField extends BaseField {
 		$html = '';
 
 		foreach ($this->options as $key => $value) {
-			$attr = [
+			$tag = new Tag('input', [
 				'type'  => 'checkbox',
 				'name'  => $this->name . '[]',
-				'value' => $key
-			];
+				'value' => 'dev'
+			]);
 
 			if ($this->required)
-				$attr['required'] = 'required';
+				$tag->addAttr('required');
 
-			$html .= Html::tag('input', $attr) . ' ' . $value;
+			$html .= $tag . ' ' . $value;
 		}
 
 		return $html;
