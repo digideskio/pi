@@ -4,7 +4,7 @@ namespace Pi\Field;
 
 use Pi\Lib\Html\Tag;
 
-class TextareaField extends BaseField {
+class TelField extends BaseField {
 	public $minLength;
 	public $maxLength;
 
@@ -16,10 +16,11 @@ class TextareaField extends BaseField {
 	}
 
 	public function html() {
-		$tag = new Tag('textarea', [
-			'type' => 'text',
-			'name' => $this->name
-		], $this->value());
+		$tag = new Tag('input', [
+			'name'  => $this->name,
+			'type'  => 'tel',
+			'value' => $this->value()
+		]);
 
 		if ($this->required)
 			$tag->addAttr('required');

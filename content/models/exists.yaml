@@ -40,3 +40,26 @@ fields:
   password:
     label: Mot de passe
     type: password
+  date:
+    label: Date
+    type: date
+  number:
+    label: Nombre
+    type: number
+    min: 1900
+    max: 2100
+    step: 1
+    default: 1990
+  phone:
+    label: Téléphone
+    type: tel
+  email:
+    label: Courriel
+    type: email
+    placeholder: Courriel
+  website:
+    label: Site
+    type: url
+  time:
+    label: Heure
+    type: time
