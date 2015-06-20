@@ -11,8 +11,8 @@ class NumberField extends BaseField {
 	public function __construct($data) {
 		parent::__construct($data);
 
-		$this->minLength   = isset($data['minLength'])   ? $data['minLength']   : 0;
-		$this->maxLength   = isset($data['maxLength'])   ? $data['maxLength']   : false;
+		$this->minLength = isset($data['minLength']) ? $data['minLength'] : 0;
+		$this->maxLength = isset($data['maxLength']) ? $data['maxLength'] : false;
 
 		$this->min  = isset($data['min'])  ? $data['min']  : 0;
 		$this->max  = isset($data['max'])  ? $data['max']  : 100;

@@ -11,8 +11,8 @@ class TimeField extends BaseField {
 	public function __construct($data) {
 		parent::__construct($data);
 
-		$this->minLength   = isset($data['minLength'])   ? $data['minLength']   : 0;
-		$this->maxLength   = isset($data['maxLength'])   ? $data['maxLength']   : false;
+		$this->minLength = isset($data['minLength']) ? $data['minLength'] : 0;
+		$this->maxLength = isset($data['maxLength']) ? $data['maxLength'] : false;
 	}
 
 	public function html() {
