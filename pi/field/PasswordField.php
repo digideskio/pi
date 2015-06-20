@@ -9,10 +9,6 @@ class PasswordField extends BaseField {
 		parent::__construct($data);
 	}
 
-	public function validate() {
-		return is_array($this->value());
-	}
-
 	public function html() {
 		$tag = new Tag('input', [
 			'name'  => $this->name,

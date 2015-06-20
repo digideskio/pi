@@ -42,7 +42,7 @@ class Form {
 		$errors = [];
 
 		foreach ($this->fields as $field)
-			$errors[] = $field->validate();
+			$errors[$field->name] = $field->validate();
 
 		return $errors;
 	}
