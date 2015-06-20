@@ -3,7 +3,10 @@ Champs
 
 ### Les champs et leurs valeurs possibles
 
-    .
+    y = implémenté
+    n = non implémenté
+    x = indéterminé
+
                  +-------+---------+----------+---------+-------------+---------+-----+-----+------+--------+
                  | label | default | required | message | placeholder | options | min | max | step | format |
     +------------+-------+---------+----------+---------+-------------+---------+-----+-----+------+--------+
@@ -75,7 +78,7 @@ Partie incomplète.
 
 - format (String)
   Le format que doit respecter le champ
-  Valeur possibles :
+  Valeurs possibles :
   - date
     - dd/mm/yyyy
     - mm/dd/yyyy

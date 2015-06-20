@@ -5,16 +5,10 @@ namespace Pi\Field;
 use Pi\Lib\Html\Tag;
 
 class CheckboxesField extends BaseField {
-	public $options;
-	public $min;
-	public $max;
-
 	public function __construct($data) {
 		parent::__construct($data);
 
-		$this->options = isset($data['options']) ? $data['options'] : [];
-		$this->min     = isset($data['min'])     ? $data['min']     : 0;
-		$this->max     = isset($data['max'])     ? $data['max']     : false;
+		$this->default = isset($data['default']) ? $data['default'] : [];
 	}
 
 	public function validate() {
@@ -22,7 +16,7 @@ class CheckboxesField extends BaseField {
 	}
 
 	public function value() {
-		if (isset($_POST)) {
+		if (!empty($_POST)) {
 			if (isset($_POST[$this->name]))
 				return $_POST[$this->name];
 			else
