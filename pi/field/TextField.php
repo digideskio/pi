@@ -3,7 +3,6 @@
 namespace Pi\Field;
 
 use Pi\Lib\Html\Tag;
-use Pi\Field\BaseField;
 
 class TextField extends BaseField {
 	public $placeholder;
@@ -20,8 +19,8 @@ class TextField extends BaseField {
 
 	public function html() {
 		$tag = new Tag('input', [
-			'type'  => 'text',
 			'name'  => $this->name,
+			'type'  => 'text',
 			'value' => $this->value()
 		]);
 

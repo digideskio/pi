@@ -23,6 +23,7 @@ class RangeField extends BaseField {
 
 	public function html() {
     $tag = new Tag('input', [
+			'name'  => $this->name,
       'type'  => 'range',
       'min'   => $this->min,
       'max'   => $this->max,

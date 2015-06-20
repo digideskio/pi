@@ -3,7 +3,7 @@
 namespace Pi\Field;
 
 abstract class BaseField {
-	private static $num = 0;
+	protected static $num = 0;
 
 	public $name;
 	public $label;

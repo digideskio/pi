@@ -37,3 +37,6 @@ fields:
     max: 10
     range: 2
     default: 8
+  password:
+    label: Mot de passe
+    type: password

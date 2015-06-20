@@ -12,12 +12,13 @@ $form = new Form($model);
 echo $form->html();
 
 if (!empty($_POST)) {
+	$valid = !in_array(false, $form->validate());
+
 	echo '<pre>';
-	//var_dump($form->validate());
-
+	var_dump($form->validate());
 	var_dump($form->save());
-
-	// Yaml::write(time() . '.yaml', $form->save());
-
 	echo '</pre>';
+
+	if ($valid)
+		Yaml::write(time() . '.yaml', $form->save());
 }

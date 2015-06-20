@@ -2,7 +2,6 @@
 
 namespace Pi\Field;
 
-use Pi\Lib\Html;
 use Pi\Lib\Html\Tag;
 
 class CheckboxesField extends BaseField {

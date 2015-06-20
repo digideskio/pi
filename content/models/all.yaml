@@ -9,6 +9,9 @@ fields:
   author:
     label: Utilisateur
     type: user
+  range:
+    label: Variation
+    type: range
   tags:
     label: Etiquettes
     type: tags
