@@ -25,11 +25,37 @@ class Form {
 
 		$html .= '<h1>Formulaire &laquo; ' . $this->model['title'] . ' &raquo;</h1>';
 
+		$html .= '<div class="row">';
 		foreach ($this->fields as $name => $field) {
+			switch ($field->width) {
+				case '1/2':
+					$width = 'col-xs-6'; break;
+
+				case '1/3':
+					$width = 'col-xs-4'; break;
+
+				case '2/3':
+					$width = 'col-xs-8'; break;
+
+				case '1/4':
+					$width = 'col-xs-3'; break;
+
+				case '3/4':
+					$width = 'col-xs-9'; break;
+
+				default:
+					$width = 'col-xs-12';
+			}
+
+			$html .= '<div class="' . $width . '">';
+
 			$html .= '<label for="input-' . $field->id . '">' . $field->label . '</label><br />';
 			$html .= $field->html();
-			$html .= '<br /><br />';
+
+			$html .= '</div> ';
 		}
+
+		$html .= '</div>';
 
 		$html .= '<input type="submit" value="Valider" />';
 

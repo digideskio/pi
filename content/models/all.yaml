@@ -32,6 +32,13 @@ fields:
   password:
     label: Mot de passe
     type: password
+  radio:
+    label: Catégorie unique
+    type: radio
+    options:
+      design: Design
+      programming: Programmation
+      graphics: Graphisme
   range:
     label: Avancement
     type: range

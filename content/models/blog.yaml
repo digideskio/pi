@@ -1,0 +1,39 @@
+title: Blog
+fields:
+	title:
+		label: Titre
+		type: title
+	checkboxes:
+		label: Catégories
+		type: checkboxes
+		width: 1/4
+		options:
+			design: Design
+			programming: Programmation
+			graphics: Graphisme
+	date:
+		label: Date de publication
+		message: 'Format : yyyy-mm-dd'
+		type: date
+		width: 1/4
+		default: today
+	status:
+		label: Statut
+		type: choice
+		width: 1/4
+		default: draft
+		options:
+			draft: Brouillon
+			private: Accessible via l'URL
+			published: Public
+	comments:
+		label: Commentaires
+		type: radio
+		width: 1/4
+		default: 'no'
+		options:
+			no: Non
+			yes: Oui
+	contenu:
+		label: Contenu
+		type: textarea

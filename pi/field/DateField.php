@@ -7,6 +7,9 @@ use Pi\Lib\Html\Tag;
 class DateField extends BaseField {
 	public function __construct($data) {
 		parent::__construct($data);
+
+		if ($this->default == 'today')
+			$this->default = strftime('%Y-%m-%d', time());
 	}
 
 	public function html() {

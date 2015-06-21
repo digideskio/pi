@@ -11,6 +11,7 @@ abstract class BaseField {
 	protected $default;
 	protected $required;
 	protected $message;
+	public $width;
 	protected $placeholder;
 	protected $options;
 	protected $min;
@@ -26,6 +27,7 @@ abstract class BaseField {
 		$this->default     = isset($data['default'])     ? $data['default']     : '';
 		$this->required    = isset($data['required'])    ? $data['required']    : false;
 		$this->message     = isset($data['message'])     ? $data['message']     : '';
+		$this->width       = isset($data['width'])       ? $data['width']       : null;
 		$this->placeholder = isset($data['placeholder']) ? $data['placeholder'] : '';
 		$this->options     = isset($data['options'])     ? $data['options']     : [];
 		$this->min         = isset($data['min'])         ? $data['min']         : 0;

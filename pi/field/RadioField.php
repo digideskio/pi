@@ -4,15 +4,9 @@ namespace Pi\Field;
 
 use Pi\Lib\Html\Tag;
 
-class CheckboxesField extends BaseField {
+class RadioField extends BaseField {
 	public function __construct($data) {
 		parent::__construct($data);
-
-		$this->default = isset($data['default']) ? $data['default'] : [];
-	}
-
-	public function validate() {
-		return is_array($this->value());
 	}
 
 	public function value() {
@@ -20,21 +14,23 @@ class CheckboxesField extends BaseField {
 			if (isset($_POST[$this->name]))
 				return $_POST[$this->name];
 			else
-				return [];
+				return '-';
 		} else {
 			return $this->default;
 		}
 	}
 
 	public function html() {
-		$values = $this->value();
-
 		$html = '';
+
+		$val = $this->value();
+
+		var_dump($val);
 
 		foreach ($this->options as $key => $value) {
 			$tag = new Tag('input', [
-				'type'  => 'checkbox',
-				'name'  => $this->name . '[]',
+				'type'  => 'radio',
+				'name'  => $this->name,
 				'value' => $key,
 				'id'    => 'input-' . $this->id
 			]);
@@ -42,7 +38,7 @@ class CheckboxesField extends BaseField {
 			if ($this->required)
 				$tag->addAttr('required');
 
-			if (in_array($key, $values))
+			if ($key == $val)
 				$tag->addAttr('checked');
 
 			$html .= $tag . ' <label for="input-' . $this->id . '">' . $value . '</label>';
