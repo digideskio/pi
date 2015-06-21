@@ -5,7 +5,7 @@ namespace Pi;
 use Pi\Core\Form;
 use Pi\Lib\Yaml;
 
-$model = Yaml::read('content/models/exists.yaml');
+$model = Yaml::read('content/models/all.yaml');
 
 $form = new Form($model);
 
