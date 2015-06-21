@@ -13,7 +13,8 @@ class EmailField extends BaseField {
 		$tag = new Tag('input', [
 			'name'  => $this->name,
 			'type'  => 'email',
-			'value' => $this->value()
+			'value' => $this->value(),
+			'id'    => 'input-' . $this->id
 		]);
 
 		if ($this->required)

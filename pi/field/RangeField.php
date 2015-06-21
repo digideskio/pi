@@ -24,7 +24,8 @@ class RangeField extends BaseField {
       'min'   => $this->min,
       'max'   => $this->max,
       'step'  => $this->step,
-      'value' => $this->value()
+      'value' => $this->value(),
+			'id'    => 'input-' . $this->id
     ]);
 
     return $tag;

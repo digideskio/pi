@@ -13,7 +13,8 @@ class FileField extends BaseField {
 		$tag = new Tag('input', [
 			'name'  => $this->name,
 			'type'  => 'file',
-			'value' => $this->value()
+			'value' => $this->value(),
+			'id'    => 'input-' . $this->id
 		]);
 
 		if ($this->required)

@@ -26,7 +26,7 @@ class Form {
 		$html .= '<h1>Formulaire &laquo; ' . $this->model['title'] . ' &raquo;</h1>';
 
 		foreach ($this->fields as $name => $field) {
-			$html .= '<label>' . $field->label . '</label><br />';
+			$html .= '<label for="input-' . $field->id . '">' . $field->label . '</label><br />';
 			$html .= $field->html();
 			$html .= '<br /><br />';
 		}

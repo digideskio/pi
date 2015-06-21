@@ -13,7 +13,8 @@ class PasswordField extends BaseField {
 		$tag = new Tag('input', [
 			'name'  => $this->name,
 			'type'  => 'password',
-			'value' => $this->value()
+			'value' => $this->value(),
+			'id'    => 'input-' . $this->id
     ]);
 
 		if ($this->required)

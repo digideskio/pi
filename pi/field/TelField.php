@@ -13,7 +13,8 @@ class TelField extends BaseField {
 		$tag = new Tag('input', [
 			'name'  => $this->name,
 			'type'  => 'tel',
-			'value' => $this->value()
+			'value' => $this->value(),
+			'id'    => 'input-' . $this->id
 		]);
 
 		if ($this->required)

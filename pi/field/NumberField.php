@@ -24,7 +24,8 @@ class NumberField extends BaseField {
 			'value' => $this->value(),
 			'min'   => $this->min,
 			'max'   => $this->max,
-			'step'  => $this->step
+			'step'  => $this->step,
+			'id'    => 'input-' . $this->id
 		]);
 
 		if ($this->required)

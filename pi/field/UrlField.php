@@ -13,7 +13,8 @@ class UrlField extends BaseField {
 		$tag = new Tag('input', [
 			'name'  => $this->name,
 			'type'  => 'url',
-			'value' => $this->value()
+			'value' => $this->value(),
+			'id'    => 'input-' . $this->id
 		]);
 
 		if ($this->required)

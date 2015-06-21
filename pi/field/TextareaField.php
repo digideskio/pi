@@ -12,7 +12,8 @@ class TextareaField extends BaseField {
 	public function html() {
 		$tag = new Tag('textarea', [
 			'type' => 'text',
-			'name' => $this->name
+			'name' => $this->name,
+			'id'    => 'input-' . $this->id
 		], $this->value());
 
 		if ($this->required)

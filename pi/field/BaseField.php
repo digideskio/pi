@@ -5,6 +5,7 @@ namespace Pi\Field;
 abstract class BaseField {
 	protected static $num = 0;
 
+	public $id;
 	public $name;
 	public $label;
 	protected $default;
@@ -18,7 +19,7 @@ abstract class BaseField {
 	protected $format;
 
   public function __construct($data) {
-		self::$num++;
+		$this->id = ++self::$num;
 
 		$this->name        = isset($data['name'])        ? $data['name']        : '';
 		$this->label       = isset($data['label'])       ? $data['label']       : '';

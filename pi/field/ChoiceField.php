@@ -10,7 +10,7 @@ class ChoiceField extends BaseField {
 	public function html() {
 		$val = $this->value();
 
-		$html = '<select name="' . $this->name . '"' . ($this->required ? ' required' : '') . '>';
+		$html = '<select name="' . $this->name . '"' . ($this->required ? ' required' : '') . ' id="input-' . $this->id . '">';
 
 		foreach ($this->options as $key => $value) {
 		 	$selected = $key == $val ? ' selected' : '';
