@@ -25,8 +25,6 @@ class RadioField extends BaseField {
 
 		$val = $this->value();
 
-		var_dump($val);
-
 		foreach ($this->options as $key => $value) {
 			$tag = new Tag('input', [
 				'type'  => 'radio',
