@@ -1,61 +1,64 @@
 title: Existant
 fields:
-  text:
-    label: Texte en ligne
-    type: text
-  textarea:
-    label: Texte long
-    type: textarea
-  categories:
+  checkboxes:
     label: Catégories
     type: checkboxes
     options:
       design: Design
       programming: Programmation
       graphics: Graphisme
-  category:
+  choice:
     label: Catégorie unique
     type: choice
     options:
       design: Design
       programming: Programmation
       graphics: Graphisme
-  progression:
-    label: Avancement
-    type: range
-  password:
-    label: Mot de passe
-    type: password
+  color:
+    label: Couleur
+    type: color
   date:
     label: Date
     type: date
-  number:
-    label: Nombre
-    type: number
-  phone:
-    label: Téléphone
-    type: tel
   email:
     label: Courriel
     type: email
-  website:
-    label: Site
-    type: url
+  file:
+    label: Fichier
+    type: file
+  number:
+    label: Nombre
+    type: number
+  password:
+    label: Mot de passe
+    type: password
+  range:
+    label: Avancement
+    type: range
+  slug:
+    label: Slug
+    type: slug
+  tags:
+    label: Etiquettes
+    type: tags
+  tel:
+    label: Téléphone
+    type: tel
+  textarea:
+    label: Texte long
+    type: textarea
+  text:
+    label: Texte en ligne
+    type: text
   time:
     label: Heure
     type: time
   title:
     label: Titre
     type: title
-  author:
+  url:
+    label: Site
+    type: url
+  user:
     label: Utilisateur
     type: user
-  tags:
-    label: Etiquettes
-    type: tags
-  color:
-    label: Couleur
-    type: color
-  slug:
-    label: Slug
-    type: slug

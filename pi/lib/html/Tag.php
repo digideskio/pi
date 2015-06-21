@@ -3,21 +3,21 @@
 namespace Pi\Lib\Html;
 
 class Tag {
-	protected static $inlineTags = [
-		'br',
-		'hr',
-		'img',
-		'input'
-	];
-
+  protected static $inlineTags = [
+    'br',
+    'hr',
+    'img',
+    'input'
+  ];
+  
   protected $name;
-	protected $attrs;
-	protected $content;
+  protected $attrs;
+  protected $content;
 
   public function __construct($name, $attrs = [], $content = '') {
-		$this->name    = $name;
-		$this->attrs   = $attrs;
-		$this->content = $content;
+    $this->name    = $name;
+    $this->attrs   = $attrs;
+    $this->content = $content;
   }
 
   public function addAttr($key, $value = true) {
@@ -43,24 +43,24 @@ class Tag {
       $this->removeAttr($key);
   }
 
-	public function setContent($content) {
-		$this->content = $content;
-	}
+  public function setContent($content) {
+    $this->content = $content;
+  }
 
   public function __toString() {
-		$html = '<' . $this->name;
+    $html = '<' . $this->name;
 
-		foreach ($this->attrs as $key => $value)
-			if (is_bool($value) && $value)
-				$html .= ' ' . $key;
-			else
-				$html .= ' ' . $key . '="' . $value . '"';
+    foreach ($this->attrs as $key => $value)
+      if (is_bool($value) && $value)
+        $html .= ' ' . $key;
+      else
+        $html .= ' ' . $key . '="' . $value . '"';
 
-		if (in_array($this->name, static::$inlineTags))
-			$html .= ' />';
-		else
-			$html .= '>' . $this->content . '</' . $this->name . '>';
+    if (in_array($this->name, static::$inlineTags))
+      $html .= ' />';
+    else
+      $html .= '>' . $this->content . '</' . $this->name . '>';
 
-		return $html;
+    return $html;
   }
 }

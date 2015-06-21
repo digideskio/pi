@@ -17,7 +17,7 @@ abstract class BaseField {
 	protected $step;
 	protected $format;
 
-	public function __construct($data) {
+  public function __construct($data) {
 		self::$num++;
 
 		$this->name        = isset($data['name'])        ? $data['name']        : '';
@@ -31,7 +31,7 @@ abstract class BaseField {
 		$this->max         = isset($data['max'])         ? $data['max']         : 0;
 		$this->step        = isset($data['step'])        ? $data['step']        : 0;
 		$this->format      = isset($data['format'])      ? $data['format']      : '';
-	}
+  }
 
 	public function html() {
 		return '';
