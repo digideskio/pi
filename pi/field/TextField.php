@@ -9,6 +9,15 @@ class TextField extends BaseField {
 		parent::__construct($data);
 	}
 
+	public function validate() {
+		$value = $this->value();
+
+		if ($this->required || !empty($value))
+			return Num::between($this->min, $this->max, strlen($value));
+		else
+			return true;
+	}
+
 	public function html() {
 		$tag = new Tag('input', [
 			'name'  => $this->name,

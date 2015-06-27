@@ -2,11 +2,21 @@
 
 namespace Pi\Field;
 
+use Pi\Lib\Num;
 use Pi\Lib\Html\Tag;
 
 class TitleField extends BaseField {
 	public function __construct($data) {
 		parent::__construct($data);
+	}
+
+	public function validate() {
+		$value = $this->value();
+
+		if ($this->required || !empty($value))
+			return Num::between($this->min, $this->max, strlen($value));
+		else
+			return true;
 	}
 
 	public function html() {

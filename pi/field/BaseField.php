@@ -8,16 +8,16 @@ abstract class BaseField {
 	public $id;
 	public $name;
 	public $label;
-	protected $default;
-	protected $required;
-	protected $message;
+	public $default;
+	public $required;
+	public $message;
 	public $width;
-	protected $placeholder;
-	protected $options;
-	protected $min;
-	protected $max;
-	protected $step;
-	protected $format;
+	public $placeholder;
+	public $options;
+	public $min;
+	public $max;
+	public $step;
+	public $format;
 
   public function __construct($data) {
 		$this->id = ++self::$num;
@@ -34,10 +34,14 @@ abstract class BaseField {
 		$this->max         = isset($data['max'])         ? $data['max']         : 0;
 		$this->step        = isset($data['step'])        ? $data['step']        : 0;
 		$this->format      = isset($data['format'])      ? $data['format']      : '';
-  }
+	}
 
 	public function html() {
 		return '';
+	}
+
+	public function value() {
+		return isset($_POST[$this->name]) ? $_POST[$this->name] : $this->default;
 	}
 
 	public function validate() {
@@ -45,10 +49,6 @@ abstract class BaseField {
 			return !empty($this->value());
 		else
 			return true;
-	}
-
-	public function value() {
-		return isset($_POST[$this->name]) ? $_POST[$this->name] : $this->default;
 	}
 
 	public function save() {

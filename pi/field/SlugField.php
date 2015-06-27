@@ -2,11 +2,21 @@
 
 namespace Pi\Field;
 
+use Pi\Lib\Str;
 use Pi\Lib\Html\Tag;
 
 class SlugField extends BaseField {
 	public function __construct($data) {
 		parent::__construct($data);
+	}
+
+	public function validate() {
+		$value = $this->value();
+
+		if ($this->required || !empty($value))
+			return $value == Str::slug($value);
+		else
+			return true;
 	}
 
 	public function html() {

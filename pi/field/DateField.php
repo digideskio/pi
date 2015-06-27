@@ -12,6 +12,25 @@ class DateField extends BaseField {
 			$this->default = strftime('%Y-%m-%d', time());
 	}
 
+	public function validate() {
+		$value = $this->value();
+		$regex = '~[0-9]{4}(-[0-9]{1,2}){2}~'; // yyyy-mm-dd
+
+		if ($this->required) {
+			if (preg_match($regex, $value))
+				return true;
+			else
+				return false;
+		} else {
+			if (empty($value))
+				return true;
+			else if (preg_match($regex, $value))
+				return true;
+			else
+				return false;
+		}
+	}
+
 	public function html() {
 		$tag = new Tag('input', [
 			'name'  => $this->name,

@@ -5,6 +5,19 @@ namespace Pi;
 use Pi\Core\Form;
 use Pi\Lib\Yaml;
 
+$models = glob('content/models/*.yaml');
+
+/*
+foreach ($models as $model) {
+?>
+
+<label>Contenu</label>
+<textarea><?=file_get_contents($model)?></textarea>
+
+<?php
+}
+*/
+
 ?>
 
 <!DOCTYPE html>
@@ -14,32 +27,42 @@ use Pi\Lib\Yaml;
 		<meta charset="utf-8" />
 		<title>Pi</title>
 
-		<link rel="stylesheet" href="web/css/style.css" />
+		<link rel="stylesheet" href="web/css/style.min.css" />
 	</head>
 
 	<body>
-		<div style="width: 1000px;">
-		<?php
+		<div class="row global">
+			<div class="col-xs-3 sidebar-left">
+				<ul>
+					<?php foreach ($models as $model): ?>
+						<li><a href="#"><?=$model?></a></li>
+					<?php endforeach; ?>
+				</ul>
+			</div>
 
-		$model = Yaml::read('content/models/blog.yaml');
+			<div class="col-xs-9 content">
+				<?php
 
-		$form = new Form($model);
+				$model = Yaml::read('content/models/blog.yaml');
 
-		echo $form->html();
+				$form = new Form($model);
 
-		if (!empty($_POST)) {
-			$valid = !in_array(false, $form->validate());
+				echo $form->html();
 
-			echo '<pre>';
-			var_dump($form->validate());
-			var_dump($form->save());
-			echo '</pre>';
+				if (!empty($_POST)) {
+					$valid = !in_array(false, $form->validate());
 
-			//if ($valid)
-			//	Yaml::write(time() . '.yaml', $form->save());
-		}
+					echo '<pre>';
+					var_dump($form->validate());
+					var_dump($form->save());
+					echo '</pre>';
 
-		?>
+					//if ($valid)
+					//	Yaml::write(time() . '.yaml', $form->save());
+				}
+
+				?>
+			</div>
 		</div>
 	</body>
 </html>

@@ -26,6 +26,7 @@ class Form {
 		$html .= '<h1>Formulaire &laquo; ' . $this->model['title'] . ' &raquo;</h1>';
 
 		$html .= '<div class="row">';
+
 		foreach ($this->fields as $name => $field) {
 			switch ($field->width) {
 				case '1/2':
@@ -49,7 +50,16 @@ class Form {
 
 			$html .= '<div class="' . $width . '">';
 
-			$html .= '<label for="input-' . $field->id . '">' . $field->label . '</label><br />';
+			$html .= '<label for="input-' . $field->id . '">' . $field->label;
+
+			if ($field->required)
+				$html .= ' *';
+
+			$html .= '</label><br />';
+
+			if (!empty($field->message))
+				$html .= '<small>' . $field->message . '</small><br />';
+
 			$html .= $field->html();
 
 			$html .= '</div> ';

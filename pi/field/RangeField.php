@@ -17,6 +17,15 @@ class RangeField extends BaseField {
 		return (int) parent::value();
 	}
 
+	public function validate() {
+		$value = $this->value();
+
+		if ($this->required || !empty($value))
+			return Num::between($this->min, $this->max, $value);
+		else
+			return true;
+	}
+
 	public function html() {
     $tag = new Tag('input', [
 			'name'  => $this->name,

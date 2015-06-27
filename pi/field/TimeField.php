@@ -9,6 +9,25 @@ class TimeField extends BaseField {
 		parent::__construct($data);
 	}
 
+	public function validate() {
+		$value = $this->value();
+		$regex = '~[0-9]{1,2}:[0-9]{1,2}~'; // hh:mm
+
+		if ($this->required) {
+			if (preg_match($regex, $value))
+				return true;
+			else
+				return false;
+		} else {
+			if (empty($value))
+				return true;
+			else if (preg_match($regex, $value))
+				return true;
+			else
+				return false;
+		}
+	}
+
 	public function html() {
 		$tag = new Tag('input', [
 			'name'  => $this->name,

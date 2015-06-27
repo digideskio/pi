@@ -12,7 +12,12 @@ class CheckboxesField extends BaseField {
 	}
 
 	public function validate() {
-		return is_array($this->value());
+		$values = $this->value();
+
+		if ($this->required && is_array($values))
+			return Num::between($this->min, $this->max, count($values));
+		else
+			return is_array($values);
 	}
 
 	public function value() {
