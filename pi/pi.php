@@ -2,67 +2,194 @@
 
 namespace Pi;
 
-use Pi\Core\Form;
-use Pi\Lib\Yaml;
+use Pi\Lib\Str;
 
-$models = glob('content/models/*.yaml');
+// A faire : à revoir entièrement
+class App {
+	private $routes;
 
-/*
-foreach ($models as $model) {
-?>
+	private static $shortcuts = [
+		'{char}'   => '([a-zA-Z_])',      // character
+		'{digit}'  => '([0-9])',          // digit
+		'{string}' => '([a-zA-Z_]+)',     // string
+		'{number}' => '([0-9]+)',         // number
+		'{slug}'   => '([a-zA-Z0-9_-]+)', // alphanumeric
+		'{*}'      => '(.+)'              // all
+	];
 
-<label>Contenu</label>
-<textarea><?=file_get_contents($model)?></textarea>
+	public function __construct() {
+		$this->routes = [];
+	}
 
-<?php
+	public function route($name, $path, $func, $method = 'GET') {
+		$methods = is_array($method) ? $method : [ $method ];
+
+		foreach ($methods as $method) {
+			$method = strtoupper($method);
+
+			$this->routes[$method . ' ' . $name] = [
+				'path'   => $path,
+				'func'   => $func,
+				'method' => $method
+			];
+		}
+
+		return $this;
+	}
+
+	public function get($name, $path, $func) {
+		return $this->route($name, $path, $func, 'GET');
+	}
+
+	public function post($name, $path, $func) {
+		return $this->route($name, $path, $func, 'POST');
+	}
+
+	public function run() {
+		$tryPath = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '/';
+		$method  = 'GET';
+		$found   = false;
+
+		if (isset($_SERVER['REQUEST_METHOD']))
+			$method = $_SERVER['REQUEST_METHOD'];
+
+		$matches = [];
+
+		foreach ($this->routes as $k => $v) {
+			$path = strtr($v['path'], self::$shortcuts);
+
+			if (
+				preg_match('#^/?' . $path . '/?$#U', $tryPath, $matches)
+				&&
+				$v['method'] == $method
+			) {
+				array_splice($matches, 0, 1);
+
+				$matches = array_map(function($match) {
+					return trim($match, '/');
+				}, $matches);
+
+				array_unshift($matches, $this);
+
+				ob_start();
+
+				call_user_func_array($v['func'], $matches);
+
+				$ob = ob_get_clean();
+
+				echo '
+					<!DOCTYPE html>
+					<html>
+
+						<head>
+							<meta charset="utf-8" />
+							<title>Pi</title>
+
+							<link rel="stylesheet" href="/web/css/style.min.css" />
+						</head>
+
+						<body>
+				';
+
+				echo $ob;
+
+				echo '
+						</body>
+					</html>
+				';
+
+				$found = true;
+				break;
+			}
+		}
+
+		if (!$found)
+			exit;
+
+		return $this;
+	}
+
+	public function genLink($routeName) {
+		if ($this->routes[$routeName]['path'] == '/')
+			return '/';
+
+		$args = func_get_args();
+		array_splice($args, 0, 1);
+
+		$path = $this->routes[$routeName]['path']; // A faire : à revoir
+
+		$link = preg_replace_callback('~\{.+\}~U', function($matches) use($args) {
+			static $i = 0;
+
+			if (isset($args[$i]))
+				return $args[$i++];
+			else
+				return '';
+		}, str_replace('?', '', $path));
+
+		$link = rtrim($link, '/');
+
+		return '/' . $link;
+	}
+
+	public function redirect($routeName) {
+		header('Location: ' . call_user_func_array([$this, 'genLink'], func_get_args()));
+
+		exit;
+	}
+
+	public function view($file) {
+		$view = new View($file);
+		$view->app = $this;
+
+		return $view;
+	}
 }
-*/
 
-?>
+class View {
+	protected $vars = [];
+	protected $file = '';
 
-<!DOCTYPE html>
-<html>
+	public function __construct($file) {
+		try {
+			if (file_exists($file)) {
+				$this->file = $file;
+			} else {
+				throw new Exc('Le fichier de vue "' . $file . '" n\'existe pas');
+			}
+		} catch(Exc $e) {
+			exit($e);
+		}
+	}
 
-	<head>
-		<meta charset="utf-8" />
-		<title>Pi</title>
+	public function __set($key, $value) {
+		if ($value instanceof View)
+			$this->vars[$key] = (string) $value;
+		else
+			$this->vars[$key] = $value;
+	}
 
-		<link rel="stylesheet" href="web/css/style.min.css" />
-	</head>
+	public function __toString() {
+		ob_start();
+		extract($this->vars);
 
-	<body>
-		<div class="row global">
-			<div class="col-xs-3 sidebar-left">
-				<ul>
-					<?php foreach ($models as $model): ?>
-						<li><a href="#"><?=$model?></a></li>
-					<?php endforeach; ?>
-				</ul>
-			</div>
+		require $this->file;
 
-			<div class="col-xs-9 content">
-				<?php
+		$_C = ob_get_contents();
+		ob_end_clean();
 
-				$model = Yaml::read('content/models/blog.yaml');
+		return $_C;
+	}
+}
 
-				$form = new Form($model);
+$app = new App();
 
-				echo $form->html();
+require 'modules/site/home.php';
+require 'modules/admin/home.php';
+require 'modules/admin/models/create.php';
+require 'modules/admin/models/edit.php';
+require 'modules/admin/models/home.php';
+require 'modules/admin/models/remove.php';
+require 'modules/admin/models/use.php';
 
-				if (!empty($_POST)) {
-					$valid = !in_array(false, $form->validate());
-
-					echo '<pre>';
-					var_dump($form->validate());
-					var_dump($form->save());
-					echo '</pre>';
-
-					//if ($valid)
-					//	Yaml::write(time() . '.yaml', $form->save());
-				}
-
-				?>
-			</div>
-		</div>
-	</body>
-</html>
+$app->run();
