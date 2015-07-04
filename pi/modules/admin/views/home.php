@@ -1,11 +1,6 @@
 <h1>Administration</h1>
 
-<h2>Modèles</h2>
-
 <ul>
-	<?php foreach ($models as $model): ?>
-		<li>
-			<a href="<?=$app->genLink('GET admin.models.use', $model->slug)?>"><?=$model->title?></a>
-		</li>
-	<?php endforeach; ?>
+	<li><a href="<?=$app->genLink('GET admin.models.home')?>">Gérer les modèles</a></li>
+	<li><a href="#">Créer une page</a></li>
 </ul>

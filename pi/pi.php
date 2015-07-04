@@ -71,11 +71,7 @@ class App {
 
 				array_unshift($matches, $this);
 
-				ob_start();
-
-				call_user_func_array($v['func'], $matches);
-
-				$ob = ob_get_clean();
+				$content = call_user_func_array($v['func'], $matches);
 
 				echo '
 					<!DOCTYPE html>
@@ -91,7 +87,7 @@ class App {
 						<body>
 				';
 
-				echo $ob;
+				echo $content;
 
 				echo '
 						</body>
@@ -189,6 +185,7 @@ require 'modules/admin/home.php';
 require 'modules/admin/models/create.php';
 require 'modules/admin/models/edit.php';
 require 'modules/admin/models/home.php';
+require 'modules/admin/models/import.php';
 require 'modules/admin/models/remove.php';
 require 'modules/admin/models/use.php';
 

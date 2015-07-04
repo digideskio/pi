@@ -16,5 +16,5 @@ $app->get('admin.home', 'admin', function($app) {
 
 	$page->models = $models;
 
-	echo $page;
+	return $page;
 });

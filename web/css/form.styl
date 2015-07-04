@@ -17,11 +17,11 @@ select
 	color #000
 	transition all .2s
 
-	&[type='submit']
-	&:focus
-		border-color #000
+[type='submit']
+input:focus
+	border-color #000
 
-input[type='checkbox']
+[type='checkbox']
 	width auto
 	display none
 
@@ -54,7 +54,7 @@ input[type='checkbox']
 	&:checked + label::after
 		transform scale(1)
 
-input[type='radio']
+[type='radio']
 	width auto
 	display none
 
@@ -79,7 +79,7 @@ input[type='radio']
 		background-color #000
 		box-shadow inset 0 0 0 3px #fff
 
-input[type='submit']
+[type='submit']
 	border-radius 16px
 	background-color transparent
 	width auto
@@ -92,3 +92,7 @@ input[type='submit']
 
 textarea
 	height 260px
+
+::-moz-focus-inner
+	padding 0
+	border 0

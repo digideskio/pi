@@ -18,6 +18,27 @@ body {
   font-size: 1.8rem;
   font-family: 'Open Sans', sans-serif;
 }
+a,
+.btn-link,
+input.btn-link {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  color: #2c94a4;
+  font-weight: normal;
+  text-decoration: underline;
+  font-family: 'Open Sans', sans-serif;
+  border-radius: 0;
+  transition: all 0.2s;
+}
+a:hover,
+.btn-link:hover,
+input.btn-link:hover {
+  text-decoration: underline;
+  background: none;
+  color: #164a52;
+}
 .row {
   font-family: FreeSans, Arimo, 'Droid Sans', Helvetica, Arial, sans-serif;
   letter-spacing: -0.31em;
@@ -201,24 +222,20 @@ select {
   color: #000;
   transition: all 0.2s;
 }
-input[type='submit'],
-textarea[type='submit'],
-select[type='submit'],
-input:focus,
-textarea:focus,
-select:focus {
+[type='submit'],
+input:focus {
   border-color: #000;
 }
-input[type='checkbox'] {
+[type='checkbox'] {
   width: auto;
   display: none;
 }
-input[type='checkbox'] + label {
+[type='checkbox'] + label {
   position: relative;
   display: block;
   font-weight: normal;
 }
-input[type='checkbox'] + label::before {
+[type='checkbox'] + label::before {
   margin-right: 6px;
   width: 20px;
   height: 20px;
@@ -228,7 +245,7 @@ input[type='checkbox'] + label::before {
   border: 2px solid #000;
   vertical-align: bottom;
 }
-input[type='checkbox'] + label::after {
+[type='checkbox'] + label::after {
   content: '\2713';
   color: #000;
   font-size: 20px;
@@ -239,19 +256,19 @@ input[type='checkbox'] + label::after {
   transition: all 0.2s;
   vertical-align: bottom;
 }
-input[type='checkbox']:checked + label::after {
+[type='checkbox']:checked + label::after {
   transform: scale(1);
 }
-input[type='radio'] {
+[type='radio'] {
   width: auto;
   display: none;
 }
-input[type='radio'] + label {
+[type='radio'] + label {
   position: relative;
   display: block;
   font-weight: normal;
 }
-input[type='radio'] + label::before {
+[type='radio'] + label::before {
   margin-right: 6px;
   width: 20px;
   height: 20px;
@@ -263,21 +280,25 @@ input[type='radio'] + label::before {
   border-radius: 50%;
   transition: all 0.2s;
 }
-input[type='radio']:checked + label::before {
+[type='radio']:checked + label::before {
   background-color: #000;
   box-shadow: inset 0 0 0 3px #fff;
 }
-input[type='submit'] {
+[type='submit'] {
   border-radius: 16px;
   background-color: transparent;
   width: auto;
   font-weight: bold;
 }
-input[type='submit']:hover {
+[type='submit']:hover {
   cursor: pointer;
   background-color: #000;
   color: #fff;
 }
 textarea {
   height: 260px;
+}
+::-moz-focus-inner {
+  padding: 0;
+  border: 0;
 }

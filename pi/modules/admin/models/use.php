@@ -13,7 +13,7 @@ $app->get('admin.models.use', 'admin/models/{slug}/use', function($app, $slug) {
 
 	$page->form = $form;
 
-	echo $page;
+	return $page;
 });
 
 $app->post('admin.models.use', 'admin/models/{slug}/use', function($app, $slug) {
