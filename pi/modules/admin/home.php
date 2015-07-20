@@ -5,7 +5,7 @@ use Pi\Core\Form;
 use Pi\Lib\Yaml;
 
 $app->get('admin.home', 'admin', function($app) {
-	$page = $app->view(__DIR__ . DS . 'views' . DS . 'home.php');
+	$page = $app->view('admin/models/views/home.php');
 	$filesModels = glob('content/models/*.yaml');
 
 	$models = [];

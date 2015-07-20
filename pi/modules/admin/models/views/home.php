@@ -1,31 +1,35 @@
-<h1>Administration</h1>
+<?php $this->layout('tpl/layout.php'); ?>
 
-<h2>Modèles</h2>
+<?php $this->begin('content'); ?>
+	<h1>Administration</h1>
 
-<ul>
-	<li><a href="<?=$app->genLink('GET admin.models.create')?>">Créer un modèle</a></li>
-	<li><a href="<?=$app->genLink('GET admin.models.import')?>">Importer</a></li>
-</ul>
+	<h2>Modèles</h2>
 
-<ul>
-	<?php foreach ($models as $model): ?>
-		<li>
-			<strong><?=$model->title?></strong>
-			<ul>
-				<li>
-					<a href="<?=$app->genLink('GET admin.models.use', $model->slug)?>">Utiliser</a>
-				</li>
+	<ul>
+		<li><a href="<?=$app->genLink('GET admin.models.create')?>">Créer un modèle</a></li>
+		<li><a href="<?=$app->genLink('GET admin.models.import')?>">Importer</a></li>
+	</ul>
 
-				<li>
-					<a href="<?=$app->genLink('GET admin.models.edit', $model->slug)?>">Modifier</a>
-				</li>
+	<ul>
+		<?php foreach ($models as $model): ?>
+			<li>
+				<strong><?=$model->title?></strong>
+				<ul>
+					<li>
+						<a href="<?=$app->genLink('GET admin.models.use', $model->slug)?>">Utiliser</a>
+					</li>
 
-				<li>
-					<form method="post" action="<?=$app->genLink('POST admin.models.remove', $model->slug)?>">
-						<input type="submit" value="Supprimer" class="btn-link" />
-					</form>
-				</li>
-			</ul>
-		</li>
-	<?php endforeach; ?>
-</ul>
+					<li>
+						<a href="<?=$app->genLink('GET admin.models.edit', $model->slug)?>">Modifier</a>
+					</li>
+
+					<li>
+						<form method="post" action="<?=$app->genLink('POST admin.models.remove', $model->slug)?>">
+							<input type="submit" value="Supprimer" class="btn-link" />
+						</form>
+					</li>
+				</ul>
+			</li>
+		<?php endforeach; ?>
+	</ul>
+<?php $this->end(); ?>

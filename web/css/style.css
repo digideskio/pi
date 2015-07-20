@@ -41,7 +41,6 @@ input.btn-link:hover {
 }
 .row {
   font-family: FreeSans, Arimo, 'Droid Sans', Helvetica, Arial, sans-serif;
-  letter-spacing: -0.31em;
   text-rendering: optimizespeed;
 }
 [class^="col-"] {

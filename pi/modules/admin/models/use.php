@@ -4,7 +4,7 @@ use Pi\Core\Model;
 use Pi\Core\Form;
 
 $app->get('admin.models.use', 'admin/models/{slug}/use', function($app, $slug) {
-	$page = $app->view(__DIR__ . DS . 'views' . DS . 'use.php');
+	$page = $app->view('admin/models/views/use.php');
 
 	$fileModel = 'content/models/' . $slug . '.yaml';
 

@@ -6,7 +6,7 @@ use Pi\Lib\Str;
 use Pi\Lib\Flash;
 
 $app->get('admin.models.create', 'admin/models/create', function($app) {
-	$content = $app->view(__DIR__ . DS . 'views' . DS . 'create.php');
+	$content = $app->view('admin/models/views/create.php');
 
 	return $content;
 });

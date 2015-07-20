@@ -3,7 +3,7 @@
 use Pi\Core\Model;
 
 $app->get('admin.models.home', 'admin/models', function($app) {
-	$page = $app->view(__DIR__ . DS . 'views' . DS . 'home.php');
+	$page = $app->view('admin/models/views/home.php');
 	$filesModels = glob('content/models/*.yaml');
 
 	$models = [];

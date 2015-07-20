@@ -1,5 +1,7 @@
 <?php
 
 $app->get('site.home', '/', function($app) {
-	return 'Accueil';
+	$page = $app->view('site/views/home.php');
+
+	return $page;
 });

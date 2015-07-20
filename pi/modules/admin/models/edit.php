@@ -8,7 +8,7 @@ $app->get('admin.models.edit', 'admin/models/{slug}/edit', function($app, $slug)
 	$file = 'content/models/' . $slug . '.yaml';
 
 	if (file_exists($file)) {
-		$content = $app->view(__DIR__ . DS . 'views' . DS . 'edit.php');
+		$content = $app->view('admin/models/views/edit.php');
 
 		$content->content = file_get_contents($file);
 

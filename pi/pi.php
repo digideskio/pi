@@ -2,6 +2,7 @@
 
 namespace Pi;
 
+use Exception;
 use Pi\Lib\Str;
 
 // A faire : à revoir entièrement
@@ -73,26 +74,7 @@ class App {
 
 				$content = call_user_func_array($v['func'], $matches);
 
-				echo '
-					<!DOCTYPE html>
-					<html>
-
-						<head>
-							<meta charset="utf-8" />
-							<title>Pi</title>
-
-							<link rel="stylesheet" href="/web/css/style.min.css" />
-						</head>
-
-						<body>
-				';
-
-				echo $content;
-
-				echo '
-						</body>
-					</html>
-				';
+				echo $content->render();
 
 				$found = true;
 				break;
@@ -143,38 +125,90 @@ class App {
 }
 
 class View {
-	protected $vars = [];
 	protected $file = '';
 
+	protected $layoutName;
+	protected $layoutData = [];
+	protected $sections = [];
+	protected $data = [];
+
 	public function __construct($file) {
+		$file = __DIR__ . DS . 'modules' . DS . $file;
+
 		try {
 			if (file_exists($file)) {
 				$this->file = $file;
 			} else {
-				throw new Exc('Le fichier de vue "' . $file . '" n\'existe pas');
+				throw new Exception('Le fichier de vue "' . $file . '" n\'existe pas');
 			}
-		} catch(Exc $e) {
+		} catch(Exception $e) {
 			exit($e);
 		}
 	}
 
 	public function __set($key, $value) {
 		if ($value instanceof View)
-			$this->vars[$key] = (string) $value;
+			$this->data[$key] = (string) $value;
 		else
-			$this->vars[$key] = $value;
+			$this->data[$key] = $value;
 	}
 
-	public function __toString() {
+	public function layout($name) {
+		$this->layoutName = $name;
+	}
+
+	public function begin($name) {
+		$this->sections[$name] = '';
 		ob_start();
-		extract($this->vars);
+	}
 
-		require $this->file;
+	public function end() {
+		end($this->sections);
+		$this->sections[key($this->sections)] = ob_get_clean();
+	}
 
-		$_C = ob_get_contents();
-		ob_end_clean();
+	protected function section($name, $default = null) {
+		if (!isset($this->sections[$name]))
+			return $default;
 
-		return $_C;
+		return $this->sections[$name];
+	}
+
+	public function render($data = []) {
+		try {
+			$this->data = array_merge($this->data, $data);
+			unset($data);
+			extract($this->data);
+			ob_start();
+
+			include $this->path();
+
+			$content = ob_get_clean();
+
+			if (isset($this->layoutName)) {
+				$layout = new View($this->layoutName);
+
+				$layout->sections = array_merge($this->sections);
+
+				$content = $layout->render($this->layoutData);
+			}
+
+			return $content;
+		} catch (LogicException $e) {
+			if (ob_get_length() > 0) {
+				ob_end_clean();
+			}
+
+			throw $e;
+		}
+	}
+
+	public function path() {
+		return $this->getPath();
+	}
+
+	public function getPath() {
+		return $this->file;
 	}
 }
 
