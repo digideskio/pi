@@ -5,10 +5,12 @@ namespace Pi\Core\Field;
 use Pi\Lib\Html\Tag;
 
 class TimeField extends BaseField {
+	private static $formats = [ 'hh:mm', 'hh:mm:ss' ];
+
 	public function __construct($data) {
 		parent::__construct($data);
 
-		if (!in_array($this->format, [ 'hh:mm', 'hh:mm:ss' ]))
+		if (!in_array($this->format, self::$formats))
 			$this->format = 'hh:mm';
 
 		if ($this->default == 'now' && $this->format == 'hh:mm')

@@ -4,9 +4,7 @@ namespace Pi\Core\Field;
 
 use Pi\Lib\Html\Tag;
 
-class TextareaField extends BaseField {
-	private static $formats = [ 'text', 'markdown', 'json', 'ini', 'yaml', 'cson', 'xml' ];
-
+class CodeField extends BaseField {
 	public function __construct($data) {
 		parent::__construct($data);
 	}
