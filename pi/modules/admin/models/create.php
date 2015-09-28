@@ -19,7 +19,7 @@ $app->post('admin.models.create', 'admin/models/create', function($app) {
 		$title = $yaml['title'];
 		$slug = Str::slug($title);
 
-		$file = 'content/models/' . $slug . '.yaml';
+		$file = 'content/models/' . $slug . '/model.yaml';
 
 		if (!file_exists($file)) {
 			Yaml::write($file, $yaml);

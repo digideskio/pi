@@ -1,12 +1,10 @@
 <?php
 
 $app->post('admin.models.remove', 'admin/models/{slug}/remove', function($app, $slug) {
-	$file = 'content/models/' . $slug . '.yaml';
+	// à faire : à revoir (tester le risque d'erreur)
+	unlink('content/models/' . $slug . '/model.yaml');
+	unlink('content/models/' . $slug . '/view.php');
+	rmdir('content/models/' . $slug);
 
-	if (file_exists($file)) {
-		unlink($file);
-		return $app->redirect('GET admin.models.home');
-	} else {
-		return $app->redirect('GET /');
-	}
+	return $app->redirect('GET admin.models.home');
 });

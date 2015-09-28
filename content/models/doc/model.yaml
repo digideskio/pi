@@ -1,0 +1,27 @@
+title: Documentation
+fields:
+	title:
+		type: title
+		label: Titre
+	parent:
+		type: text
+		label: Page parente
+		width: 1/4
+	author:
+		label: Auteur
+		type: user
+		width: 1/4
+	date:
+		label: Date
+		type: date
+		default: today
+		width: 1/4
+	version:
+		label: Version
+		type: version
+		width: 1/4
+		placeholder: 0.0.0
+	contenu:
+		label: Contenu
+		type: textarea
+		format: markdown

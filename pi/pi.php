@@ -74,7 +74,8 @@ class App {
 
 				$content = call_user_func_array($v['func'], $matches);
 
-				echo $content->render();
+				if ($content instanceof View)
+					echo $content->render();
 
 				$found = true;
 				break;
@@ -112,7 +113,6 @@ class App {
 
 	public function redirect($routeName) {
 		header('Location: ' . call_user_func_array([$this, 'genLink'], func_get_args()));
-
 		exit;
 	}
 

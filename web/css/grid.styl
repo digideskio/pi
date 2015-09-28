@@ -1,32 +1,10 @@
 .row
-	font-family FreeSans, Arimo, 'Droid Sans', Helvetica, Arial, sans-serif // hack (1/2)
-	// letter-spacing -0.31em
-	text-rendering optimizespeed
+	display flex
+	flex-direction row
 
 [class^="col-"]
-	display inline-block
-	font-family $font // hack (2/2=)
-	letter-spacing normal
-	word-spacing normal
-	vertical-align top
-	text-rendering auto
 	padding 12px
 
 for i in (1 .. 12)
 	.col-xs-{i}
 		width (i * 100 / 12)%
-
-@media (min-width: $screen-sm)
-	for i in (1 .. 12)
-		.col-sm-{i}
-			width (i * 100 / 12)%
-
-@media (min-width: $screen-md)
-	for i in (1 .. 12)
-		.col-md-{i}
-			width (i * 100 / 12)%
-
-@media (min-width: $screen-lg)
-	for i in (1 .. 12)
-		.col-lg-{i}
-			width (i * 100 / 12)%

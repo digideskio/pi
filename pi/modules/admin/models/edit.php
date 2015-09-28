@@ -25,7 +25,7 @@ $app->post('admin.models.edit', 'admin/models/{slug}/edit', function($app, $slug
 	if (!empty($content) && isset($yaml['title'], $yaml['fields'])) {
 		$title = $yaml['title'];
 
-		$file = 'content/models/' . $slug . '.yaml';
+		$file = 'content/models/' . $slug . '/model.yaml';
 
 		Yaml::write($file, $yaml);
 		Flash::pushSuccess('Modèle modifié avec succès');

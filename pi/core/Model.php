@@ -16,7 +16,7 @@ class Model {
 		$this->file   = $file;
 		$this->title  = $model['title'];
 		$this->fields = [];
-		$this->slug   = substr(basename($file), 0, -5);
+		$this->slug   = explode('/', $file)[2];
 
 		foreach ($model['fields'] as $name => $field) {
 			$class = ucfirst($field['type']) . 'Field';

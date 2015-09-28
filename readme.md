@@ -1,7 +1,28 @@
-Champs
-------
+# Modèles
+## Créer ou modifier un modèle
+### Création d'un modèle
+Dans le dossier /content/models/
+Créer un dossier portant le nom du modèle en minuscule : 0-9, a-z, _
+Créer deux fichiers dans ce nouveau dossier :
+- view.php
+- model.yaml
 
-### Les champs et leurs valeurs possibles
+Le modèle (model.yaml) contient deux valeurs :
+- title : le titre du modèle
+- fields : la liste des champs
+
+### Modification d'un modèle
+Un champ ajouté   = valeur vide ou par défaut dans les pages créées avec ce modèle
+Un champ supprimé = champ supprimé sur les pages créées avec ce modèle
+Un champ modifié  = un champ supprimé et un champ ajouté
+
+Pour savoir si le champ a été ajouté, supprimé ou modifié, on se base sur le nom et le type du champ
+
+## La vue
+...
+
+# Champs
+## Les champs et leurs valeurs possibles
 
     y = implémenté
     n = non implémenté
@@ -29,6 +50,8 @@ Champs
     +------------+-------+---------+---------+-------+----------+-----+-----+-------------+---------+--------+------+
     | radio      |   y   |    y    |    y    |   y   |    n     |     |     |             |    y    |        |      |
     +------------+-------+---------+---------+-------+----------+-----+-----+-------------+---------+--------+------+
+                 | label | default | message | width | required | min | max | placeholder | options | format | step |
+    +------------+-------+---------+---------+-------+----------+-----+-----+-------------+---------+--------+------+
     | range      |   y   |    y    |    y    |   y   |          |  y  |  y  |             |    n    |        |  y   |
     +------------+-------+---------+---------+-------+----------+-----+-----+-------------+---------+--------+------+
     | slug       |   y   |    y    |    y    |   y   |    y     |  y  |  y  |      y      |         |        |      |
@@ -49,9 +72,12 @@ Champs
     +------------+-------+---------+---------+-------+----------+-----+-----+-------------+---------+--------+------+
     | user       |   y   |    n    |    y    |   y   |    n     |  n  |  n  |      n      |    n    |        |      |
     +------------+-------+---------+---------+-------+----------+-----+-----+-------------+---------+--------+------+
+                 | label | default | message | width | required | min | max | placeholder | options | format | step |
+    +------------+-------+---------+---------+-------+----------+-----+-----+-------------+---------+--------+------+
+    | version    |   y   |    y    |    y    |   y   |    y     |  n  |  n  |      y      |    n    |   n    |  n   |
+    +------------+-------+---------+---------+-------+----------+-----+-----+-------------+---------+--------+------+
 
-### Définition des valeurs
-
+## Définition des valeurs
 Partie incomplète.
 
 - label (String)
@@ -110,13 +136,3 @@ Partie incomplète.
   - time
     - hh:mm
     - hh:mm:ss
-
-Modèles
--------
-
-### Un modèle est modifié
-Un champ ajouté   = valeur vide ou par défaut dans les pages créées avec ce modèle
-Un champ supprimé = champ supprimé sur les pages créées avec ce modèle
-Un champ modifié  = un champ supprimé et un champ ajouté
-
-Pour savoir si le champ a été ajouté, supprimé ou modifié, on se base sur le nom et le type du champ

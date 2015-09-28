@@ -20,6 +20,8 @@ class Form {
 		$html .= '<h1>Formulaire &laquo; ' . $this->model->title . ' &raquo;</h1>';
 		$html .= '<div class="row">';
 
+		$accum = 0;
+
 		foreach ($this->model->fields as $field) {
 			switch ($field->width) {
 				case '1/2': $width = 'col-xs-6'; break;
@@ -43,6 +45,16 @@ class Form {
 
 			$html .= $field->html();
 			$html .= '</div> ';
+
+			// L'accumulateur sert à déterminer les lignes pour garder un affichage
+			// propre (en grille)
+			$accum += (int) substr($width, 7);
+
+			if ($accum >= 12) {
+				$html .= '</div>';
+				$html .= '<div class="row">';
+				$accum = 0;
+			}
 		}
 
 		$html .= '</div>';
