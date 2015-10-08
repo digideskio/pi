@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{% block head %}
+			<title>{% block title %}{% endblock %} - Pi</title>
+		{% endblock %}
+	</head>
+
+	<body>
+		<div id="content">{% block content %}{% endblock %}</div>
+
+		<div id="footer">
+			{% block footer %}
+				&copy; 2011 - PifyZ.
+			{% endblock %}
+		</div>
+	</body>
+</html>
