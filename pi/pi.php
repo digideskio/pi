@@ -6,7 +6,9 @@ use \Exception;
 use \Twig_Loader_Filesystem;
 use \Twig_Environment;
 use \Twig_SimpleFunction;
+use \Twig_SimpleFilter;
 use Pi\Lib\Str;
+use Pi\Lib\Markdown;
 
 // A faire : à revoir entièrement
 class App {
@@ -27,12 +29,17 @@ class App {
 		$this->routes = [];
 
 		$this->loader = new Twig_Loader_Filesystem('./pi/views');
+		$this->loader->addPath('./content/models');
 		$this->twig = new Twig_Environment($this->loader);
 
 		$this->twig->addFunction(new Twig_SimpleFunction('genLink', function($url, array $options = []) {
 			array_unshift($options, $url);
 			return call_user_func_array([ $this, 'genLink' ], $options);
 		}, [ 'is_variadic' => true ]));
+
+		$this->twig->addFilter(new Twig_SimpleFilter('markdown', function($text) {
+			return Markdown::html($text);
+		}));
 	}
 
 	public function route($name, $path, $func, $method = 'GET') {

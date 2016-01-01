@@ -1,0 +1,21 @@
+{% extends "tpl.html" %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+	<h1>{{ title }}</h1>
+
+	<p>Publié le {{ date }}</p>
+
+	<p>
+		Catégories :
+
+		{% for category in categories %}
+			{{ category }}
+		{% endfor %}
+	</p>
+
+	<div>
+		{{ content|markdown|raw }}
+	</div>
+{% endblock %}

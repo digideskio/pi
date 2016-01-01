@@ -21,9 +21,14 @@ $app->post('admin.models.use', 'admin/models/{slug}/use', function($app, $slug) 
 	$model = new Model($fileModel);
 	$form = new Form($model);
 
-	$yaml = Yaml::encode($form->save());
+	$content = [
+		'model' => $slug,
+		'created_at' => time(),
+		'updated_at' => time(),
+		'fields' => $form->save()
+	];
 
-	Yaml::write('content/pages/' . time() . '.yaml', $form->save());
+	Yaml::write('content/pages/' . time() . '.yaml', $content);
 
-	echo '<pre>' . $yaml . '</pre>';
+	return $app->redirect('GET admin.models.home');
 });
