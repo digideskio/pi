@@ -123,8 +123,8 @@ Partie incomplète.
   - password
     - expression régulière
   - textarea
-    - expression régulière
     - text
+    - regex
     - markdown
     - json
     - ini
@@ -132,7 +132,11 @@ Partie incomplète.
     - cson
     - xml
   - text
-    - expression régulière
+    - tetx
+    - regex
+    - icon
+    - twitter
+    - github
   - time
     - hh:mm
     - hh:mm:ss

@@ -5,14 +5,12 @@ use Pi\Lib\Input;
 use Pi\Lib\Flash;
 
 $app->get('admin.models.edit', 'admin/models/{slug}/edit', function($app, $slug) {
-	$file = 'content/models/' . $slug . '.yaml';
+	$file = 'content/models/' . $slug . '/model.yaml';
 
 	if (file_exists($file)) {
-		$content = $app->view('admin/models/views/edit.php');
-
-		$content->content = file_get_contents($file);
-
-		return $content;
+		return $app->render('admin/models/edit.html', [
+			'content' => file_get_contents($file)
+		]);
 	}
 
 	return $app->redirect('GET /');

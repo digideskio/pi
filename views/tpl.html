@@ -4,6 +4,10 @@
 		{% block head %}
 			<title>{% block title %}{% endblock %} - Pi</title>
 		{% endblock %}
+
+		{% block stylesheets %}
+			<link rel="stylesheet" href="/web/css/style.min.css" />
+		{% endblock %}
 	</head>
 
 	<body>
@@ -11,7 +15,7 @@
 
 		<div id="footer">
 			{% block footer %}
-				&copy; 2011 - PifyZ.
+				&copy; 2016 - PifyZ.
 			{% endblock %}
 		</div>
 	</body>

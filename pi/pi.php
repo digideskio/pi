@@ -2,12 +2,17 @@
 
 namespace Pi;
 
-use Exception;
+use \Exception;
+use \Twig_Loader_Filesystem;
+use \Twig_Environment;
+use \Twig_SimpleFunction;
 use Pi\Lib\Str;
 
 // A faire : à revoir entièrement
 class App {
 	private $routes;
+	private $loader;
+	private $twig;
 
 	private static $shortcuts = [
 		'{char}'   => '([a-zA-Z_])',      // character
@@ -20,6 +25,14 @@ class App {
 
 	public function __construct() {
 		$this->routes = [];
+
+		$this->loader = new Twig_Loader_Filesystem('views');
+		$this->twig = new Twig_Environment($this->loader);
+
+		$this->twig->addFunction(new Twig_SimpleFunction('genLink', function($url, array $options = []) {
+			array_unshift($options, $url);
+			return call_user_func_array([ $this, 'genLink' ], $options);
+		}, [ 'is_variadic' => true ]));
 	}
 
 	public function route($name, $path, $func, $method = 'GET') {
@@ -48,8 +61,8 @@ class App {
 
 	public function run() {
 		$tryPath = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '/';
-		$method  = 'GET';
-		$found   = false;
+		$method = 'GET';
+		$found = false;
 
 		if (isset($_SERVER['REQUEST_METHOD']))
 			$method = $_SERVER['REQUEST_METHOD'];
@@ -74,8 +87,7 @@ class App {
 
 				$content = call_user_func_array($v['func'], $matches);
 
-				if ($content instanceof View)
-					echo $content->render();
+				echo $content;
 
 				$found = true;
 				break;
@@ -112,115 +124,11 @@ class App {
 	}
 
 	public function redirect($routeName) {
-		header('Location: ' . call_user_func_array([$this, 'genLink'], func_get_args()));
+		header('Location: ' . call_user_func_array([ $this, 'genLink' ], func_get_args()));
 		exit;
 	}
 
-	public function view($file) {
-		$view = new View($file);
-		$view->app = $this;
-
-		return $view;
+	public function render($file, $variables = []) {
+		return $this->twig->render($file, $variables);
 	}
 }
-
-class View {
-	protected $file = '';
-
-	protected $layoutName;
-	protected $layoutData = [];
-	protected $sections = [];
-	protected $data = [];
-
-	public function __construct($file) {
-		$file = __DIR__ . DS . 'modules' . DS . $file;
-
-		try {
-			if (file_exists($file)) {
-				$this->file = $file;
-			} else {
-				throw new Exception('Le fichier de vue "' . $file . '" n\'existe pas');
-			}
-		} catch(Exception $e) {
-			exit($e);
-		}
-	}
-
-	public function __set($key, $value) {
-		if ($value instanceof View)
-			$this->data[$key] = (string) $value;
-		else
-			$this->data[$key] = $value;
-	}
-
-	public function layout($name) {
-		$this->layoutName = $name;
-	}
-
-	public function begin($name) {
-		$this->sections[$name] = '';
-		ob_start();
-	}
-
-	public function end() {
-		end($this->sections);
-		$this->sections[key($this->sections)] = ob_get_clean();
-	}
-
-	protected function section($name, $default = null) {
-		if (!isset($this->sections[$name]))
-			return $default;
-
-		return $this->sections[$name];
-	}
-
-	public function render($data = []) {
-		try {
-			$this->data = array_merge($this->data, $data);
-			unset($data);
-			extract($this->data);
-			ob_start();
-
-			include $this->path();
-
-			$content = ob_get_clean();
-
-			if (isset($this->layoutName)) {
-				$layout = new View($this->layoutName);
-
-				$layout->sections = array_merge($this->sections);
-
-				$content = $layout->render($this->layoutData);
-			}
-
-			return $content;
-		} catch (LogicException $e) {
-			if (ob_get_length() > 0) {
-				ob_end_clean();
-			}
-
-			throw $e;
-		}
-	}
-
-	public function path() {
-		return $this->getPath();
-	}
-
-	public function getPath() {
-		return $this->file;
-	}
-}
-
-$app = new App();
-
-require 'modules/site/home.php';
-require 'modules/admin/home.php';
-require 'modules/admin/models/create.php';
-require 'modules/admin/models/edit.php';
-require 'modules/admin/models/home.php';
-require 'modules/admin/models/import.php';
-require 'modules/admin/models/remove.php';
-require 'modules/admin/models/use.php';
-
-$app->run();

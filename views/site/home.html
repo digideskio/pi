@@ -1,0 +1,11 @@
+{% extends "tpl.html" %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+	<h1>Accueil</h1>
+
+	<p>
+		Bienvenue sur <a href="{{ genLink('essai%s%s', 5, 5) }}">Pi</a>.
+	</p>
+{% endblock %}

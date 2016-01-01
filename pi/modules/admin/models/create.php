@@ -6,9 +6,7 @@ use Pi\Lib\Str;
 use Pi\Lib\Flash;
 
 $app->get('admin.models.create', 'admin/models/create', function($app) {
-	$content = $app->view('admin/models/views/create.php');
-
-	return $content;
+	return $app->render('admin/models/create.html');
 });
 
 $app->post('admin.models.create', 'admin/models/create', function($app) {
