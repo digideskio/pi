@@ -1,27 +1,34 @@
 # Modèles
+
 ## Créer ou modifier un modèle
+
 ### Création d'un modèle
-Dans le dossier /content/models/
-Créer un dossier portant le nom du modèle en minuscule : 0-9, a-z, _
-Créer deux fichiers dans ce nouveau dossier :
-- view.php
-- model.yaml
+
+- Se placer dans le dossier « /content/models/ » ;
+- Créer un dossier portant le nom du modèle en minuscule : « 0-9, a-z, _ » ;
+- Créer deux fichiers dans ce nouveau dossier :
+  - view.html ;
+  - model.yaml.
 
 Le modèle (model.yaml) contient deux valeurs :
-- title : le titre du modèle
-- fields : la liste des champs
+- title : le titre du modèle ;
+- fields : la liste des champs.
 
 ### Modification d'un modèle
-Un champ ajouté   = valeur vide ou par défaut dans les pages créées avec ce modèle
-Un champ supprimé = champ supprimé sur les pages créées avec ce modèle
-Un champ modifié  = un champ supprimé et un champ ajouté
 
-Pour savoir si le champ a été ajouté, supprimé ou modifié, on se base sur le nom et le type du champ
+- Un champ ajouté = valeur vide ou par défaut dans les pages créées avec ce
+  modèle ;
+- Un champ supprimé = champ supprimé sur les pages créées avec ce modèle ;
+- Un champ modifié = un champ supprimé et un champ ajouté.
+
+Pour savoir si le champ a été ajouté, supprimé ou modifié, on se base sur le nom
+et le type du champ
 
 ## La vue
 ...
 
 # Champs
+
 ## Les champs et leurs valeurs possibles
 
     y = implémenté
@@ -78,6 +85,7 @@ Pour savoir si le champ a été ajouté, supprimé ou modifié, on se base sur l
     +------------+-------+---------+---------+-------+----------+-----+-----+-------------+---------+--------+------+
 
 ## Définition des valeurs
+
 Partie incomplète.
 
 - label (String)

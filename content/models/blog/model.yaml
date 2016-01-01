@@ -4,7 +4,7 @@ fields:
 		label: Titre
 		type: title
 		required: true
-	checkboxes:
+	categories:
 		label: Catégories
 		message: Organiser le contenu
 		type: checkboxes
@@ -39,7 +39,7 @@ fields:
 		options:
 			no: Non
 			yes: Oui
-	contenu:
+	content:
 		label: Contenu
 		type: textarea
 		required: true

@@ -3,7 +3,7 @@
 $m = new App();
 
 // Retour réponse HTTP
-$m->get('/', function (Context $ctx) {
+$m->get('site.home', '/', function (Context $ctx) {
 	$myJson = '{ "a": 0 }';
 
 	return new HttpResponse($myJson, [
@@ -13,12 +13,12 @@ $m->get('/', function (Context $ctx) {
 });
 
 // Retour redirection
-$m->get('/', function (Context $ctx) {
+$m->get('site.home', '/', function (Context $ctx) {
 	return new HttpRedirect('site.home');
 });
 
 // Retour réponse HTTP avec template
-$m->get('/', function (Context $ctx) {
+$m->get('site.home', '/', function (Context $ctx) {
 	$page = new Template('ma-page.tpl', [
 		'username' => 'essai'
 	]);
@@ -30,7 +30,7 @@ $m->get('/', function (Context $ctx) {
 });
 
 // Récupération des paramètres
-$m->get('/user/:id([0-9]+)', function (Context $ctx) {
+$m->get('user.profile', '/user/:id([0-9]+)', function (Context $ctx) {
 	$id = $ctx->getParam('id');
 });
 

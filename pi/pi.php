@@ -26,7 +26,7 @@ class App {
 	public function __construct() {
 		$this->routes = [];
 
-		$this->loader = new Twig_Loader_Filesystem('views');
+		$this->loader = new Twig_Loader_Filesystem('./pi/views');
 		$this->twig = new Twig_Environment($this->loader);
 
 		$this->twig->addFunction(new Twig_SimpleFunction('genLink', function($url, array $options = []) {

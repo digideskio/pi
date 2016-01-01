@@ -2,6 +2,7 @@
 
 use Pi\Core\Model;
 use Pi\Core\Form;
+use Pi\Lib\Yaml;
 
 $app->get('admin.models.use', 'admin/models/{slug}/use', function($app, $slug) {
 	$fileModel = 'content/models/' . $slug . '/model.yaml';
@@ -18,7 +19,11 @@ $app->post('admin.models.use', 'admin/models/{slug}/use', function($app, $slug) 
 	$fileModel = 'content/models/' . $slug . '/model.yaml';
 
 	$model = new Model($fileModel);
-	$form  = new Form($model);
+	$form = new Form($model);
 
-	var_dump($form->save(), true);
+	$yaml = Yaml::encode($form->save());
+
+	Yaml::write('content/pages/' . time() . '.yaml', $form->save());
+
+	echo '<pre>' . $yaml . '</pre>';
 });
