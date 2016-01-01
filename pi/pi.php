@@ -25,6 +25,33 @@ class App {
 		'{*}'      => '(.+)'              // all
 	];
 
+	public static function register() {
+		spl_autoload_register([ __CLASS__, 'autoload' ]);
+	}
+
+	public static function autoload($class) {
+		if (0 !== strpos($class, 'Pi'))
+			return;
+
+		$parts = explode('\\', $class);
+
+		$newParts = [];
+
+		for ($i = 0, $len = count($parts) ; $i < $len ; $i++) {
+			if ($i == count($parts) - 1)
+				$newParts[] = $parts[$i];
+			else
+				$newParts[] = strtolower($parts[$i]);
+		}
+
+		$fileName = implode(DS, $newParts);
+
+		$file = dirname(__FILE__) . '/../' . $fileName . '.php';
+
+		if (is_file($file))
+			require $file;
+	}
+
 	public function __construct() {
 		$this->routes = [];
 
@@ -39,7 +66,7 @@ class App {
 
 		$this->twig->addFilter(new Twig_SimpleFilter('markdown', function($text) {
 			return Markdown::html($text);
-		}));
+		}, [ 'is_safe' => [ 'html' ] ]));
 	}
 
 	public function route($name, $path, $func, $method = 'GET') {

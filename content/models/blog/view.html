@@ -1,6 +1,6 @@
 {% extends "tpl.html" %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}« {{ title }} »{% endblock %}
 
 {% block content %}
 	<h1>{{ title }}</h1>
@@ -16,6 +16,6 @@
 	</p>
 
 	<div>
-		{{ content|markdown|raw }}
+		{{ content|markdown }}
 	</div>
 {% endblock %}
