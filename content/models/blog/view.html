@@ -1,21 +1,21 @@
 {% extends "tpl.html" %}
 
-{% block title %}« {{ title }} »{% endblock %}
+{% block title %}« {{ page.title }} »{% endblock %}
 
 {% block content %}
-	<h1>{{ title }}</h1>
+	<h1>{{ page.title }}</h1>
 
-	<p>Publié le {{ date }}</p>
+	<p>Publié le {{ page.date }}</p>
 
 	<p>
 		Catégories :
 
-		{% for category in categories %}
+		{% for category in page.categories %}
 			{{ category }}
 		{% endfor %}
 	</p>
 
 	<div>
-		{{ content|markdown }}
+		{{ page.content|markdown }}
 	</div>
 {% endblock %}

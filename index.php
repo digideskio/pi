@@ -17,7 +17,6 @@ try {
 	$app = new Pi\App();
 
 	require 'pi/modules/site/home.php';
-	require 'pi/modules/site/content.php';
 	require 'pi/modules/admin/home.php';
 	require 'pi/modules/admin/models/create.php';
 	require 'pi/modules/admin/models/edit.php';
@@ -25,6 +24,8 @@ try {
 	require 'pi/modules/admin/models/import.php';
 	require 'pi/modules/admin/models/remove.php';
 	require 'pi/modules/admin/models/use.php';
+	require 'pi/modules/admin/pages/create.php';
+	require 'pi/modules/site/content.php';
 
 	$app->run();
 } catch (Exception $e) {
