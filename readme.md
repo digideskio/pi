@@ -140,7 +140,7 @@ Partie incomplète.
     - cson
     - xml
   - text
-    - tetx
+    - text
     - regex
     - icon
     - twitter
