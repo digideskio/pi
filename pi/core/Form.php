@@ -4,21 +4,19 @@ namespace Pi\Core;
 
 class Form {
 	public $model;
-	public $bind;
 
 	public function __construct($model, $bind = false) {
-		$this->model  = $model;
-
-		$this->bind = $bind;
+		$this->model = $model;
 	}
 
 	public function html() {
-		if ($this->bind)
-			call_user_func($this->bind, $this);
-
 		$html  = '<form method="post" action="">';
 		$html .= '<h1>Formulaire &laquo; ' . $this->model->title . ' &raquo;</h1>';
 		$html .= '<div class="row">';
+
+		$html .= '<div class="col-xs-12">';
+		$html .= '<input type="text" name="model" value="' . $this->model->slug . '" />';
+		$html .= '</div>';
 
 		$accum = 0;
 

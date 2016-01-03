@@ -10,7 +10,7 @@ class Model {
 	public $fields;
 	public $slug;
 
-	public function __construct($file, $bind = false) {
+	public function __construct($file) {
 		$model = Yaml::read($file);
 
 		$this->file   = $file;
