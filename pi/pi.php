@@ -2,13 +2,11 @@
 
 namespace Pi;
 
-use \Exception;
 use \Twig_Loader_Filesystem;
 use \Twig_Environment;
-use \Twig_SimpleFunction;
 use \Twig_SimpleFilter;
-use Pi\Lib\Str;
 use Pi\Lib\Markdown;
+use Pi\Core\Page;
 
 // A faire : à revoir entièrement
 class App {
@@ -43,8 +41,14 @@ class App {
 			require $file;
 	}
 
-	public function __construct($path) {
-		$this->path = $path;
+	public function __construct() {
+		$this->path = 'home';
+
+		if (isset($_SERVER['PATH_INFO'])) {
+			// /page/test/&edit => page/test
+			preg_match('/\/?([a-zA-Z0-9\/_-]*)\/?&?.*/', $_SERVER['PATH_INFO'], $matches);
+			$this->path = trim($matches[1], '/');
+		}
 
 		$this->loader = new Twig_Loader_Filesystem('./pi/views');
 		$this->loader->addPath('./content/models');
@@ -62,5 +66,30 @@ class App {
 		], $variables);
 
 		return $this->twig->render($file, $variables);
+	}
+
+	public function getPath() {
+		return $this->path;
+	}
+
+	public function run() {
+		$content = Page::getLastVersion($this->getPath());
+
+		if (!$content)
+			$content = Page::getLastVersion('error');
+
+		$model = $content['model'];
+		$fields = $content['fields'];
+
+		$meta = [
+			'model' => $model,
+			'created_at' => $content['created_at'],
+			'updated_at' => $content['updated_at']
+		];
+
+		echo $this->render($model . '/view.html', [
+			'page' => $fields,
+			'meta' => $meta
+		]);
 	}
 }
