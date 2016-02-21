@@ -5,6 +5,7 @@ namespace Pi;
 use \Twig_Loader_Filesystem;
 use \Twig_Environment;
 use \Twig_SimpleFilter;
+use \Twig_SimpleFunction;
 use Pi\Lib\Markdown;
 use Pi\Lib\Yaml;
 use Pi\Core\Page;
@@ -17,6 +18,7 @@ class App {
 	private $twig;
 	private $path;
 	private $query;
+	private $theme;
 
 	public static function register() {
 		spl_autoload_register([ __CLASS__, 'autoload' ]);
@@ -48,6 +50,7 @@ class App {
 	public function __construct() {
 		$this->path = 'home';
 		$this->query = '';
+		$this->theme = 'default';
 
 		if (isset($_SERVER['PATH_INFO'])) {
 			// /page/test/&edit
@@ -57,9 +60,14 @@ class App {
 			$this->query = trim($matches[2], '/'); // edit
 		}
 
-		$this->loader = new Twig_Loader_Filesystem('./pi/views');
+		$this->loader = new Twig_Loader_Filesystem('./content/themes/' . $this->theme . '/tpl');
 		$this->loader->addPath('./content/models');
 		$this->twig = new Twig_Environment($this->loader);
+
+		$this->twig->addFunction(new Twig_SimpleFunction('genLink', function($url, array $options = []) {
+			array_unshift($options, $url);
+			return call_user_func_array([ $this, 'genLink' ], $options);
+		}, [ 'is_variadic' => true ]));
 
 		$this->twig->addFilter(new Twig_SimpleFilter('markdown', function($text) {
 			return Markdown::html($text);
@@ -83,9 +91,20 @@ class App {
 	}
 
 	public function render($file, $variables = []) {
+		$dir = [
+			'theme' => [
+				'dir' => '/content/themes/' . $this->theme . '/',
+				'tpl' => '/content/themes/' . $this->theme . '/tpl/',
+				'img' => '/content/themes/' . $this->theme . '/img/',
+				'js'  => '/content/themes/' . $this->theme . '/js/',
+				'css' => '/content/themes/' . $this->theme . '/css/'
+			]
+		];
+
 		$variables = array_merge([
 			'app' => $this,
-			'currentUrl' => $this->path
+			'currentUrl' => $this->path,
+			'dir' => $dir
 		], $variables);
 
 		return $this->twig->render($file, $variables);
