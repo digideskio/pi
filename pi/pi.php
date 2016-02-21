@@ -3,28 +3,24 @@
 namespace Pi;
 
 use Exception;
-use Twig_Loader_Filesystem;
-use Twig_Environment;
-use Twig_SimpleFilter;
-use Twig_SimpleFunction;
-use Pi\Lib\Markdown;
-use Pi\Lib\Yaml;
+
 use Pi\Core\Page;
-use Pi\Core\Model;
-use Pi\Core\Form;
+use Pi\Core\Renderer;
 
 // A faire : à revoir entièrement
 class App {
-	private $loader;
-	private $twig;
+	private $renderer;
 	private $path;
 	private $query;
 	private $theme;
 
+	/// Enregistre l'« autoloader »
 	public static function register() {
 		spl_autoload_register([ __CLASS__, 'autoload' ]);
 	}
 
+	/// Quand l'utilisation d'une classe est repérée, le fichier créant la
+	/// classe est chargé
 	public static function autoload($class) {
 		if (0 !== strpos($class, 'Pi'))
 			return;
@@ -50,20 +46,12 @@ class App {
 			throw new Exception('Unable to load "' . $file . '"');
 	}
 
+	/// Constructeur
 	public function __construct() {
-		$this->path = 'home';
-		$this->query = '';
 		$this->theme = 'default';
 
-		if (isset($_SERVER['PATH_INFO'])) {
-			// /page/test/&edit
-			preg_match('/\/?([a-zA-Z0-9\/_-]*)\/?&?(.*)/', $_SERVER['PATH_INFO'], $matches);
-
-			$this->path = trim($matches[1], '/'); // page/test
-			$this->query = trim($matches[2], '/'); // edit
-		}
-
-		$this->initializeTwig();
+		$this->initializePath();
+		$this->renderer = new Renderer($this->theme);
 
 		if (!empty($_POST)) {
 			$fileModel = 'content/models/' . $_POST['model'] . '/model.yaml';
@@ -78,46 +66,44 @@ class App {
 				'fields' => $form->save()
 			];
 
-			Yaml::write('content/pages/' . $this->path . '/' . time() . '.yaml', $content);
+			Yaml::write('content/pages/' . $this->getPath() . '/' . time() . '.yaml', $content);
 		}
 	}
 
-	public function initializeTwig() {
-		// Définition du dossier des modèles de page
-		$this->loader = new Twig_Loader_Filesystem('./content/themes/' . $this->theme . '/tpl');
-		$this->loader->addPath('./content/models');
+	/// Initialise le chemin courant
+	public function initializePath() {
+		$this->path = 'home';
+		$this->query = '';
 
-		$this->twig = new Twig_Environment($this->loader);
+		if (isset($_SERVER['PATH_INFO'])) {
+			// /page/test/&edit
+			preg_match('/\/?([a-zA-Z0-9\/_-]*)\/?&?(.*)/', $_SERVER['PATH_INFO'], $matches);
 
-		// Fonction « genLink » : « genLink('about') »
-		$this->twig->addFunction(new Twig_SimpleFunction('genLink', function($url, array $options = []) {
-			array_unshift($options, $url);
-			return call_user_func_array([ $this, 'genLink' ], $options);
-		}, [ 'is_variadic' => true ]));
-
-		// Filtre markdown : « ma_variable|markdown »
-		$this->twig->addFilter(new Twig_SimpleFilter('markdown', function($text) {
-			return Markdown::html($text);
-		}, [ 'is_safe' => [ 'html' ] ]));
+			$this->path = trim($matches[1], '/'); // page/test
+			$this->query = trim($matches[2], '/'); // edit
+		}
 	}
 
+	/// Rendu du fichier
 	public function render($file, $variables = []) {
 		$mainVariables = $this->getVariables();
 		$variables = array_merge($mainVariables, $variables);
 
-		return $this->twig->render($file, $variables);
+		return $this->renderer->render($file, $variables);
 	}
 
+	/// Variables globales qui seront envoyées à toutes les vues
 	public function getVariables() {
 		return [
 			'app' => $this,
-			'currentUrl' => $this->path,
+			'currentUrl' => $this->getPath(),
 			'dir' => [
 				'theme' => '/content/themes/' . $this->theme . '/'
 			]
 		];
 	}
 
+	/// Obtention de l'URL courante
 	public function getPath() {
 		return $this->path;
 	}
