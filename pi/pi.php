@@ -2,10 +2,11 @@
 
 namespace Pi;
 
-use \Twig_Loader_Filesystem;
-use \Twig_Environment;
-use \Twig_SimpleFilter;
-use \Twig_SimpleFunction;
+use Exception;
+use Twig_Loader_Filesystem;
+use Twig_Environment;
+use Twig_SimpleFilter;
+use Twig_SimpleFunction;
 use Pi\Lib\Markdown;
 use Pi\Lib\Yaml;
 use Pi\Core\Page;
@@ -45,6 +46,8 @@ class App {
 
 		if (is_file($file))
 			require $file;
+		else
+			throw new Exception('Unable to load "' . $file . '"');
 	}
 
 	public function __construct() {
@@ -60,18 +63,7 @@ class App {
 			$this->query = trim($matches[2], '/'); // edit
 		}
 
-		$this->loader = new Twig_Loader_Filesystem('./content/themes/' . $this->theme . '/tpl');
-		$this->loader->addPath('./content/models');
-		$this->twig = new Twig_Environment($this->loader);
-
-		$this->twig->addFunction(new Twig_SimpleFunction('genLink', function($url, array $options = []) {
-			array_unshift($options, $url);
-			return call_user_func_array([ $this, 'genLink' ], $options);
-		}, [ 'is_variadic' => true ]));
-
-		$this->twig->addFilter(new Twig_SimpleFilter('markdown', function($text) {
-			return Markdown::html($text);
-		}, [ 'is_safe' => [ 'html' ] ]));
+		$this->initializeTwig();
 
 		if (!empty($_POST)) {
 			$fileModel = 'content/models/' . $_POST['model'] . '/model.yaml';
@@ -90,24 +82,40 @@ class App {
 		}
 	}
 
-	public function render($file, $variables = []) {
-		$dir = [
-			'theme' => [
-				'dir' => '/content/themes/' . $this->theme . '/',
-				'tpl' => '/content/themes/' . $this->theme . '/tpl/',
-				'img' => '/content/themes/' . $this->theme . '/img/',
-				'js'  => '/content/themes/' . $this->theme . '/js/',
-				'css' => '/content/themes/' . $this->theme . '/css/'
-			]
-		];
+	public function initializeTwig() {
+		// Définition du dossier des modèles de page
+		$this->loader = new Twig_Loader_Filesystem('./content/themes/' . $this->theme . '/tpl');
+		$this->loader->addPath('./content/models');
 
-		$variables = array_merge([
-			'app' => $this,
-			'currentUrl' => $this->path,
-			'dir' => $dir
-		], $variables);
+		$this->twig = new Twig_Environment($this->loader);
+
+		// Fonction « genLink » : « genLink('about') »
+		$this->twig->addFunction(new Twig_SimpleFunction('genLink', function($url, array $options = []) {
+			array_unshift($options, $url);
+			return call_user_func_array([ $this, 'genLink' ], $options);
+		}, [ 'is_variadic' => true ]));
+
+		// Filtre markdown : « ma_variable|markdown »
+		$this->twig->addFilter(new Twig_SimpleFilter('markdown', function($text) {
+			return Markdown::html($text);
+		}, [ 'is_safe' => [ 'html' ] ]));
+	}
+
+	public function render($file, $variables = []) {
+		$mainVariables = $this->getVariables();
+		$variables = array_merge($mainVariables, $variables);
 
 		return $this->twig->render($file, $variables);
+	}
+
+	public function getVariables() {
+		return [
+			'app' => $this,
+			'currentUrl' => $this->path,
+			'dir' => [
+				'theme' => '/content/themes/' . $this->theme . '/'
+			]
+		];
 	}
 
 	public function getPath() {
