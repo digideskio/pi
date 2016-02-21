@@ -27,6 +27,17 @@ class Renderer {
 			return Markdown::html($text);
 		}, [ 'is_safe' => [ 'html' ] ]));
 
+		// Fonction « getAllPages »
+		$this->twig->addFunction(new Twig_SimpleFunction('getAllPages', function() {
+			$dirs = scandir('content/pages');
+
+			$dirs = array_filter($dirs, function($dir) {
+				return ($dir != '.' && $dir != '..');
+			});
+
+			return $dirs;
+		}));
+
 		// Fonction « template_from_string » : « {{ include(template_from_string("chaine")) }} »
 		// Interprète avec Twig le contenu de la chaine
 		$this->twig->addExtension(new Twig_Extension_StringLoader());
