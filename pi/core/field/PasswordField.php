@@ -24,7 +24,7 @@ class PasswordField extends BaseField {
 			'type'  => 'password',
 			'value' => $this->value(),
 			'id'    => 'input-' . $this->id
-    ]);
+    	]);
 
 		if ($this->required)
 			$tag->addAttr('required');
