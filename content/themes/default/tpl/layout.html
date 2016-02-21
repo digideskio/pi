@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="utf-8" />
+
 		{% block head %}
 			<title>{% block title %}{% endblock %} - Pi</title>
 		{% endblock %}
 
 		{% block stylesheets %}
-			<link rel="stylesheet" href="/web/css/style.css" />
+			<link rel="stylesheet" href="{{ dir.theme.css }}style.css" />
 		{% endblock %}
 	</head>
 

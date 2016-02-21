@@ -1,11 +1,9 @@
-{% extends "tpl.html" %}
+{% extends "layout.html" %}
 
 {% block title %}{{ page.title }}{% endblock %}
 
 {% block content %}
-	<h1>{{ page.title }}</h1>
-
 	<div>
-		{{ page.content|markdown }}
+		{{ include(template_from_string(page.content)) }}
 	</div>
 {% endblock %}

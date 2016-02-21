@@ -19,7 +19,7 @@ abstract class BaseField {
 	public $step;
 	public $format;
 
-  public function __construct($data) {
+	public function __construct($data) {
 		$this->id = ++self::$num;
 
 		$this->name        = isset($data['name'])        ? $data['name']        : '';
