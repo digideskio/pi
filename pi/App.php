@@ -51,8 +51,13 @@ class App {
 		$this->theme = 'default';
 
 		$this->initializePath();
-		$this->renderer = new Renderer($this->theme);
+		$this->initializeRenderer();
 
+        $this->processPost();
+	}
+
+    /// Traite les données reçues via POST
+    public function processPost() {
 		if (!empty($_POST)) {
 			$fileModel = 'content/models/' . $_POST['model'] . '/model.yaml';
 
@@ -68,7 +73,12 @@ class App {
 
 			Yaml::write('content/pages/' . $this->getPath() . '/' . time() . '.yaml', $content);
 		}
-	}
+    }
+
+    /// Initilise le moteur de rendu
+    public function initializeRenderer() {
+		$this->renderer = new Renderer($this->theme);
+    }
 
 	/// Initialise le chemin courant
 	public function initializePath() {
@@ -98,7 +108,7 @@ class App {
 			'app' => $this,
 			'currentUrl' => $this->getPath(),
 			'dir' => [
-				'theme' => '/content/themes/' . $this->theme . '/'
+				'theme' => PI_URL . 'content/themes/' . $this->theme . '/'
 			]
 		];
 	}
@@ -108,6 +118,7 @@ class App {
 		return $this->path;
 	}
 
+    /// Lance la recherche de la page et la retourne
 	public function run() {
 		if ($this->query == 'edit') {
 			$content = Page::getLastVersion($this->getPath());
