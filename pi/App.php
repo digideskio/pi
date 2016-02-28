@@ -4,8 +4,11 @@ namespace Pi;
 
 use Exception;
 
+use Pi\Core\Form;
+use Pi\Core\Model;
 use Pi\Core\Page;
 use Pi\Core\Renderer;
+use Pi\Lib\Yaml;
 
 // A faire : à revoir entièrement
 class App {
@@ -123,10 +126,13 @@ class App {
 		if ($this->query == 'edit') {
 			$content = Page::getLastVersion($this->getPath());
 
+			if (!$content)
+				throw new Exception('Unable to load page "' . $this->getPath() . '"');
+
 			$fileModel = 'content/models/' . $content['model'] . '/model.yaml';
 
 			$model = new Model($fileModel);
-			$form  = new Form($model);
+			$form = new Form($model);
 
 			if (empty($_POST))
 				$_POST = $content['fields'];
