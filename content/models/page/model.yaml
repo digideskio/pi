@@ -7,4 +7,3 @@ fields:
 	content:
 		label: Contenu
 		type: textarea
-		required: true
