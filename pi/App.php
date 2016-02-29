@@ -67,6 +67,9 @@ class App {
 			$model = new Model($fileModel);
 			$form = new Form($model);
 
+            if (!$form->validate())
+                throw new Exception('Error in form');
+
 			$content = [
 				'model' => $_POST['model'],
 				'created_at' => time(),
@@ -74,7 +77,13 @@ class App {
 				'fields' => $form->save()
 			];
 
-			Yaml::write('content/pages/' . $this->getPath() . '/' . time() . '.yaml', $content);
+
+            $folder = 'content/pages/' . $this->getPath() . '/';
+
+            if (!file_exists($folder))
+                mkdir($folder);
+
+			Yaml::write($folder . time() . '.yaml', $content);
 		}
     }
 
@@ -126,8 +135,17 @@ class App {
 		if ($this->query == 'edit') {
 			$content = Page::getLastVersion($this->getPath());
 
-			if (!$content)
-				throw new Exception('Unable to load page "' . $this->getPath() . '"');
+			if (!$content) {
+                echo $this->render('create.html', [
+                    'models' => [
+                        'page' => 'page',
+                        'article' => 'article',
+                        'all' => 'all'
+                    ]
+                ]);
+
+                return;
+            }
 
 			$fileModel = 'content/models/' . $content['model'] . '/model.yaml';
 
@@ -161,4 +179,9 @@ class App {
 			]);
 		}
 	}
+
+    /// Récupérer toutes les pages
+    public function getAllPages() {
+        return PageCollection::newWithAllPages();
+    }
 }

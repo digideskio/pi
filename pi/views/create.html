@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}Modifier un contenu{% endblock %}
+
+{% block content %}
+	<form method="post" action="">
+        <label for="txt-title">Titre</label>
+            <input type="text" name="title" id="txt-title" />
+
+        <label for="list-models">Modèle</label>
+            <select name="model" id="list-models">
+                {% for slug, name in models %}
+                    <option value="{{ slug }}">{{ name }}</option>
+                {% endfor %}
+            </select>
+
+        <input type="submit" value="Valider" />
+    </form>
+{% endblock %}

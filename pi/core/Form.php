@@ -14,9 +14,7 @@ class Form {
 		$html .= '<h1>Formulaire &laquo; ' . $this->model->title . ' &raquo;</h1>';
 		$html .= '<div class="row">';
 
-		$html .= '<div class="col-xs-12">';
-		$html .= '<input type="text" name="model" value="' . $this->model->slug . '" />';
-		$html .= '</div>';
+		$html .= '<input type="hidden" name="model" value="' . $this->model->slug . '" />';
 
 		$accum = 0;
 

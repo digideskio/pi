@@ -9,6 +9,7 @@ use Twig_SimpleFunction;
 use Twig_Extension_StringLoader;
 
 use Pi\Lib\Markdown;
+use Pi\Lib\Str;
 
 class Renderer {
 	private $loader;
@@ -27,17 +28,6 @@ class Renderer {
 		$this->twig->addFilter(new Twig_SimpleFilter('markdown', function($text) {
 			return Markdown::html($text);
 		}, [ 'is_safe' => [ 'html' ] ]));
-
-		// Fonction « getAllPages »
-		$this->twig->addFunction(new Twig_SimpleFunction('getAllPages', function() {
-			$dirs = scandir('content/pages');
-
-			$dirs = array_filter($dirs, function($dir) {
-				return ($dir != '.' && $dir != '..');
-			});
-
-			return $dirs;
-		}));
 
 		// Fonction « template_from_string » : « {{ include(template_from_string("chaine")) }} »
 		// Interprète avec Twig le contenu de la chaine
