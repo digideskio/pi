@@ -3,5 +3,5 @@
 {% block title %}{{ page.title }}{% endblock %}
 
 {% block content %}
-	{{ include(template_from_string(page.content)) }}
+	{{ include(template_from_string(page.content))|markdown }}
 {% endblock %}

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 	<head>
 		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 
 		{% block head %}
 			<title>{% block title %}{% endblock %} - Pi</title>
@@ -13,12 +14,36 @@
 	</head>
 
 	<body>
-		<div id="content">{% block content %}{% endblock %}</div>
+		<div class="main">
+			<header>
+				<div class="limit">
+					<a href="/" class="logo" class="active">
+						P<span class="logo-red">i</span>
+					</a>
 
-		<div id="footer">
-			{% block footer %}
-				&copy; 2016 - PifyZ.
-			{% endblock %}
+					<nav>
+						<ul>
+							{% for slug, page in app.getAllPages() %}
+								<li><a href="{{ slug }}">{{ page.fields.title }}</a></li>
+							{% endfor %}
+						</ul>
+					</nav>
+				</div>
+			</header>
+
+			<section>
+				<div class="limit">{% block content %}{% endblock %}</div>
+			</section>
+
+			<footer>
+				<div class="limit">
+					{% block footer %}
+						<div class="float-right">
+							Pi &middot; 2016
+						</div>
+					{% endblock %}
+				</div>
+			</footer>
 		</div>
 	</body>
 </html>
