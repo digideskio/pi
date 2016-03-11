@@ -59,8 +59,8 @@ class App {
         $this->processPost();
 	}
 
-    /// Traite les données reçues via POST
-    public function processPost() {
+	/// Traite les données reçues via POST
+	public function processPost() {
 		if (!empty($_POST)) {
 			$fileModel = 'content/models/' . $_POST['model'] . '/model.yaml';
 
@@ -90,7 +90,7 @@ class App {
     /// Initilise le moteur de rendu
     public function initializeRenderer() {
 		$this->renderer = new Renderer($this->theme);
-    }
+	}
 
 	/// Initialise le chemin courant
 	public function initializePath() {
@@ -136,16 +136,16 @@ class App {
 			$content = Page::getLastVersion($this->getPath());
 
 			if (!$content) {
-                echo $this->render('create.html', [
-                    'models' => [
-                        'page' => 'page',
-                        'article' => 'article',
-                        'all' => 'all'
-                    ]
-                ]);
+				echo $this->render('create.html', [
+					'models' => [
+						'page' => 'page',
+						'article' => 'article',
+						'all' => 'all'
+					]
+				]);
 
-                return;
-            }
+				return;
+			}
 
 			$fileModel = 'content/models/' . $content['model'] . '/model.yaml';
 
@@ -180,8 +180,8 @@ class App {
 		}
 	}
 
-    /// Récupérer toutes les pages
-    public function getAllPages() {
-        return PageCollection::newWithAllPages();
-    }
+	/// Récupérer toutes les pages
+	public function getAllPages() {
+		return PageCollection::allPages();
+	}
 }
