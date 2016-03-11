@@ -1,1 +1,7 @@
-/content/pages/*
+# Exclusion de toutes les pages et de toutes les versions excepté la version 0
+# de la page d'accueil pour avoir un contenu de base
+content/pages/*
+!content/pages/home
+
+content/pages/home/*
+!content/pages/home/0.yaml
