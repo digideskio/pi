@@ -8,7 +8,11 @@ use Pi\Core\Page;
 use Pi\Lib\Str;
 
 class PageCollection implements IteratorAggregate {
+	/// Pages faisant partie de la collection
 	private $pages;
+
+	/// Cache de toutes les pages, pour éviter de tout recalculer à chaque fois
+	private static $cacheAllPages = null;
 
 	public function __construct($pages) {
 		// Récupération des pages passées en paramètre
@@ -80,6 +84,10 @@ class PageCollection implements IteratorAggregate {
 
 	/// Récupérer toutes les pages
 	public static function allPages() {
+		// Retourne les pages en cache s'il y en a
+		if (static::$cacheAllPages != null)
+			return static::$cacheAllPages;
+
 		$dirs = scandir('content/pages');
 
 		$dirs = array_filter($dirs, function($dir) {
@@ -90,6 +98,9 @@ class PageCollection implements IteratorAggregate {
 
 		$self = new static($dirs);
 
-		return $self;
+		// Complète le cache avec les pages récupérées
+		static::$cacheAllPages = $self;
+
+		return static::$cacheAllPages;
 	}
 }
