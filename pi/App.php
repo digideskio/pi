@@ -103,6 +103,9 @@ class App {
 			$this->path = trim($matches[1], '/'); // page/test
 			$this->query = trim($matches[2], '/'); // edit
 		}
+
+		if (empty($this->path))
+			$this->path = 'home';
 	}
 
 	/// Rendu du fichier
