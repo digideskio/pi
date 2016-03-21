@@ -77,10 +77,10 @@ class App {
 				'fields' => $form->save()
 			];
 
-		$folder = 'content/pages/' . $this->getPath() . '/';
+			$folder = 'content/pages/' . $this->getPath() . '/';
 
-		if (!file_exists($folder))
-				mkdir($folder);
+			if (!file_exists($folder))
+					mkdir($folder);
 
 			Yaml::write($folder . time() . '.yaml', $content);
 		}
@@ -132,7 +132,7 @@ class App {
 		return $this->path;
 	}
 
-    /// Lance la recherche de la page et la retourne
+	/// Lance la recherche de la page et la retourne
 	public function run() {
 		if ($this->query == 'edit') {
 			$content = Page::getLastVersion($this->getPath());
