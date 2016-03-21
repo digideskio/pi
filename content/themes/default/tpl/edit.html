@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}Modifier un contenu{% endblock %}
+
+{% block head %}
+	<link rel="stylesheet" href="{{ dir.theme }}js/codemirror/lib/codemirror.css" />
+	<link rel="stylesheet" href="{{ dir.theme }}js/codemirror/theme/neo.css" />
+
+	<script src="{{ dir.theme }}js/codemirror/lib/codemirror.js"></script>
+	<script src="{{ dir.theme }}js/codemirror/mode/xml/xml.js"></script>
+	<script src="{{ dir.theme }}js/codemirror/mode/javascript/javascript.js"></script>
+	<script src="{{ dir.theme }}js/codemirror/mode/css/css.js"></script>
+	<script src="{{ dir.theme }}js/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+	<script src="{{ dir.theme }}js/codemirror/mode/markdown/markdown.js"></script>
+	<script src="{{ dir.theme }}js/codemirror/mode/twig/twig.js"></script>
+	<script src="{{ dir.theme }}js/codemirror/addon/display/fullscreen.js"></script>
+{% endblock %}
+
+{% block content %}
+	{{ form.html|raw }}
+
+	<script>
+		var editor = CodeMirror.fromTextArea(document.querySelector('textarea'), {
+			lineNumbers: true,
+			mode: {
+				name: 'twig',
+				htmlMode: true
+			},
+			indentWithTabs: true,
+			tabSize: 2,
+			lineWrapping: true,
+			theme: 'neo',
+			extraKeys: {
+				'F11': function(cm) {
+					cm.setOption('fullScreen', !cm.getOption('fullScreen'));
+				}
+			}
+		});
+	</script>
+{% endblock %}

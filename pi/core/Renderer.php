@@ -19,7 +19,6 @@ class Renderer {
 		// Définition du dossier des modèles de page
 		$this->loader = new Twig_Loader_Filesystem('./content/themes/' . $theme . '/tpl');
 		$this->loader->addPath('./content/models');
-		$this->loader->addPath('./pi/views');
 
 		$this->twig = new Twig_Environment($this->loader);
 
