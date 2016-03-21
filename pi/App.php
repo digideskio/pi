@@ -186,4 +186,11 @@ class App {
 	public function getAllPages() {
 		return PageCollection::allPages();
 	}
+
+	/// Récupérer une page
+	public static function getPage($page) {
+		$p = Page::getLastVersion($page);
+
+		return $p;
+	}
 }
