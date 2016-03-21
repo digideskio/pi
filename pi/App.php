@@ -56,7 +56,7 @@ class App {
 		$this->initializePath();
 		$this->initializeRenderer();
 
-        $this->processPost();
+		$this->processPost();
 	}
 
 	/// Traite les données reçues via POST
@@ -67,8 +67,8 @@ class App {
 			$model = new Model($fileModel);
 			$form = new Form($model);
 
-            if (!$form->validate())
-                throw new Exception('Error in form');
+			if (!$form->validate())
+					throw new Exception('Error in form');
 
 			$content = [
 				'model' => $_POST['model'],
@@ -77,18 +77,17 @@ class App {
 				'fields' => $form->save()
 			];
 
+		$folder = 'content/pages/' . $this->getPath() . '/';
 
-            $folder = 'content/pages/' . $this->getPath() . '/';
-
-            if (!file_exists($folder))
-                mkdir($folder);
+		if (!file_exists($folder))
+				mkdir($folder);
 
 			Yaml::write($folder . time() . '.yaml', $content);
 		}
-    }
+	}
 
-    /// Initilise le moteur de rendu
-    public function initializeRenderer() {
+	/// Initilise le moteur de rendu
+	public function initializeRenderer() {
 		$this->renderer = new Renderer($this->theme);
 	}
 
