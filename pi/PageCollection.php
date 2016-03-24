@@ -18,12 +18,10 @@ class PageCollection implements IteratorAggregate {
 		// Récupération des pages passées en paramètre
 		$this->pages = $pages;
 
-    /*
 		// Toutes les pages sont gardées excepté la page « error »
 		$this->pages = array_filter($this->pages, function($slug) {
 			return $slug != 'error';
 		}, ARRAY_FILTER_USE_KEY);
-    */
 	}
 
 	/// Pages dont le slug commence par
