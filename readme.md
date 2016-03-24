@@ -25,7 +25,27 @@ Pour savoir si le champ a été ajouté, supprimé ou modifié, on se base sur l
 et le type du champ
 
 ## La vue
-...
+
+Variables disponible dans toutes les vues :
+
+- url
+  - site : lien complet vers le site
+  - theme : lien complet vers le thème courant
+  - current : lien vers la page actuelle
+- config
+  - site
+    - name : nom du site
+    - theme : slug du thème
+- dir
+  - site : chemin complet vers le site
+
+Variables disponible en suppléments dans les pages :
+
+- meta
+  - model : slug du modèle
+  - created_at : date de création de la page
+  - updated_at : date de dernière modification de la page
+- page : tous les champs liés à la page
 
 # Champs
 

@@ -1,0 +1,7 @@
+model: page
+created_at: 0
+updated_at: 0
+fields:
+  title: Erreur
+  content: |
+    # Erreur 404</h1>

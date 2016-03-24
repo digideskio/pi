@@ -28,9 +28,7 @@ header {
 }
 
 header .logo {
-  margin-left: -120px;
   padding: 0 6px;
-  position: relative;
   display: inline-block;
   font-size: 34px;
   font-weight: lighter;
@@ -40,14 +38,10 @@ header .logo {
 }
 
 header .logo:hover,
-header .logo:hover .logo-red,
-header .logo.active,
-header .logo.active .logo-red {
+header .logo.active {
+  text-decoration: none;
   margin-bottom: -2px;
   border-bottom: 2px solid #6a18ad;
-}
-
-header .logo-red {
   color: #6a18ad;
 }
 

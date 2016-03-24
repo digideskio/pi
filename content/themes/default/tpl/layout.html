@@ -2,6 +2,7 @@
 <html lang="fr">
 	<head>
 		<meta charset="utf-8" />
+
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 
 		{% block head %}
@@ -9,7 +10,7 @@
 		{% endblock %}
 
 		{% block stylesheets %}
-			<link rel="stylesheet" href="{{ dir.theme }}css/style.css" />
+			<link rel="stylesheet" href="{{ url.theme }}css/style.css" />
 		{% endblock %}
 	</head>
 
@@ -17,13 +18,13 @@
 		<div class="main">
 			<header>
 				<div class="limit">
-					<a href="/" class="logo">
-						P<span class="logo-red">i</span>
+					<a href="{{ url.site }}" class="logo">
+						{{ config.site.name }}
 					</a>
 
 					<nav>
 						<ul>
-							{% for slug, page in app.getAllPages() %}
+							{% for slug, page in app.getAllPages().containsField('content') %}
 								<li><a href="{{ slug }}">{{ page.fields.title }}</a></li>
 							{% endfor %}
 						</ul>

@@ -16,6 +16,7 @@ class App {
 	private $path;
 	private $query;
 	private $theme;
+  private $config;
 
 	/// Enregistre l'« autoloader »
 	public static function register() {
@@ -51,8 +52,9 @@ class App {
 
 	/// Constructeur
 	public function __construct() {
-		$this->theme = 'default';
+    $this->parseConfig();
 
+		$this->initializeTheme();
 		$this->initializePath();
 		$this->initializeRenderer();
 
@@ -91,6 +93,16 @@ class App {
 		$this->renderer = new Renderer($this->theme);
 	}
 
+	/// Initialise le thème courant
+  // à faire : si le thème courant n'existe pas, renvoyer une erreur
+	public function initializeTheme() {
+    $this->theme = 'default';
+
+    if (isset($this->config['site']))
+      if (isset($this->config['site']['theme']))
+        $this->theme = $this->config['site']['theme'];
+  }
+
 	/// Initialise le chemin courant
 	public function initializePath() {
 		$this->path = 'home';
@@ -108,6 +120,10 @@ class App {
 			$this->path = 'home';
 	}
 
+  public function parseConfig() {
+    $this->config = Yaml::read('content/config.yaml');
+  }
+
 	/// Rendu du fichier
 	public function render($file, $variables = []) {
 		$mainVariables = $this->getVariables();
@@ -120,10 +136,15 @@ class App {
 	public function getVariables() {
 		return [
 			'app' => $this,
-			'currentUrl' => $this->getPath(),
-			'dir' => [
-				'theme' => PI_URL . 'content/themes/' . $this->theme . '/'
-			]
+      'config' => $this->config,
+			'url' => [
+        'site' => PI_URL,
+				'theme' => PI_URL . 'content/themes/' . $this->theme . '/',
+        'curent' => $this->getPath(),
+			],
+      'dir' => [
+        'site' => PI_DIR
+      ]
 		];
 	}
 
@@ -184,7 +205,7 @@ class App {
 
 	/// Récupérer toutes les pages
 	public function getAllPages() {
-		return PageCollection::allPages();
+		return PageCollection::getAllPages();
 	}
 
 	/// Récupérer une page
