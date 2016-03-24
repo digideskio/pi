@@ -24,7 +24,7 @@ Le modèle (model.yaml) contient deux valeurs :
 Pour savoir si le champ a été ajouté, supprimé ou modifié, on se base sur le nom
 et le type du champ
 
-## La vue
+# La vue
 
 Variables disponible dans toutes les vues :
 
@@ -46,6 +46,13 @@ Variables disponible en suppléments dans les pages :
   - created_at : date de création de la page
   - updated_at : date de dernière modification de la page
 - page : tous les champs liés à la page
+
+# Pages spéciales
+
+Il existe deux pages spéciales qui doivent obligatoirement exister :
+
+- home : la page d'accueil ;
+- error : la page d'erreur (404 par exemple).
 
 # Champs
 
