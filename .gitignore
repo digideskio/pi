@@ -2,6 +2,10 @@
 # de la page d'accueil pour avoir un contenu de base
 content/pages/*
 !content/pages/home
+!content/pages/error
 
 content/pages/home/*
-!content/pages/home/0.yaml
+!content/pages/home/1.yaml
+
+content/pages/error/*
+!content/pages/error/1.yaml
