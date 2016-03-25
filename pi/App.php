@@ -82,7 +82,7 @@ class App {
 			$folder = 'content/pages/' . $this->getPath() . '/';
 
 			if (!file_exists($folder))
-					mkdir($folder);
+					mkdir($folder, 0777, true);
 
 			Yaml::write($folder . time() . '.yaml', $content);
 		}
