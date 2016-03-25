@@ -1,3 +1,7 @@
+# Pi
+
+Pi est un CMS qui se veut modulaire.
+
 # Modèles
 
 ## Créer ou modifier un modèle
@@ -26,7 +30,7 @@ et le type du champ
 
 # La vue
 
-Variables disponible dans toutes les vues :
+Variables disponibles dans toutes les vues :
 
 - url
   - site : lien complet vers le site
@@ -39,7 +43,7 @@ Variables disponible dans toutes les vues :
 - dir
   - site : chemin complet vers le site
 
-Variables disponible en suppléments dans les pages :
+Variables disponibles en supplément dans les pages :
 
 - meta
   - model : slug du modèle
