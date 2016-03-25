@@ -25,7 +25,7 @@
 					<nav>
 						<ul>
 							{% for slug, page in app.getAllPages().containsField('content') %}
-								<li><a href="{{ slug }}">{{ page.fields.title }}</a></li>
+								<li><a href="/{{ slug }}">{{ page.fields.title }}</a></li>
 							{% endfor %}
 						</ul>
 					</nav>
