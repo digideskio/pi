@@ -2,11 +2,11 @@
 
 Pi est un CMS qui se veut modulaire.
 
-# Modèles
+## Modèles
 
-## Créer ou modifier un modèle
+### Créer ou modifier un modèle
 
-### Création d'un modèle
+#### Création d'un modèle
 
 - Se placer dans le dossier « /content/models/ » ;
 - Créer un dossier portant le nom du modèle en minuscule : « 0-9, a-z, _ » ;
@@ -18,7 +18,7 @@ Le modèle (model.yaml) contient deux valeurs :
 - title : le titre du modèle ;
 - fields : la liste des champs.
 
-### Modification d'un modèle
+#### Modification d'un modèle
 
 - Un champ ajouté = valeur vide ou par défaut dans les pages créées avec ce
   modèle ;
@@ -28,7 +28,7 @@ Le modèle (model.yaml) contient deux valeurs :
 Pour savoir si le champ a été ajouté, supprimé ou modifié, on se base sur le nom
 et le type du champ
 
-# La vue
+## La vue
 
 Variables disponibles dans toutes les vues :
 
@@ -51,16 +51,16 @@ Variables disponibles en supplément dans les pages :
   - updated_at : date de dernière modification de la page
 - page : tous les champs liés à la page
 
-# Pages spéciales
+## Pages spéciales
 
 Il existe deux pages spéciales qui doivent obligatoirement exister :
 
 - home : la page d'accueil ;
 - error : la page d'erreur (404 par exemple).
 
-# Champs
+## Champs
 
-## Les champs et leurs valeurs possibles
+### Les champs et leurs valeurs possibles
 
     y = implémenté
     n = non implémenté
@@ -115,7 +115,7 @@ Il existe deux pages spéciales qui doivent obligatoirement exister :
     | version    |   y   |    y    |    y    |   y   |    y     |  n  |  n  |      y      |    n    |   n    |  n   |
     +------------+-------+---------+---------+-------+----------+-----+-----+-------------+---------+--------+------+
 
-## Définition des valeurs
+### Définition des valeurs
 
 Partie incomplète.
 
