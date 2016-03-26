@@ -143,7 +143,8 @@ class App {
         'curent' => $this->getPath(),
 			],
       'dir' => [
-        'site' => PI_DIR
+        'site' => PI_DIR,
+				'theme' => PI_DIR . 'content/themes/' . $this->theme . '/',
       ]
 		];
 	}

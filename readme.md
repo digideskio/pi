@@ -35,13 +35,14 @@ Variables disponibles dans toutes les vues :
 - url
   - site : lien complet vers le site
   - theme : lien complet vers le thème courant
-  - current : lien vers la page actuelle
+  - current : lien complet vers la page actuelle
 - config
   - site
     - name : nom du site
     - theme : slug du thème
 - dir
   - site : chemin complet vers le site
+	- theme : chemin complet vers le thème courant
 
 Variables disponibles en supplément dans les pages :
 
