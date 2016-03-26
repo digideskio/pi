@@ -378,7 +378,6 @@ class Spyc {
     $indent += $this->_dumpIndent;
     $spaces   = str_repeat(' ',$indent);
     foreach ($exploded as $line) {
-      $line = trim($line);
       if (strpos($line, '"') === 0 && strrpos($line, '"') == (strlen($line)-1) || strpos($line, "'") === 0 && strrpos($line, "'") == (strlen($line)-1)) {
         $line = substr($line, 1, -1);
       }

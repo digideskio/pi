@@ -6,7 +6,7 @@ use Spyc;
 
 class Yaml {
 	public static function encode($array) {
-		return preg_replace('~^---\n~', '', Spyc::YAMLDump($array));
+		return Spyc::YAMLDump($array, false, false, true);
 	}
 
 	public static function write($file, $array) {
