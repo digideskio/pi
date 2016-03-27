@@ -6,4 +6,11 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php/$1 [L]
 
 # Empêche de lister les dossiers et fichiers
-Options -Indexes
+Options All -Indexes
+IndexIgnore *
+
+# Masque les informations du serveur
+ServerSignature Off
+
+# Encodage par défaut : UTF-8
+AddDefaultCharset UTF-8
