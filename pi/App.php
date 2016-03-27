@@ -64,7 +64,7 @@ class App {
 	/// Traite les données reçues via POST
 	public function processPost() {
 		if (!empty($_POST)) {
-			$fileModel = 'content/models/' . $_POST['model'] . '/model.yaml';
+			$fileModel = PI_DIR_MODELS . $_POST['model'] . '/model.yaml';
 
 			$model = new Model($fileModel);
 			$form = new Form($model);
@@ -79,7 +79,7 @@ class App {
 				'fields' => $form->save()
 			];
 
-			$folder = 'content/pages/' . $this->getPath() . '/';
+			$folder = PI_DIR_PAGES . $this->getPath() . '/';
 
 			if (!file_exists($folder))
 					mkdir($folder, 0755, true);
@@ -121,7 +121,7 @@ class App {
 	}
 
   public function parseConfig() {
-    $this->config = Yaml::read('content/config.yaml');
+    $this->config = Yaml::read(PI_DIR_CONTENT . 'config.yaml');
   }
 
 	/// Rendu du fichier
@@ -138,13 +138,21 @@ class App {
 			'app' => $this,
       'config' => $this->config,
 			'url' => [
-        'site' => PI_URL,
-				'theme' => PI_URL . 'content/themes/' . $this->theme . '/',
+        'site' => PI_URL_SITE,
+				'content' => PI_URL_CONTENT,
+				'models' => PI_URL_MODELS,
+				'pages' => PI_URL_PAGES,
+				'themes' => PI_URL_THEMES,
+				'theme' => PI_URL_THEMES . $this->theme . '/',
         'curent' => $this->getPath(),
 			],
       'dir' => [
-        'site' => PI_DIR,
-				'theme' => PI_DIR . 'content/themes/' . $this->theme . '/',
+        'site' => PI_DIR_SITE,
+				'content' => PI_DIR_CONTENT,
+				'models' => PI_DIR_MODELS,
+				'pages' => PI_DIR_PAGES,
+				'themes' => PI_DIR_THEMES,
+				'theme' => PI_DIR_THEMES . $this->theme . '/',
       ]
 		];
 	}
@@ -171,7 +179,7 @@ class App {
 				return;
 			}
 
-			$fileModel = 'content/models/' . $content['model'] . '/model.yaml';
+			$fileModel = PI_DIR_MODELS . $content['model'] . '/model.yaml';
 
 			$model = new Model($fileModel);
 			$form = new Form($model);

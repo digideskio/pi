@@ -17,8 +17,8 @@ class Renderer {
 
 	public function __construct($theme) {
 		// Définition du dossier des modèles de page
-		$this->loader = new Twig_Loader_Filesystem('./content/themes/' . $theme . '/tpl');
-		$this->loader->addPath('./content/models');
+		$this->loader = new Twig_Loader_Filesystem(PI_DIR_THEMES . $theme . '/tpl');
+		$this->loader->addPath(PI_DIR_MODELS);
 
 		$this->twig = new Twig_Environment($this->loader);
 

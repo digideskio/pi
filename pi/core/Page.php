@@ -6,7 +6,7 @@ use Pi\Lib\Yaml;
 
 class Page {
 	public static function getVersion($slug, $version) {
-		$file = 'content/pages/' . $slug . '/' . $version . '.yaml';
+		$file = PI_DIR_PAGES . $slug . '/' . $version . '.yaml';
 
 		if (file_exists($file)) {
 			return Yaml::read($file);
@@ -16,7 +16,7 @@ class Page {
 	}
 
 	public static function getLastVersion($slug) {
-		$f = 'content/pages/' . $slug;
+		$f = PI_DIR_PAGES . $slug;
 
 		if (!is_dir($f))
 			return false;
@@ -50,7 +50,7 @@ class Page {
 	public static function getAllVersions($slug) {
 		$versions = [];
 
-		$f = 'content/pages/' . $slug;
+		$f = PI_DIR_PAGES . $slug;
 
 		if (!is_dir($f))
 			return [];

@@ -34,15 +34,23 @@ Variables disponibles dans toutes les vues :
 
 - `url`
   - `site` : lien complet vers le site
+	- `content` : lien complet vers le contenu
+	- `models` : lien complet vers les modèles
+	- `pages` : lien complet vers les pages
+	- `themes` : lien complet vers les thèmes
   - `theme` : lien complet vers le thème courant
   - `current` : lien complet vers la page actuelle
+- `dir`
+  - `site` : chemin complet vers le site
+	- `content` : chemin complet vers le contenu
+	- `models` : chemin complet vers les modèles
+	- `pages` : chemin complet vers les pages
+	- `themes` : chemin complet vers les thèmes
+  - `theme` : chemin complet vers le thème courant
 - `config`
   - `site`
     - `name` : nom du site
     - `theme` : slug du thème
-- `dir`
-  - `site` : chemin complet vers le site
-	- `theme` : chemin complet vers le thème courant
 
 Variables disponibles en supplément dans les pages :
 

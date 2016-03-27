@@ -91,7 +91,7 @@ class PageCollection implements IteratorAggregate {
 			return static::$cacheAllPages;
 
     // Récupère tous les chemins du dossier des pages
-		$dirs = scandir('content/pages');
+		$dirs = scandir(PI_DIR_PAGES);
 
     // Supprime les chemins « . » et « .. »
 		$dirs = array_filter($dirs, function($dir) {

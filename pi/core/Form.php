@@ -13,7 +13,7 @@ class Form {
 		$html  = '<form method="post" action="">';
 		$html .= '<h1>Formulaire &laquo; ' . $this->model->title . ' &raquo;</h1>';
 		$html .= '<div class="row">';
-
+		
 		$html .= '<input type="hidden" name="model" value="' . $this->model->slug . '" />';
 
 		$accum = 0;
