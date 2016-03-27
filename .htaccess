@@ -1,5 +1,9 @@
+# Réécriture d'URL
 Options +FollowSymlinks
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php/$1 [L]
+
+# Empêche de lister les dossiers et fichiers
+Options -Indexes
