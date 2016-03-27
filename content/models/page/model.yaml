@@ -7,3 +7,4 @@ fields:
 	content:
 		label: Contenu
 		type: textarea
+		format: twig

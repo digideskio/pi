@@ -20,8 +20,6 @@ class Model {
 
 		$slug = str_replace(PI_DIR_MODELS, '', $file);
 
-		var_dump($slug);
-
 		foreach ($model['fields'] as $name => $field) {
 			$class = ucfirst($field['type']) . 'Field';
 			$class = 'Pi\\Core\\Field\\' . $class;

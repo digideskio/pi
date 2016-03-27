@@ -18,23 +18,4 @@
 
 {% block content %}
 	{{ form.html|raw }}
-
-	<script>
-		var editor = CodeMirror.fromTextArea(document.querySelector('textarea'), {
-			lineNumbers: true,
-			mode: {
-				name: 'twig',
-				htmlMode: true
-			},
-			indentWithTabs: true,
-			tabSize: 2,
-			lineWrapping: true,
-			theme: 'neo',
-			extraKeys: {
-				'F11': function(cm) {
-					cm.setOption('fullScreen', !cm.getOption('fullScreen'));
-				}
-			}
-		});
-	</script>
 {% endblock %}
