@@ -14,10 +14,6 @@ fields:
       design: Design
       programming: Programmation
       graphics: Graphisme
-  code:
-    label: Code
-    type: code
-    format: php
   color:
     label: Couleur
     type: color

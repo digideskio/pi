@@ -160,8 +160,6 @@ Partie incomplète.
 - `format` (`String`)
   Le format que doit respecter le champ
   Valeurs possibles :
-  - `code`
-    - un langage de programmation
   - `color`
     - `rgba`
     - `rgb`
@@ -174,13 +172,8 @@ Partie incomplète.
     - expression régulière
   - `textarea`
     - `text`
-    - `regex`
-    - `markdown`
-    - `json`
-    - `ini`
-    - `yaml`
-    - `cson`
-    - `xml`
+		- un langage parmi `markdown`, `twig`, `html`
+		- tous les langages : `javascript`, `java`, `go`, `css`, `c`, `cpp`, ...
   - `text`
     - `text`
     - `regex`
