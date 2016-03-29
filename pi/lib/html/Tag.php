@@ -35,11 +35,11 @@ class Tag {
 		$this->name    = $name;
 		$this->attrs   = $attrs;
 		$this->content = $content;
-		}
+	}
 
 	public function addAttr($key, $value = true) {
 		$this->attrs[$key] = $value;
-		}
+	}
 
 	public function addAttrs($attrs) {
 		foreach ($attrs as $key => $value)

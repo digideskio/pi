@@ -33,7 +33,7 @@ class App {
 	private $path;
 	private $query;
 	private $theme;
-  private $config;
+	private $config;
 
 	/// Enregistre l'« autoloader »
 	public static function register() {
@@ -69,7 +69,7 @@ class App {
 
 	/// Constructeur
 	public function __construct() {
-    $this->parseConfig();
+		$this->parseConfig();
 
 		$this->initializeTheme();
 		$this->initializePath();
@@ -87,7 +87,7 @@ class App {
 			$form = new Form($model);
 
 			if (!$form->validate())
-					throw new Exception('Error in form');
+				throw new Exception('Error in form');
 
 			$content = [
 				'model' => $_POST['model'],
@@ -99,7 +99,7 @@ class App {
 			$folder = PI_DIR_PAGES . $this->getPath() . '/';
 
 			if (!file_exists($folder))
-					mkdir($folder, 0755, true);
+				mkdir($folder, 0755, true);
 
 			Yaml::write($folder . time() . '.yaml', $content);
 		}
@@ -111,14 +111,15 @@ class App {
 	}
 
 	/// Initialise le thème courant
-  // à faire : si le thème courant n'existe pas, renvoyer une erreur
+  	// à faire : si le thème courant n'existe pas, renvoyer une erreur
 	public function initializeTheme() {
-    $this->theme = 'default';
+		$this->theme = 'default';
 
-    if (isset($this->config['site']))
-      if (isset($this->config['site']['theme']))
-        $this->theme = $this->config['site']['theme'];
-  }
+		// Vérifie l'existence de $this->config['site']['theme']
+		if (isset($this->config['site']))
+			if (isset($this->config['site']['theme']))
+				$this->theme = $this->config['site']['theme'];
+	}
 
 	/// Initialise le chemin courant
 	public function initializePath() {
@@ -137,9 +138,9 @@ class App {
 			$this->path = 'home';
 	}
 
-  public function parseConfig() {
-    $this->config = Yaml::read(PI_DIR_CONTENT . 'config.yaml');
-  }
+	public function parseConfig() {
+		$this->config = Yaml::read(PI_DIR_CONTENT . 'config.yaml');
+	}
 
 	/// Rendu du fichier
 	public function render($file, $variables = []) {
@@ -153,24 +154,24 @@ class App {
 	public function getVariables() {
 		return [
 			'app' => $this,
-      'config' => $this->config,
+	  		'config' => $this->config,
 			'url' => [
-        'site' => PI_URL_SITE,
+			'site' => PI_URL_SITE,
 				'content' => PI_URL_CONTENT,
 				'models' => PI_URL_MODELS,
 				'pages' => PI_URL_PAGES,
 				'themes' => PI_URL_THEMES,
 				'theme' => PI_URL_THEMES . $this->theme . '/',
-        'curent' => $this->getPath(),
+				'curent' => $this->getPath()
 			],
-      'dir' => [
-        'site' => PI_DIR_SITE,
+			'dir' => [
+				'site' => PI_DIR_SITE,
 				'content' => PI_DIR_CONTENT,
 				'models' => PI_DIR_MODELS,
 				'pages' => PI_DIR_PAGES,
 				'themes' => PI_DIR_THEMES,
-				'theme' => PI_DIR_THEMES . $this->theme . '/',
-      ]
+				'theme' => PI_DIR_THEMES . $this->theme . '/'
+			]
 		];
 	}
 

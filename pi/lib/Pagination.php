@@ -71,11 +71,11 @@ class Pagination extends BaseMod implements IteratorAggregate {
 	public function getNbPages() {
 		return $this->nbPages;
 	}
-	
+
 	public function isActualPage($i) {
 		return $this->actual == $i;
 	}
-	
+
 	public function getIterator() {
 		for ($i = $this->first ; $i <= $this->last ; $i++)
 			yield $i;

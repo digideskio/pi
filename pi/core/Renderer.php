@@ -45,6 +45,18 @@ class Renderer {
 			return Markdown::html($text);
 		}, [ 'is_safe' => [ 'html' ] ]));
 
+		// Détermine si le slug fournit est la page actuellement ouverte
+		// à faire : éviter de déterminer le chemin courant ici alors qu'il est
+		//           déterminé aussi dans la classe App
+		$this->twig->addFilter(new Twig_SimpleFilter('is_current_page', function($slug) {
+			$currentPath = 'home';
+
+			if (isset($_SERVER['PATH_INFO']))
+				$currentPath = trim($_SERVER['PATH_INFO'], '/');
+
+			return $slug == $currentPath;
+		}));
+
 		// Fonction « template_from_string » : « {{ include(template_from_string("chaine")) }} »
 		// Interprète avec Twig le contenu de la chaine
 		$this->twig->addExtension(new Twig_Extension_StringLoader());

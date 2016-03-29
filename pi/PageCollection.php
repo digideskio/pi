@@ -44,7 +44,7 @@ class PageCollection implements IteratorAggregate {
 	/// Pages dont le slug commence par
 	public function slugStartsWith($name) {
 		$this->pages = array_filter($this->pages, function($slug) use ($name) {
-      return Str::startsWith($slug, $name);
+			return Str::startsWith($slug, $name);
 		}, ARRAY_FILTER_USE_KEY);
 
 		return $this;
@@ -53,7 +53,7 @@ class PageCollection implements IteratorAggregate {
 	/// Pages dont le slug finit par
 	public function slugEndsWith($name) {
 		$this->pages = array_filter($this->pages, function($slug) use ($name) {
-      return Str::endsWith($slug, $name);
+			return Str::endsWith($slug, $name);
 		}, ARRAY_FILTER_USE_KEY);
 
 		return $this;
@@ -62,7 +62,7 @@ class PageCollection implements IteratorAggregate {
 	/// Pages dont le slug contient
 	public function slugContains($name) {
 		$this->pages = array_filter($this->pages, function($slug) use ($name) {
-      return Str::contains($slug, $name);
+			return Str::contains($slug, $name);
 		}, ARRAY_FILTER_USE_KEY);
 
 		return $this;
@@ -71,7 +71,7 @@ class PageCollection implements IteratorAggregate {
 	/// Pages qui contiennent le champ
 	public function containsField($fieldName) {
 		$this->pages = array_filter($this->pages, function($page) use ($fieldName) {
-      return isset($page['fields'][$fieldName]);
+			return isset($page['fields'][$fieldName]);
 		});
 
 		return $this;
@@ -80,7 +80,7 @@ class PageCollection implements IteratorAggregate {
 	/// à faire : Pages dont le champ vaut
 	public function fieldValueIs($fieldName, $fieldValue) {
 		$this->pages = array_filter($this->pages, function($page) use ($name) {
-      return true;
+			return true;
 		});
 
 		return $this;
@@ -89,7 +89,7 @@ class PageCollection implements IteratorAggregate {
 	/// Pages dont le modèle est
 	public function withModel($modelName) {
 		$this->pages = array_filter($this->pages, function($page) use ($modelName) {
-      return $page['model'] == $modelName;
+			return $page['model'] == $modelName;
 		});
 
 		return $this;
@@ -107,30 +107,30 @@ class PageCollection implements IteratorAggregate {
 		if (static::$cacheAllPages != null)
 			return static::$cacheAllPages;
 
-    // Récupère tous les chemins du dossier des pages
+		// Récupère tous les chemins du dossier des pages
 		$dirs = scandir(PI_DIR_PAGES);
 
-    // Supprime les chemins « . » et « .. »
+		// Supprime les chemins « . » et « .. »
 		$dirs = array_filter($dirs, function($dir) {
-				return ($dir != '.' && $dir != '..');
+			return ($dir != '.' && $dir != '..');
 		});
 
-    // Redéfinition de l'indexation du tableau
+		// Redéfinition de l'indexation du tableau
 		$dirs = array_values($dirs);
 
-    // Récupération de la dernière version de chacune des pages
-    $pages = [];
+		// Récupération de la dernière version de chacune des pages
+		$pages = [];
 
-    foreach ($dirs as $dir)
-      $pages[$dir] = Page::getLastVersion($dir);
+		foreach ($dirs as $dir)
+			$pages[$dir] = Page::getLastVersion($dir);
 
-    // Création de la collection
+		// Création de la collection
 		$self = new static($pages);
 
 		// Complète le cache avec les pages récupérées
 		static::$cacheAllPages = $self;
 
-    // Retourne la version désormais en cache
+		// Retourne la version désormais en cache
 		return static::$cacheAllPages;
 	}
 }

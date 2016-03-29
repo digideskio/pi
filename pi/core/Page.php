@@ -25,11 +25,10 @@ class Page {
 	public static function getVersion($slug, $version) {
 		$file = PI_DIR_PAGES . $slug . '/' . $version . '.yaml';
 
-		if (file_exists($file)) {
+		if (file_exists($file))
 			return Yaml::read($file);
-		} else {
+		else
 			throw new Exception('Version \'' . $version . '\' de \'' . $slug . '\' inexistante.');
-		}
 	}
 
 	public static function getLastVersion($slug) {
