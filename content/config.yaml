@@ -1,3 +1,32 @@
 site:
 	name: Pi
 	theme: default
+
+roles:
+	editor: &role-editor
+		- can-edit-pages
+		- can-create-pages
+		- can-remove-pages
+
+	admin: &role-admin
+		<<: *role-editor
+		- can-create-users
+		- can-edit-users
+		- can-remove-users
+
+	super-admin: &role-super-admin
+		<<: *role-admin
+		- can-change-config
+
+users:
+	- username: editor
+		password: editor
+		permissions: *role-editor
+
+	- username: admin
+		password: admin
+		permissions: *role-admin
+
+	- username: super-admin
+		password: super-admin
+		permissions: *role-super-admin
