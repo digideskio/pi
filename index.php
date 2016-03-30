@@ -18,7 +18,7 @@
 */
 
 // Configurations
-require 'config.php';
+require 'settings.php';
 
 // Lancement de l'application (affichage de la page demandée)
 $app = new Pi\App();

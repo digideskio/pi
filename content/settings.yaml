@@ -1,0 +1,30 @@
+site:
+  name: Pi
+  theme: default
+
+roles:
+  editor: &role-editor
+    - can-manage-pages
+
+  admin: &role-admin
+    <<: *role-editor
+    - can-manage-users
+    - can-manage-models
+    - can-manage-settings
+
+  super-admin: &role-super-admin
+    <<: *role-admin
+    - can-manage-file-settings
+
+users:
+  - username: editor
+    password: editor
+    permissions: *role-editor
+
+  - username: admin
+    password: admin
+    permissions: *role-admin
+
+  - username: super-admin
+    password: super-admin
+    permissions: *role-super-admin
