@@ -21,6 +21,7 @@ namespace Pi;
 
 use Exception;
 
+use Pi\Settings;
 use Pi\Core\Form;
 use Pi\Core\Model;
 use Pi\Core\Page;
@@ -33,7 +34,6 @@ class App {
 	private $path;
 	private $query;
 	private $theme;
-	private $config;
 
 	/// Enregistre l'« autoloader »
 	public static function register() {
@@ -69,8 +69,6 @@ class App {
 
 	/// Constructeur
 	public function __construct() {
-		$this->parseConfig();
-
 		$this->initializeTheme();
 		$this->initializePath();
 		$this->initializeRenderer();
@@ -115,10 +113,10 @@ class App {
 	public function initializeTheme() {
 		$this->theme = 'default';
 
-		// Vérifie l'existence de $this->config['site']['theme']
-		if (isset($this->config['site']))
-			if (isset($this->config['site']['theme']))
-				$this->theme = $this->config['site']['theme'];
+		$this->theme = Settings::get('site.theme');
+
+		if (!$this->theme)
+			$this->theme = 'default';
 	}
 
 	/// Initialise le chemin courant
@@ -138,10 +136,6 @@ class App {
 			$this->path = 'home';
 	}
 
-	public function parseConfig() {
-		$this->config = Yaml::read(PI_DIR_CONTENT . 'config.yaml');
-	}
-
 	/// Rendu du fichier
 	public function render($file, $variables = []) {
 		$mainVariables = $this->getVariables();
@@ -154,9 +148,9 @@ class App {
 	public function getVariables() {
 		return [
 			'app' => $this,
-	  		'config' => $this->config,
+	  		'settings' => Settings::getSettings(),
 			'url' => [
-			'site' => PI_URL_SITE,
+				'site' => PI_URL_SITE,
 				'content' => PI_URL_CONTENT,
 				'models' => PI_URL_MODELS,
 				'pages' => PI_URL_PAGES,

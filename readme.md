@@ -9,7 +9,8 @@ Pi est un CMS qui se veut modulaire.
 #### Création d'un modèle
 
 - Se placer dans le dossier `/content/models/` ;
-- Créer un dossier portant le nom du modèle en minuscule : « 0-9, a-z, _ » ;
+- Créer un dossier portant le nom du modèle en minuscule : « `0-9`, `a-z`,
+  `_` » ;
 - Créer deux fichiers dans ce nouveau dossier :
   - `view.html` ;
   - `model.yaml`.
@@ -47,7 +48,7 @@ Variables disponibles dans toutes les vues :
 	- `pages` : chemin complet vers les pages
 	- `themes` : chemin complet vers les thèmes
   - `theme` : chemin complet vers le thème courant
-- `config`
+- `settings`
   - `site`
     - `name` : nom du site
     - `theme` : slug du thème
