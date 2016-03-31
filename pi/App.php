@@ -180,7 +180,7 @@ class App {
 			$content = Page::getLastVersion($this->getPath());
 
 			if (!$content) {
-				echo $this->render('create.html', [
+				echo $this->render('admin/create-page.html', [
 					'models' => [
 						'page' => 'page',
 						'article' => 'article',
@@ -199,7 +199,7 @@ class App {
 			if (empty($_POST))
 				$_POST = $content['fields'];
 
-			echo $this->render('edit.html', [
+			echo $this->render('admin/edit-page.html', [
 				'form' => $form
 			]);
 		} else {

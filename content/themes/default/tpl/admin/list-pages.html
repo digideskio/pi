@@ -1,0 +1,12 @@
+
+{% extends "layout.html" %}
+
+{% block title %}Liste des pages{% endblock %}
+
+{% block content %}
+    <ul>
+        {% for slug, page in pages %}
+            <li>{{ page.fields.title }} : {{ '/' ~ slug }}/</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
