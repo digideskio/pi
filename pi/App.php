@@ -224,6 +224,11 @@ class App {
 		}
 	}
 
+	/// Récupérer tous les utilisateurs
+	public function getAllUsers() {
+		return Settings::getUsers();
+	}
+
 	/// Récupérer toutes les pages
 	public function getAllPages() {
 		return PageCollection::getAllPages();

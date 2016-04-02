@@ -17,6 +17,6 @@ $pages = PageCollection::getAllPages();
 
 $app = new App();
 
-echo $app->render('admin/list-pages.html', [
+echo $app->render('admin/dashboard.html', [
     'pages' => $pages
 ]);

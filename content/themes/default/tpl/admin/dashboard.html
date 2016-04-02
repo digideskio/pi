@@ -1,0 +1,21 @@
+{% extends "admin/layout.html" %}
+
+{% block title %}Liste des pages{% endblock %}
+
+{% block content %}
+	<h2>Liste des pages</h2>
+
+	<ul>
+		{% for slug, page in pages %}
+			<li>{{ page.fields.title }} : {{ slug }}</li>
+		{% endfor %}
+	</ul>
+
+	<h2>Liste des utilisateurs</h2>
+
+	<ul>
+		{% for user in app.getAllUsers() %}
+			<li>{{ user.username }}</li>
+		{% endfor %}
+	</ul>
+{% endblock %}
