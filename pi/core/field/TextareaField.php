@@ -72,6 +72,35 @@ class TextareaField extends BaseField {
 			</script>
 		';
 
+		if ($this->format == 'visual-html') {
+			$tagField .= '
+				<script>
+					tinymce.init({
+						selector: \'textarea\',
+						language: \'fr_FR\',
+						height: 500,
+						theme: \'modern\',
+
+						plugins: [
+							\'advlist autolink lists link image hr\',
+							\'searchreplace code fullscreen\',
+							\'media table contextmenu\',
+							\'textcolor imagetools\'
+						],
+
+						toolbar1: \'insertfile undo redo | styleselect | bold \' +
+							\'italic underline strikethrough | alignleft \' +
+							\'aligncenter alignright alignjustify | bullist \' +
+							\'numlist outdent indent | link image\',
+
+						toolbar2: \'media | forecolor backcolor code\',
+
+						removed_menuitems: \'newdocument cut copy paste\'
+					});
+				</script>
+			';
+		}
+
 		return $tagField;
 	}
 }
