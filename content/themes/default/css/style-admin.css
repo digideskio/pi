@@ -79,6 +79,10 @@ nav li a.active {
 	background-color: rgba(255, 255, 255, .1);
 }
 
+nav .site-url a {
+	font-weight: bold;
+}
+
 footer {
 	margin: 12px 0;
 	text-align: right;
@@ -189,4 +193,26 @@ th {
 
 tr:nth-child(2n) {
 	background-color: rgb(243, 243, 243);
+}
+
+/* ------
+   Grille
+   ------ */
+.col-xs-100 {
+	width: 100%;
+}
+
+.col-md-65 {
+	float: left;
+	width: 65%;
+	padding: 0 16px;
+}
+.col-md-35 {
+	float: left;
+	width: 35%;
+	padding: 0 16px;
+}
+
+* {
+	box-sizing: border-box;
 }

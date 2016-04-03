@@ -12,6 +12,7 @@ $menuItems = [
 	'Tableau de bord' => PI_URL_SITE . 'admin/',
 	'Pages' => PI_URL_SITE . 'admin/list-pages.php',
 	'Modèles' => PI_URL_SITE . 'admin/list-models.php',
+	'Utilisateurs' => PI_URL_SITE . 'admin/list-users.php',
 	'Paramètres' => PI_URL_SITE . 'admin/settings.php',
 	'Avancés' => PI_URL_SITE . 'admin/advanced.php'
 ];

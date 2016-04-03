@@ -3,41 +3,59 @@
 {% block title %}Tableau de bord{% endblock %}
 
 {% block content %}
-	<h2>Liste des pages</h2>
+	<h1>Administration</h1>
 
-	<table>
-		<tr>
-			<th>Titre</th>
-			<th>Slug</th>
-			<th>Modifier</th>
-			<th>Supprimer</th>
-		</tr>
+	<div class="row">
+		<div class="col-xs-100 col-md-65">
+			<h2>Liste des pages</h2>
 
-		{% for slug, page in pages %}
-			<tr>
-				<td>{{ page.fields.title }}</td>
-				<td>{{ slug }}</td>
-				<td><a href="#">Modifier</a></td>
-				<td><a href="#">Supprimer</a></td>
-			</tr>
-		{% endfor %}
-	</table>
+			<table>
+				<tr>
+					<th>Titre</th>
+					<th>Slug</th>
+					<th>Modifier</th>
+					<th>Supprimer</th>
+				</tr>
 
-	<h2>Liste des utilisateurs</h2>
+				{% for slug, page in pages %}
+					<tr>
+						<td>{{ page.fields.title }}</td>
+						<td>{{ slug }}</td>
+						<td><a href="#">Modifier</a></td>
+						<td><a href="#">Supprimer</a></td>
+					</tr>
+				{% endfor %}
+			</table>
 
-	<table>
-		<tr>
-			<th>Pseudonyme</th>
-			<th>Modifier</th>
-			<th>Supprimer</th>
-		</tr>
+			<a href="{{ url.site ~ 'admin/list-pages.php' }}">
+				Afficher la liste complète
+			</a>
+		</div>
 
-		{% for user in app.getAllUsers() %}
-			<tr>
-				<td>{{ user.username }}</td>
-				<td><a href="#">Modifier</a></td>
-				<td><a href="#">Supprimer</a></td>
-			</tr>
-		{% endfor %}
-	</table>
+		<div class="col-xs-100 col-md-35">
+			<h2>Liste des utilisateurs</h2>
+
+			<table>
+				<tr>
+					<th>Pseudonyme</th>
+					<th>Rôle</th>
+					<th>Modifier</th>
+					<th>Supprimer</th>
+				</tr>
+
+				{% for user in app.getAllUsers() %}
+					<tr>
+						<td>{{ user.username }}</td>
+						<td>À venir</td>
+						<td><a href="#">Modifier</a></td>
+						<td><a href="#">Supprimer</a></td>
+					</tr>
+				{% endfor %}
+			</table>
+
+			<a href="{{ url.site ~ 'admin/list-users.php' }}">
+				Afficher la liste complète
+			</a>
+		</div>
+	</div>
 {% endblock %}

@@ -1,22 +1,22 @@
 {% extends "admin/layout.html" %}
 
-{% block title %}Liste des pages{% endblock %}
+{% block title %}Liste des utilisateurs{% endblock %}
 
 {% block content %}
-	<h1>Liste des pages</h1>
+	<h1>Liste des utilisateurs</h1>
 
 	<table>
 		<tr>
-			<th>Titre</th>
-			<th>Slug</th>
+			<th>Pseudonyme</th>
+			<th>Rôle</th>
 			<th>Modifier</th>
 			<th>Supprimer</th>
 		</tr>
 
-		{% for slug, page in pages %}
+		{% for user in app.getAllUsers() %}
 			<tr>
-				<td>{{ page.fields.title }}</td>
-				<td>{{ slug }}</td>
+				<td>{{ user.username }}</td>
+				<td>À venir</td>
 				<td><a href="#">Modifier</a></td>
 				<td><a href="#">Supprimer</a></td>
 			</tr>

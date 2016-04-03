@@ -20,6 +20,10 @@
 				<div class="sidebar-menu">
 					<nav>
 						<ul>
+							<li class="site-url">
+								<a href="{{ url.site }}">{{ settings.site.name }}</a>
+							</li>
+
 							{% for name, url in menu_items %}
 								<li>
 									<a href="{{ url }}">{{ name }}</a>

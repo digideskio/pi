@@ -10,12 +10,7 @@ $pages = PageCollection::getAllPages();
 
 $app = new App();
 
-$themes = [
-	'default' => 'Default'
-];
-
-echo $app->render('admin/settings.html', [
+echo $app->render('admin/list-users.html', [
 	'pages' => $pages,
-	'menu_items' => $menuItems,
-	'themes' => $themes
+	'menu_items' => $menuItems
 ]);

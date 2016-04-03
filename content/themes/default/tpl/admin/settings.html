@@ -4,4 +4,16 @@
 
 {% block content %}
 	<h1>Paramètres</h1>
+	
+	<form method="POST" action="">
+		<label>Titre du site</label>
+			<input type="text" />
+
+		<label>Thème</label>
+			<select>
+				{% for slug, name in themes %}
+					<option value="{{ slug }}">{{ name }}</option>
+				{% endfor %}
+			</select>
+	</form>
 {% endblock %}
