@@ -10,7 +10,7 @@ $pages = PageCollection::getAllPages();
 
 $app = new App();
 
-echo $app->render('admin/dashboard.html', [
+echo $app->render('admin/settings.html', [
 	'pages' => $pages,
 	'menu_items' => $menuItems
 ]);

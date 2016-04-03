@@ -3,6 +3,8 @@
 {% block title %}Liste des pages{% endblock %}
 
 {% block content %}
+	<h1>Liste des pages</h1>
+
     <ul>
         {% for slug, page in pages %}
             <li>{{ page.fields.title }} : {{ slug }}</li>
