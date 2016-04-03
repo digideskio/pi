@@ -109,7 +109,7 @@ class App {
 	}
 
 	/// Initialise le thème courant
-  	// à faire : si le thème courant n'existe pas, renvoyer une erreur
+	// à faire : si le thème courant n'existe pas, renvoyer une erreur
 	public function initializeTheme() {
 		$this->theme = 'default';
 
@@ -148,7 +148,7 @@ class App {
 	public function getVariables() {
 		return [
 			'app' => $this,
-	  		'settings' => Settings::getSettings(),
+			'settings' => Settings::getSettings(),
 			'url' => [
 				'site' => PI_URL_SITE,
 				'content' => PI_URL_CONTENT,

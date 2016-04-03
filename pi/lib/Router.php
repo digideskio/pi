@@ -57,8 +57,8 @@ class Router {
 		$method = is_array($method) ? $method : [ $method ];
 
 		$this->routes[$name] = [
-			'path'   => $path,
-			'func'   => $func,
+			'path' => $path,
+			'func' => $func,
 			'method' => $method
 		];
 
@@ -75,7 +75,7 @@ class Router {
 
 	public function find($tryPath) {
 		$method = 'GET';
-		$found  = false;
+		$found = false;
 
 		if (isset($_SERVER['REQUEST_METHOD']))
 			$method = $_SERVER['REQUEST_METHOD'];

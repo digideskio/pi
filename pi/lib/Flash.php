@@ -22,14 +22,14 @@ namespace Pi\Lib;
 class Flash {
 	public static function init() {
 		if (!isset($_SESSION['errors']))
-			$_SESSION['errors']  = [];
+			$_SESSION['errors'] = [];
 
 		if (!isset($_SESSION['success']))
 			$_SESSION['success'] = [];
 	}
 
 	public static function clean() {
-		$_SESSION['errors']  = [];
+		$_SESSION['errors'] = [];
 		$_SESSION['success'] = [];
 	}
 

@@ -8,7 +8,7 @@ use Pi\PageCollection;
 session_start();
 
 function isConnected() {
-    return isset($_SESSION['username']);
+	return isset($_SESSION['username']);
 }
 
 $_SESSION['username'] = 'super-admin';
@@ -18,7 +18,7 @@ $pages = PageCollection::getAllPages();
 $app = new App();
 
 echo $app->render('admin/dashboard.html', [
-    'pages' => $pages,
+	'pages' => $pages,
 
 	'menu_items' => [
 		'Tableau de bord' => PI_URL_SITE . 'admin/',

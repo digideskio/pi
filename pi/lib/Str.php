@@ -89,7 +89,7 @@ class Str {
 
 	public static function contains($txt, $needle, $insensitive = true) {
 		if ($insensitive) {
-			$txt    = strtolower($txt);
+			$txt = strtolower($txt);
 			$needle = strtolower($needle);
 		}
 
