@@ -10,24 +10,26 @@
 		{% endblock %}
 
 		{% block stylesheets %}
-			<link rel="stylesheet" href="{{ url.theme }}css/style.css" />
+			<link rel="stylesheet" href="{{ url.theme }}css/style-admin.css" />
 		{% endblock %}
 	</head>
 
 	<body>
 		<div class="main">
-			<header>
-				<div class="limit">
+			<section>
+				<div class="sidebar-menu">
 					<nav>
 						<ul>
-							<li><a href="{{ url.site ~ 'admin' }}">Tableau de bord</a></li>
+							{% for name, url in menu_items %}
+								<li>
+									<a href="{{ url }}">{{ name }}</a>
+								</li>
+							{% endfor %}
 						</ul>
 					</nav>
 				</div>
-			</header>
 
-			<section>
-				<div class="limit">{% block content %}{% endblock %}</div>
+				<div class="content">{% block content %}{% endblock %}</div>
 			</section>
 		</div>
 	</body>

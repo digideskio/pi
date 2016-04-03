@@ -18,5 +18,13 @@ $pages = PageCollection::getAllPages();
 $app = new App();
 
 echo $app->render('admin/dashboard.html', [
-    'pages' => $pages
+    'pages' => $pages,
+
+	'menu_items' => [
+		'Tableau de bord' => PI_URL_SITE . 'admin/',
+		'Pages' => PI_URL_SITE . 'admin/list-pages.php',
+		'Modèles' => PI_URL_SITE . 'admin/list-models.php',
+		'Configurations' => PI_URL_SITE . 'admin/settings.php',
+		'Avancés' => PI_URL_SITE . 'admin/advanced.php'
+	]
 ]);
