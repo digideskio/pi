@@ -22,12 +22,15 @@ namespace Pi;
 class User {
 	public $username;
 	public $password;
+	public $role;
 	public $permissions;
 
 	public function __construct($data) {
 		$this->username = $data['username'];
 		$this->password = $data['password'];
-		$this->permissions = $data['permissions'];
+		$this->role = $data['role'];
+
+		$this->permissions = Settings::get('roles.' . $this->role . '.permissions');
 	}
 
 	public function hasPermission($permission) {

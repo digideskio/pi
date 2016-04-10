@@ -1,0 +1,46 @@
+{
+	"site": {
+		"name": "Pi",
+		"theme": "default"
+	},
+
+	"roles": {
+		"editor": {
+			"name": "Editeur",
+			"permissions": [ "can-manage-pages" ]
+		},
+
+		"admin": {
+			"name": "Administrateur",
+			"permissions": [ "can-mangage-pages", "can-manage-users",
+			"can-manage-models", "can-manage-settings" ]
+		},
+
+		"super-admin": {
+			"name": "Super-administrateur",
+			"permissions": [ "can-mangage-pages", "can-manage-users",
+			"can-manage-models", "can-manage-settings",
+			"can-manage-file-settings" ]
+		}
+	},
+
+	"users": [
+		{
+			"username": "editor",
+			"password": "editor",
+			"role": "editor"
+		},
+
+		{
+			"username": "admin",
+			"password": "admin",
+			"role": "admin"
+		},
+
+		{
+			"username": "super-admin",
+			"password": "super-admin",
+			"role": "super-admin"
+		}
+	]
+}

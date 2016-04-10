@@ -20,7 +20,7 @@
 namespace Pi;
 
 use Pi\User;
-use Pi\Lib\Yaml;
+use Pi\Lib\Json;
 
 class Settings {
 	/// Paramètres enregistrés
@@ -28,7 +28,7 @@ class Settings {
 
 	/// Initilisation des paramètres
 	public static function initializeSettings() {
-		static::$settings = Yaml::read(PI_DIR_CONTENT . 'settings.yaml');
+		static::$settings = Json::read(PI_DIR_CONTENT . 'settings.json');
 	}
 
 	/// Récupérer un paramètre dans le tableau des paramètres

@@ -19,7 +19,7 @@
 
 namespace Pi\Core;
 
-use Pi\Lib\Yaml;
+use Pi\Lib\Json;
 
 class Model {
 	public $file;
@@ -28,14 +28,22 @@ class Model {
 	public $slug;
 
 	public function __construct($file) {
-		$model = Yaml::read($file);
+		$model = Json::read($file);
+
+		/* Détermination du slug */
+		// Découpage du nom du fichier : a/b/c/d.e => [a, b, c, d.e]
+		$parts = explode('/', $file);
 		
+		// Suppression du dernier élément : [a, b, c, d.e] => [a, b, c]
+		array_pop($parts);
+		
+		// Récupération du dernier élément restant : [a, b, c] => c
+		$slug = $parts[count($parts) - 1];
+
 		$this->file = $file;
 		$this->title = $model['title'];
 		$this->fields = [];
-		$this->slug = explode('/', $file)[2];
-
-		$slug = str_replace(PI_DIR_MODELS, '', $file);
+		$this->slug = $slug;
 
 		foreach ($model['fields'] as $name => $field) {
 			$class = ucfirst($field['type']) . 'Field';

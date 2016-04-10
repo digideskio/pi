@@ -13,9 +13,9 @@ Pi est un CMS qui se veut modulaire.
   `_` » ;
 - Créer deux fichiers dans ce nouveau dossier :
   - `view.html` ;
-  - `model.yaml`.
+  - `model.json`.
 
-Le modèle (model.yaml) contient deux valeurs :
+Le modèle (model.json) contient deux valeurs :
 - `title` : le titre du modèle ;
 - `fields` : la liste des champs.
 

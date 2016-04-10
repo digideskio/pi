@@ -5,7 +5,7 @@ content/pages/*
 !content/pages/error
 
 content/pages/home/*
-!content/pages/home/1.yaml
+!content/pages/home/1.json
 
 content/pages/error/*
-!content/pages/error/1.yaml
+!content/pages/error/1.json

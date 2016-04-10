@@ -1,0 +1,96 @@
+{
+  "title": "Tout",
+  "fields": {
+    "checkboxes": {
+      "label": "Catégories",
+      "type": "checkboxes",
+      "options": {
+        "design": "Design",
+        "programming": "Programmation",
+        "graphics": "Graphisme"
+      }
+    },
+    "choice": {
+      "label": "Catégorie unique",
+      "type": "choice",
+      "options": {
+        "design": "Design",
+        "programming": "Programmation",
+        "graphics": "Graphisme"
+      }
+    },
+    "color": {
+      "label": "Couleur",
+      "type": "color"
+    },
+    "date": {
+      "label": "Date",
+      "type": "date"
+    },
+    "email": {
+      "label": "Courriel",
+      "type": "email"
+    },
+    "file": {
+      "label": "Fichier",
+      "type": "file"
+    },
+    "number": {
+      "label": "Nombre",
+      "type": "number"
+    },
+    "password": {
+      "label": "Mot de passe",
+      "type": "password"
+    },
+    "radio": {
+      "label": "Catégorie unique",
+      "type": "radio",
+      "options": {
+        "design": "Design",
+        "programming": "Programmation",
+        "graphics": "Graphisme"
+      }
+    },
+    "range": {
+      "label": "Avancement",
+      "type": "range"
+    },
+    "slug": {
+      "label": "Slug",
+      "type": "slug"
+    },
+    "tags": {
+      "label": "Etiquettes",
+      "type": "tags"
+    },
+    "tel": {
+      "label": "Téléphone",
+      "type": "tel"
+    },
+    "textarea": {
+      "label": "Texte long",
+      "type": "textarea"
+    },
+    "text": {
+      "label": "Texte en ligne",
+      "type": "text"
+    },
+    "time": {
+      "label": "Heure",
+      "type": "time"
+    },
+    "title": {
+      "label": "Titre",
+      "type": "title"
+    },
+    "url": {
+      "label": "Site",
+      "type": "url"
+    },
+    "user": {
+      "label": "Utilisateur",
+      "type": "user"
+    }
+  }
+}

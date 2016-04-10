@@ -22,7 +22,6 @@ require 'constants.php';
 
 // Bibliohèques
 require 'pi/vendors/Twig/Autoloader.php';
-require 'pi/vendors/spyc/Spyc.php';
 require 'pi/vendors/parsedown/Parsedown.php';
 require 'pi/vendors/parsedown/ParsedownExtra.php';
 

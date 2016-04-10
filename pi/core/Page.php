@@ -19,14 +19,16 @@
 
 namespace Pi\Core;
 
-use Pi\Lib\Yaml;
+use Exception;
+
+use Pi\Lib\Json;
 
 class Page {
 	public static function getVersion($slug, $version) {
-		$file = PI_DIR_PAGES . $slug . '/' . $version . '.yaml';
+		$file = PI_DIR_PAGES . $slug . '/' . $version . '.json';
 
 		if (file_exists($file))
-			return Yaml::read($file);
+			return Json::read($file);
 		else
 			throw new Exception('Version \'' . $version . '\' de \'' . $slug . '\' inexistante.');
 	}

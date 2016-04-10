@@ -26,7 +26,7 @@ use Pi\Core\Form;
 use Pi\Core\Model;
 use Pi\Core\Page;
 use Pi\Core\Renderer;
-use Pi\Lib\Yaml;
+use Pi\Lib\Json;
 
 // A faire : à revoir entièrement
 class App {
@@ -64,7 +64,7 @@ class App {
 		if (is_file($file))
 			require $file;
 		else
-			throw new Exception('Unable to load "' . $file . '"');
+			throw new \Exception('Unable to load "' . $file . '"');
 	}
 
 	/// Constructeur
@@ -79,7 +79,7 @@ class App {
 	/// Traite les données reçues via POST
 	public function processPost() {
 		if (!empty($_POST)) {
-			$fileModel = PI_DIR_MODELS . $_POST['model'] . '/model.yaml';
+			$fileModel = PI_DIR_MODELS . $_POST['model'] . '/model.json';
 
 			$model = new Model($fileModel);
 			$form = new Form($model);
@@ -99,7 +99,7 @@ class App {
 			if (!file_exists($folder))
 				mkdir($folder, 0755, true);
 
-			Yaml::write($folder . time() . '.yaml', $content);
+			Json::write($folder . time() . '.json', $content);
 		}
 	}
 
@@ -191,7 +191,7 @@ class App {
 				return;
 			}
 
-			$fileModel = PI_DIR_MODELS . $content['model'] . '/model.yaml';
+			$fileModel = PI_DIR_MODELS . $content['model'] . '/model.json';
 
 			$model = new Model($fileModel);
 			$form = new Form($model);

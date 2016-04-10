@@ -19,22 +19,24 @@
 
 namespace Pi\Lib;
 
-use Spyc;
-
-class Yaml {
-	public static function encode($array) {
-		return Spyc::YAMLDump($array, false, false, true);
-	}
-
+class Json {
 	public static function write($file, $array) {
-		return file_put_contents($file, static::encode($array));
-	}
+		$encodedArray = static::encode($array);
 
-	public static function decode($yaml) {
-		return Spyc::YAMLLoad($yaml);
+		return static::encode($encodedArray);
 	}
 
 	public static function read($file) {
-		return Spyc::YAMLLoad($file);
+		$content = file_get_contents($file);
+
+		return static::decode($content);
+	}
+
+	public static function encode($array) {
+		return json_encode($array);
+	}
+
+	public static function decode($string) {
+		return json_decode($string, true);
 	}
 }
