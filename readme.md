@@ -173,6 +173,7 @@ Partie incomplète.
     - expression régulière
   - `textarea`
     - `text`
+		- `wysiwyg`
 		- un langage parmi `markdown`, `twig`, `html`
 		- tous les langages : `javascript`, `java`, `go`, `css`, `c`, `cpp`, ...
   - `text`

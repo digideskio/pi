@@ -72,7 +72,7 @@ class TextareaField extends BaseField {
 			</script>
 		';
 
-		if ($this->format == 'visual-html') {
+		if ($this->format == 'wysiwyg') {
 			$tagField .= '
 				<script>
 					tinymce.init({
