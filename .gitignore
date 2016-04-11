@@ -9,3 +9,5 @@ content/pages/home/*
 
 content/pages/error/*
 !content/pages/error/1.json
+
+unshared/
