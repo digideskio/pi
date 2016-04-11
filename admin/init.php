@@ -8,11 +8,23 @@ function isConnected() {
 
 $_SESSION['username'] = 'super-admin';
 
-$menuItems = [
-	'Tableau de bord' => PI_URL_SITE . 'admin/',
-	'Pages' => PI_URL_SITE . 'admin/list-pages.php',
-	'Modèles' => PI_URL_SITE . 'admin/list-models.php',
-	'Utilisateurs' => PI_URL_SITE . 'admin/list-users.php',
-	'Paramètres' => PI_URL_SITE . 'admin/settings.php',
-	'Avancés' => PI_URL_SITE . 'admin/advanced.php'
-];
+$user = Settings::getUser($_SESSION['username']);
+
+$menuItems = [];
+
+$menuItems['Tableau de bord'] = PI_URL_SITE . 'admin/';
+
+if ($user->hasPermission('can-manage-pages'))
+	$menuItems['Pages'] = PI_URL_SITE . 'admin/list-pages.php';
+
+if ($user->hasPermission('can-manage-models'))
+	$menuItems['Modèles'] = PI_URL_SITE . 'admin/list-models.php';
+
+if ($user->hasPermission('can-manage-users'))
+	$menuItems['Utilisateurs'] = PI_URL_SITE . 'admin/list-users.php';
+
+if ($user->hasPermission('can-manage-settings'))
+	$menuItems['Paramètres'] = PI_URL_SITE . 'admin/settings.php';
+
+if ($user->hasPermission('can-manage-advanced'))
+	$menuItems['Avancés'] = PI_URL_SITE . 'admin/advanced.php';
