@@ -28,4 +28,10 @@ projet utilisable en production.
 - Tout modèle doit posséder un titre : sortir « title » des modèles et l'ajouter
   au niveau des métadonnées ;
 
+- Un module doit pouvoir créer un modèle, surcharger un modèle, ajouter et
+  modifier des permissions utilisateur, ajouter un champ, surcharger un champ,
+  ...
+
+- Un thème doit pouvoir surcharger la vue d'un modèle ;
+
 - ...
