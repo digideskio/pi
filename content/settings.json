@@ -3,44 +3,45 @@
 		"name": "Pi",
 		"theme": "default"
 	},
-
 	"roles": {
 		"editor": {
 			"name": "Editeur",
-			"permissions": [ "can-manage-pages" ]
+			"permissions": [
+				"can-manage-pages"
+			]
 		},
-
 		"admin": {
 			"name": "Administrateur",
-			"permissions": [ "can-mangage-pages", "can-manage-users",
-			"can-manage-models", "can-manage-settings" ]
+			"permissions": [
+				"can-mangage-pages",
+				"can-manage-models",
+				"can-manage-users",
+				"can-manage-settings"
+			]
 		},
-
 		"super-admin": {
 			"name": "Super-administrateur",
-			"permissions": [ "can-mangage-pages", "can-manage-users",
-			"can-manage-models", "can-manage-settings",
-			"can-manage-file-settings" ]
+			"permissions": [
+				"can-mangage-pages",
+				"can-manage-users",
+				"can-manage-models",
+				"can-manage-settings",
+				"can-manage-advanced"
+			]
 		}
 	},
-
-	"users": [
-		{
-			"username": "editor",
+	"users": {
+		"editor": {
 			"password": "editor",
 			"role": "editor"
 		},
-
-		{
-			"username": "admin",
+		"admin": {
 			"password": "admin",
 			"role": "admin"
 		},
-
-		{
-			"username": "super-admin",
+		"super-admin": {
 			"password": "super-admin",
 			"role": "super-admin"
 		}
-	]
+	}
 }
