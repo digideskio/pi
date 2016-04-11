@@ -30,6 +30,7 @@ class User {
 		$this->password = $data['password'];
 		$this->role = $data['role'];
 
+		// Récupération des permissions à partir du nom du role
 		$this->permissions = Settings::get('roles.' . $this->role . '.permissions');
 	}
 
