@@ -48,7 +48,7 @@ class Renderer {
 		// Détermine si le slug fournit est la page actuellement ouverte
 		// à faire : éviter de déterminer le chemin courant ici alors qu'il est
 		//           déterminé aussi dans la classe App
-		$this->twig->addFilter(new Twig_SimpleFilter('is_current_page', function($slug) {
+		$this->twig->addFunction(new Twig_SimpleFunction('is_current_page', function($slug) {
 			$currentPath = 'home';
 
 			if (isset($_SERVER['PATH_INFO']))
