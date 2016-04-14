@@ -9,9 +9,9 @@
 			<title>{% block title %}{% endblock %} - {{ settings.site.name }}</title>
 		{% endblock %}
 
-		{% block stylesheets %}
-			<link rel="stylesheet" href="{{ url.theme }}css/style.css" />
-		{% endblock %}
+		{% for url in cssUrls %}
+			<link rel="stylesheet" href="{{ url }}" />
+		{% endfor %}
 	</head>
 
 	<body>
@@ -48,5 +48,9 @@
 				</div>
 			</footer>
 		</div>
+
+		{% for url in jsUrls %}
+			<script src="{{ url }}"></script>
+		{% endfor %}
 	</body>
 </html>

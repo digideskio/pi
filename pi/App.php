@@ -21,6 +21,7 @@ namespace Pi;
 
 use Exception;
 
+use Pi\Loader;
 use Pi\Settings;
 use Pi\Core\Form;
 use Pi\Core\Model;
@@ -117,6 +118,11 @@ class App {
 
 		if (!$this->theme)
 			$this->theme = 'default';
+
+		define('PI_DIR_THEME', PI_DIR_THEMES . $this->theme . DS);
+		define('PI_URL_THEME', PI_URL_THEMES . $this->theme . '/');
+		
+		require PI_DIR_THEME . 'init.php';
 	}
 
 	/// Initialise le chemin courant
@@ -155,7 +161,7 @@ class App {
 				'models' => PI_URL_MODELS,
 				'pages' => PI_URL_PAGES,
 				'themes' => PI_URL_THEMES,
-				'theme' => PI_URL_THEMES . $this->theme . '/',
+				'theme' => PI_URL_THEME,
 				'curent' => $this->getPath()
 			],
 			'dir' => [
@@ -164,8 +170,10 @@ class App {
 				'models' => PI_DIR_MODELS,
 				'pages' => PI_DIR_PAGES,
 				'themes' => PI_DIR_THEMES,
-				'theme' => PI_DIR_THEMES . $this->theme . '/'
-			]
+				'theme' => PI_DIR_THEME
+			],
+			'jsUrls' => Loader::getJsUrls(),
+			'cssUrls' => Loader::getCssUrls()
 		];
 	}
 
