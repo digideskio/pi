@@ -1,9 +1,9 @@
 {
+	"title": "Accueil",
 	"model": "page",
 	"created_at": 0,
 	"updated_at": 0,
 	"fields": {
-		"title": "Accueil",
 		"content": "Bienvenue."
 	}
 }

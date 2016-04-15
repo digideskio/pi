@@ -1,9 +1,9 @@
 {
+	"title": "Erreur",
 	"model": "page",
 	"created_at": 0,
 	"updated_at": 0,
 	"fields": {
-		"title": "Erreur",
 		"content": "Page inexistante."
 	}
 }

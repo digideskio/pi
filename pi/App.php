@@ -220,6 +220,7 @@ class App {
 			$fields = $content['fields'];
 
 			$meta = [
+				'title' => $content['title'],
 				'model' => $model,
 				'created_at' => $content['created_at'],
 				'updated_at' => $content['updated_at']

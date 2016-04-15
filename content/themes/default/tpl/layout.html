@@ -26,7 +26,7 @@
 						<ul>
 							{% for slug, page in app.getAllPages().containsField('content') %}
 								<li{% if is_current_page(slug) %} class="active"{% endif %}>
-									<a href="{{ url.site ~ slug }}">{{ page.fields.title }}</a>
+									<a href="{{ url.site ~ slug }}">{{ page.title }}</a>
 								</li>
 							{% endfor %}
 						</ul>

@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block title %}{{ page.title }}{% endblock %}
+{% block title %}{{ meta.title }}{% endblock %}
 
 {% block content %}
 	{{ include(template_from_string(page.content))|markdown }}
