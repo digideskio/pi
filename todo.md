@@ -17,16 +17,11 @@ projet utilisable en production.
 
 - Ajouter la possibilité de faire un thème hérité ;
 
-- Exécuter un code PHP au chargement du thème ;
-
 - Ajouter la possibilité d'ajouter une table des matière n'importe où (dans les
   textarea du type « twig » ou « markdown ») ;
 
 - Ajouter la possibilité de faire un fil d'Ariane (possibilité d'ajouter une
   page parent) ;
-
-- Tout modèle doit posséder un titre : sortir « title » des modèles et l'ajouter
-  au niveau des métadonnées ;
 
 - Un module doit pouvoir créer un modèle, surcharger un modèle, ajouter et
   modifier des permissions utilisateur, ajouter un champ, surcharger un champ,
