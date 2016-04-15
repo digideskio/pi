@@ -42,8 +42,11 @@ class Settings {
 		$usersList = [];
 		$users = static::getValue(static::$settings, 'users');
 
-		foreach ($users as $user)
-			$userList[] = new User($user);
+		foreach ($users as $username => $data) {
+			$data['username'] = $username;
+
+			$userList[] = new User($data);
+		}
 
 		return $userList;
 	}

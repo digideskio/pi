@@ -1,5 +1,9 @@
 <?php
 
+require '../settings.php';
+
+use Pi\Settings;
+
 session_start();
 
 function isConnected() {

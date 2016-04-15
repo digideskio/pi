@@ -1,6 +1,5 @@
 <?php
 
-require '../settings.php';
 require 'init.php';
 
 use Pi\App;
