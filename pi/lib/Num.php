@@ -21,9 +21,9 @@ namespace Pi\Lib;
 
 class Num {
 	/**
-	 * @param $min
-	 * @param $max
-	 * @param $value
+	 * @param float $min
+	 * @param float $max
+	 * @param float $value
 	 * 
 	 * @return bool
 	 */

@@ -25,7 +25,7 @@ class Model {
 	/** @var string */
 	public $file;
 
-	/** @var  string */
+	/** @var string */
 	public $title;
 
 	/** @var array */
@@ -35,7 +35,7 @@ class Model {
 	public $slug;
 
 	/**
-	 * @param $file string
+	 * @param string $file
 	 */
 	public function __construct($file) {
 		$model = Json::read($file);

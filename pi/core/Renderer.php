@@ -35,7 +35,7 @@ class Renderer {
 	protected $twig;
 
 	/**
-	 * @param $theme
+	 * @param string $theme
 	 */
 	public function __construct($theme) {
 		// Définition du dossier des modèles de page
@@ -67,6 +67,12 @@ class Renderer {
 		$this->twig->addExtension(new Twig_Extension_StringLoader());
 	}
 
+	/**
+	 * @param string $file
+	 * @param array $variables
+	 *
+	 * @return string
+	 */
 	public function render($file, $variables) {
 		return $this->twig->render($file, $variables);
 	}

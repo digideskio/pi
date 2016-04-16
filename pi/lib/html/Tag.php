@@ -38,7 +38,7 @@ class Tag {
 	protected $content;
 
 	/**
-	 * @param $name
+	 * @param string $name
 	 * @param array $attrs
 	 * @param string $content
 	 */
@@ -57,7 +57,7 @@ class Tag {
 	}
 
 	/**
-	 * @param $attrs
+	 * @param array $attrs
 	 */
 	public function addAttrs($attrs) {
 		foreach ($attrs as $key => $value)
@@ -65,7 +65,7 @@ class Tag {
 	}
 
 	/**
-	 * @param $key
+	 * @param string $key
 	 *
 	 * @return bool
 	 */
@@ -80,7 +80,7 @@ class Tag {
 	}
 
 	/**
-	 * @param $attrs
+	 * @param array $attrs
 	 */
 	public function removeAttrs($attrs) {
 		foreach ($attrs as $key => $value)
@@ -88,7 +88,7 @@ class Tag {
 	}
 
 	/**
-	 * @param $content
+	 * @param string $content
 	 */
 	public function setContent($content) {
 		$this->content = $content;

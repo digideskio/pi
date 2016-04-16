@@ -21,9 +21,9 @@ namespace Pi\Lib;
 
 class Str {
 	/**
-	 * @param $txt
+	 * @param string $txt
 	 * 
-	 * @return mixed
+	 * @return string
 	 */
 	public static function stripAccents($txt) {
 		return strtr(utf8_decode($txt), utf8_decode(
@@ -32,9 +32,9 @@ class Str {
 	}
 
 	/**
-	 * @param $txt
+	 * @param string $txt
 	 *
-	 * @return mixed
+	 * @return string
 	 */
 	public static function slug($txt) {
 		// on remplace les apostrophes et les espaces par des tirets
@@ -59,21 +59,21 @@ class Str {
 	}
 
 	/**
-	 * @param $txt
+	 * @param string $txt
 	 *
-	 * @return mixed
+	 * @return array
 	 */
 	public static function lines($txt) {
-		return split(EOL, $txt);
+		return str_split(EOL, $txt);
 	}
 
 	/**
-	 * @param $string
+	 * @param string $string
 	 *
-	 * @return mixed
+	 * @return bool
 	 */
 	public static function isURL($string) {
-		return filter_var($string, FILTER_VALIDATE_URL);
+		return (bool) filter_var($string, FILTER_VALIDATE_URL);
 	}
 
 	/**
@@ -94,7 +94,7 @@ class Str {
 	}
 
 	/**
-	 * @param $txt
+	 * @param string $txt
 	 * @param int $nbWords
 	 * @param string $after
 	 *
@@ -120,8 +120,8 @@ class Str {
 	}
 
 	/**
-	 * @param $txt
-	 * @param $needle
+	 * @param string $txt
+	 * @param string $needle
 	 * @param bool $insensitive
 	 *
 	 * @return bool
@@ -136,8 +136,8 @@ class Str {
 	}
 
 	/**
-	 * @param $str
-	 * @param $needle
+	 * @param string $str
+	 * @param string $needle
 	 *
 	 * @return bool
 	 */
@@ -146,8 +146,8 @@ class Str {
 	}
 
 	/**
-	 * @param $str
-	 * @param $needle
+	 * @param string $str
+	 * @param string $needle
 	 *
 	 * @return bool
 	 */

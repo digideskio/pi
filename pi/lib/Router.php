@@ -58,9 +58,9 @@ class Router {
 	}
 
 	/**
-	 * @param $name
-	 * @param $path
-	 * @param $func
+	 * @param string $name
+	 * @param string $path
+	 * @param \Closure $func
 	 * @param string $method
 	 *
 	 * @return $this
@@ -78,29 +78,29 @@ class Router {
 	}
 
 	/**
-	 * @param $name
-	 * @param $path
-	 * @param $func
+	 * @param string $name
+	 * @param string $path
+	 * @param \Closure $func
 	 *
-	 * @return Router
+	 * @return $this
 	 */
 	public function get($name, $path, $func) {
 		return $this->route($name, $path, $func, 'GET');
 	}
 
 	/**
-	 * @param $name
-	 * @param $path
-	 * @param $func
+	 * @param string $name
+	 * @param string $path
+	 * @param \Closure $func
 	 *
-	 * @return Router
+	 * @return $this
 	 */
 	public function post($name, $path, $func) {
 		return $this->route($name, $path, $func, 'POST');
 	}
 
 	/**
-	 * @param $tryPath
+	 * @param string $tryPath
 	 *
 	 * @return $this
 	 */

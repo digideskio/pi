@@ -47,8 +47,8 @@ class Pagination implements IteratorAggregate {
 	protected $nbPages;
 
 	/**
-	 * @param $nbTotal
-	 * @param $nbByPage
+	 * @param int $nbTotal
+	 * @param int $nbByPage
 	 * @param int $actual
 	 * @param int $firstPage
 	 */
@@ -120,7 +120,7 @@ class Pagination implements IteratorAggregate {
 	}
 
 	/**
-	 * @param $i
+	 * @param int $i
 	 *
 	 * @return bool
 	 */

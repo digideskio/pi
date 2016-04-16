@@ -27,14 +27,14 @@ class Loader {
 	protected static $jsUrls = [];
 
 	/**
-	 * @param $url
+	 * @param string $url
 	 */
 	public static function loadCss($url) {
 		static::$cssUrls[] = $url;
 	}
 
 	/**
-	 * @param $url
+	 * @param string $url
 	 */
 	public static function loadJs($url) {
 		static::$jsUrls[] = $url;

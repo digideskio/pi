@@ -45,7 +45,7 @@ class User {
 	}
 
 	/**
-	 * @param $permission
+	 * @param string $permission
 	 *
 	 * @return bool
 	 */

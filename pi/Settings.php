@@ -36,7 +36,7 @@ class Settings {
 	 * Récupérer un paramètre dans le tableau des paramètres
 	 * Syntaxe de la variable $setting : « site.theme »
 	 *
-	 * @param $setting
+	 * @param string $setting
 	 *
 	 * @return null
 	 */
@@ -67,7 +67,7 @@ class Settings {
 	 *
 	 * @param $username
 	 *
-	 * @return mixed|null
+	 * @return User|null
 	 */
 	public static function getUser($username) {
 		$correctUser = null;
@@ -96,8 +96,8 @@ class Settings {
 	 * Récupérer une configuration dans les paramètres avec la syntaxe
 	 * « roles.editor »
 	 *
-	 * @param $array
-	 * @param $setting
+	 * @param array $array
+	 * @param string $setting
 	 *
 	 * @return mixed
 	 */

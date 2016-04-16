@@ -21,15 +21,15 @@ namespace Pi\Lib;
 
 class Session {
 	/**
-	 * @param $key
-	 * @param $value
+	 * @param string $key
+	 * @param mixed $value
 	 */
 	public static function set($key, $value) {
 		$_SESSION[$key] = $value;
 	}
 
 	/**
-	 * @param $key
+	 * @param string $key
 	 *
 	 * @return mixed
 	 */
@@ -38,14 +38,14 @@ class Session {
 	}
 
 	/**
-	 * @param $key
+	 * @param string $key
 	 */
 	public static function remove($key) {
 		unset($_SESSION[$key]);
 	}
 
 	/**
-	 * @param $key
+	 * @param string $key
 	 *
 	 * @return bool
 	 */
@@ -54,21 +54,21 @@ class Session {
 	}
 
 	/**
-	 *
+	 * Ouvre la session
 	 */
 	public static function start() {
 		session_start();
 	}
 
 	/**
-	 *
+	 * Ferme la session
 	 */
 	public static function stop() {
 		session_destroy();
 	}
 
 	/**
-	 *
+	 * Relance la session
 	 */
 	public static function restart() {
 		static::stop();

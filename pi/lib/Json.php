@@ -21,9 +21,8 @@ namespace Pi\Lib;
 
 class Json {
 	/**
-	 * @param $file
-	 *
-	 * @param $array
+	 * @param string $file
+	 * @param array $array
 	 */
 	public static function write($file, $array) {
 		$encodedArray = static::encode($array);
@@ -32,7 +31,7 @@ class Json {
 	}
 
 	/**
-	 * @param $file
+	 * @param string $file
 	 *
 	 * @return mixed
 	 */
@@ -43,7 +42,7 @@ class Json {
 	}
 
 	/**
-	 * @param $array
+	 * @param array $array
 	 *
 	 * @return string
 	 */
@@ -52,7 +51,7 @@ class Json {
 	}
 
 	/**
-	 * @param $string
+	 * @param string $string
 	 *
 	 * @return mixed
 	 */
