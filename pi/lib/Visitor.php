@@ -20,10 +20,16 @@
 namespace Pi\Lib;
 
 class Visitor {
+	/**
+	 * @return mixed
+	 */
 	public static function ip() {
 		return $_SERVER['REMOTE_ADDR'];
 	}
 
+	/**
+	 * @return string|null
+	 */
 	public static function ua() {
 		return isset($_SERVER['HTTP_USER_AGENT'])
 			? $_SERVER['HTTP_USER_AGENT']

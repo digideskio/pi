@@ -22,6 +22,9 @@ namespace Pi\Core\Field;
 use Pi\Lib\Html\Tag;
 
 class DateField extends BaseField {
+	/**
+	 * @param $data
+	 */
 	public function __construct($data) {
 		parent::__construct($data);
 
@@ -29,6 +32,9 @@ class DateField extends BaseField {
 			$this->default = strftime('%Y-%m-%d', time());
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function validate() {
 		$value = $this->value();
 		$regex = '~[0-9]{4}(-[0-9]{1,2}){2}~'; // yyyy-mm-dd
@@ -48,6 +54,9 @@ class DateField extends BaseField {
 		}
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function html() {
 		$tag = new Tag('input', [
 			'name'  => $this->name,

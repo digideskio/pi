@@ -20,10 +20,16 @@
 namespace Pi\Core\Field;
 
 class ChoiceField extends BaseField {
+	/**
+	 * @param $data
+	 */
 	public function __construct($data) {
 		parent::__construct($data);
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function html() {
 		$val = $this->value();
 

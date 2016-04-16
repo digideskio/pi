@@ -22,8 +22,12 @@ namespace Pi\Core\Field;
 use Pi\Lib\Html\Tag;
 
 class TimeField extends BaseField {
-	private static $formats = [ 'hh:mm', 'hh:mm:ss' ];
+	/** @var string[] */
+	protected static $formats = [ 'hh:mm', 'hh:mm:ss' ];
 
+	/**
+	 * @param $data
+	 */
 	public function __construct($data) {
 		parent::__construct($data);
 
@@ -36,6 +40,9 @@ class TimeField extends BaseField {
 			$this->default = strftime('%H:%M:%S', time());
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function validate() {
 		$value = $this->value();
 
@@ -59,6 +66,9 @@ class TimeField extends BaseField {
 		}
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function html() {
 		$tag = new Tag('input', [
 			'name'  => $this->name,

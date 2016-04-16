@@ -20,6 +20,12 @@
 namespace Pi\Lib;
 
 class Input {
+	/**
+	 * @param string $name
+	 * @param string $default
+	 *
+	 * @return string
+	 */
 	public static function get($name, $default = '') {
 		if (isset($_POST[$name]))
 			return $_POST[$name];

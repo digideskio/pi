@@ -21,8 +21,6 @@ namespace Pi;
 
 use Exception;
 
-use Pi\Loader;
-use Pi\Settings;
 use Pi\Core\Form;
 use Pi\Core\Model;
 use Pi\Core\Page;
@@ -31,18 +29,33 @@ use Pi\Lib\Json;
 
 // A faire : à revoir entièrement
 class App {
-	private $renderer;
-	private $path;
-	private $query;
-	private $theme;
+	/** @var Renderer */
+	protected $renderer;
 
-	/// Enregistre l'« autoloader »
+	/** @var string */
+	protected $path;
+
+	/** @var string */
+	protected $query;
+
+	/** @var string */
+	protected $theme;
+
+	/**
+	 * Enregistre l'« autoloader »
+	 */
 	public static function register() {
 		spl_autoload_register([ __CLASS__, 'autoload' ]);
 	}
 
-	/// Quand l'utilisation d'une classe est repérée, le fichier créant la
-	/// classe est chargé
+	/**
+	 * Quand l'utilisation d'une classe est repérée, le fichier créant la
+	 * classe est chargé
+	 *
+	 * @param string $class
+	 *
+	 * @throws Exception
+	 */
 	public static function autoload($class) {
 		if (0 !== strpos($class, 'Pi'))
 			return;
@@ -68,7 +81,8 @@ class App {
 			throw new \Exception('Unable to load "' . $file . '"');
 	}
 
-	/// Constructeur
+	/**
+	 */
 	public function __construct() {
 		$this->initializeTheme();
 		$this->initializePath();
@@ -77,7 +91,11 @@ class App {
 		$this->processPost();
 	}
 
-	/// Traite les données reçues via POST
+	/**
+	 * Traite les données reçues via POST
+	 *
+	 * @throws Exception
+	 */
 	public function processPost() {
 		if (!empty($_POST)) {
 			$fileModel = PI_DIR_MODELS . $_POST['model'] . '/model.json';
@@ -104,13 +122,18 @@ class App {
 		}
 	}
 
-	/// Initilise le moteur de rendu
+	/**
+	 * Initilise le moteur de rendu
+	 */
 	public function initializeRenderer() {
 		$this->renderer = new Renderer($this->theme);
 	}
 
-	/// Initialise le thème courant
-	// à faire : si le thème courant n'existe pas, renvoyer une erreur
+	/**
+	 * Initialise le thème courant
+	 *
+	 * @todo si le thème courant n'existe pas, renvoyer une erreur
+	 */
 	public function initializeTheme() {
 		$this->theme = 'default';
 
@@ -125,7 +148,9 @@ class App {
 		require PI_DIR_THEME . 'init.php';
 	}
 
-	/// Initialise le chemin courant
+	/**
+	 * Initialise le chemin courant
+	 */
 	public function initializePath() {
 		$this->path = 'home';
 		$this->query = '';
@@ -142,7 +167,14 @@ class App {
 			$this->path = 'home';
 	}
 
-	/// Rendu du fichier
+	/**
+	 * Rendu du fichier
+	 *
+	 * @param string $file
+	 * @param array $variables
+	 *
+	 * @return string
+	 */
 	public function render($file, $variables = []) {
 		$mainVariables = $this->getVariables();
 		$variables = array_merge($mainVariables, $variables);
@@ -150,7 +182,11 @@ class App {
 		return $this->renderer->render($file, $variables);
 	}
 
-	/// Variables globales qui seront envoyées à toutes les vues
+	/**
+	 * Variables globales qui seront envoyées à toutes les vues
+	 *
+	 * @return array
+	 */
 	public function getVariables() {
 		return [
 			'app' => $this,
@@ -177,12 +213,18 @@ class App {
 		];
 	}
 
-	/// Obtention de l'URL courante
+	/**
+	 * Obtention de l'URL courante
+	 *
+	 * @return string
+	 */
 	public function getPath() {
 		return $this->path;
 	}
 
-	/// Lance la recherche de la page et la retourne
+	/**
+	 * Lance la recherche de la page et la retourne
+	 */
 	public function run() {
 		if ($this->query == 'edit') {
 			$content = Page::getLastVersion($this->getPath());
@@ -233,17 +275,33 @@ class App {
 		}
 	}
 
-	/// Récupérer tous les utilisateurs
+	/**
+	 * Récupérer tous les utilisateurs
+	 *
+	 * @return User[]
+	 */
 	public function getAllUsers() {
 		return Settings::getUsers();
 	}
 
-	/// Récupérer toutes les pages
+	/**
+	 * Récupérer toutes les pages
+	 *
+	 * @return PageCollection
+	 */
 	public function getAllPages() {
+		$users = $this->getAllUsers();
+
 		return PageCollection::getAllPages();
 	}
 
-	/// Récupérer une page
+	/**
+	 * Récupérer une page
+	 *
+	 * @param Page $page
+	 *
+	 * @return bool|mixed
+	 */
 	public static function getPage($page) {
 		$p = Page::getLastVersion($page);
 

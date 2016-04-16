@@ -20,22 +20,42 @@
 namespace Pi\Lib;
 
 class Json {
+	/**
+	 * @param $file
+	 *
+	 * @param $array
+	 */
 	public static function write($file, $array) {
 		$encodedArray = static::encode($array);
 
-		return static::encode($encodedArray);
+		file_put_contents($file, $encodedArray);
 	}
 
+	/**
+	 * @param $file
+	 *
+	 * @return mixed
+	 */
 	public static function read($file) {
 		$content = file_get_contents($file);
 
 		return static::decode($content);
 	}
 
+	/**
+	 * @param $array
+	 *
+	 * @return string
+	 */
 	public static function encode($array) {
 		return json_encode($array);
 	}
 
+	/**
+	 * @param $string
+	 *
+	 * @return mixed
+	 */
 	public static function decode($string) {
 		return json_decode($string, true);
 	}

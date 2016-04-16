@@ -22,6 +22,9 @@ namespace Pi\Core\Field;
 use Pi\Lib\Html\Tag;
 
 class RangeField extends BaseField {
+	/**
+	 * @param $data
+	 */
 	public function __construct($data) {
 		parent::__construct($data);
 
@@ -30,10 +33,16 @@ class RangeField extends BaseField {
 		$this->step = isset($data['step']) ? $data['step'] : 1;
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function value() {
 		return (int) parent::value();
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function validate() {
 		$value = $this->value();
 
@@ -43,17 +52,20 @@ class RangeField extends BaseField {
 			return true;
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function html() {
-    $tag = new Tag('input', [
-			'name'  => $this->name,
-      'type'  => 'range',
-      'min'   => $this->min,
-      'max'   => $this->max,
-      'step'  => $this->step,
-      'value' => $this->value(),
-			'id'    => 'input-' . $this->id
-    ]);
+	    $tag = new Tag('input', [
+				'name'  => $this->name,
+	      'type'  => 'range',
+	      'min'   => $this->min,
+	      'max'   => $this->max,
+	      'step'  => $this->step,
+	      'value' => $this->value(),
+				'id'    => 'input-' . $this->id
+	    ]);
 
-    return $tag;
+	    return $tag;
 	}
 }

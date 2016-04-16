@@ -20,6 +20,9 @@
 namespace Pi\Lib;
 
 class Flash {
+	/**
+	 * Initilisation du flash
+	 */
 	public static function init() {
 		if (!isset($_SESSION['errors']))
 			$_SESSION['errors'] = [];
@@ -28,35 +31,59 @@ class Flash {
 			$_SESSION['success'] = [];
 	}
 
+	/**
+	 * Nettoyage du flash
+	 */
 	public static function clean() {
 		$_SESSION['errors'] = [];
 		$_SESSION['success'] = [];
 	}
 
+	/**
+	 * @param string $error
+	 */
 	public static function pushError($error) {
 		array_push($_SESSION['errors'], $error);
 	}
 
+	/**
+	 * @param string $success
+	 */
 	public static function pushSuccess($success) {
 		array_push($_SESSION['success'], $success);
 	}
 
+	/**
+	 * @return bool
+	 */
 	public static function hasErrors() {
 		return count($_SESSION['errors']) > 0;
 	}
 
+	/**
+	 * @return bool
+	 */
 	public static function hasNoErrors() {
 		return !self::hasErrors();
 	}
 
+	/**
+	 * @return bool
+	 */
 	public static function hasSuccess() {
 		return count($_SESSION['success']) > 0;
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public static function getErrors() {
 		return $_SESSION['errors'];
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public static function getSuccess() {
 		return $_SESSION['success'];
 	}

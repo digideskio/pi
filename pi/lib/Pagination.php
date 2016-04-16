@@ -19,16 +19,39 @@
 
 namespace Pi\Lib;
 
-class Pagination extends BaseMod implements IteratorAggregate {
+use \IteratorAggregate;
+
+class Pagination implements IteratorAggregate {
+	/** @var int */
 	protected $first;
+
+	/** @var int */
 	protected $last;
+
+	/** @var int */
 	protected $prev;
+
+	/** @var int */
 	protected $next;
+
+	/** @var int */
 	protected $nbTotal;
+
+	/** @var int */
 	protected $nbByPage;
+
+	/** @var int */
 	protected $actual;
+
+	/** @var int */
 	protected $nbPages;
 
+	/**
+	 * @param $nbTotal
+	 * @param $nbByPage
+	 * @param int $actual
+	 * @param int $firstPage
+	 */
 	public function __construct($nbTotal, $nbByPage, $actual = 1, $firstPage = 1) {
 		$this->first    = $firstPage;
 		$this->last     = ceil($nbTotal / $nbByPage);
@@ -40,42 +63,74 @@ class Pagination extends BaseMod implements IteratorAggregate {
 		$this->nbPages  = $this->last - $this->first;
 	}
 
+	/**
+	 * @return int
+	 */
 	public function getFirstPage() {
 		return $this->first;
 	}
 
+	/**
+	 * @return int
+	 */
 	public function getLastPage() {
 		return $this->last;
 	}
 
+	/**
+	 * @return int
+	 */
 	public function getPreviousPage() {
 		return $this->prev;
 	}
 
+	/**
+	 * @return int
+	 */
 	public function getActualPage() {
 		return $this->actual;
 	}
 
+	/**
+	 * @return int
+	 */
 	public function getNextPage() {
 		return $this->next;
 	}
 
+	/**
+	 * @return int
+	 */
 	public function getNbTotal() {
 		return $this->nbTotal;
 	}
 
+	/**
+	 * @return int
+	 */
 	public function getNbByPage() {
 		return $this->nbByPage;
 	}
 
+	/**
+	 * @return int
+	 */
 	public function getNbPages() {
 		return $this->nbPages;
 	}
 
+	/**
+	 * @param $i
+	 *
+	 * @return bool
+	 */
 	public function isActualPage($i) {
 		return $this->actual == $i;
 	}
 
+	/**
+	 * @return \Generator
+	 */
 	public function getIterator() {
 		for ($i = $this->first ; $i <= $this->last ; $i++)
 			yield $i;

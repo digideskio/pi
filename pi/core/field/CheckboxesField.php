@@ -22,12 +22,18 @@ namespace Pi\Core\Field;
 use Pi\Lib\Html\Tag;
 
 class CheckboxesField extends BaseField {
+	/**
+	 * @param $data
+	 */
 	public function __construct($data) {
 		parent::__construct($data);
 
 		$this->default = isset($data['default']) ? $data['default'] : [];
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function validate() {
 		$values = $this->value();
 
@@ -37,6 +43,9 @@ class CheckboxesField extends BaseField {
 			return is_array($values);
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function value() {
 		if (!empty($_POST)) {
 			if (isset($_POST[$this->name]))
@@ -48,6 +57,9 @@ class CheckboxesField extends BaseField {
 		}
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function html() {
 		$values = $this->value();
 

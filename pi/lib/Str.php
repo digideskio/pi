@@ -20,12 +20,22 @@
 namespace Pi\Lib;
 
 class Str {
+	/**
+	 * @param $txt
+	 * 
+	 * @return mixed
+	 */
 	public static function stripAccents($txt) {
 		return strtr(utf8_decode($txt), utf8_decode(
 			'àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'),
 			'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
 	}
 
+	/**
+	 * @param $txt
+	 *
+	 * @return mixed
+	 */
 	public static function slug($txt) {
 		// on remplace les apostrophes et les espaces par des tirets
 		$txt = str_replace(['\'', ' '], '-', $txt);
@@ -48,14 +58,29 @@ class Str {
 		return $txt;
 	}
 
+	/**
+	 * @param $txt
+	 *
+	 * @return mixed
+	 */
 	public static function lines($txt) {
 		return split(EOL, $txt);
 	}
 
+	/**
+	 * @param $string
+	 *
+	 * @return mixed
+	 */
 	public static function isURL($string) {
 		return filter_var($string, FILTER_VALIDATE_URL);
 	}
 
+	/**
+	 * @param int $length
+	 *
+	 * @return string
+	 */
 	public static function random($length = 8) {
 		$chars = array_merge(range('a', 'z'), range('A', 'Z'), range(0, 9));
 		$lengthChars = count($chars);
@@ -68,6 +93,13 @@ class Str {
 		return $string;
 	}
 
+	/**
+	 * @param $txt
+	 * @param int $nbWords
+	 * @param string $after
+	 *
+	 * @return string
+	 */
 	public static function splitWords($txt, $nbWords = 50, $after = '…') {
 		$txt = strip_tags($txt);
 
@@ -87,6 +119,13 @@ class Str {
 		return $txt;
 	}
 
+	/**
+	 * @param $txt
+	 * @param $needle
+	 * @param bool $insensitive
+	 *
+	 * @return bool
+	 */
 	public static function contains($txt, $needle, $insensitive = true) {
 		if ($insensitive) {
 			$txt = strtolower($txt);
@@ -96,10 +135,22 @@ class Str {
 		return strstr($txt, $needle) ? true : false;
 	}
 
+	/**
+	 * @param $str
+	 * @param $needle
+	 *
+	 * @return bool
+	 */
 	public static function startsWith($str, $needle) {
 		return $needle === '' || strpos($str, $needle) === 0;
 	}
 
+	/**
+	 * @param $str
+	 * @param $needle
+	 *
+	 * @return bool
+	 */
 	public static function endsWith($str, $needle) {
 		return $needle === '' || substr($str, -strlen($needle)) === $needle;
 	}

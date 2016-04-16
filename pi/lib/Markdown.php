@@ -22,12 +22,22 @@ namespace Pi\Lib;
 use ParsedownExtra;
 
 class Markdown {
+	/**
+	 * @param $txt
+	 * 
+	 * @return mixed|string
+	 */
 	public static function html($txt) {
 		$parse = new ParsedownExtra();
 
 		return $parse->text($txt);
 	}
 
+	/**
+	 * @param $file
+	 *
+	 * @return mixed|string
+	 */
 	public static function read($file) {
 		return static::html(file_get_contents($file));
 	}

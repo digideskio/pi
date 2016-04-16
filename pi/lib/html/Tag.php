@@ -20,6 +20,7 @@
 namespace Pi\Lib\Html;
 
 class Tag {
+	/** @var string[] */
 	protected static $inlineTags = [
 		'br',
 		'hr',
@@ -27,25 +28,47 @@ class Tag {
 		'input'
 	];
 
+	/** @var string */
 	protected $name;
+
+	/** @var array */
 	protected $attrs;
+
+	/** @var string */
 	protected $content;
 
+	/**
+	 * @param $name
+	 * @param array $attrs
+	 * @param string $content
+	 */
 	public function __construct($name, $attrs = [], $content = '') {
-		$this->name    = $name;
-		$this->attrs   = $attrs;
+		$this->name = $name;
+		$this->attrs = $attrs;
 		$this->content = $content;
 	}
 
+	/**
+	 * @param string $key
+	 * @param mixed $value
+	 */
 	public function addAttr($key, $value = true) {
 		$this->attrs[$key] = $value;
 	}
 
+	/**
+	 * @param $attrs
+	 */
 	public function addAttrs($attrs) {
 		foreach ($attrs as $key => $value)
 		$this->addAttr($key, $value);
 	}
 
+	/**
+	 * @param $key
+	 *
+	 * @return bool
+	 */
 	public function removeAttr($key) {
 		if (isset($this->attrs[$key])) {
 			unset($this->attrs[$key]);
@@ -56,15 +79,24 @@ class Tag {
 		return false;
 	}
 
+	/**
+	 * @param $attrs
+	 */
 	public function removeAttrs($attrs) {
 		foreach ($attrs as $key => $value)
 			$this->removeAttr($key);
 	}
 
+	/**
+	 * @param $content
+	 */
 	public function setContent($content) {
 		$this->content = $content;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function __toString() {
 		$html = '<' . $this->name;
 

@@ -19,27 +19,38 @@
 
 namespace Pi;
 
-use Pi\User;
 use Pi\Lib\Json;
 
 class Settings {
-	/// Paramètres enregistrés
+	/** @var array Paramètres enregistrés */
 	protected static $settings = [];
 
-	/// Initilisation des paramètres
+	/**
+	 * Initilisation des paramètres
+	 */
 	public static function initializeSettings() {
 		static::$settings = Json::read(PI_DIR_CONTENT . 'settings.json');
 	}
 
-	/// Récupérer un paramètre dans le tableau des paramètres
-	/// Syntaxe de la variable $setting : « site.theme »
+	/**
+	 * Récupérer un paramètre dans le tableau des paramètres
+	 * Syntaxe de la variable $setting : « site.theme »
+	 *
+	 * @param $setting
+	 *
+	 * @return null
+	 */
 	public static function get($setting) {
 		return static::getValue(static::$settings, $setting);
 	}
 
-	/// Récupérer la liste de tous les utilisateurs
+	/**
+	 * Récupérer la liste de tous les utilisateurs
+	 *
+	 * @return User[]
+	 */
 	public static function getUsers() {
-		$usersList = [];
+		$userList = [];
 		$users = static::getValue(static::$settings, 'users');
 
 		foreach ($users as $username => $data) {
@@ -51,7 +62,13 @@ class Settings {
 		return $userList;
 	}
 
-	/// Récupérer un utilisateur par son pseudonyme
+	/**
+	 * Récupérer un utilisateur par son pseudonyme
+	 *
+	 * @param $username
+	 *
+	 * @return mixed|null
+	 */
 	public static function getUser($username) {
 		$correctUser = null;
 		$users = static::getUsers();
@@ -66,13 +83,24 @@ class Settings {
 		return $correctUser;
 	}
 
-	/// Récupérer les paramètres
+	/**
+	 * Récupérer les paramètres
+	 *
+	 * @return array
+	 */
 	public static function getSettings() {
 		return static::$settings;
 	}
 
-	/// Récupérer une configuration dans les paramètres avec la syntaxe
-	/// « roles.editor »
+	/**
+	 * Récupérer une configuration dans les paramètres avec la syntaxe
+	 * « roles.editor »
+	 *
+	 * @param $array
+	 * @param $setting
+	 *
+	 * @return mixed
+	 */
 	protected static function getValue($array, $setting) {
 		$value = null;
 		$parts = explode('.', $setting);

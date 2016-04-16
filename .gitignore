@@ -1,5 +1,11 @@
-# Exclusion de toutes les pages et de toutes les versions excepté la version 0
-# de la page d'accueil pour avoir un contenu de base
+# PhpStorm
+.idea/
+
+# Dossier non-partagé
+unshared/
+
+# Exclusion de toutes les pages et de toutes les versions excepté la version 1
+# de la page d'accueil et de la page d'erreur pour avoir un contenu de base
 content/pages/*
 !content/pages/home
 !content/pages/error
@@ -9,5 +15,3 @@ content/pages/home/*
 
 content/pages/error/*
 !content/pages/error/1.json
-
-unshared/

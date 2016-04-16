@@ -20,6 +20,13 @@
 namespace Pi\Lib;
 
 class Num {
+	/**
+	 * @param $min
+	 * @param $max
+	 * @param $value
+	 * 
+	 * @return bool
+	 */
 	public static function between($min, $max, $value) {
 		if ($min > $max) {
 			return false;

@@ -25,13 +25,20 @@ use Pi\Core\Page;
 use Pi\Lib\Str;
 
 class PageCollection implements IteratorAggregate {
-	/// Pages faisant partie de la collection
-	private $pages;
+	/** @var Page[] Pages faisant partie de la collection */
+	protected $pages;
 
-	/// Cache de toutes les pages, pour éviter de tout recalculer à chaque fois
-	private static $cacheAllPages = null;
+	/**
+	 * Cache de toutes les pages, pour éviter de tout recalculer à chaque fois
+	 *
+	 * @var PageCollection|null
+	 */
+	protected static $cacheAllPages = null;
 
-	private function __construct($pages) {
+	/**
+	 * @param Page[] $pages
+	 */
+	protected function __construct($pages) {
 		// Récupération des pages passées en paramètre
 		$this->pages = $pages;
 
@@ -41,7 +48,13 @@ class PageCollection implements IteratorAggregate {
 		}, ARRAY_FILTER_USE_KEY);
 	}
 
-	/// Pages dont le slug commence par
+	/**
+	 * Pages dont le slug commence par
+	 *
+	 * @param string $name
+	 *
+	 * @return $this
+	 */
 	public function slugStartsWith($name) {
 		$this->pages = array_filter($this->pages, function($slug) use ($name) {
 			return Str::startsWith($slug, $name);
@@ -50,7 +63,13 @@ class PageCollection implements IteratorAggregate {
 		return $this;
 	}
 
-	/// Pages dont le slug finit par
+	/**
+	 * Pages dont le slug finit par
+	 *
+	 * @param string $name
+	 *
+	 * @return $this
+	 */
 	public function slugEndsWith($name) {
 		$this->pages = array_filter($this->pages, function($slug) use ($name) {
 			return Str::endsWith($slug, $name);
@@ -59,7 +78,13 @@ class PageCollection implements IteratorAggregate {
 		return $this;
 	}
 
-	/// Pages dont le slug contient
+	/**
+	 * Pages dont le slug contient
+	 *
+	 * @param string $name
+	 *
+	 * @return $this
+	 */
 	public function slugContains($name) {
 		$this->pages = array_filter($this->pages, function($slug) use ($name) {
 			return Str::contains($slug, $name);
@@ -68,7 +93,13 @@ class PageCollection implements IteratorAggregate {
 		return $this;
 	}
 
-	/// Pages qui contiennent le champ
+	/**
+	 * Pages qui contiennent le champ
+	 *
+	 * @param string $fieldName
+	 *
+	 * @return $this
+	 */
 	public function containsField($fieldName) {
 		$this->pages = array_filter($this->pages, function($page) use ($fieldName) {
 			return isset($page['fields'][$fieldName]);
@@ -77,16 +108,29 @@ class PageCollection implements IteratorAggregate {
 		return $this;
 	}
 
-	/// à faire : Pages dont le champ vaut
+	/**
+	 * @todo Pages dont le champ vaut
+	 *
+	 * @param string $fieldName
+	 * @param mixed $fieldValue
+	 *
+	 * @return $this
+	 */
 	public function fieldValueIs($fieldName, $fieldValue) {
-		$this->pages = array_filter($this->pages, function($page) use ($name) {
+		$this->pages = array_filter($this->pages, function($page) {
 			return true;
 		});
 
 		return $this;
 	}
 
-	/// Pages dont le modèle est
+	/**
+	 * Pages dont le modèle est
+	 *
+	 * @param string $modelName
+	 *
+	 * @return $this
+	 */
 	public function withModel($modelName) {
 		$this->pages = array_filter($this->pages, function($page) use ($modelName) {
 			return $page['model'] == $modelName;
@@ -95,13 +139,21 @@ class PageCollection implements IteratorAggregate {
 		return $this;
 	}
 
-	/// Itérateur : le slug de la page en clé et la page en valeur
+	/**
+	 * Itérateur : le slug de la page en clé et la page en valeur
+	 *
+	 * @return \Generator
+	 */
 	public function getIterator() {
 		foreach ($this->pages as $slug => $page)
 			yield $slug => $page;
 	}
 
-	/// Récupérer toutes les pages
+	/**
+	 * Récupérer toutes les pages
+	 *
+	 * @return PageCollection
+	 */
 	public static function getAllPages() {
 		// Retourne les pages en cache s'il y en a
 		if (static::$cacheAllPages != null)

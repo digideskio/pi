@@ -38,9 +38,11 @@ Usage:
 namespace Pi\Lib;
 
 class Router {
-	private $routes;
+	/** @var array */
+	protected $routes;
 
-	private static $shortcuts = [
+	/** @var array */
+	protected static $shortcuts = [
 		'{char}'   => '([a-zA-Z_])',      // character
 		'{digit}'  => '([0-9])',          // digit
 		'{string}' => '([a-zA-Z_]+)',     // string
@@ -49,10 +51,20 @@ class Router {
 		'{*}'      => '(.+)'              // all
 	];
 
+	/**
+	 */
 	public function __construct() {
 		$this->routes = [];
 	}
 
+	/**
+	 * @param $name
+	 * @param $path
+	 * @param $func
+	 * @param string $method
+	 *
+	 * @return $this
+	 */
 	public function route($name, $path, $func, $method = 'GET') {
 		$method = is_array($method) ? $method : [ $method ];
 
@@ -65,14 +77,33 @@ class Router {
 		return $this;
 	}
 
+	/**
+	 * @param $name
+	 * @param $path
+	 * @param $func
+	 *
+	 * @return Router
+	 */
 	public function get($name, $path, $func) {
 		return $this->route($name, $path, $func, 'GET');
 	}
 
+	/**
+	 * @param $name
+	 * @param $path
+	 * @param $func
+	 *
+	 * @return Router
+	 */
 	public function post($name, $path, $func) {
 		return $this->route($name, $path, $func, 'POST');
 	}
 
+	/**
+	 * @param $tryPath
+	 *
+	 * @return $this
+	 */
 	public function find($tryPath) {
 		$method = 'GET';
 		$found = false;
@@ -105,9 +136,8 @@ class Router {
 			}
 		}
 
-		if (!$found) {
+		if (!$found)
 			exit;
-		}
 
 		return $this;
 	}

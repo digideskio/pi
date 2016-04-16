@@ -20,11 +20,21 @@
 namespace Pi;
 
 class User {
+	/** @var string */
 	public $username;
+
+	/** @var string */
 	public $password;
+
+	/** @var string */
 	public $role;
+
+	/** @var string[] */
 	public $permissions;
 
+	/**
+	 * @param $data
+	 */
 	public function __construct($data) {
 		$this->username = $data['username'];
 		$this->password = $data['password'];
@@ -34,6 +44,11 @@ class User {
 		$this->permissions = Settings::get('roles.' . $this->role . '.permissions');
 	}
 
+	/**
+	 * @param $permission
+	 *
+	 * @return bool
+	 */
 	public function hasPermission($permission) {
 		return in_array($permission, $this->permissions);
 	}

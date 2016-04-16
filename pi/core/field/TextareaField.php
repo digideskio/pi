@@ -22,12 +22,19 @@ namespace Pi\Core\Field;
 use Pi\Lib\Html\Tag;
 
 class TextareaField extends BaseField {
-	private static $formats = [ 'text', 'markdown', 'twig', 'html' ];
+	/** @var string[] */
+	protected static $formats = [ 'text', 'markdown', 'twig', 'html' ];
 
+	/**
+	 * @param $data
+	 */
 	public function __construct($data) {
 		parent::__construct($data);
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function html() {
 		$id = 'input-' . $this->id;
 

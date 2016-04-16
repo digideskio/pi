@@ -22,6 +22,9 @@ namespace Pi\Core\Field;
 use Pi\Lib\Html\Tag;
 
 class RadioField extends BaseField {
+	/**
+	 * @param $data
+	 */
 	public function __construct($data) {
 		parent::__construct($data);
 
@@ -29,6 +32,9 @@ class RadioField extends BaseField {
 			$this->default = array_keys($this->options)[0];
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function value() {
 		if (!empty($_POST)) {
 			if (isset($_POST[$this->name]))
@@ -40,6 +46,9 @@ class RadioField extends BaseField {
 		}
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function html() {
 		$html = '';
 

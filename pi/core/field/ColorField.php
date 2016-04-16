@@ -22,8 +22,12 @@ namespace Pi\Core\Field;
 use Pi\Lib\Html\Tag;
 
 class ColorField extends BaseField {
-	private static $formats = [ 'hex', 'rgb', 'rgba', 'hsl' ];
+	/** @var string[] */
+	protected static $formats = [ 'hex', 'rgb', 'rgba', 'hsl' ];
 
+	/**
+	 * @param $data
+	 */
 	public function __construct($data) {
 		parent::__construct($data);
 
@@ -31,6 +35,9 @@ class ColorField extends BaseField {
 			$this->format = 'hex';
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function save() {
 		if (in_array($this->format, [ 'rgb', 'rgba' ])) {
 			$value = $this->value();
@@ -69,6 +76,9 @@ class ColorField extends BaseField {
 		return $this->value();
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function html() {
 		$tag = new Tag('input', [
 			'name'  => $this->name,

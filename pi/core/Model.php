@@ -22,11 +22,21 @@ namespace Pi\Core;
 use Pi\Lib\Json;
 
 class Model {
+	/** @var string */
 	public $file;
+
+	/** @var  string */
 	public $title;
+
+	/** @var array */
 	public $fields;
+
+	/** @var string */
 	public $slug;
 
+	/**
+	 * @param $file string
+	 */
 	public function __construct($file) {
 		$model = Json::read($file);
 

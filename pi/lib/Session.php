@@ -20,30 +20,56 @@
 namespace Pi\Lib;
 
 class Session {
+	/**
+	 * @param $key
+	 * @param $value
+	 */
 	public static function set($key, $value) {
 		$_SESSION[$key] = $value;
 	}
 
+	/**
+	 * @param $key
+	 *
+	 * @return mixed
+	 */
 	public static function get($key) {
 		return $_SESSION[$key];
 	}
 
+	/**
+	 * @param $key
+	 */
 	public static function remove($key) {
 		unset($_SESSION[$key]);
 	}
 
+	/**
+	 * @param $key
+	 *
+	 * @return bool
+	 */
 	public static function exists($key) {
 		return isset($_SESSION[$key]);
 	}
 
+	/**
+	 *
+	 */
 	public static function start() {
 		session_start();
 	}
 
+	/**
+	 *
+	 */
 	public static function stop() {
 		session_destroy();
 	}
 
+	/**
+	 *
+	 */
 	public static function restart() {
 		static::stop();
 		static::start();

@@ -20,12 +20,25 @@
 namespace Pi\Core;
 
 class Config {
+	/** @var array */
 	public static $data = [];
 
+	/**
+	 * @param string $key
+	 * @param mixed $value
+	 *
+	 * @return mixed
+	 */
 	public static function set($key, $value) {
 		return static::$data[$key] = $value;
 	}
 
+	/**
+	 * @param string|null $key
+	 * @param mixed $default
+	 *
+	 * @return array|mixed|null
+	 */
 	public static function get($key = null, $default = null) {
 		if (is_null($key))
 			return static::$data;
@@ -33,6 +46,11 @@ class Config {
 		return isset(static::$data[$key]) ? static::$data[$key] : $default;
 	}
 
+	/**
+	 * @param string|null $key
+	 *
+	 * @return array
+	 */
 	public static function remove($key = null) {
 		if (is_null($key))
 			return static::$data = [];

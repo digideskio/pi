@@ -24,6 +24,14 @@ use Exception;
 use Pi\Lib\Json;
 
 class Page {
+	/**
+	 * @param string $slug
+	 * @param string $version
+	 *
+	 * @return mixed
+	 *
+	 * @throws Exception
+	 */
 	public static function getVersion($slug, $version) {
 		$file = PI_DIR_PAGES . $slug . '/' . $version . '.json';
 
@@ -33,16 +41,23 @@ class Page {
 			throw new Exception('Version \'' . $version . '\' de \'' . $slug . '\' inexistante.');
 	}
 
+	/**
+	 * @param string $slug
+	 *
+	 * @return mixed|null
+	 *
+	 * @throws Exception
+	 */
 	public static function getLastVersion($slug) {
 		$f = PI_DIR_PAGES . $slug;
 
 		if (!is_dir($f))
-			return false;
+			return null;
 
 		$a = opendir($f);
 
 		if (!$a)
-			return false;
+			return null;
 
 		$version = 0;
 
@@ -60,11 +75,16 @@ class Page {
 		}
 
 		if ($version == 0)
-			return false;
+			return null;
 
 		return self::getVersion($slug, $version);
 	}
 
+	/**
+	 * @param $slug
+	 *
+	 * @return array
+	 */
 	public static function getAllVersions($slug) {
 		$versions = [];
 
@@ -92,6 +112,11 @@ class Page {
 		return array_reverse($versions);
 	}
 
+	/**
+	 * @param $slug
+	 * 
+	 * @return string
+	 */
 	public static function getFormatedContent($slug) {
 		$table_contents = self::getTitles($slug);
 
@@ -108,7 +133,7 @@ class Page {
 
 		$content = $parser
 			->setBreaksEnabled(true)
-			->text($this->content);
+			->text($content);
 
 		$offset = strpos($content, '<h2 id="');
 

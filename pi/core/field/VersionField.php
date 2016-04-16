@@ -23,10 +23,16 @@ use Pi\Lib\Num;
 use Pi\Lib\Html\Tag;
 
 class VersionField extends BaseField {
+	/**
+	 * @param $data
+	 */
 	public function __construct($data) {
 		parent::__construct($data);
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function validate() {
 		$value = $this->value();
 
@@ -36,6 +42,9 @@ class VersionField extends BaseField {
 			return true;
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function html() {
 		$tag = new Tag('input', [
 			'name'  => $this->name,

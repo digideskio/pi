@@ -22,10 +22,16 @@ namespace Pi\Core\Field;
 use Pi\Lib\Html\Tag;
 
 class PasswordField extends BaseField {
+	/**
+	 * @param $data
+	 */
 	public function __construct($data) {
 		parent::__construct($data);
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function validate() {
 		$value = $this->value();
 
@@ -35,6 +41,9 @@ class PasswordField extends BaseField {
 			return true;
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function html() {
 		$tag = new Tag('input', [
 			'name'  => $this->name,

@@ -20,21 +20,36 @@
 namespace Pi;
 
 class Loader {
+	/** @var string[] */
 	protected static $cssUrls = [];
+
+	/** @var string[] */
 	protected static $jsUrls = [];
 
+	/**
+	 * @param $url
+	 */
 	public static function loadCss($url) {
 		static::$cssUrls[] = $url;
 	}
 
+	/**
+	 * @param $url
+	 */
 	public static function loadJs($url) {
 		static::$jsUrls[] = $url;
 	}
 
+	/**
+	 * @return string[]
+	 */
 	public static function getCssUrls() {
 		return static::$cssUrls;
 	}
 
+	/**
+	 * @return string[]
+	 */
 	public static function getJsUrls() {
 		return static::$jsUrls;
 	}

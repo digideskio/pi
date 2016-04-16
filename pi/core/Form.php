@@ -20,12 +20,20 @@
 namespace Pi\Core;
 
 class Form {
+	/** @var Model */
 	public $model;
 
+	/**
+	 * @param Model $model
+	 * @param bool $bind
+	 */
 	public function __construct($model, $bind = false) {
 		$this->model = $model;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function html() {
 		$html  = '<form method="post" action="">';
 		$html .= '<h1>Formulaire &laquo; ' . $this->model->title . ' &raquo;</h1>';
@@ -79,6 +87,9 @@ class Form {
 		return $html;
 	}
 
+	/**
+	 * @return array
+	 */
 	public function validate() {
 		$errors = [];
 
@@ -88,6 +99,9 @@ class Form {
 		return $errors;
 	}
 
+	/**
+	 * @return array
+	 */
 	public function save() {
 		$infos = [];
 

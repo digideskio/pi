@@ -26,12 +26,17 @@ use Twig_SimpleFunction;
 use Twig_Extension_StringLoader;
 
 use Pi\Lib\Markdown;
-use Pi\Lib\Str;
 
 class Renderer {
-	private $loader;
-	private $twig;
+	/** @var Twig_Loader_Filesystem */
+	protected $loader;
 
+	/** @var Twig_Environment */
+	protected $twig;
+
+	/**
+	 * @param $theme
+	 */
 	public function __construct($theme) {
 		// Définition du dossier des modèles de page
 		$this->loader = new Twig_Loader_Filesystem(PI_DIR_THEMES . $theme . '/tpl');

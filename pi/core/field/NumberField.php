@@ -22,6 +22,9 @@ namespace Pi\Core\Field;
 use Pi\Lib\Html\Tag;
 
 class NumberField extends BaseField {
+	/**
+	 * @param $data
+	 */
 	public function __construct($data) {
 		parent::__construct($data);
 
@@ -30,10 +33,16 @@ class NumberField extends BaseField {
 		$this->step = isset($data['step']) ? $data['step'] : 1;
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function value() {
 		return (int) parent::value();
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function validate() {
 		$value = $this->value();
 
@@ -43,6 +52,9 @@ class NumberField extends BaseField {
 			return true;
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function html() {
 		$tag = new Tag('input', [
 			'name'  => $this->name,
