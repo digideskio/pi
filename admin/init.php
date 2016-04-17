@@ -2,7 +2,7 @@
 
 require '../settings.php';
 
-use Pi\Settings;
+use Pi\Core\Settings;
 
 session_start();
 

@@ -17,9 +17,32 @@
  * along with Pi.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// Configurations
-require 'settings.php';
+namespace Pi\Model\Field;
 
-// Lancement de l'application (affichage de la page demandée)
-$app = new Pi\Core\App();
-$app->run();
+class ChoiceField extends BaseField {
+	/**
+	 * @param $data
+	 */
+	public function __construct($data) {
+		parent::__construct($data);
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function html() {
+		$val = $this->value();
+
+		$html = '<select name="' . $this->name . '"' . ($this->required ? ' required' : '') . ' id="input-' . $this->id . '">';
+
+		foreach ($this->options as $key => $value) {
+		 	$selected = $key == $val ? ' selected' : '';
+
+			$html .= '<option value="' . $key . '"' . $selected . '>' . $value . '</option>';
+		}
+
+		$html .= '</select>';
+
+		return $html;
+	}
+}

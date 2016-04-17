@@ -17,9 +17,40 @@
  * along with Pi.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// Configurations
-require 'settings.php';
+namespace Pi\Core;
 
-// Lancement de l'application (affichage de la page demandée)
-$app = new Pi\Core\App();
-$app->run();
+class Loader {
+	/** @var string[] */
+	protected static $cssUrls = [];
+
+	/** @var string[] */
+	protected static $jsUrls = [];
+
+	/**
+	 * @param string $url
+	 */
+	public static function loadCss($url) {
+		static::$cssUrls[] = $url;
+	}
+
+	/**
+	 * @param string $url
+	 */
+	public static function loadJs($url) {
+		static::$jsUrls[] = $url;
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public static function getCssUrls() {
+		return static::$cssUrls;
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public static function getJsUrls() {
+		return static::$jsUrls;
+	}
+}
