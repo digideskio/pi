@@ -58,7 +58,7 @@ class App {
 	 * @throws Exception
 	 */
 	public static function autoload($class) {
-		if (0 !== strpos($class, 'Pi'))
+		if (strpos($class, 'Pi') !== 0)
 			return;
 
 		$parts = explode('\\', $class);
