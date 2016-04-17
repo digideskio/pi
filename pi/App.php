@@ -126,7 +126,9 @@ class App {
 	 * Initilise le moteur de rendu
 	 */
 	public function initializeRenderer() {
-		$this->renderer = new Renderer($this->theme);
+		$this->renderer = new Renderer();
+		$this->renderer->addPath(PI_DIR_MODELS);
+		$this->renderer->addPath(PI_DIR_THEME . '/tpl');
 	}
 
 	/**

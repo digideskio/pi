@@ -35,13 +35,10 @@ class Renderer {
 	protected $twig;
 
 	/**
-	 * @param string $theme
 	 */
-	public function __construct($theme) {
+	public function __construct() {
 		// Définition du dossier des modèles de page
-		$this->loader = new Twig_Loader_Filesystem(PI_DIR_THEMES . $theme . '/tpl');
-		$this->loader->addPath(PI_DIR_MODELS);
-
+		$this->loader = new Twig_Loader_Filesystem();
 		$this->twig = new Twig_Environment($this->loader);
 
 		// Filtre markdown : « {{ ma_variable|markdown }} »
@@ -65,6 +62,17 @@ class Renderer {
 		// Fonction « template_from_string » : « {{ include(template_from_string("chaine")) }} »
 		// Interprète avec Twig le contenu de la chaine
 		$this->twig->addExtension(new Twig_Extension_StringLoader());
+	}
+
+	/**
+	 * Ajout un chemin vers des vues
+	 *
+	 * @param string $path Chemin vers le dossier
+	 *
+	 * @throws \Twig_Error_Loader
+	 */
+	public function addPath($path) {
+		$this->loader->addPath($path);
 	}
 
 	/**
