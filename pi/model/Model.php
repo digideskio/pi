@@ -19,31 +19,53 @@
 
 namespace Pi\Model;
 
+use Exception;
+
 use Pi\Model\Field\BaseField;
 use Pi\Lib\Json;
 
 class Model {
-	/** @var string */
-	protected $file;
+	/** @var string Nom du fichier */
+	protected $filename;
 
-	/** @var string */
+	/** @var string Titre du modèle */
 	protected $title;
 
-	/** @var BaseField[] */
+	/** @var BaseField[] Champs du modèle */
 	protected $fields;
 
-	/** @var string */
+	/** @var string Slug du modèle */
 	protected $slug;
 
 	/**
-	 * @param string $file
+	 * @param string $filename
+	 *
+	 * @throws Exception
 	 */
-	public function __construct($file) {
-		$model = Json::read($file);
+	public function __construct($filename) {
+		$model = Json::read($filename);
+
+		// Vérification de la lecture du fichier
+		if (is_null($model))
+			throw new Exception('Error when parsing model "' . $filename . '"');
+
+		// Vérification de la présence des champs
+		if (!isset($model['title']))
+			throw new Exception('"title" field is missed in model');
+
+		if (!isset($model['fields']))
+			throw new Exception('"fields" field is missed in model');
+
+		// Vérification des types
+		if (!is_string($model['title']))
+			throw new Exception('"title" field has to be a string');
+
+		if (!is_array($model['fields']))
+			throw new Exception('"fields" field has to be an array');
 
 		/* Détermination du slug */
 		// Découpage du nom du fichier : a/b/c/d.e => [a, b, c, d.e]
-		$parts = explode('/', $file);
+		$parts = explode('/', $filename);
 		
 		// Suppression du dernier élément : [a, b, c, d.e] => [a, b, c]
 		array_pop($parts);
@@ -51,7 +73,7 @@ class Model {
 		// Récupération du dernier élément restant : [a, b, c] => c
 		$slug = $parts[count($parts) - 1];
 
-		$this->file = $file;
+		$this->filename = $filename;
 		$this->title = $model['title'];
 		$this->fields = [];
 		$this->slug = $slug;
@@ -67,13 +89,17 @@ class Model {
 	}
 
 	/**
+	 * Récupérer le nom du fichier
+	 *
 	 * @return string
 	 */
-	public function getFile() {
-		return $this->file;
+	public function getFilename() {
+		return $this->filename;
 	}
 
 	/**
+	 * Récupérer le titre du modèle
+	 *
 	 * @return string
 	 */
 	public function getTitle() {
@@ -81,6 +107,8 @@ class Model {
 	}
 
 	/**
+	 * Récupérer les champs du modèle
+	 *
 	 * @return BaseField[]
 	 */
 	public function getFields() {
@@ -88,6 +116,8 @@ class Model {
 	}
 
 	/**
+	 * Récupérer le slug du modèle
+	 *
 	 * @return string
 	 */
 	public function getSlug() {
