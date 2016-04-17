@@ -1,10 +1,10 @@
 {
-  "title": "Page",
-  "fields": {
-    "content": {
-      "label": "Contenu",
-      "type": "textarea",
-      "format": "twig"
-    }
-  }
+    "title": "Page",
+    "fields": {
+        "content": {
+            "label": "Contenu",
+            "type": "textarea",
+            "format": "twig"
+	    }
+	}
 }
