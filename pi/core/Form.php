@@ -21,7 +21,7 @@ namespace Pi\Core;
 
 class Form {
 	/** @var Model */
-	public $model;
+	protected $model;
 
 	/**
 	 * @param Model $model

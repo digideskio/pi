@@ -23,16 +23,16 @@ use Pi\Lib\Json;
 
 class Model {
 	/** @var string */
-	public $file;
+	protected $file;
 
 	/** @var string */
-	public $title;
+	protected $title;
 
 	/** @var array */
-	public $fields;
+	protected $fields;
 
 	/** @var string */
-	public $slug;
+	protected $slug;
 
 	/**
 	 * @param string $file

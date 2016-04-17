@@ -86,7 +86,7 @@ class Settings {
 		$users = static::getUsers();
 
 		foreach ($users as $user) {
-			if ($user->username == $username) {
+			if ($user->getUsername() == $username) {
 				$correctUser = $user;
 				break;
 			}

@@ -21,16 +21,16 @@ namespace Pi;
 
 class User {
 	/** @var string Pseudonyme */
-	public $username;
+	protected $username;
 
 	/** @var string Mot de passe */
-	public $password;
+	protected $password;
 
 	/** @var string Nom du rôle */
-	public $role;
+	protected $role;
 
 	/** @var string[] Permissions accordées à l'utilisateur */
-	public $permissions;
+	protected $permissions;
 
 	/**
 	 * Constructeur de la classe
@@ -57,5 +57,41 @@ class User {
 	 */
 	public function hasPermission($permission) {
 		return in_array($permission, $this->permissions);
+	}
+
+	/**
+	 * Pseudonyme de l'utilisateur
+	 *
+	 * @return string
+	 */
+	public function getUsername() {
+		return $this->username;
+	}
+
+	/**
+	 * Mot de passe de l'utilisateur
+	 *
+	 * @return string
+	 */
+	public function getPassword() {
+		return $this->password;
+	}
+
+	/**
+	 * Role de l'utilisateur
+	 *
+	 * @return string
+	 */
+	public function getRole() {
+		return $this->role;
+	}
+
+	/**
+	 * Permissions de l'utilisateur
+	 * 
+	 * @return string[]
+	 */
+	public function getPermissions() {
+		return $this->permissions;
 	}
 }
