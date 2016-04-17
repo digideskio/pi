@@ -50,7 +50,7 @@ class Json {
 	 * @return string
 	 */
 	public static function encode($array) {
-		return json_encode($array);
+		return json_encode($array, JSON_PRETTY_PRINT);
 	}
 
 	/**
