@@ -21,28 +21,31 @@ namespace Pi\Lib;
 
 class Json {
 	/**
-	 * @param string $file
-	 * @param array $array
+	 * @param string $file Fichier dans lequel écrire
+	 * @param array $array Tableau à écrire dans le fichier (sera encodé au
+	 *                     format JSON sous forme de chaine)
+	 *
+	 * @return bool
 	 */
 	public static function write($file, $array) {
 		$encodedArray = static::encode($array);
 
-		file_put_contents($file, $encodedArray);
+		return file_put_contents($file, $encodedArray) !== false;
 	}
 
 	/**
-	 * @param string $file
+	 * @param string $filename Fichier à décoder
 	 *
 	 * @return mixed
 	 */
-	public static function read($file) {
-		$content = file_get_contents($file);
+	public static function read($filename) {
+		$content = file_get_contents($filename);
 
 		return static::decode($content);
 	}
 
 	/**
-	 * @param array $array
+	 * @param array $array Tableau à encoder : tablea PHP => chaine JSON
 	 *
 	 * @return string
 	 */
@@ -51,7 +54,7 @@ class Json {
 	}
 
 	/**
-	 * @param string $string
+	 * @param string $string Chaine à décoder : chaine JSON => tableau PHP
 	 *
 	 * @return mixed
 	 */

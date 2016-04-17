@@ -20,20 +20,22 @@
 namespace Pi;
 
 class User {
-	/** @var string */
+	/** @var string Pseudonyme */
 	public $username;
 
-	/** @var string */
+	/** @var string Mot de passe */
 	public $password;
 
-	/** @var string */
+	/** @var string Nom du rôle */
 	public $role;
 
-	/** @var string[] */
+	/** @var string[] Permissions accordées à l'utilisateur */
 	public $permissions;
 
 	/**
-	 * @param $data
+	 * Constructeur de la classe
+	 *
+	 * @param array $data Données fournies pour contruire l'utilisateur
 	 */
 	public function __construct($data) {
 		$this->username = $data['username'];
@@ -41,13 +43,17 @@ class User {
 		$this->role = $data['role'];
 
 		// Récupération des permissions à partir du nom du role
-		$this->permissions = Settings::get('roles.' . $this->role . '.permissions');
+		$this->permissions = Settings::get(
+			'roles.' . $this->role . '.permissions');
 	}
 
 	/**
+	 * L'utilisateur dispose t-il de cette permission ?
+	 *
 	 * @param string $permission
 	 *
-	 * @return bool
+	 * @return bool Retourne true si l'utilisateur dipose de la permission
+	 *              $permission, false sinon
 	 */
 	public function hasPermission($permission) {
 		return in_array($permission, $this->permissions);

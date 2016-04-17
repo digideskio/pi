@@ -22,6 +22,9 @@ namespace Pi;
 use Pi\Lib\Json;
 
 class Settings {
+	/** @var string Chemin vers le fichier des paramètres */
+	protected static $filename = PI_DIR_CONTENT . 'settings.json';
+
 	/** @var array Paramètres enregistrés */
 	protected static $settings = [];
 
@@ -29,7 +32,16 @@ class Settings {
 	 * Initilisation des paramètres
 	 */
 	public static function initializeSettings() {
-		static::$settings = Json::read(PI_DIR_CONTENT . 'settings.json');
+		static::$settings = Json::read(static::$filename);
+	}
+
+	/**
+	 * Enregistre les paramètres
+	 *
+	 * @return bool
+	 */
+	public static function save() {
+		return Json::write(static::$filename, static::$settings);
 	}
 
 	/**
@@ -38,7 +50,7 @@ class Settings {
 	 *
 	 * @param string $setting
 	 *
-	 * @return null
+	 * @return mixed
 	 */
 	public static function get($setting) {
 		return static::getValue(static::$settings, $setting);
