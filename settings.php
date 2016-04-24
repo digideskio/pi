@@ -34,5 +34,8 @@ Twig_Autoloader::register();
 // Chargement de Pi
 Pi\Core\App::register();
 
+// Initialisation du chemin
+Pi\Core\Router::initializePath();
+
 // Initialisation des paramètres du site
 Pi\Core\Settings::initializeSettings();

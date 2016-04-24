@@ -34,9 +34,6 @@ class App {
 	protected $renderer;
 
 	/** @var string */
-	protected $path;
-
-	/** @var string */
 	protected $query;
 
 	/** @var string */
@@ -86,7 +83,6 @@ class App {
 	 */
 	public function __construct() {
 		$this->initializeTheme();
-		$this->initializePath();
 		$this->initializeRenderer();
 
 		$this->processPost();
@@ -114,7 +110,7 @@ class App {
 				'fields' => $form->save()
 			];
 
-			$folder = PI_DIR_PAGES . $this->getPath() . '/';
+			$folder = PI_DIR_PAGES . Router::getPath() . '/';
 
 			if (!file_exists($folder))
 				mkdir($folder, 0755, true);
@@ -152,35 +148,6 @@ class App {
 	}
 
 	/**
-	 * Initialise le chemin courant
-	 */
-	public function initializePath() {
-		$this->path = 'home';
-		$this->query = '';
-
-		if (isset($_SERVER['PATH_INFO'])) {
-			// /page/test/&edit
-			preg_match('/\/?([a-zA-Z0-9\/_-]*)\/?&?(.*)/', $_SERVER['PATH_INFO'], $matches);
-
-			$this->path = trim($matches[1], '/'); // page/test
-
-			/*
-			$parts = explode('&', $matches[2]);
-
-			$parts2 = [];
-
-			foreach ($parts as $part)
-				$parts2[] = explode('=', $part, 2);
-			*/
-
-			$this->query = trim($matches[2], '/'); // edit
-		}
-
-		if (empty($this->path))
-			$this->path = 'home';
-	}
-
-	/**
 	 * Rendu du fichier
 	 *
 	 * @param string $file
@@ -189,50 +156,7 @@ class App {
 	 * @return string
 	 */
 	public function render($file, $variables = []) {
-		$mainVariables = $this->getVariables();
-		$variables = array_merge($mainVariables, $variables);
-
 		return $this->renderer->render($file, $variables);
-	}
-
-	/**
-	 * Variables globales qui seront envoyées à toutes les vues
-	 *
-	 * @return array
-	 */
-	public function getVariables() {
-		return [
-			'app' => $this,
-			'settings' => Settings::getSettings(),
-			'url' => [
-				'site' => PI_URL_SITE,
-				'content' => PI_URL_CONTENT,
-				'models' => PI_URL_MODELS,
-				'pages' => PI_URL_PAGES,
-				'themes' => PI_URL_THEMES,
-				'theme' => PI_URL_THEME,
-				'curent' => $this->getPath()
-			],
-			'dir' => [
-				'site' => PI_DIR_SITE,
-				'content' => PI_DIR_CONTENT,
-				'models' => PI_DIR_MODELS,
-				'pages' => PI_DIR_PAGES,
-				'themes' => PI_DIR_THEMES,
-				'theme' => PI_DIR_THEME
-			],
-			'jsUrls' => Loader::getJsUrls(),
-			'cssUrls' => Loader::getCssUrls()
-		];
-	}
-
-	/**
-	 * Obtention de l'URL courante
-	 *
-	 * @return string
-	 */
-	public function getPath() {
-		return $this->path;
 	}
 
 	/**
@@ -240,7 +164,7 @@ class App {
 	 */
 	public function run() {
 		if ($this->query == 'edit') {
-			$content = Page::getLastVersion($this->getPath());
+			$content = Page::getLastVersion(Router::getPath());
 
 			if (!$content) {
 				echo $this->render('admin/create-page.html', [
@@ -266,7 +190,7 @@ class App {
 				'form' => $form
 			]);
 		} else {
-			$content = Page::getLastVersion($this->getPath());
+			$content = Page::getLastVersion(Router::getPath());
 
 			if (!$content)
 				$content = Page::getLastVersion('error');

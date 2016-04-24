@@ -19,12 +19,15 @@
 
 namespace Pi\Render;
 
+use Pi\Core\Router;
 use Twig_Environment;
 use Twig_Extension_StringLoader;
 use Twig_Loader_Filesystem;
 use Twig_SimpleFilter;
 use Twig_SimpleFunction;
 
+use Pi\Core\Loader;
+use Pi\Core\Settings;
 use Pi\Lib\Markdown;
 
 class Renderer {
@@ -82,6 +85,41 @@ class Renderer {
 	 * @return string
 	 */
 	public function render($file, $variables) {
+		$variables = array_merge($this->getVariables(), $variables);
+
 		return $this->twig->render($file, $variables);
+	}
+
+	/**
+	 * Variables globales qui seront envoyées à toutes les vues
+	 *
+	 * @return array
+	 */
+	public function getVariables() {
+		return [
+			'settings' => Settings::getSettings(),
+
+			'url' => [
+				'site' => PI_URL_SITE,
+				'content' => PI_URL_CONTENT,
+				'models' => PI_URL_MODELS,
+				'pages' => PI_URL_PAGES,
+				'themes' => PI_URL_THEMES,
+				'theme' => PI_URL_THEME,
+				'curent' => Router::getPath()
+			],
+
+			'dir' => [
+				'site' => PI_DIR_SITE,
+				'content' => PI_DIR_CONTENT,
+				'models' => PI_DIR_MODELS,
+				'pages' => PI_DIR_PAGES,
+				'themes' => PI_DIR_THEMES,
+				'theme' => PI_DIR_THEME
+			],
+
+			'jsUrls' => Loader::getJsUrls(),
+			'cssUrls' => Loader::getCssUrls()
+		];
 	}
 }
