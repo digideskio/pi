@@ -163,6 +163,16 @@ class App {
 			preg_match('/\/?([a-zA-Z0-9\/_-]*)\/?&?(.*)/', $_SERVER['PATH_INFO'], $matches);
 
 			$this->path = trim($matches[1], '/'); // page/test
+
+			/*
+			$parts = explode('&', $matches[2]);
+
+			$parts2 = [];
+
+			foreach ($parts as $part)
+				$parts2[] = explode('=', $part, 2);
+			*/
+
 			$this->query = trim($matches[2], '/'); // edit
 		}
 
