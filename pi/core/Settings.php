@@ -50,11 +50,17 @@ class Settings {
 	 * Syntaxe de la variable $setting : « site.theme »
 	 *
 	 * @param string $setting
+	 * @param mixed $defaultValue
 	 *
 	 * @return mixed
 	 */
-	public static function get($setting) {
-		return static::getValue(static::$settings, $setting);
+	public static function get($setting, $defaultValue = null) {
+		$value = static::getValue(static::$settings, $setting);
+
+		if (is_null($value))
+			return $defaultValue;
+		else
+			return $value;
 	}
 
 	/**
