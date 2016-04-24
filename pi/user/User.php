@@ -40,13 +40,13 @@ class User {
 	 * @param array $data Données fournies pour contruire l'utilisateur
 	 */
 	public function __construct($data) {
-		$this->username = $data['username'];
-		$this->password = $data['password'];
-		$this->role = $data['role'];
+		$this->username = $data['username'] ?? 'anonymous';
+		$this->password = $data['password'] ?? '';
+		$this->role = $data['role'] ?? 'editor';
 
 		// Récupération des permissions à partir du nom du role
 		$this->permissions = Settings::get(
-			'roles.' . $this->role . '.permissions');
+			'roles.' . $this->role . '.permissions', []);
 	}
 
 	/**
