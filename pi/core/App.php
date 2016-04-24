@@ -213,24 +213,6 @@ class App {
 	}
 
 	/**
-	 * Récupérer tous les utilisateurs
-	 *
-	 * @return User[]
-	 */
-	public function getAllUsers() {
-		return Settings::getUsers();
-	}
-
-	/**
-	 * Récupérer toutes les pages
-	 *
-	 * @return PageCollection
-	 */
-	public function getAllPages() {
-		return PageCollection::getAllPages();
-	}
-
-	/**
 	 * Récupérer une page
 	 *
 	 * @param Page $page

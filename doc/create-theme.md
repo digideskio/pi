@@ -33,5 +33,7 @@ comment il est construit.
   - `site`
     - `name` : nom du site
     - `theme` : slug du thème
+- `pages` : liste des pages
+- `users` : liste des utilisateurs
 
 Exemple d'utilisation pour l'affichage `{{ settings.site.name }}`.

@@ -29,6 +29,7 @@ use Twig_SimpleFunction;
 use Pi\Core\Loader;
 use Pi\Core\Settings;
 use Pi\Lib\Markdown;
+use Pi\Page\PageCollection;
 
 class Renderer {
 	/** @var Twig_Loader_Filesystem */
@@ -119,7 +120,10 @@ class Renderer {
 			],
 
 			'jsUrls' => Loader::getJsUrls(),
-			'cssUrls' => Loader::getCssUrls()
+			'cssUrls' => Loader::getCssUrls(),
+
+			'pages' => PageCollection::getAllPages(),
+			'users' => Settings::getUsers()
 		];
 	}
 }
