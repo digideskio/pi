@@ -13,7 +13,7 @@
 		"admin": {
 			"name": "Administrateur",
 			"permissions": [
-				"can-mangage-pages",
+				"can-manage-pages",
 				"can-manage-models",
 				"can-manage-users",
 				"can-manage-settings"
@@ -22,7 +22,7 @@
 		"super-admin": {
 			"name": "Super-administrateur",
 			"permissions": [
-				"can-mangage-pages",
+				"can-manage-pages",
 				"can-manage-users",
 				"can-manage-models",
 				"can-manage-settings",
