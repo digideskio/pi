@@ -22,12 +22,11 @@ namespace Pi\Core;
 use Exception;
 
 use Pi\Lib\Json;
+use Pi\Model\Field\BaseField;
 use Pi\Model\Form;
 use Pi\Model\Model;
 use Pi\Page\Page;
-use Pi\Page\PageCollection;
 use Pi\Render\Renderer;
-use Pi\User\User;
 
 class App {
 	/** @var Renderer */
@@ -38,6 +37,12 @@ class App {
 
 	/** @var string */
 	protected $theme;
+
+	/** @var array */
+	protected static $models;
+
+	/** @var array */
+	protected static $fields;
 
 	/**
 	 * Enregistre l'« autoloader »
@@ -55,8 +60,9 @@ class App {
 	 * @throws Exception
 	 */
 	public static function autoload($class) {
-		if (strpos($class, 'Pi') !== 0)
-			return;
+		if (strpos($class, 'Pi') !== 0 && strpos($class, 'Module') !== 0)
+			throw new Exception('Namespace should starts with "Pi" or
+				"Module"');
 
 		$parts = explode('\\', $class);
 
@@ -71,7 +77,26 @@ class App {
 
 		$fileName = implode(DS, $newParts);
 
-		$file = dirname(__FILE__) . '/../../' . $fileName . '.php';
+		$firstPart = $parts[0];
+
+		if ($firstPart == 'Pi') {
+			$file = realpath(dirname(__FILE__) . '/../../') . DS
+				. $fileName . '.php';
+		} else if ($firstPart == 'Module') {
+			// remplace « module » par « content/modules » (seulement la
+			// première occurence)
+			$pos = strpos($fileName, 'module');
+
+			if ($pos !== false) {
+				$fileName = substr_replace($fileName, 'content/modules', $pos,
+					strlen('module'));
+			}
+
+			$file = realpath(dirname(__FILE__) . '/../../') . DS
+				. $fileName . '.php';
+		} else {
+			throw new Exception('Unable to load class "' . $class . '"');
+		}
 
 		if (is_file($file))
 			require $file;
@@ -80,12 +105,85 @@ class App {
 	}
 
 	/**
+	 * @param $name
+	 *
+	 * @return BaseField
+	 */
+	public static function getField($name) {
+		if (isset(static::$fields[$name]))
+			return static::$fields[$name];
+		else
+			throw new Exception('Field "' . $name . '" does not exists.');
+	}
+
+	/**
+	 * Contruction de l'application
 	 */
 	public function __construct() {
 		$this->initializeTheme();
 		$this->initializeRenderer();
+		$this->initializeModules();
+		$this->initializeAttributes();
 
 		$this->processPost();
+	}
+
+	/**
+	 * Initialise le thème courant
+	 *
+	 * @todo si le thème courant n'existe pas, renvoyer une erreur
+	 */
+	protected function initializeTheme() {
+		$this->theme = 'default';
+
+		$this->theme = Settings::get('site.theme');
+
+		if (!$this->theme)
+			$this->theme = 'default';
+
+		define('PI_DIR_THEME', PI_DIR_THEMES . $this->theme . DS);
+		define('PI_URL_THEME', PI_URL_THEMES . $this->theme . '/');
+
+		if (file_exists(PI_DIR_THEME . 'init.php'))
+			require PI_DIR_THEME . 'init.php';
+		else
+			throw new Exception('Unable to load "init.php" for theme "'
+				. $this->theme . '"');
+	}
+
+	/**
+	 * Initilise le moteur de rendu
+	 */
+	protected function initializeRenderer() {
+		$this->renderer = new Renderer();
+		$this->renderer->addPath(PI_DIR_MODELS);
+		$this->renderer->addPath(PI_DIR_THEME . '/tpl');
+	}
+
+	/**
+	 * Initialisation des modules
+	 */
+	protected function initializeModules() {
+		foreach (scandir(PI_DIR_MODULES) as $dir) {
+			if ($dir == '.' || $dir == '..')
+				continue;
+
+			$filename = PI_DIR_MODULES . $dir . DS . 'module.php';
+
+			if (file_exists($filename))
+				require $filename;
+			else
+				throw new Exception('Missing "module.php" in module "'
+					. $dir . '"');
+		}
+	}
+
+	/**
+	 * Initialisation des attributs
+	 */
+	protected function initializeAttributes() {
+		foreach (Model::getAll() as $model)
+			static::registerModel($model->getSlug());
 	}
 
 	/**
@@ -93,11 +191,9 @@ class App {
 	 *
 	 * @throws Exception
 	 */
-	public function processPost() {
+	protected function processPost() {
 		if (!empty($_POST)) {
-			$fileModel = PI_DIR_MODELS . $_POST['model'] . '/model.json';
-
-			$model = new Model($fileModel);
+			$model = new Model($_POST['model']);
 			$form = new Form($model);
 
 			if (!$form->validate())
@@ -117,34 +213,6 @@ class App {
 
 			Json::write($folder . time() . '.json', $content);
 		}
-	}
-
-	/**
-	 * Initilise le moteur de rendu
-	 */
-	public function initializeRenderer() {
-		$this->renderer = new Renderer();
-		$this->renderer->addPath(PI_DIR_MODELS);
-		$this->renderer->addPath(PI_DIR_THEME . '/tpl');
-	}
-
-	/**
-	 * Initialise le thème courant
-	 *
-	 * @todo si le thème courant n'existe pas, renvoyer une erreur
-	 */
-	public function initializeTheme() {
-		$this->theme = 'default';
-
-		$this->theme = Settings::get('site.theme');
-
-		if (!$this->theme)
-			$this->theme = 'default';
-
-		define('PI_DIR_THEME', PI_DIR_THEMES . $this->theme . DS);
-		define('PI_URL_THEME', PI_URL_THEMES . $this->theme . '/');
-		
-		require PI_DIR_THEME . 'init.php';
 	}
 
 	/**
@@ -178,9 +246,7 @@ class App {
 				return;
 			}
 
-			$fileModel = PI_DIR_MODELS . $content['model'] . '/model.json';
-
-			$model = new Model($fileModel);
+			$model = new Model($content['model']);
 			$form = new Form($model);
 
 			if (empty($_POST))
@@ -223,5 +289,76 @@ class App {
 		$p = Page::getLastVersion($page);
 
 		return $p;
+	}
+
+	/**
+	 * Enregistrer un nouveau modèle
+	 *
+	 * @param string $modelName Nom du modèle
+	 * @param string $modelFilename Chemin vers le fichier modèle (JSON)
+	 * @param string $viewFilename Chemin vers le fichier vue (Twig)
+	 *
+	 * @return bool true si le modèle a pu être enregistré, false sinon
+	 */
+	public static function registerModel($modelName, $modelFilename = null,
+	                                     $viewFilename = null) {
+		static::$models[] = new Model(
+			$modelName,
+			$modelFilename,
+			$viewFilename);
+
+		return true;
+	}
+
+	/**
+	 * Enregistrer un nouveau champ
+	 *
+	 * @param string $fieldName Nom du champ
+	 * @param string $fieldClass Classe du champ
+	 *
+	 * @return bool true si le champ a pu être enregistré, false sinon
+	 */
+	public static function registerField($fieldName, $fieldClass) {
+		static::$fields[$fieldName] = $fieldClass;
+
+		return true;
+	}
+
+	/**
+	 * Surcharger un modèle
+	 *
+	 * @param string $modelName Nom du modèle
+	 * @param string $modelFilename Chemin vers le fichier modèle (JSON)
+	 * @param string $viewFilename Chemin vers le fichier vue (Twig)
+	 *
+	 * @return bool true si le modèle a pu être surchargé, false sinon
+	 */
+	public static function overrideModel($modelName, $modelFilename,
+	                                     $viewFilename) {
+		return true;
+	}
+
+	/**
+	 * Surcharger la vue d'un modèle
+	 *
+	 * @param string $modelName Nom du modèle à surcharger
+	 * @param string $filename Chemin vers la vue surchargée
+	 *
+	 * @return bool true si la vue a pu être surchargée, false sinon
+	 */
+	public static function overrideViewModel($modelName, $filename) {
+		return true;
+	}
+
+	/**
+	 * Surcharger un champ
+	 *
+	 * @param string $fieldName Nom du champ
+	 * @param string $fieldClass Classe du champ
+	 *
+	 * @return bool true si la vue a pu être surchargée, false sinon
+	 */
+	public static function overrideField($fieldName, $fieldClass) {
+		return true;
 	}
 }

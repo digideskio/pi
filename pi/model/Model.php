@@ -21,12 +21,16 @@ namespace Pi\Model;
 
 use Exception;
 
+use Pi\Core\App;
 use Pi\Model\Field\BaseField;
 use Pi\Lib\Json;
 
 class Model {
-	/** @var string Nom du fichier */
-	protected $filename;
+	/** @var string Nom du fichier du modèle */
+	protected $modelFilename;
+
+	/** @var string Nom du fichier de la vue */
+	protected $viewFilename;
 
 	/** @var string Titre du modèle */
 	protected $title;
@@ -38,16 +42,49 @@ class Model {
 	protected $slug;
 
 	/**
-	 * @param string $filename
+	 * Récupérer la liste des modèles
+	 *
+	 * @return Model[]
+	 */
+	public static function getAll() {
+		$models = [];
+
+		foreach (scandir(PI_DIR_MODELS) as $dir) {
+			if ($dir == '.' || $dir == '..')
+				continue;
+
+			$models[] = new Model($dir);
+		}
+
+		return $models;
+	}
+
+	/**
+	 * Construit un modèle à partir de son nom
+	 *
+	 * @param string $modelName Nom du modèle
+	 * @param string $modelFilename
+	 * @param string $viewFilename
 	 *
 	 * @throws Exception
 	 */
-	public function __construct($filename) {
-		$model = Json::read($filename);
+	public function __construct($modelName, $modelFilename = null,
+	                            $viewFilename = null) {
+		$modelFilename = $modelFilename ??
+			PI_DIR_MODELS . $modelName . '/model.json';
+
+		$viewFilename = $viewFilename ??
+			PI_DIR_MODELS . $modelName . '/view.html';
+
+		$this->modelFilename = $modelFilename;
+		$this->viewFilename = $viewFilename;
+
+		$model = Json::read($this->modelFilename);
 
 		// Vérification de la lecture du fichier
 		if (is_null($model))
-			throw new Exception('Error when parsing model "' . $filename . '"');
+			throw new Exception('Error when parsing model "' . $modelName
+				. '"');
 
 		// Vérification de la présence des champs
 		if (!isset($model['title']))
@@ -63,28 +100,14 @@ class Model {
 		if (!is_array($model['fields']))
 			throw new Exception('"fields" field has to be an array');
 
-		/* Détermination du slug */
-		// Découpage du nom du fichier : a/b/c/d.e => [a, b, c, d.e]
-		$parts = explode('/', $filename);
-		
-		// Suppression du dernier élément : [a, b, c, d.e] => [a, b, c]
-		array_pop($parts);
-		
-		// Récupération du dernier élément restant : [a, b, c] => c
-		$slug = $parts[count($parts) - 1];
-
-		$this->filename = $filename;
 		$this->title = $model['title'];
 		$this->fields = [];
-		$this->slug = $slug;
+		$this->slug = $modelName;
 
 		foreach ($model['fields'] as $name => $field) {
-			$class = ucfirst($field['type']) . 'Field';
-			$class = 'Pi\\Model\\Field\\' . $class;
+			$fieldClass = App::getField($field['type']);
 
-			$field['name'] = $name;
-
-			$this->fields[] = new $class($field);
+			$this->fields[] = new $fieldClass($field);
 		}
 	}
 
@@ -93,8 +116,17 @@ class Model {
 	 *
 	 * @return string
 	 */
-	public function getFilename() {
-		return $this->filename;
+	public function getModelFilename() {
+		return $this->modelFilename;
+	}
+
+	/**
+	 * Récupérer le nom du fichier
+	 *
+	 * @return string
+	 */
+	public function getViewFilename() {
+		return $this->viewFilename;
 	}
 
 	/**

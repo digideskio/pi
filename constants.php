@@ -23,11 +23,13 @@ const EOL = PHP_EOL;
 define('PI_DIR_SITE', dirname(__FILE__) . DS);
 define('PI_DIR_CONTENT', PI_DIR_SITE . 'content' . DS);
 define('PI_DIR_MODELS', PI_DIR_CONTENT . 'models' . DS);
+define('PI_DIR_MODULES', PI_DIR_CONTENT . 'modules' . DS);
 define('PI_DIR_PAGES', PI_DIR_CONTENT . 'pages' . DS);
 define('PI_DIR_THEMES', PI_DIR_CONTENT . 'themes' . DS);
 
 define('PI_URL_SITE', $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['SERVER_NAME'] . '/');
 define('PI_URL_CONTENT', PI_URL_SITE . 'content/');
 define('PI_URL_MODELS', PI_URL_CONTENT . 'models/');
+define('PI_URL_MODULES', PI_URL_CONTENT . 'modules/');
 define('PI_URL_PAGES', PI_URL_CONTENT . 'pages/');
 define('PI_URL_THEMES', PI_URL_CONTENT . 'themes/');
