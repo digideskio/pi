@@ -1,122 +1,56 @@
+/* -------
+   Polices
+   ------- */
+@font-face {
+  font-family: 'Futura';
+  src: url('../fonts/FuturaNewBook.otf');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Futura';
+  src: url('../fonts/FuturaNewHeavy.otf');
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: 'Bodoni';
+  src: url('../fonts/BodoniFLF-Roman.ttf');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bodoni';
+  src: url('../fonts/BodoniFLF-Italic.ttf');
+  font-style: italic;
+}
+
+/* -------
+   Balises
+   ------- */
 html,
 body {
   margin: 0;
   padding: 0;
 }
 
+html {
+  font-size: 62.5%;
+}
+
 body {
-  background-color: #fff;
-  font-size: 20px;
-  font-family: "Calibri", "Helvetica", "Arial", sans-serif;
-  color: #2c2c2c;
-}
-
-.main {
-  padding: 0;
-}
-
-.limit {
-  margin: 0 auto;
-  width: 740px;
-  min-width: 320px;
-}
-
-header {
-  margin: 0;
-  padding: 0;
-  background: #e0e0e0;
-}
-
-header .logo {
-  padding: 0 6px;
-  display: inline-block;
-  font-size: 34px;
-  font-weight: lighter;
-  vertical-align: middle;
-  color: #212121;
-  text-decoration: none;
-}
-
-header .logo:hover,
-header .logo.active {
-  text-decoration: none;
-  margin-bottom: -2px;
-  border-bottom: 2px solid #6a18ad;
-  color: #6a18ad;
-}
-
-header nav {
-  margin: 0 0 0 12px;
-  padding: 0;
-  font-size: 22px;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-header ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-header li {
-  margin: 0;
-  padding: 0;
-  display: inline;
-}
-
-header a {
-  margin: 0;
-  padding: 8px 16px;
-  color: #212121;
-  text-decoration: none;
-  font-weight: lighter;
-}
-
-header li a:hover {
-  text-decoration: none;
-  color: #6a18ad;
-  border-bottom: 2px solid #6a18ad;
-}
-
-header li.active a {
-  color: #6a18ad;
-  border-bottom: 2px solid #6a18ad;
-}
-
-section {
-  margin: 0;
-  padding: 28px 0;
-  border-bottom: 1px solid #e7e7e7;
-}
-
-footer {
-  margin: 12px 0;
-  text-align: right;
-  color: #707070;
-}
-
-footer::after {
-  display: block;
-  content: '';
-  width: 0;
-  clear: both;
-}
-
-.float-left {
-  float: left;
-}
-
-.float-right {
-  float: right;
+  background-color: #ffffff;
+  font-size: 2.2rem;
+  font-family: 'Futura', sans-serif;
+  color: #000000;
 }
 
 a {
-  color: #428bca;
-  text-decoration: none;
+  color: #343b95;
 }
 
 a:hover {
-  text-decoration: underline;
+  color: #181b44;
 }
 
 h1,
@@ -125,29 +59,24 @@ h3,
 h4 {
   margin: 16px 0 6px 0;
   padding: 0;
-  font-weight: normal;
+  font-weight: bolder;
 }
 
 h1 {
   margin-bottom: 12px;
-  color: #6a18ad;
-  font-size: 32px;
+  font-size: 5.2rem;
 }
 
 h2 {
-  color: #d82451;
-  font-size: 27px;
+  font-size: 3.6rem;
 }
 
 h3 {
-  color: #ed7e00;
-  font-size: 21px;
+  font-size: 3rem;
 }
 
 h4 {
-  color: #000;
-  font-size: 20px;
-  text-decoration: underline;
+  font-size: 2.2rem;
 }
 
 ul {
@@ -174,6 +103,127 @@ code {
   color: #2c2c2c;
 }
 
+header {
+  margin: 0;
+  padding: 0;
+  font-family: 'Bodoni', serif;
+}
+
+header nav {
+  margin: 0 0 0 12px;
+  padding: 0;
+  font-size: 2.8rem;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+header ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+header li {
+  margin: 0;
+  padding: 0;
+  display: inline;
+}
+
+header a {
+  margin: 0;
+  padding: 0;
+  color: #000000;
+  text-decoration: none;
+  font-weight: lighter;
+}
+
+header a:hover {
+  color: #000000;
+}
+
+header nav a {
+  margin: 0 4px;
+  padding: 8px 8px;
+  font-style: italic;
+}
+
+header li a:hover {
+  text-decoration: none;
+  margin-bottom: -2px;
+  border-bottom: 2px solid #000000;
+}
+
+section {
+  margin: 0;
+  padding: 28px 0;
+}
+
+footer {
+  margin: 6px 0;
+  text-align: right;
+}
+
+/* -------
+   Classes
+   ------- */
+.main {
+  padding: 0;
+}
+
+.limit {
+  margin: 0 auto;
+  width: 740px;
+  min-width: 320px;
+}
+
+header .limit {
+  border-bottom: 1px solid #000000;
+}
+
+header .logo {
+  padding: 0;
+  display: inline-block;
+  font-size: 4rem;
+  font-weight: lighter;
+  vertical-align: middle;
+  text-decoration: none;
+}
+
+header .logo:hover,
+header .logo.active {
+  text-decoration: none;
+  margin-bottom: -2px;
+  border-bottom: 2px solid #000000;
+}
+
+header li.active a {
+  font-style: normal;
+  margin-bottom: -2px;
+  border-bottom: 2px solid #000000;
+}
+
+footer .limit {
+  padding-top: 6px;
+  border-top: 1px solid #000000;
+}
+
+footer::after {
+  display: block;
+  content: '';
+  width: 0;
+  clear: both;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+/* ----------------
+   Design adaptatif
+   ---------------- */
 @media screen and (max-width: 760px) {
   .limit {
     width: 98%;
