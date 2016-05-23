@@ -108,6 +108,8 @@ class App {
 	 * @param $name
 	 *
 	 * @return BaseField
+	 *
+	 * @throws Exception
 	 */
 	public static function getField($name) {
 		if (isset(static::$fields[$name]))
@@ -182,8 +184,14 @@ class App {
 	 * Initialisation des attributs
 	 */
 	protected function initializeAttributes() {
-		foreach (Model::getAll() as $model)
-			static::registerModel($model->getSlug());
+		static::$models = [];
+
+		foreach (scandir(PI_DIR_MODELS) as $dir) {
+			if ($dir == '.' || $dir == '..')
+				continue;
+
+			static::$models[] = new Model($dir);
+		}
 	}
 
 	/**

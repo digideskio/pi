@@ -19,6 +19,8 @@
 
 namespace Pi\Model\Field;
 
+use Exception;
+
 abstract class BaseField {
 	protected static $num = 0;
 
@@ -62,23 +64,47 @@ abstract class BaseField {
 	public $format;
 
 	/**
+	 * Construit un champ
+	 *
+	 * @param array $array
+	 *
+	 * @return static
+	 *
+	 * @throws Exception
+	 */
+	public static function fromArray($array) {
+		$field = new static();
+
+		foreach ($array as $key => $value) {
+			$setter = 'set' . ucfirst($key);
+
+			if (method_exists($field, $setter))
+				$field->$setter($value);
+			else
+				throw new Exception('No setter available for "' . $key . '"');
+		}
+
+		return $field;
+	}
+
+	/**
 	 * @param $data
 	 */
-	public function __construct($data) {
+	public function __construct($data = []) {
 		$this->id = ++self::$num;
 
-		$this->name        = isset($data['name'])        ? $data['name']        : '';
-		$this->label       = isset($data['label'])       ? $data['label']       : '';
-		$this->default     = isset($data['default'])     ? $data['default']     : '';
-		$this->required    = isset($data['required'])    ? $data['required']    : false;
-		$this->message     = isset($data['message'])     ? $data['message']     : '';
-		$this->width       = isset($data['width'])       ? $data['width']       : '1/1';
-		$this->placeholder = isset($data['placeholder']) ? $data['placeholder'] : '';
-		$this->options     = isset($data['options'])     ? $data['options']     : [];
-		$this->min         = isset($data['min'])         ? $data['min']         : 0;
-		$this->max         = isset($data['max'])         ? $data['max']         : 0;
-		$this->step        = isset($data['step'])        ? $data['step']        : 0;
-		$this->format      = isset($data['format'])      ? $data['format']      : '';
+		$this->name        = $data['name']        ?? '';
+		$this->label       = $data['label']       ?? '';
+		$this->default     = $data['default']     ?? '';
+		$this->required    = $data['required']    ?? false;
+		$this->message     = $data['message']     ?? '';
+		$this->width       = $data['width']       ?? '1/1';
+		$this->placeholder = $data['placeholder'] ?? '';
+		$this->options     = $data['options']     ?? [];
+		$this->min         = $data['min']         ?? 0;
+		$this->max         = $data['max']         ?? 0;
+		$this->step        = $data['step']        ?? 0;
+		$this->format      = $data['format']      ?? '';
 	}
 
 	/**
@@ -92,7 +118,7 @@ abstract class BaseField {
 	 * @return string
 	 */
 	public function value() {
-		return isset($_POST[$this->name]) ? $_POST[$this->name] : $this->default;
+		return $_POST[$this->name] ?? $this->default;
 	}
 
 	/**
@@ -110,5 +136,113 @@ abstract class BaseField {
 	 */
 	public function save() {
 		return $this->value();
+	}
+
+	/**
+	 * Définir le nom du champ
+	 *
+	 * @param string $name
+	 */
+	public function setName($name) {
+		$this->name = $name;
+	}
+
+	/**
+	 * Définir le label du champ
+	 *
+	 * @param string $label
+	 */
+	public function setLabel($label) {
+		$this->label = $label;
+	}
+
+	/**
+	 * Définir la valeur par défaut
+	 *
+	 * @param string $default
+	 */
+	public function setDefault($default) {
+		$this->default = $default;
+	}
+
+	/**
+	 * Définir si le champ est obligatoire ou non
+	 *
+	 * @param bool $required
+	 */
+	public function setRequired($required) {
+		$this->required = $required;
+	}
+
+	/**
+	 * Définir le message du champ
+	 *
+	 * @param string $message
+	 */
+	public function setMessage($message) {
+		$this->message = $message;
+	}
+
+	/**
+	 * Définir la largeur du champ
+	 *
+	 * @param string $width
+	 */
+	public function setWidth($width) {
+		$this->width = $width;
+	}
+
+	/**
+	 * Définir le « placeholder » du champ
+	 *
+	 * @param string $placeholder
+	 */
+	public function setPlaceholder($placeholder) {
+		$this->placeholder = $placeholder;
+	}
+
+	/**
+	 * Définir les valeurs disponibles pour ce champ
+	 *
+	 * @param array $options
+	 */
+	public function setOptions($options) {
+		$this->options = $options;
+	}
+
+	/**
+	 * Définir la valeur minimale que pour avoir le champ
+	 *
+	 * @param int|float $min
+	 */
+	public function setMin($min) {
+		$this->min = $min;
+	}
+
+	/**
+	 * Définir la valeur maximale que pour avoir le champ
+	 *
+	 * @param int|float $max
+	 */
+	public function setMax($max) {
+		$this->max = $max;
+	}
+
+	/**
+	 * Définir le pas du champ
+	 *
+	 * @param int|float $step
+	 */
+	public function setStep($step) {
+		$this->step = $step;
+	}
+
+	/**
+	 * Définir le format du champ
+	 *
+	 * @param string $format
+	 */
+	public function setFormat($format) {
+		$this->format = $format;
 	}
 }

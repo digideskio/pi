@@ -15,122 +15,127 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Pi.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 namespace Pi\Model;
 
 use Exception;
 
 use Pi\Core\App;
+use Pi\Lib\Str;
 use Pi\Model\Field\BaseField;
-use Pi\Lib\Json;
 
 class Model {
-	/** @var string Nom du fichier du modèle */
-	protected $modelFilename;
-
-	/** @var string Nom du fichier de la vue */
-	protected $viewFilename;
-
-	/** @var string Titre du modèle */
+	/** @var string Nom du modèle */
 	protected $title;
-
-	/** @var BaseField[] Champs du modèle */
-	protected $fields;
 
 	/** @var string Slug du modèle */
 	protected $slug;
 
+	/** @var array Champs du modèle */
+	protected $fields;
+
+	/** @var string Chemin vers la vue */
+	protected $viewFilename;
+
 	/**
-	 * Récupérer la liste des modèles
+	 * Construit un modèle
 	 *
-	 * @return Model[]
+	 * @param array $array
+	 *
+	 * @return static
 	 */
-	public static function getAll() {
-		$models = [];
+	public static function fromArray($array) {
+		$model = new Model($array['title']);
 
-		foreach (scandir(PI_DIR_MODELS) as $dir) {
-			if ($dir == '.' || $dir == '..')
-				continue;
+		foreach ($array['fields'] as $name => $field) {
+			$fieldClass = App::getField($field['type']);
 
-			$models[] = new Model($dir);
+			$field['name'] = $name;
+
+			$model->addField($name, $fieldClass::fromArray($field));
 		}
 
-		return $models;
+		return $model;
 	}
 
 	/**
-	 * Construit un modèle à partir de son nom
+	 * Constructeur
 	 *
-	 * @param string $modelName Nom du modèle
-	 * @param string $modelFilename
-	 * @param string $viewFilename
+	 * @param string $title Titre du modèle
+	 */
+	public function __construct($title = '') {
+		$this->setTitle($title);
+
+		$this->fields = [];
+		$this->viewFilename = '';
+	}
+
+	/**
+	 * Définit le titre du modèle
+	 *
+	 * @param string $title
+	 * @param bool $overrideSlug
+	 *
+	 * @return $this
+	 */
+	public function setTitle($title, $overrideSlug = true) {
+		$this->title = $title;
+
+		if ($overrideSlug)
+			$this->slug = Str::slug($title);
+
+		return $this;
+	}
+
+	/**
+	 * Définit le slug du modèle
+	 *
+	 * @param string $slug
+	 *
+	 * @return $this
+	 */
+	public function setSlug($slug) {
+		$this->slug = $slug;
+
+		return $this;
+	}
+
+	/**
+	 * Ajoute un champ
+	 *
+	 * @param string $fieldName
+	 * @param BaseField $field
+	 *
+	 * @return $this
 	 *
 	 * @throws Exception
 	 */
-	public function __construct($modelName, $modelFilename = null,
-	                            $viewFilename = null) {
-		$modelFilename = $modelFilename ??
-			PI_DIR_MODELS . $modelName . '/model.json';
+	public function addField($fieldName, $field) {
+		if (!in_array($fieldName, array_keys($this->fields)))
+			$this->fields[$fieldName] = $field;
+		else
+			throw new Exception('Field "' . $fieldName .'" already exists in
+				model "' . $this->getTitle() . '"');
 
-		$viewFilename = $viewFilename ??
-			PI_DIR_MODELS . $modelName . '/view.html';
+		return $this;
+	}
 
-		$this->modelFilename = $modelFilename;
+	/**
+	 * Définir le chemin vers la vue
+	 *
+	 * @param string $viewFilename
+	 *
+	 * @return $this
+	 */
+	public function setViewFilename($viewFilename) {
 		$this->viewFilename = $viewFilename;
 
-		$model = Json::read($this->modelFilename);
-
-		// Vérification de la lecture du fichier
-		if (is_null($model))
-			throw new Exception('Error when parsing model "' . $modelName
-				. '"');
-
-		// Vérification de la présence des champs
-		if (!isset($model['title']))
-			throw new Exception('"title" field is missed in model');
-
-		if (!isset($model['fields']))
-			throw new Exception('"fields" field is missed in model');
-
-		// Vérification des types
-		if (!is_string($model['title']))
-			throw new Exception('"title" field has to be a string');
-
-		if (!is_array($model['fields']))
-			throw new Exception('"fields" field has to be an array');
-
-		$this->title = $model['title'];
-		$this->fields = [];
-		$this->slug = $modelName;
-
-		foreach ($model['fields'] as $name => $field) {
-			$fieldClass = App::getField($field['type']);
-
-			$this->fields[] = new $fieldClass($field);
-		}
+		return $this;
 	}
 
 	/**
-	 * Récupérer le nom du fichier
-	 *
-	 * @return string
-	 */
-	public function getModelFilename() {
-		return $this->modelFilename;
-	}
-
-	/**
-	 * Récupérer le nom du fichier
-	 *
-	 * @return string
-	 */
-	public function getViewFilename() {
-		return $this->viewFilename;
-	}
-
-	/**
-	 * Récupérer le titre du modèle
+	 * Récupérer le titre
 	 *
 	 * @return string
 	 */
@@ -139,20 +144,29 @@ class Model {
 	}
 
 	/**
-	 * Récupérer les champs du modèle
+	 * Récupérer le slug
 	 *
-	 * @return BaseField[]
+	 * @return string
+	 */
+	public function getSlug() {
+		return $this->slug;
+	}
+
+	/**
+	 * Récupérer les champs
+	 *
+	 * @return array
 	 */
 	public function getFields() {
 		return $this->fields;
 	}
 
 	/**
-	 * Récupérer le slug du modèle
+	 * Récupérer le chemin vers la vue
 	 *
 	 * @return string
 	 */
-	public function getSlug() {
-		return $this->slug;
+	public function getViewFilename() {
+		return $this->viewFilename;
 	}
 }
