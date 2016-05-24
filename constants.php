@@ -20,7 +20,7 @@
 const DS = DIRECTORY_SEPARATOR;
 const EOL = PHP_EOL;
 
-define('PI_DIR_SITE', dirname(__FILE__) . DS);
+define('PI_DIR_SITE', __DIR__ . DS);
 define('PI_DIR_CONTENT', PI_DIR_SITE . 'content' . DS);
 define('PI_DIR_MODELS', PI_DIR_CONTENT . 'models' . DS);
 define('PI_DIR_MODULES', PI_DIR_CONTENT . 'modules' . DS);

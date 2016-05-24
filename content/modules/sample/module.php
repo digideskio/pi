@@ -8,8 +8,8 @@ use Module\Core\Field\TextField;
 // Créer un nouveau modèle
 App::registerModel(
 	'test',
-	dirname(__FILE__) . DS . 'add-model' . DS . 'model.json',
-	dirname(__FILE__) . DS . 'add-model' . DS . 'view.html');
+	__DIR__ . DS . 'add-model' . DS . 'model.json',
+	__DIR__ . DS . 'add-model' . DS . 'view.html');
 
 // Créer un nouveau champ
 App::registerField(
@@ -19,13 +19,13 @@ App::registerField(
 // Surcharger un modèle
 App::overrideModel(
 	'all',
-	dirname(__FILE__) . DS . 'override-model' . DS . 'all.json',
-	dirname(__FILE__) . DS . 'override-model' . DS . 'all.html');
+	__DIR__ . DS . 'override-model' . DS . 'all.json',
+	__DIR__ . DS . 'override-model' . DS . 'all.html');
 
 // Surcharger la vue d'un modèle
 App::overrideViewModel(
 	'all',
-	dirname(__FILE__) . DS . 'override-view-model' . DS . 'all.html');
+	__DIR__ . DS . 'override-view-model' . DS . 'all.html');
 
 // Surcharger un champ
 App::overrideField(

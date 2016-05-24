@@ -80,7 +80,7 @@ class App {
 		$firstPart = $parts[0];
 
 		if ($firstPart == 'Pi') {
-			$file = realpath(dirname(__FILE__) . '/../../') . DS
+			$file = realpath(__DIR__ . '/../../') . DS
 				. $fileName . '.php';
 		} else if ($firstPart == 'Module') {
 			// remplace « module » par « content/modules » (seulement la
@@ -92,7 +92,7 @@ class App {
 					strlen('module'));
 			}
 
-			$file = realpath(dirname(__FILE__) . '/../../') . DS
+			$file = realpath(__DIR__ . '/../../') . DS
 				. $fileName . '.php';
 		} else {
 			throw new Exception('Unable to load class "' . $class . '"');
