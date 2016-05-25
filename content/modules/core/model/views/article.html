@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %}« {{ meta.title }} »{% endblock %}
+
+{% block content %}
+	<h1>{{ meta.title }}</h1>
+
+	<p>Publié le {{ page.date }}</p>
+
+	<p>
+		Catégories :
+
+		{% for category in page.categories %}
+			{{ category }}
+		{% endfor %}
+	</p>
+
+	<div>
+		{{ page.content|markdown }}
+	</div>
+{% endblock %}

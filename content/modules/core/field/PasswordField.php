@@ -19,14 +19,14 @@
 
 namespace Module\Core\Field;
 
-use Pi\Model\Field\BaseField;
+use Pi\Model\Field;
 use Pi\Lib\Html\Tag;
 
-class PasswordField extends BaseField {
+class PasswordField extends Field {
 	/**
 	 * @param $data
 	 */
-	public function __construct($data) {
+	public function __construct($data = []) {
 		parent::__construct($data);
 	}
 

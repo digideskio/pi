@@ -19,14 +19,14 @@
 
 namespace Module\Core\Field;
 
-use Pi\Model\Field\BaseField;
+use Pi\Model\Field;
 use Pi\Lib\Html\Tag;
 
-class DateField extends BaseField {
+class DateField extends Field {
 	/**
 	 * @param $data
 	 */
-	public function __construct($data) {
+	public function __construct($data = []) {
 		parent::__construct($data);
 
 		if ($this->default == 'today')

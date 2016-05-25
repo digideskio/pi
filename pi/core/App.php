@@ -22,7 +22,7 @@ namespace Pi\Core;
 use Exception;
 
 use Pi\Lib\Json;
-use Pi\Model\Field\BaseField;
+use Pi\Model\Field;
 use Pi\Model\Form;
 use Pi\Model\Model;
 use Pi\Page\Page;
@@ -107,7 +107,7 @@ class App {
 	/**
 	 * @param $name
 	 *
-	 * @return BaseField
+	 * @return Field
 	 *
 	 * @throws Exception
 	 */
@@ -158,7 +158,6 @@ class App {
 	 */
 	protected function initializeRenderer() {
 		$this->renderer = new Renderer();
-		$this->renderer->addPath(PI_DIR_MODELS);
 		$this->renderer->addPath(PI_DIR_THEME . '/tpl');
 	}
 
@@ -185,13 +184,6 @@ class App {
 	 */
 	protected function initializeAttributes() {
 		static::$models = [];
-
-		foreach (scandir(PI_DIR_MODELS) as $dir) {
-			if ($dir == '.' || $dir == '..')
-				continue;
-
-			static::$models[] = new Model($dir);
-		}
 	}
 
 	/**

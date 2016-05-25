@@ -23,7 +23,6 @@ use Exception;
 
 use Pi\Core\App;
 use Pi\Lib\Str;
-use Pi\Model\Field\BaseField;
 
 class Model {
 	/** @var string Nom du modèle */
@@ -35,8 +34,8 @@ class Model {
 	/** @var array Champs du modèle */
 	protected $fields;
 
-	/** @var string Chemin vers la vue */
-	protected $viewFilename;
+	/** @var string Vue du modèle */
+	protected $view;
 
 	/**
 	 * Construit un modèle
@@ -68,7 +67,7 @@ class Model {
 		$this->setTitle($title);
 
 		$this->fields = [];
-		$this->viewFilename = '';
+		$this->view = '';
 	}
 
 	/**
@@ -105,7 +104,7 @@ class Model {
 	 * Ajoute un champ
 	 *
 	 * @param string $fieldName
-	 * @param BaseField $field
+	 * @param Field $field
 	 *
 	 * @return $this
 	 *
@@ -122,14 +121,27 @@ class Model {
 	}
 
 	/**
-	 * Définir le chemin vers la vue
+	 * Définir la vue
 	 *
-	 * @param string $viewFilename
+	 * @param string $view
 	 *
 	 * @return $this
 	 */
-	public function setViewFilename($viewFilename) {
-		$this->viewFilename = $viewFilename;
+	public function setView($view) {
+		$this->view = $view;
+
+		return $this;
+	}
+
+	/**
+	 * Définir la vue à partir d'un fichier
+	 *
+	 * @param string $filename
+	 *
+	 * @return $this
+	 */
+	public function setViewFromFile($filename) {
+		$this->view = file_get_contents($filename);
 
 		return $this;
 	}
@@ -166,7 +178,7 @@ class Model {
 	 *
 	 * @return string
 	 */
-	public function getViewFilename() {
-		return $this->viewFilename;
+	public function getView() {
+		return $this->view;
 	}
 }

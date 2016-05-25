@@ -17,11 +17,11 @@
  * along with Pi.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace Pi\Model\Field;
+namespace Pi\Model;
 
 use Exception;
 
-abstract class BaseField {
+abstract class Field {
 	protected static $num = 0;
 
 	/** @var int */

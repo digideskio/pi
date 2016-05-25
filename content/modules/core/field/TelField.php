@@ -19,15 +19,15 @@
 
 namespace Module\Core\Field;
 
-use Pi\Model\Field\BaseField;
+use Pi\Model\Field;
 use Pi\Lib\Num;
 use Pi\Lib\Html\Tag;
 
-class TelField extends BaseField {
+class TelField extends Field {
 	/**
 	 * @param $data
 	 */
-	public function __construct($data) {
+	public function __construct($data = []) {
 		parent::__construct($data);
 	}
 

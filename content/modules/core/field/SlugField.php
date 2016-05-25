@@ -19,15 +19,15 @@
 
 namespace Module\Core\Field;
 
-use Pi\Model\Field\BaseField;
+use Pi\Model\Field;
 use Pi\Lib\Str;
 use Pi\Lib\Html\Tag;
 
-class SlugField extends BaseField {
+class SlugField extends Field {
 	/**
 	 * @param $data
 	 */
-	public function __construct($data) {
+	public function __construct($data = []) {
 		parent::__construct($data);
 	}
 

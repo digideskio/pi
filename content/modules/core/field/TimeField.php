@@ -19,17 +19,17 @@
 
 namespace Module\Core\Field;
 
-use Pi\Model\Field\BaseField;
+use Pi\Model\Field;
 use Pi\Lib\Html\Tag;
 
-class TimeField extends BaseField {
+class TimeField extends Field {
 	/** @var string[] */
 	protected static $formats = [ 'hh:mm', 'hh:mm:ss' ];
 
 	/**
 	 * @param $data
 	 */
-	public function __construct($data) {
+	public function __construct($data = []) {
 		parent::__construct($data);
 
 		if (!in_array($this->format, self::$formats))

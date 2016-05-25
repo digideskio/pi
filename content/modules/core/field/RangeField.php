@@ -19,14 +19,14 @@
 
 namespace Module\Core\Field;
 
-use Pi\Model\Field\BaseField;
+use Pi\Model\Field;
 use Pi\Lib\Html\Tag;
 
-class RangeField extends BaseField {
+class RangeField extends Field {
 	/**
 	 * @param $data
 	 */
-	public function __construct($data) {
+	public function __construct($data = []) {
 		parent::__construct($data);
 
 		$this->min  = isset($data['min'])  ? $data['min']  : 0;

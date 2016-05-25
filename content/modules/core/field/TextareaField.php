@@ -19,17 +19,17 @@
 
 namespace Module\Core\Field;
 
-use Pi\Model\Field\BaseField;
+use Pi\Model\Field;
 use Pi\Lib\Html\Tag;
 
-class TextareaField extends BaseField {
+class TextareaField extends Field {
 	/** @var string[] */
 	protected static $formats = [ 'text', 'markdown', 'twig', 'html' ];
 
 	/**
 	 * @param $data
 	 */
-	public function __construct($data) {
+	public function __construct($data = []) {
 		parent::__construct($data);
 	}
 

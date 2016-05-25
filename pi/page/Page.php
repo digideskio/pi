@@ -19,190 +19,174 @@
 
 namespace Pi\Page;
 
-use Exception;
-
+use DateTime;
 use Pi\Lib\Json;
-use Pi\Lib\Markdown;
 
 class Page {
-	/**
-	 * @param string $slug
-	 * @param string $version
-	 *
-	 * @return mixed
-	 *
-	 * @throws Exception
-	 */
-	public static function getVersion($slug, $version) {
-		$file = PI_DIR_PAGES . $slug . '/' . $version . '.json';
+	/** @var string Titre de la page */
+	protected $title;
 
-		if (file_exists($file))
-			return Json::read($file);
-		else
-			throw new Exception('Version \'' . $version . '\' de \'' . $slug . '\' inexistante.');
+	/** @var string Modèle utilisé par la page */
+	protected $model;
+
+	/** @var DateTime Date de création de la page */
+	protected $createdAt;
+
+	/** @var DateTime Date de dernière mise à jour de la page */
+	protected $updatedAt;
+
+	/** @var array Liste des champs de la page */
+	protected $fields;
+
+	/**
+	 * Constructeur
+	 */
+	public function __construct() {
+		$this->title = '';
+		$this->model = '';
+		$this->createdAt = new DateTime();
+		$this->updatedAt = new DateTime();
+		$this->fields = [];
 	}
 
 	/**
-	 * @param string $slug
+	 * Définir le titre
 	 *
-	 * @return mixed|null
+	 * @param $title
 	 *
-	 * @throws Exception
+	 * @return $this
 	 */
-	public static function getLastVersion($slug) {
-		$f = PI_DIR_PAGES . $slug;
+	public function setTitle($title) {
+		$this->title = $title;
 
-		if (!is_dir($f))
-			return null;
-
-		$a = opendir($f);
-
-		if (!$a)
-			return null;
-
-		$version = 0;
-
-		while ($b = readdir($a)) {
-			if ($b != '.' && $b != '..') {
-				$c = $f . '/' . $b;
-
-				if (is_file($c)) {
-					$d = (int) substr($b, 0, -4);
-
-					if ($d > $version)
-						$version = $d;
-				}
-			}
-		}
-
-		if ($version == 0)
-			return null;
-
-		return self::getVersion($slug, $version);
+		return $this;
 	}
 
 	/**
-	 * @param $slug
+	 * Définir le modèle utilisé
+	 *
+	 * @param $model
+	 *
+	 * @return $this
+	 */
+	public function setModel($model) {
+		$this->model = $model;
+
+		return $this;
+	}
+
+	/**
+	 * Définir la date de création
+	 *
+	 * @param $createdAt
+	 *
+	 * @return $this
+	 */
+	public function setCreatedAt($createdAt) {
+		$this->createdAt = $createdAt;
+
+		return $this;
+	}
+
+	/**
+	 * Définir la date de dernière mise à jour
+	 *
+	 * @param $updatedAt
+	 *
+	 * @return $this
+	 */
+	public function setUpdatedAt($updatedAt) {
+		$this->updatedAt = $updatedAt;
+
+		return $this;
+	}
+
+	/**
+	 * Définir les champs
+	 *
+	 * @param $fields
+	 *
+	 * @return $this
+	 */
+	public function setFields($fields) {
+		$this->fields = $fields;
+
+		return $this;
+	}
+
+	/**
+	 * Récupérer le titre
+	 *
+	 * @return string
+	 */
+	public function getTitle() {
+		return $this->title;
+	}
+
+	/**
+	 * Récupérer le modèle utilisé
+	 *
+	 * @return string
+	 */
+	public function getModel() {
+		return $this->model;
+	}
+
+	/**
+	 * Récupérer la date de création de la page
+	 *
+	 * @return DateTime
+	 */
+	public function getCreatedAt() {
+		return $this->createdAt;
+	}
+
+	/**
+	 * Récupérer la date de dernière mise à jour de la page
+	 *
+	 * @return DateTime
+	 */
+	public function getUpdatedAt() {
+		return $this->updatedAt;
+	}
+
+	/**
+	 * Récupérer les champs
 	 *
 	 * @return array
 	 */
-	public static function getAllVersions($slug) {
-		$versions = [];
-
-		$f = PI_DIR_PAGES . $slug;
-
-		if (!is_dir($f))
-			return [];
-
-		$a = opendir($f);
-
-		if (!$a)
-			return [];
-
-		while ($b = readdir($a)) {
-			if ($b != '.' && $b != '..') {
-				$c = $f . '/' . $b;
-
-				if (is_file($c)) {
-					$d = (int) substr($b, 0, -5);
-					$versions[] = $d;
-				}
-			}
-		}
-
-		return array_reverse($versions);
+	public function getFields() {
+		return $this->fields;
 	}
 
 	/**
-	 * @param $slug
-	 * 
+	 * Enregistrer la page dans un fichier
+	 *
+	 * @param $filename
+	 *
+	 * @return int
+	 */
+	public function saveToFile($filename) {
+		return file_put_contents($filename, (string) $this);
+	}
+
+	/**
+	 * Représentation JSON de la page
+	 *
 	 * @return string
 	 */
-	public static function getFormatedContent($slug) {
-		$table_contents = self::getTitles($slug);
+	public function __toString() {
+		$arr = [];
 
-		$toc = '';
+		$arr['title'] = $this->getTitle();
+		$arr['model'] = $this->getModel();
+		$arr['created_at'] = $this->getCreatedAt()->format(DateTime::ISO8601);
+		$arr['updated_at'] = $this->getUpdatedAt()->format(DateTime::ISO8601);
+		$arr['fields'] = [];
 
-		if (!empty($table_contents))
-			$toc = '
-				<div class="table-contents">
-					' . self::array2ul($table_contents) . '
-				</div>
-			';
+		foreach ($this->getFields() as $field)
+			$arr['fields'] = (string) $field;
 
-		$parser = new Markdown();
-
-		$content = $parser
-			->setBreaksEnabled(true)
-			->text($content);
-
-		$offset = strpos($content, '<h2 id="');
-
-		// Si on trouve un <h2>, on éclate le contenu en deux,
-		// et on ajoute la table des matières avant le titre
-		if ($offset !== false) {
-			$part1 = substr($content, 0, $offset);
-			$part2 = substr($content, $offset);
-
-			$content = $part1 . $toc . $part2;
-		}
-
-		return $content;
+		return Json::encode($arr);
 	}
-
-	/*
-	public static function getTitles($slug) {
-		$final = [];
-
-		$lines = explode("\n", $this->content);
-
-		$lvl2 = '';
-		$lvl3 = '';
-		$lvl4 = '';
-		$lvl5 = '';
-
-		for ($i = 0 ; $i < count($lines) ; $i++) {
-			$line = trim($lines[$i]);
-
-			if (preg_match('/-{2,}/', $line) && preg_match('/.+/', $lines[$i - 1])) {
-				$lvl2 = $lines[$i - 1];
-				$final[$lvl2] = [];
-			} else if (preg_match('/######.+/', $line)) {
-				$lvl6 = trim(preg_replace('/^######/', '', $line));
-				$final[$lvl2][$lvl3][$lvl4][$lvl5][$lvl6] = [];
-			} else if (preg_match('/#####.+/', $line)) {
-				$lvl5 = trim(preg_replace('/^#####/', '', $line));
-				$final[$lvl2][$lvl3][$lvl4][$lvl5] = [];
-			} else if (preg_match('/####.+/', $line)) {
-				$lvl4 = trim(preg_replace('/^####/', '', $line));
-				$final[$lvl2][$lvl3][$lvl4] = [];
-			} else if (preg_match('/###.+/', $line)) {
-				$lvl3 = trim(preg_replace('/^###/', '', $line));
-				$final[$lvl2][$lvl3] = [];
-			} else if (preg_match('/##.+/', $line)) {
-				$lvl2 = trim(preg_replace('/^##/', '', $line));
-				$final[$lvl2] = [];
-			}
-		}
-
-		return $final;
-	}
-
-	public static function array2ul($array) {
-		$out = '<ul>';
-
-		foreach ($array as $key => $elem){
-			if (!is_array($elem))
-				$out .= '<li>' . $key . ':' . $elem . '</li>';
-			else if (empty($elem))
-				$out .= '<li><a href="#' . ParsedownAylab::gen_slug($key) . '">' . $key . '</a></li>';
-			else if (!empty($elem))
-				$out .= '<li><a href="#' . ParsedownAylab::gen_slug($key) . '">' . $key . '</a>' . self::array2ul($elem) . '</li>';
-		}
-
-		$out .= '</ul>';
-
-		return $out;
-	}
-	*/
 }

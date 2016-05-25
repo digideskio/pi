@@ -29,4 +29,7 @@ projet utilisable en production.
 
 - Un thème doit pouvoir surcharger la vue d'un modèle ;
 
+- Quand un template de thème est demandé, le rechercher d'abord dans le thème
+  utilisateur puis, s'il n'existe pas dans le thème default ;
+
 - ...

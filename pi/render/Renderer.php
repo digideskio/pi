@@ -103,7 +103,6 @@ class Renderer {
 			'url' => [
 				'site' => PI_URL_SITE,
 				'content' => PI_URL_CONTENT,
-				'models' => PI_URL_MODELS,
 				'pages' => PI_URL_PAGES,
 				'themes' => PI_URL_THEMES,
 				'theme' => PI_URL_THEME,
@@ -113,7 +112,6 @@ class Renderer {
 			'dir' => [
 				'site' => PI_DIR_SITE,
 				'content' => PI_DIR_CONTENT,
-				'models' => PI_DIR_MODELS,
 				'pages' => PI_DIR_PAGES,
 				'themes' => PI_DIR_THEMES,
 				'theme' => PI_DIR_THEME
