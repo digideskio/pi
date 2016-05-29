@@ -113,7 +113,7 @@ class Renderer {
 				'pages' => PI_URL_PAGES,
 				'themes' => PI_URL_THEMES,
 				'theme' => PI_URL_THEME,
-				'curent' => Router::getPath()
+				'curent' => $this->app->getPath()
 			],
 
 			'dir' => [

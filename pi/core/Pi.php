@@ -252,6 +252,13 @@ class Pi {
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getPath() {
+		return $this->router->getPath();
+	}
+
+	/**
 	 * Enregistrer un nouveau modèle
 	 *
 	 * @param string $modelName Nom du modèle
