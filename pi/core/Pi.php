@@ -281,7 +281,7 @@ class Pi {
 				parent::__construct();
 
 				$this->setTitle('Test');
-				$this->setView($viewFilename);
+				$this->setViewFilename($viewFilename);
 			}
 		};
 

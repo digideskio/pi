@@ -31,7 +31,7 @@ class ArticleModel extends Model {
 		parent::__construct();
 
 		$this->setTitle('Article');
-		$this->setViewFromFile(__DIR__ . 'views' . DS . 'article.html');
+		$this->setViewFilename(__DIR__ . DS . 'views' . DS . 'article.html');
 
 		$categories = new CheckboxesField();
 		$categories->setLabel('Catégories');

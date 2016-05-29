@@ -27,7 +27,7 @@ class PageModel extends Model {
 		parent::__construct();
 
 		$this->setTitle('Page');
-		$this->setViewFromFile(__DIR__ . 'views' . DS . 'page.html');
+		$this->setViewFilename(__DIR__ . DS . 'views' . DS . 'page.html');
 
 		$content = new TextareaField();
 		$content->setLabel('Contenu');

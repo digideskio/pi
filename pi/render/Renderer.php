@@ -19,7 +19,6 @@
 
 namespace Pi\Render;
 
-use Pi\Core\Router;
 use Twig_Environment;
 use Twig_Extension_StringLoader;
 use Twig_Loader_Filesystem;
@@ -49,7 +48,7 @@ class Renderer {
 		$this->app = $app;
 
 		// Définition du dossier des modèles de page
-		$this->loader = new Twig_Loader_Filesystem();
+		$this->loader = new Twig_Loader_Filesystem('/');
 		$this->twig = new Twig_Environment($this->loader);
 
 		// Filtre markdown : « {{ ma_variable|markdown }} »
@@ -79,11 +78,12 @@ class Renderer {
 	 * Ajout un chemin vers des vues
 	 *
 	 * @param string $path Chemin vers le dossier
+	 * @param string $namespace Espace de noms
 	 *
 	 * @throws \Twig_Error_Loader
 	 */
-	public function addPath($path) {
-		$this->loader->addPath($path);
+	public function addPath($path, $namespace = null) {
+		$this->loader->addPath($path, $namespace);
 	}
 
 	/**

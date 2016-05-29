@@ -21,7 +21,6 @@ namespace Pi\Core;
 
 use Exception;
 
-use Pi\Model\Form;
 use Pi\Model\Model;
 use Pi\Page\Page;
 use Pi\Render\Renderer;
@@ -58,11 +57,20 @@ class App extends Pi {
 		define('PI_DIR_THEME', PI_DIR_THEMES . $this->theme . DS);
 		define('PI_URL_THEME', PI_URL_THEMES . $this->theme . '/');
 
-		if (file_exists(PI_DIR_THEME . $this->theme . '.php'))
+		if (file_exists(PI_DIR_THEME . $this->theme . '.php')) {
 			require PI_DIR_THEME . $this->theme . '.php';
-		else
+
+			$classname = 'Theme\\' . $this->theme . '\\'
+				. $this->theme . 'Theme';
+
+			/** @var Theme $theme */
+			$theme = new $classname($this);
+			$theme->initialize();
+		}
+		else {
 			throw new Exception('Unable to load "' . $this->theme . '.php" for
 				theme "' . $this->theme . '"');
+		}
 	}
 
 	/**
@@ -70,7 +78,7 @@ class App extends Pi {
 	 */
 	protected function initializeRenderer() {
 		$this->renderer = new Renderer($this);
-		$this->renderer->addPath(PI_DIR_THEME . '/tpl');
+		$this->renderer->addPath(PI_DIR_THEME . '/tpl', 'theme');
 	}
 
 	/**
@@ -81,15 +89,20 @@ class App extends Pi {
 			if ($dir == '.' || $dir == '..')
 				continue;
 
-			$filename = PI_DIR_MODULES . $dir . DS . 'module.php';
+			$filename = PI_DIR_MODULES . $dir . DS . $dir . '.php';
 
-			if (file_exists($filename))
+			if (file_exists($filename)) {
 				require $filename;
-			/*
-			else
-				throw new Exception('Missing "module.php" in module "'
+
+				$classname = 'Module\\' . $dir . '\\' . $dir . 'Module';
+
+				/** @var Module $module */
+				$module = new $classname($this);
+				$module->initialize();
+			} else {
+				throw new Exception('Missing "' . $dir . '.php" in module "'
 					. $dir . '"');
-			*/
+			}
 		}
 	}
 
@@ -105,6 +118,9 @@ class App extends Pi {
 		$model = $content->getModel();
 		$fields = $content->getFields();
 
+		/** @var Model $modelObject */
+		$modelObject = new $this->models[$model]();
+
 		$meta = [
 			'title' => $content->getTitle(),
 			'model' => $model,
@@ -112,7 +128,7 @@ class App extends Pi {
 			'updated_at' => $content->getUpdatedAt()
 		];
 
-		echo $this->render($model . '/view.html', [
+		echo $this->render($modelObject->getViewFilename(), [
 			'page' => $fields,
 			'meta' => $meta
 		]);

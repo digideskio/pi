@@ -21,7 +21,6 @@ namespace Pi\Model;
 
 use Exception;
 
-use Pi\Core\App;
 use Pi\Lib\Str;
 
 class Model {
@@ -35,7 +34,7 @@ class Model {
 	protected $fields;
 
 	/** @var string Vue du modèle */
-	protected $view;
+	protected $viewFilename;
 
 	/**
 	 * Construit un modèle
@@ -67,7 +66,7 @@ class Model {
 		$this->setTitle($title);
 
 		$this->fields = [];
-		$this->view = '';
+		$this->viewFilename = '';
 	}
 
 	/**
@@ -123,25 +122,12 @@ class Model {
 	/**
 	 * Définir la vue
 	 *
-	 * @param string $view
+	 * @param string $viewFilename
 	 *
 	 * @return $this
 	 */
-	public function setView($view) {
-		$this->view = $view;
-
-		return $this;
-	}
-
-	/**
-	 * Définir la vue à partir d'un fichier
-	 *
-	 * @param string $filename
-	 *
-	 * @return $this
-	 */
-	public function setViewFromFile($filename) {
-		$this->view = file_get_contents($filename);
+	public function setViewFilename($viewFilename) {
+		$this->viewFilename = $viewFilename;
 
 		return $this;
 	}
@@ -178,7 +164,7 @@ class Model {
 	 *
 	 * @return string
 	 */
-	public function getView() {
-		return $this->view;
+	public function getViewFilename() {
+		return $this->viewFilename;
 	}
 }
