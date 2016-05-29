@@ -32,7 +32,7 @@ class ColorField extends Field {
 	public function __construct($data = []) {
 		parent::__construct($data);
 
-		if (!in_array($this->format, self::$formats))
+		if (!in_array($this->format, static::$formats))
 			$this->format = 'hex';
 	}
 

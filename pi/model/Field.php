@@ -91,7 +91,7 @@ abstract class Field {
 	 * @param $data
 	 */
 	public function __construct($data = []) {
-		$this->id = ++self::$num;
+		$this->id = ++static::$num;
 
 		$this->name        = $data['name']        ?? '';
 		$this->label       = $data['label']       ?? '';

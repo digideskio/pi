@@ -32,7 +32,7 @@ class TimeField extends Field {
 	public function __construct($data = []) {
 		parent::__construct($data);
 
-		if (!in_array($this->format, self::$formats))
+		if (!in_array($this->format, static::$formats))
 			$this->format = 'hh:mm';
 
 		if ($this->default == 'now' && $this->format == 'hh:mm')

@@ -83,7 +83,7 @@ class CheckboxesField extends Field {
 
 			$html .= $tag . ' <label for="input-' . $this->id . '">' . $value . '</label>';
 
-			$this->id = ++self::$num;
+			$this->id = ++static::$num;
 		}
 
 		return $html;
