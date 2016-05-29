@@ -17,41 +17,22 @@
  * along with Pi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Pi\Core;
+namespace Module\Core\Model;
 
-class Router {
-	protected $path;
-	protected $query;
+use Pi\Model\Model;
+use Module\Core\Field\TextareaField;
 
-	/**
-	 * Initialise le chemin courant
-	 */
+class PageModel extends Model {
 	public function __construct() {
-		$this->path = 'home';
-		$this->query = '';
+		parent::__construct();
 
-		if (isset($_SERVER['PATH_INFO'])) {
-			preg_match('/\/?([a-zA-Z0-9\/_-]*)\/?&?(.*)/', $_SERVER['PATH_INFO'], $matches);
+		$this->setTitle('Page');
+		$this->setViewFromFile(__DIR__ . 'views' . DS . 'page.html');
 
-			$parts = explode('&', $matches[2]);
-			$query = [];
+		$content = new TextareaField();
+		$content->setLabel('Contenu');
+		$content->setFormat('twig');
 
-			foreach ($parts as $part)
-				$query[] = explode('=', $part, 2);
-
-			$this->path = trim($matches[1], '/');
-			$this->query = $query;
-		}
-
-		if (empty($this->path))
-			$this->path = 'home';
-	}
-
-	public function getPath() {
-		return $this->path;
-	}
-
-	public function getQuery() {
-		return $this->query;
+		$this->addField('content', $content);
 	}
 }

@@ -19,12 +19,23 @@
 
 namespace Pi\Core;
 
-class Module {
-	protected static $app;
+abstract class Module {
+	/** @var App */
+	protected $app;
 
+	/**
+	 * Constructeur
+	 *
+	 * @param App $app
+	 */
 	public final function __construct($app) {
 		$this->app = $app;
 	}
+
+	/**
+	 * Initialisation du module
+	 */
+	abstract public function initialize();
 
 	/**
 	 * Enregistrer un nouveau modèle
@@ -35,12 +46,26 @@ class Module {
 	 *
 	 * @return bool true si le modèle a pu être enregistré, false sinon
 	 */
-	public static function registerModel($modelName, $modelFilename = null,
-	                                     $viewFilename = null) {
+	public function registerModel($modelName, $modelFilename = null,
+	                              $viewFilename = null) {
 		return $this->app->registerModel(
 			$modelName,
 			$modelFilename,
 			$viewFilename);
+	}
+
+	/**
+	 * Enregistrer un nouveau modèle depuis une class
+	 *
+	 * @param string $modelName Nom du modèle
+	 * @param string $modelClass Classe du modèle
+	 *
+	 * @return bool true si le modèle a pu être enregistré, false sinon
+	 */
+	public function registerModelFromClass($modelName, $modelClass) {
+		return $this->app->registerModelFromClass(
+			$modelName,
+			$modelClass);
 	}
 
 	/**
@@ -51,7 +76,7 @@ class Module {
 	 *
 	 * @return bool true si le champ a pu être enregistré, false sinon
 	 */
-	public static function registerField($fieldName, $fieldClass) {
+	public function registerField($fieldName, $fieldClass) {
 		return $this->app->registerField(
 			$fieldName,
 			$fieldClass);
@@ -66,8 +91,8 @@ class Module {
 	 *
 	 * @return bool true si le modèle a pu être surchargé, false sinon
 	 */
-	public static function overrideModel($modelName, $modelFilename,
-	                                     $viewFilename) {
+	public function overrideModel($modelName, $modelFilename,
+	                              $viewFilename) {
 		return $this->app->overrideModel(
 				$modelName,
 				$modelFilename,
@@ -82,7 +107,7 @@ class Module {
 	 *
 	 * @return bool true si la vue a pu être surchargée, false sinon
 	 */
-	public static function overrideViewModel($modelName, $filename) {
+	public function overrideViewModel($modelName, $filename) {
 		return $this->app->overrideViewModel(
 			$modelName,
 			$filename);
@@ -96,7 +121,7 @@ class Module {
 	 *
 	 * @return bool true si la vue a pu être surchargée, false sinon
 	 */
-	public static function overrideField($fieldName, $fieldClass) {
+	public function overrideField($fieldName, $fieldClass) {
 		return $this->app->overrideField(
 			$fieldName,
 			$fieldClass);

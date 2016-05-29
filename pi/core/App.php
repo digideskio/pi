@@ -22,10 +22,12 @@ namespace Pi\Core;
 use Exception;
 
 use Pi\Lib\Json;
+use Pi\Lib\Session;
 use Pi\Model\Field;
 use Pi\Model\Form;
 use Pi\Model\Model;
 use Pi\Page\Page;
+use Pi\Page\PageCollection;
 use Pi\Render\Renderer;
 
 class App {
@@ -39,10 +41,31 @@ class App {
 	protected $theme;
 
 	/** @var array */
-	protected static $models;
+	protected $models;
 
 	/** @var array */
-	protected static $fields;
+	protected $fields;
+
+	/** @var array */
+	protected $pages;
+
+	/** @var array */
+	protected $users;
+
+	/** @var string[] */
+	protected $cssUrls;
+
+	/** @var string[] */
+	protected $jsUrls;
+
+	/** @var Settings */
+	protected $settings;
+
+	/** @var Router */
+	protected $router;
+
+	/** @var Session */
+	protected $session;
 
 	/**
 	 * Enregistre l'« autoloader »
@@ -80,8 +103,7 @@ class App {
 		$firstPart = $parts[0];
 
 		if ($firstPart == 'Pi') {
-			$file = realpath(__DIR__ . '/../../') . DS
-				. $fileName . '.php';
+			$file = realpath(__DIR__ . '/../../') . DS . $fileName . '.php';
 		} else if ($firstPart == 'Module') {
 			// remplace « module » par « content/modules » (seulement la
 			// première occurence)
@@ -105,27 +127,13 @@ class App {
 	}
 
 	/**
-	 * @param $name
-	 *
-	 * @return Field
-	 *
-	 * @throws Exception
-	 */
-	public static function getField($name) {
-		if (isset(static::$fields[$name]))
-			return static::$fields[$name];
-		else
-			throw new Exception('Field "' . $name . '" does not exists.');
-	}
-
-	/**
 	 * Contruction de l'application
 	 */
 	public function __construct() {
+		$this->initializeAttributes();
 		$this->initializeTheme();
 		$this->initializeRenderer();
 		$this->initializeModules();
-		$this->initializeAttributes();
 
 		$this->processPost();
 	}
@@ -136,12 +144,12 @@ class App {
 	 * @todo si le thème courant n'existe pas, renvoyer une erreur
 	 */
 	protected function initializeTheme() {
-		$this->theme = 'default';
+		$this->theme = 'classic';
 
-		$this->theme = Settings::get('site.theme');
+		$this->theme = $this->settings->get('site.theme');
 
 		if (!$this->theme)
-			$this->theme = 'default';
+			$this->theme = 'classic';
 
 		define('PI_DIR_THEME', PI_DIR_THEMES . $this->theme . DS);
 		define('PI_URL_THEME', PI_URL_THEMES . $this->theme . '/');
@@ -157,7 +165,7 @@ class App {
 	 * Initilise le moteur de rendu
 	 */
 	protected function initializeRenderer() {
-		$this->renderer = new Renderer();
+		$this->renderer = new Renderer($this);
 		$this->renderer->addPath(PI_DIR_THEME . '/tpl');
 	}
 
@@ -173,9 +181,11 @@ class App {
 
 			if (file_exists($filename))
 				require $filename;
+			/*
 			else
 				throw new Exception('Missing "module.php" in module "'
 					. $dir . '"');
+			*/
 		}
 	}
 
@@ -183,7 +193,15 @@ class App {
 	 * Initialisation des attributs
 	 */
 	protected function initializeAttributes() {
-		static::$models = [];
+		$this->fields = [];
+		$this->models = [];
+		$this->pages = [];
+		$this->users = [];
+		$this->cssUrls = [];
+		$this->jsUrls = [];
+		$this->settings = new Settings(PI_DIR_CONTENT . 'settings.json');
+		$this->router = new Router();
+		$this->session = new Session();
 	}
 
 	/**
@@ -206,7 +224,7 @@ class App {
 				'fields' => $form->save()
 			];
 
-			$folder = PI_DIR_PAGES . Router::getPath() . '/';
+			$folder = PI_DIR_PAGES . $this->router->getPath() . '/';
 
 			if (!file_exists($folder))
 				mkdir($folder, 0755, true);
@@ -232,7 +250,7 @@ class App {
 	 */
 	public function run() {
 		if ($this->query == 'edit') {
-			$content = Page::getLastVersion(Router::getPath());
+			$content = Page::getLastVersion($this->router->getPath());
 
 			if (!$content) {
 				echo $this->render('admin/create-page.html', [
@@ -256,7 +274,7 @@ class App {
 				'form' => $form
 			]);
 		} else {
-			$content = Page::getLastVersion(Router::getPath());
+			$content = Page::getLastVersion($this->router->getPath());
 
 			if (!$content)
 				$content = Page::getLastVersion('error');
@@ -279,16 +297,76 @@ class App {
 	}
 
 	/**
-	 * Récupérer une page
+	 * Récupérer la liste des modèles
 	 *
-	 * @param Page $page
-	 *
-	 * @return bool|mixed
+	 * @return array
 	 */
-	public static function getPage($page) {
-		$p = Page::getLastVersion($page);
+	public function getModels() {
+		return $this->models;
+	}
 
-		return $p;
+	/**
+	 * Récupérer la liste des champs
+	 *
+	 * @return array
+	 */
+	public function getFields() {
+		return $this->fields;
+	}
+
+	/**
+	 * Récupérer la liste des pages
+	 *
+	 * @return array
+	 */
+	public function getPages() {
+		return $this->pages;
+	}
+
+	/**
+	 * Récupérer la liste des utilisateurs
+	 *
+	 * @return array
+	 */
+	public function getUsers() {
+		return $this->users;
+	}
+
+	/**
+	 * Récupérer les paramètres du site
+	 *
+	 * @return Settings
+	 */
+	public function getSettings() {
+		return $this->settings->getSettings();
+	}
+
+	/**
+	 * @param string $url
+	 */
+	public function loadCss($url) {
+		$this->cssUrls[] = $url;
+	}
+
+	/**
+	 * @param string $url
+	 */
+	public function loadJs($url) {
+		$this->jsUrls[] = $url;
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getCssUrls() {
+		return $this->cssUrls;
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getJsUrls() {
+		return $this->jsUrls;
 	}
 
 	/**
@@ -300,12 +378,39 @@ class App {
 	 *
 	 * @return bool true si le modèle a pu être enregistré, false sinon
 	 */
-	public static function registerModel($modelName, $modelFilename = null,
-	                                     $viewFilename = null) {
-		static::$models[] = new Model(
+	public function registerModel($modelName, $modelFilename = null,
+	                              $viewFilename = null) {
+		$this->models[$modelName] = new Model(
 			$modelName,
 			$modelFilename,
 			$viewFilename);
+
+		$model = Json::read($modelFilename);
+
+		$modelClass = new class($viewFilename) extends Model {
+			public function __construct($viewFilename) {
+				parent::__construct();
+
+				$this->setTitle('Test');
+				$this->setView($viewFilename);
+			}
+		};
+
+		$this->models[] = $modelClass;
+
+		return true;
+	}
+
+	/**
+	 * Enregistrer un nouveau modèle depuis une classe
+	 *
+	 * @param string $modelName Nom du modèle
+	 * @param string $modelClass Classe du modèle
+	 *
+	 * @return bool true si le modèle a pu être enregistré, false sinon
+	 */
+	public function registerModelFromClass($modelName, $modelClass) {
+		$this->models[$modelName] = $modelClass;
 
 		return true;
 	}
@@ -318,8 +423,8 @@ class App {
 	 *
 	 * @return bool true si le champ a pu être enregistré, false sinon
 	 */
-	public static function registerField($fieldName, $fieldClass) {
-		static::$fields[$fieldName] = $fieldClass;
+	public function registerField($fieldName, $fieldClass) {
+		$this->fields[$fieldName] = $fieldClass;
 
 		return true;
 	}
@@ -333,7 +438,7 @@ class App {
 	 *
 	 * @return bool true si le modèle a pu être surchargé, false sinon
 	 */
-	public static function overrideModel($modelName, $modelFilename,
+	public function overrideModel($modelName, $modelFilename,
 	                                     $viewFilename) {
 		return true;
 	}
@@ -346,7 +451,7 @@ class App {
 	 *
 	 * @return bool true si la vue a pu être surchargée, false sinon
 	 */
-	public static function overrideViewModel($modelName, $filename) {
+	public function overrideViewModel($modelName, $filename) {
 		return true;
 	}
 
@@ -358,7 +463,7 @@ class App {
 	 *
 	 * @return bool true si la vue a pu être surchargée, false sinon
 	 */
-	public static function overrideField($fieldName, $fieldClass) {
+	public function overrideField($fieldName, $fieldClass) {
 		return true;
 	}
 }

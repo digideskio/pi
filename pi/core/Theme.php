@@ -15,42 +15,39 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Pi.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 namespace Pi\Core;
 
-class Loader {
-	/** @var string[] */
-	protected static $cssUrls = [];
+abstract class Theme {
+	/** @var App */
+	protected $app;
 
-	/** @var string[] */
-	protected static $jsUrls = [];
+	/**
+	 * Constructeur
+	 *
+	 * @param App $app
+	 */
+	public final function __construct($app) {
+		$this->app = $app;
+	}
+
+	/**
+	 * Initialisation du thème
+	 */
+	abstract public function initialize();
 
 	/**
 	 * @param string $url
 	 */
-	public static function loadCss($url) {
-		static::$cssUrls[] = $url;
+	public function loadCss($url) {
+		$this->app->loadCss($url);
 	}
 
 	/**
 	 * @param string $url
 	 */
-	public static function loadJs($url) {
-		static::$jsUrls[] = $url;
-	}
-
-	/**
-	 * @return string[]
-	 */
-	public static function getCssUrls() {
-		return static::$cssUrls;
-	}
-
-	/**
-	 * @return string[]
-	 */
-	public static function getJsUrls() {
-		return static::$jsUrls;
+	public function loadJs($url) {
+		$this->app->loadJs($url);
 	}
 }

@@ -26,10 +26,8 @@ use Twig_Loader_Filesystem;
 use Twig_SimpleFilter;
 use Twig_SimpleFunction;
 
-use Pi\Core\Loader;
-use Pi\Core\Settings;
+use Pi\Core\App;
 use Pi\Lib\Markdown;
-use Pi\Page\PageCollection;
 
 class Renderer {
 	/** @var Twig_Loader_Filesystem */
@@ -38,9 +36,18 @@ class Renderer {
 	/** @var Twig_Environment */
 	protected $twig;
 
+	/** @var App */
+	protected $app;
+
 	/**
+	 * Constructeur
+	 *
+	 * @param App $app
 	 */
-	public function __construct() {
+	public function __construct($app) {
+		// Application
+		$this->app = $app;
+
 		// Définition du dossier des modèles de page
 		$this->loader = new Twig_Loader_Filesystem();
 		$this->twig = new Twig_Environment($this->loader);
@@ -98,7 +105,7 @@ class Renderer {
 	 */
 	public function getVariables() {
 		return [
-			'settings' => Settings::getSettings(),
+			'settings' => $this->app->getSettings(),
 
 			'url' => [
 				'site' => PI_URL_SITE,
@@ -117,11 +124,11 @@ class Renderer {
 				'theme' => PI_DIR_THEME
 			],
 
-			'jsUrls' => Loader::getJsUrls(),
-			'cssUrls' => Loader::getCssUrls(),
+			'jsUrls' => $this->app->getJsUrls(),
+			'cssUrls' => $this->app->getCssUrls(),
 
-			'pages' => PageCollection::getAllPages(),
-			'users' => Settings::getUsers()
+			'pages' => $this->app->getPages(),
+			'users' => $this->app->getUsers()
 		];
 	}
 }

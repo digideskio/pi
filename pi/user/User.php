@@ -19,8 +19,6 @@
 
 namespace Pi\User;
 
-use Pi\Core\Settings;
-
 class User {
 	/** @var string Pseudonyme */
 	protected $username;
@@ -40,13 +38,10 @@ class User {
 	 * @param array $data Données fournies pour contruire l'utilisateur
 	 */
 	public function __construct($data) {
-		$this->username = $data['username'] ?? 'anonymous';
+		$this->username = $data['username'] ?? '';
 		$this->password = $data['password'] ?? '';
-		$this->role = $data['role'] ?? 'editor';
-
-		// Récupération des permissions à partir du nom du role
-		$this->permissions = Settings::get(
-			'roles.' . $this->role . '.permissions', []);
+		$this->role = $data['role'] ?? '';
+		$this->permissions = $data['permissions'] ?? [];
 	}
 
 	/**
@@ -59,6 +54,71 @@ class User {
 	 */
 	public function hasPermission($permission) {
 		return in_array($permission, $this->permissions);
+	}
+
+	/**
+	 * Ajouter une permission
+	 *
+	 * @param string $permission Permission à ajouter
+	 *
+	 * @return $this
+	 */
+	public function addPermission($permission) {
+		$this->permissions[] = $permission;
+
+		return $this;
+	}
+
+	/**
+	 * Pseudonyme de l'utilisateur
+	 *
+	 * @param string $username
+	 *
+	 * @return $this
+	 */
+	public function setUsername($username) {
+		$this->username = $username;
+
+		return $this;
+	}
+
+	/**
+	 * Mot de passe de l'utilisateur
+	 *
+	 * @param string $password
+	 *
+	 * @return $this
+	 */
+	public function setPassword($password) {
+		$this->password = $password;
+
+		return $this;
+	}
+
+	/**
+	 * Role de l'utilisateur
+	 *
+	 * @param string $role
+	 *
+	 * @return $this
+	 */
+	public function setRole($role) {
+		$this->role = $role;
+
+		return $this;
+	}
+
+	/**
+	 * Permissions de l'utilisateur
+	 *
+	 * @param string[] $permissions
+	 *
+	 * @return $this
+	 */
+	public function setPermissions($permissions) {
+		$this->permissions = $permissions;
+
+		return $this;
 	}
 
 	/**
@@ -90,7 +150,7 @@ class User {
 
 	/**
 	 * Permissions de l'utilisateur
-	 * 
+	 *
 	 * @return string[]
 	 */
 	public function getPermissions() {

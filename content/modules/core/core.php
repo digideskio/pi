@@ -19,7 +19,6 @@
 
 namespace Module\Core;
 
-use Pi\Core\App;
 use Pi\Core\Module;
 
 class CoreModule extends Module {
@@ -45,19 +44,19 @@ class CoreModule extends Module {
 		$this->registerField('user', Field\UserField::class);
 		$this->registerField('version', Field\VersionField::class);
 
+		/*
 		$this->registerModel(
 			'all',
 			__DIR__ . DS . 'models' . DS . 'all' . DS . 'model.json',
 			__DIR__ . DS . 'models' . DS . 'all' . DS . 'view.html');
+		*/
 
-		$this->registerModel(
+		$this->registerModelFromClass(
 			'article',
-			__DIR__ . DS . 'models' . DS . 'article' . DS . 'model.json',
-			__DIR__ . DS . 'models' . DS . 'article' . DS . 'view.html');
+			Model\ArticleModel::class);
 
-		$this->registerModel(
+		$this->registerModelFromClass(
 			'page',
-			__DIR__ . DS . 'models' . DS . 'page' . DS . 'model.json',
-			__DIR__ . DS . 'models' . DS . 'page' . DS . 'view.html');
+			Model\PageModel::class);
 	}
 }

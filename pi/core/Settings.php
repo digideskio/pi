@@ -24,16 +24,18 @@ use Pi\User\User;
 
 class Settings {
 	/** @var string Chemin vers le fichier des paramètres */
-	protected static $filename = PI_DIR_CONTENT . 'settings.json';
+	protected $filename;
 
 	/** @var array Paramètres enregistrés */
-	protected static $settings = [];
+	protected $settings;
 
 	/**
 	 * Initilisation des paramètres
 	 */
-	public static function initializeSettings() {
-		static::$settings = Json::read(static::$filename);
+	public function __construct($filename) {
+		$this->filename = $filename;
+
+		$this->settings = Json::read($this->filename);
 	}
 
 	/**
@@ -41,8 +43,8 @@ class Settings {
 	 *
 	 * @return bool
 	 */
-	public static function save() {
-		return Json::write(static::$filename, static::$settings);
+	public function save() {
+		return Json::write($this->filename, $this->settings);
 	}
 
 	/**
@@ -54,8 +56,8 @@ class Settings {
 	 *
 	 * @return mixed
 	 */
-	public static function get($setting, $defaultValue = null) {
-		$value = static::getValue(static::$settings, $setting);
+	public function get($setting, $defaultValue = null) {
+		$value = $this->getValue($this->settings, $setting);
 
 		if (is_null($value))
 			return $defaultValue;
@@ -68,9 +70,9 @@ class Settings {
 	 *
 	 * @return User[]
 	 */
-	public static function getUsers() {
+	public function getUsers() {
 		$userList = [];
-		$users = static::getValue(static::$settings, 'users');
+		$users = $this->getValue($this->settings, 'users');
 
 		foreach ($users as $username => $data) {
 			$data['username'] = $username;
@@ -88,9 +90,9 @@ class Settings {
 	 *
 	 * @return User|null
 	 */
-	public static function getUser($username) {
+	public function getUser($username) {
 		$correctUser = null;
-		$users = static::getUsers();
+		$users = $this->getUsers();
 
 		foreach ($users as $user) {
 			if ($user->getUsername() == $username) {
@@ -107,8 +109,8 @@ class Settings {
 	 *
 	 * @return array
 	 */
-	public static function getSettings() {
-		return static::$settings;
+	public function getSettings() {
+		return $this->settings;
 	}
 
 	/**
@@ -120,7 +122,7 @@ class Settings {
 	 *
 	 * @return mixed
 	 */
-	protected static function getValue($array, $setting) {
+	protected function getValue($array, $setting) {
 		$value = null;
 		$parts = explode('.', $setting);
 

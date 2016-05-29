@@ -24,7 +24,7 @@ class Session {
 	 * @param string $key
 	 * @param mixed $value
 	 */
-	public static function set($key, $value) {
+	public function set($key, $value) {
 		$_SESSION[$key] = $value;
 	}
 
@@ -33,14 +33,14 @@ class Session {
 	 *
 	 * @return mixed
 	 */
-	public static function get($key) {
+	public function get($key) {
 		return $_SESSION[$key];
 	}
 
 	/**
 	 * @param string $key
 	 */
-	public static function remove($key) {
+	public function remove($key) {
 		unset($_SESSION[$key]);
 	}
 
@@ -49,29 +49,29 @@ class Session {
 	 *
 	 * @return bool
 	 */
-	public static function exists($key) {
+	public function exists($key) {
 		return isset($_SESSION[$key]);
 	}
 
 	/**
 	 * Ouvre la session
 	 */
-	public static function start() {
+	public function start() {
 		session_start();
 	}
 
 	/**
 	 * Ferme la session
 	 */
-	public static function stop() {
+	public function stop() {
 		session_destroy();
 	}
 
 	/**
 	 * Relance la session
 	 */
-	public static function restart() {
-		static::stop();
-		static::start();
+	public function restart() {
+		$this->stop();
+		$this->start();
 	}
 }

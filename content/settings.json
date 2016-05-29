@@ -1,7 +1,7 @@
 {
 	"site": {
 		"name": "Pi",
-		"theme": "default"
+		"theme": "classic"
 	},
 	"roles": {
 		"editor": {

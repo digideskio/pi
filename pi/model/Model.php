@@ -31,7 +31,7 @@ class Model {
 	/** @var string Slug du modèle */
 	protected $slug;
 
-	/** @var array Champs du modèle */
+	/** @var Field[] Champs du modèle */
 	protected $fields;
 
 	/** @var string Vue du modèle */
@@ -43,7 +43,6 @@ class Model {
 	 * @param array $array
 	 *
 	 * @return static
-	 */
 	public static function fromArray($array) {
 		$model = new Model($array['title']);
 
@@ -57,6 +56,7 @@ class Model {
 
 		return $model;
 	}
+	*/
 
 	/**
 	 * Constructeur
@@ -167,7 +167,7 @@ class Model {
 	/**
 	 * Récupérer les champs
 	 *
-	 * @return array
+	 * @return Field[]
 	 */
 	public function getFields() {
 		return $this->fields;
