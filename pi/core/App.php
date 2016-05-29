@@ -21,6 +21,7 @@ namespace Pi\Core;
 
 use Exception;
 
+use Pi\Lib\Flash;
 use Pi\Lib\Json;
 use Pi\Lib\Session;
 use Pi\Model\Field;
@@ -66,6 +67,9 @@ class App {
 
 	/** @var Session */
 	protected $session;
+
+	/** @var Flash */
+	protected $flash;
 
 	/**
 	 * Enregistre l'« autoloader »
@@ -217,6 +221,7 @@ class App {
 		$this->settings = new Settings(PI_DIR_CONTENT . 'settings.json');
 		$this->router = new Router();
 		$this->session = new Session();
+		$this->flash = new Flash();
 	}
 
 	/**

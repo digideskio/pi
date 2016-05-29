@@ -23,7 +23,7 @@ class Flash {
 	/**
 	 * Initilisation du flash
 	 */
-	public static function init() {
+	public function __construct() {
 		if (!isset($_SESSION['errors']))
 			$_SESSION['errors'] = [];
 
@@ -34,7 +34,7 @@ class Flash {
 	/**
 	 * Nettoyage du flash
 	 */
-	public static function clean() {
+	public function clean() {
 		$_SESSION['errors'] = [];
 		$_SESSION['success'] = [];
 	}
@@ -42,49 +42,49 @@ class Flash {
 	/**
 	 * @param string $error
 	 */
-	public static function pushError($error) {
+	public function pushError($error) {
 		array_push($_SESSION['errors'], $error);
 	}
 
 	/**
 	 * @param string $success
 	 */
-	public static function pushSuccess($success) {
+	public function pushSuccess($success) {
 		array_push($_SESSION['success'], $success);
 	}
 
 	/**
 	 * @return bool
 	 */
-	public static function hasErrors() {
+	public function hasErrors() {
 		return count($_SESSION['errors']) > 0;
 	}
 
 	/**
 	 * @return bool
 	 */
-	public static function hasNoErrors() {
-		return !self::hasErrors();
+	public function hasNoErrors() {
+		return !$this->hasErrors();
 	}
 
 	/**
 	 * @return bool
 	 */
-	public static function hasSuccess() {
+	public function hasSuccess() {
 		return count($_SESSION['success']) > 0;
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public static function getErrors() {
+	public function getErrors() {
 		return $_SESSION['errors'];
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public static function getSuccess() {
+	public function getSuccess() {
 		return $_SESSION['success'];
 	}
 }
