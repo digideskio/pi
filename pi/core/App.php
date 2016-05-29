@@ -97,50 +97,24 @@ class App extends Pi {
 	 * Lance la recherche de la page et la retourne
 	 */
 	public function run() {
-		if ($this->query == 'edit') {
-			$content = Page::getLastVersion($this->router->getPath());
+		$content = Page::getLastVersion($this->router->getPath());
 
-			if (!$content) {
-				echo $this->render('admin/create-page.html', [
-					'models' => [
-						'page' => 'page',
-						'article' => 'article',
-						'all' => 'all'
-					]
-				]);
+		if (!$content)
+			$content = Page::getLastVersion('error');
 
-				return;
-			}
+		$model = $content->getModel();
+		$fields = $content->getFields();
 
-			$model = new Model($content['model']);
-			$form = new Form($model);
+		$meta = [
+			'title' => $content->getTitle(),
+			'model' => $model,
+			'created_at' => $content->getCreatedAt(),
+			'updated_at' => $content->getUpdatedAt()
+		];
 
-			if (empty($_POST))
-				$_POST = $content['fields'];
-
-			echo $this->render('admin/edit-page.html', [
-				'form' => $form
-			]);
-		} else {
-			$content = Page::getLastVersion($this->router->getPath());
-
-			if (!$content)
-				$content = Page::getLastVersion('error');
-
-			$model = $content['model'];
-			$fields = $content['fields'];
-
-			$meta = [
-				'title' => $content['title'],
-				'model' => $model,
-				'created_at' => $content['created_at'],
-				'updated_at' => $content['updated_at']
-			];
-
-			echo $this->render($model . '/view.html', [
-				'page' => $fields,
-				'meta' => $meta
-			]);
-		}
+		echo $this->render($model . '/view.html', [
+			'page' => $fields,
+			'meta' => $meta
+		]);
 	}
 }
