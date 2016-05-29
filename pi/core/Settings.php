@@ -31,8 +31,20 @@ class Settings {
 
 	/**
 	 * Initilisation des paramètres
+	 *
+	 * @param string $filename
 	 */
-	public function __construct($filename) {
+	public function __construct($filename = null) {
+		if ($filename)
+			$this->load($filename);
+	}
+
+	/**
+	 * Initilisation des paramètres
+	 *
+	 * @param string $filename
+	 */
+	public function load($filename) {
 		$this->filename = $filename;
 
 		$this->settings = Json::read($this->filename);
