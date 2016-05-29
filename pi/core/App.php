@@ -83,9 +83,12 @@ class App {
 	 * @throws Exception
 	 */
 	public static function autoload($class) {
-		if (strpos($class, 'Pi') !== 0 && strpos($class, 'Module') !== 0)
-			throw new Exception('Namespace should starts with "Pi" or
-				"Module"');
+		if (strpos($class, 'Pi') !== 0
+			&& strpos($class, 'Module') !== 0
+			&& strpos($class, 'Theme') !== 0
+		)
+			throw new Exception('Namespace should starts with "Pi", "Module"
+				or "Theme"');
 
 		$parts = explode('\\', $class);
 
@@ -112,6 +115,18 @@ class App {
 			if ($pos !== false) {
 				$fileName = substr_replace($fileName, 'content/modules', $pos,
 					strlen('module'));
+			}
+
+			$file = realpath(__DIR__ . '/../../') . DS
+				. $fileName . '.php';
+		} else if ($firstPart == 'Theme') {
+			// remplace « theme » par « content/theme » (seulement la
+			// première occurence)
+			$pos = strpos($fileName, 'theme');
+
+			if ($pos !== false) {
+				$fileName = substr_replace($fileName, 'content/themes', $pos,
+					strlen('theme'));
 			}
 
 			$file = realpath(__DIR__ . '/../../') . DS
@@ -154,11 +169,11 @@ class App {
 		define('PI_DIR_THEME', PI_DIR_THEMES . $this->theme . DS);
 		define('PI_URL_THEME', PI_URL_THEMES . $this->theme . '/');
 
-		if (file_exists(PI_DIR_THEME . 'init.php'))
-			require PI_DIR_THEME . 'init.php';
+		if (file_exists(PI_DIR_THEME . $this->theme . '.php'))
+			require PI_DIR_THEME . $this->theme . '.php';
 		else
-			throw new Exception('Unable to load "init.php" for theme "'
-				. $this->theme . '"');
+			throw new Exception('Unable to load "' . $this->theme . '.php" for
+				theme "' . $this->theme . '"');
 	}
 
 	/**
