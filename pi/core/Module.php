@@ -21,14 +21,14 @@ namespace Pi\Core;
 
 abstract class Module {
 	/** @var App */
-	protected $app;
+	private $app;
 
 	/**
 	 * Constructeur
 	 *
 	 * @param App $app
 	 */
-	public final function __construct($app) {
+	final public function __construct($app) {
 		$this->app = $app;
 	}
 
@@ -125,5 +125,19 @@ abstract class Module {
 		return $this->app->overrideField(
 			$fieldName,
 			$fieldClass);
+	}
+
+	/**
+	 * @param string $url
+	 */
+	public function loadCss($url) {
+		$this->app->loadCss($url);
+	}
+
+	/**
+	 * @param string $url
+	 */
+	public function loadJs($url) {
+		$this->app->loadJs($url);
 	}
 }

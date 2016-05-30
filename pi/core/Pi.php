@@ -55,7 +55,7 @@ class Pi {
 	/** @var string[] */
 	protected $jsUrls;
 
-	/** @var Settings */
+	/** @var array */
 	protected $settings;
 
 	/** @var Router */
@@ -151,7 +151,7 @@ class Pi {
 		$this->users = [];
 		$this->cssUrls = [];
 		$this->jsUrls = [];
-		$this->settings = new Settings();
+		$this->settings = [];
 		$this->router = new Router();
 		$this->session = new Session();
 		$this->flash = new Flash();
@@ -208,10 +208,10 @@ class Pi {
 	/**
 	 * Récupérer les paramètres du site
 	 *
-	 * @return Settings
+	 * @return array
 	 */
 	public function getSettings() {
-		return $this->settings->getSettings();
+		return $this->settings;
 	}
 
 	/**

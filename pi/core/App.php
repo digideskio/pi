@@ -21,6 +21,7 @@ namespace Pi\Core;
 
 use Exception;
 
+use Pi\Lib\Json;
 use Pi\Model\Model;
 use Pi\Page\Page;
 use Pi\Render\Renderer;
@@ -42,14 +43,14 @@ class App extends Pi {
 	 * Initialise les paramètres
 	 */
 	protected function initializeSettings() {
-		$this->settings->load(PI_DIR_CONTENT . 'settings.json');
+		$this->settings = Json::read(PI_DIR_CONTENT . 'settings.json');
 	}
 
 	/**
 	 * Initialise le thème courant
 	 */
 	protected function initializeTheme() {
-		$this->theme = $this->settings->get('site.theme');
+		$this->theme = $this->settings['site']['theme'];
 
 		if (!$this->theme)
 			$this->theme = 'classic';
@@ -66,15 +67,14 @@ class App extends Pi {
 			/** @var Theme $theme */
 			$theme = new $classname($this);
 			$theme->initialize();
-		}
-		else {
+		} else {
 			throw new Exception('Unable to load "' . $this->theme . '.php" for
 				theme "' . $this->theme . '"');
 		}
 	}
 
 	/**
-	 * Initilise le moteur de rendu
+	 * Initialise le moteur de rendu
 	 */
 	protected function initializeRenderer() {
 		$this->renderer = new Renderer($this);

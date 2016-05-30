@@ -38,6 +38,15 @@ class Page {
 	/** @var array Liste des champs de la page */
 	protected $fields;
 
+	public static function getLastVersion() {
+		$page = new static();
+
+		$page->setTitle('ok');
+		$page->setModel('page');
+
+		return $page;
+	}
+
 	/**
 	 * Constructeur
 	 */
