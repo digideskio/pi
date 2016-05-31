@@ -30,7 +30,7 @@ class CheckboxesField extends Field {
 	public function __construct($data = []) {
 		parent::__construct($data);
 
-		$this->default = isset($data['default']) ? $data['default'] : [];
+		$this->default = $data['default'] ?? [];
 	}
 
 	/**
@@ -49,14 +49,10 @@ class CheckboxesField extends Field {
 	 * @inheritdoc
 	 */
 	public function value() {
-		if (!empty($_POST)) {
-			if (isset($_POST[$this->name]))
-				return $_POST[$this->name];
-			else
-				return [];
-		} else {
+		if (!empty($_POST))
+			return $_POST[$this->name] ?? [];
+		else
 			return $this->default;
-		}
 	}
 
 	/**

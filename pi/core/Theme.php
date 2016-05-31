@@ -38,6 +38,8 @@ abstract class Theme {
 	abstract public function initialize();
 
 	/**
+	 * Charger un fichier CSS dans le thème
+	 *
 	 * @param string $url
 	 */
 	public function loadCss($url) {
@@ -45,9 +47,25 @@ abstract class Theme {
 	}
 
 	/**
+	 * Charger un fichier JavaScript dans le thème
+	 *
 	 * @param string $url
 	 */
 	public function loadJs($url) {
 		$this->app->loadJs($url);
+	}
+
+	/**
+	 * Surcharger la vue d'un modèle
+	 *
+	 * @param string $modelName Nom du modèle à surcharger
+	 * @param string $filename Chemin vers la vue surchargée
+	 *
+	 * @return bool true si la vue a pu être surchargée, false sinon
+	 */
+	public function overrideViewModel($modelName, $filename) {
+		return $this->app->overrideViewModel(
+			$modelName,
+			$filename);
 	}
 }

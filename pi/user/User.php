@@ -21,16 +21,16 @@ namespace Pi\User;
 
 class User {
 	/** @var string Pseudonyme */
-	protected $username;
+	private $username;
 
 	/** @var string Mot de passe */
-	protected $password;
+	private $password;
 
 	/** @var string Nom du rôle */
-	protected $role;
+	private $role;
 
 	/** @var string[] Permissions accordées à l'utilisateur */
-	protected $permissions;
+	private $permissions;
 
 	/**
 	 * Constructeur de la classe

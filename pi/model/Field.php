@@ -110,9 +110,7 @@ abstract class Field {
 	/**
 	 * @return string
 	 */
-	public function html() {
-		return '';
-	}
+	abstract public function html();
 
 	/**
 	 * @return string

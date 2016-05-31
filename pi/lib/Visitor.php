@@ -21,20 +21,20 @@ namespace Pi\Lib;
 
 class Visitor {
 	/**
+	 * IP du client
+	 *
 	 * @return string
 	 */
 	public static function ip() {
-		return $_SERVER['REMOTE_ADDR']
-			? $_SERVER['REMOTE_ADDR']
-			: '';
+		return $_SERVER['REMOTE_ADDR'] ?? '';
 	}
 
 	/**
+	 * User-agent du client
+	 *
 	 * @return string
 	 */
 	public static function ua() {
-		return isset($_SERVER['HTTP_USER_AGENT'])
-			? $_SERVER['HTTP_USER_AGENT']
-			: '';
+		return $_SERVER['HTTP_USER_AGENT'] ?? '';
 	}
 }

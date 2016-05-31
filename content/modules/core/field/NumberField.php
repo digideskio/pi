@@ -29,9 +29,9 @@ class NumberField extends Field {
 	public function __construct($data = []) {
 		parent::__construct($data);
 
-		$this->min  = isset($data['min'])  ? $data['min']  : 0;
-		$this->max  = isset($data['max'])  ? $data['max']  : 100;
-		$this->step = isset($data['step']) ? $data['step'] : 1;
+		$this->min  = $data['min']) ?? 0;
+		$this->max  = $data['max']) ?? 100;
+		$this->step = $data['step']) ?? 1;
 	}
 
 	/**

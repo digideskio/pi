@@ -28,43 +28,43 @@ use Pi\Model\Model;
 use Pi\Render\Renderer;
 
 class Pi {
-	/** @var Renderer */
+	/** @var Renderer Moteur de rendu */
 	protected $renderer;
 
 	/** @var string */
 	protected $query;
 
-	/** @var string */
+	/** @var string Nom du thème */
 	protected $theme;
 
-	/** @var array */
+	/** @var array Modèles enregistrés */
 	protected $models;
 
-	/** @var array */
+	/** @var array Champs enregistrés */
 	protected $fields;
 
-	/** @var array */
+	/** @var array Pages enregistrées */
 	protected $pages;
 
-	/** @var array */
+	/** @var array Utilisateurs enregistrés */
 	protected $users;
 
-	/** @var string[] */
+	/** @var string[] Fichiers CSS enregistrés */
 	protected $cssUrls;
 
-	/** @var string[] */
+	/** @var string[] Fichiers JavaScript enregistrés */
 	protected $jsUrls;
 
-	/** @var array */
+	/** @var array Paramètres du site */
 	protected $settings;
 
-	/** @var Router */
+	/** @var Router Routeur */
 	protected $router;
 
-	/** @var Session */
+	/** @var Session Gestionnaire de session */
 	protected $session;
 
-	/** @var Flash */
+	/** @var Flash Gestionnaire des messages flash */
 	protected $flash;
 
 	/**

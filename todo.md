@@ -32,4 +32,6 @@ projet utilisable en production.
 - Quand un template de thème est demandé, le rechercher d'abord dans le thème
   utilisateur puis, s'il n'existe pas dans le thème classic ;
 
+- Ajouter la possibilité de désenregistrer un CSS ou JS ;
+
 - ...
