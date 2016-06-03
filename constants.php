@@ -20,11 +20,11 @@
 const DS = DIRECTORY_SEPARATOR;
 const EOL = PHP_EOL;
 
-const PI_DIR_SITE = __DIR__ . DS;
-const PI_DIR_CONTENT = PI_DIR_SITE . 'content' . DS;
-const PI_DIR_MODULES = PI_DIR_CONTENT . 'modules' . DS;
-const PI_DIR_PAGES = PI_DIR_CONTENT . 'pages' . DS;
-const PI_DIR_THEMES = PI_DIR_CONTENT . 'themes' . DS;
+const PI_DIR_SITE = __DIR__ . '/';
+const PI_DIR_CONTENT = PI_DIR_SITE . 'content/';
+const PI_DIR_MODULES = PI_DIR_CONTENT . 'modules/';
+const PI_DIR_PAGES = PI_DIR_CONTENT . 'pages/';
+const PI_DIR_THEMES = PI_DIR_CONTENT . 'themes/';
 
 define('PI_URL_SITE', $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['SERVER_NAME'] . '/');
 define('PI_URL_CONTENT', PI_URL_SITE . 'content/');

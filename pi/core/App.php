@@ -55,7 +55,7 @@ class App extends Pi {
 		if (!$this->theme)
 			$this->theme = 'classic';
 
-		define('PI_DIR_THEME', PI_DIR_THEMES . $this->theme . DS);
+		define('PI_DIR_THEME', PI_DIR_THEMES . $this->theme . '/');
 		define('PI_URL_THEME', PI_URL_THEMES . $this->theme . '/');
 
 		$filename = PI_DIR_THEME . ucfirst($this->theme) . 'Theme.php';
@@ -92,7 +92,7 @@ class App extends Pi {
 			if ($dir == '.' || $dir == '..')
 				continue;
 
-			$filename = PI_DIR_MODULES . $dir . DS
+			$filename = PI_DIR_MODULES . $dir . '/'
 				. ucfirst($dir) . 'Module.php';
 
 			if (file_exists($filename)) {

@@ -101,12 +101,12 @@ class Pi {
 				$newParts[] = strtolower($parts[$i]);
 		}
 
-		$fileName = implode(DS, $newParts);
+		$fileName = implode('/', $newParts);
 
 		$firstPart = $parts[0];
 
 		if ($firstPart == 'Pi') {
-			$file = realpath(__DIR__ . '/../../') . DS . $fileName . '.php';
+			$file = realpath(__DIR__ . '/../../') . '/' . $fileName . '.php';
 		} else if ($firstPart == 'Module') {
 			// remplace « module » par « content/modules » (seulement la
 			// première occurence)
@@ -117,7 +117,7 @@ class Pi {
 					strlen('module'));
 			}
 
-			$file = realpath(__DIR__ . '/../../') . DS
+			$file = realpath(__DIR__ . '/../../') . '/'
 				. $fileName . '.php';
 		} else if ($firstPart == 'Theme') {
 			// remplace « theme » par « content/theme » (seulement la
@@ -129,7 +129,7 @@ class Pi {
 					strlen('theme'));
 			}
 
-			$file = realpath(__DIR__ . '/../../') . DS
+			$file = realpath(__DIR__ . '/../../') . '/'
 				. $fileName . '.php';
 		} else {
 			throw new Exception('Unable to load class "' . $class . '"');

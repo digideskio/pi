@@ -27,8 +27,8 @@ class SampleModule extends Module {
 		// Créer un nouveau modèle
 		$this->registerModel(
 			'test',
-			__DIR__ . DS . 'add-model' . DS . 'model.json',
-			__DIR__ . DS . 'add-model' . DS . 'view.html');
+			__DIR__ . '/add-model/model.json',
+			__DIR__ . '/add-model/view.html');
 
 		// Créer un nouveau champ
 		$this->registerField(
@@ -38,13 +38,13 @@ class SampleModule extends Module {
 		// Surcharger un modèle
 		$this->overrideModel(
 			'all',
-			__DIR__ . DS . 'override-model' . DS . 'all.json',
-			__DIR__ . DS . 'override-model' . DS . 'all.html');
+			__DIR__ . '/override-model/all.json',
+			__DIR__ . '/override-model/all.html');
 
 		// Surcharger la vue d'un modèle
 		$this->overrideViewModel(
 			'all',
-			__DIR__ . DS . 'override-view-model' . DS . 'all.html');
+			__DIR__ . '/override-view-model/all.html');
 
 		// Surcharger un champ
 		$this->overrideField(
