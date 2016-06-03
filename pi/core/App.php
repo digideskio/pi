@@ -58,8 +58,11 @@ class App extends Pi {
 		define('PI_DIR_THEME', PI_DIR_THEMES . $this->theme . DS);
 		define('PI_URL_THEME', PI_URL_THEMES . $this->theme . '/');
 
-		if (file_exists(PI_DIR_THEME . $this->theme . '.php')) {
-			require PI_DIR_THEME . $this->theme . '.php';
+		$filename = PI_DIR_THEME . ucfirst($this->theme) . 'Theme.php';
+
+		if (file_exists($filename)) {
+
+			require $filename;
 
 			$classname = 'Theme\\' . $this->theme . '\\'
 				. $this->theme . 'Theme';
@@ -68,8 +71,8 @@ class App extends Pi {
 			$theme = new $classname($this);
 			$theme->initialize();
 		} else {
-			throw new Exception('Unable to load "' . $this->theme . '.php" for
-				theme "' . $this->theme . '"');
+			throw new Exception('Unable to load "' . $this->theme . 'Theme.php"
+				for theme "' . $this->theme . '"');
 		}
 	}
 
@@ -89,7 +92,8 @@ class App extends Pi {
 			if ($dir == '.' || $dir == '..')
 				continue;
 
-			$filename = PI_DIR_MODULES . $dir . DS . $dir . '.php';
+			$filename = PI_DIR_MODULES . $dir . DS
+				. ucfirst($dir) . 'Module.php';
 
 			if (file_exists($filename)) {
 				require $filename;
@@ -100,8 +104,8 @@ class App extends Pi {
 				$module = new $classname($this);
 				$module->initialize();
 			} else {
-				throw new Exception('Missing "' . $dir . '.php" in module "'
-					. $dir . '"');
+				throw new Exception('Missing "' . $dir . 'Module.php" in module
+					"' . $dir . '"');
 			}
 		}
 	}
