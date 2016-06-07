@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Pi.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 namespace Pi\Page;
 
@@ -24,25 +24,37 @@ use Pi\Lib\Json;
 
 class Page {
 	/** @var string Titre de la page */
-	protected $title;
+	private $title;
 
 	/** @var string Modèle utilisé par la page */
-	protected $model;
+	private $model;
 
 	/** @var DateTime Date de création de la page */
-	protected $createdAt;
+	private $createdAt;
 
 	/** @var DateTime Date de dernière mise à jour de la page */
-	protected $updatedAt;
+	private $updatedAt;
 
 	/** @var array Liste des champs de la page */
-	protected $fields;
+	private $fields;
 
-	public static function getLastVersion() {
+	/**
+	 * Créer une instance de Page à partir d'un fichier JSON
+	 *
+	 * @param string $filename Fichier JSON
+	 *
+	 * @return static
+	 */
+	public static function fromFile($filename) {
+		$json = Json::read($filename);
+
 		$page = new static();
 
-		$page->setTitle('ok');
-		$page->setModel('page');
+		$page->setTitle($json->title);
+		$page->setModel($json->model);
+		$page->setCreatedAt($json->created_at);
+		$page->setUpdatedAt($json->updated_at);
+		$page->setFields($json->fields);
 
 		return $page;
 	}

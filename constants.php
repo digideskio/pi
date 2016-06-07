@@ -15,18 +15,20 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Pi.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 const DS = DIRECTORY_SEPARATOR;
 const EOL = PHP_EOL;
 
 const PI_DIR_SITE = __DIR__ . '/';
+const PI_DIR_ADMIN = PI_DIR_SITE . 'admin/';
 const PI_DIR_CONTENT = PI_DIR_SITE . 'content/';
 const PI_DIR_MODULES = PI_DIR_CONTENT . 'modules/';
 const PI_DIR_PAGES = PI_DIR_CONTENT . 'pages/';
 const PI_DIR_THEMES = PI_DIR_CONTENT . 'themes/';
 
 define('PI_URL_SITE', $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['SERVER_NAME'] . '/');
+define('PI_URL_ADMIN', PI_URL_SITE . 'admin/');
 define('PI_URL_CONTENT', PI_URL_SITE . 'content/');
 define('PI_URL_MODULES', PI_URL_CONTENT . 'modules/');
 define('PI_URL_PAGES', PI_URL_CONTENT . 'pages/');

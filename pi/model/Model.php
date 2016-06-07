@@ -25,16 +25,16 @@ use Pi\Lib\Str;
 
 class Model {
 	/** @var string Nom du modèle */
-	protected $title;
+	private $title;
 
 	/** @var string Slug du modèle */
-	protected $slug;
+	private $slug;
 
 	/** @var Field[] Champs du modèle */
-	protected $fields;
+	private $fields;
 
 	/** @var string Vue du modèle */
-	protected $viewFilename;
+	private $viewFilename;
 
 	/**
 	 * Construit un modèle

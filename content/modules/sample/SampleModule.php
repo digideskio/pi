@@ -25,31 +25,41 @@ use Pi\Core\Module;
 class SampleModule extends Module {
 	public function initialize() {
 		// Créer un nouveau modèle
+		/*
 		$this->registerModel(
 			'test',
 			__DIR__ . '/add-model/model.json',
 			__DIR__ . '/add-model/view.html');
+		*/
 
 		// Créer un nouveau champ
+		/*
 		$this->registerField(
 			'test',
 			MyTestField::class);
+		*/
 
 		// Surcharger un modèle
+		/*
 		$this->overrideModel(
 			'all',
 			__DIR__ . '/override-model/all.json',
 			__DIR__ . '/override-model/all.html');
+		*/
 
 		// Surcharger la vue d'un modèle
+		/*
 		$this->overrideViewModel(
 			'all',
 			__DIR__ . '/override-view-model/all.html');
+		*/
 
 		// Surcharger un champ
+		/*
 		$this->overrideField(
 			'text',
 			MyTextField::class);
+		*/
 	}
 }
 

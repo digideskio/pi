@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Pi.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 namespace Pi\Lib;
 
@@ -54,11 +54,11 @@ class Json {
 	}
 
 	/**
-	 * @param string $string Chaine à décoder : chaine JSON => tableau PHP
+	 * @param string $string Chaine à décoder : chaine JSON => objet PHP
 	 *
 	 * @return mixed
 	 */
 	public static function decode($string) {
-		return json_decode($string, true);
+		return json_decode($string, false);
 	}
 }

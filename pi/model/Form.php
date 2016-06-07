@@ -15,13 +15,13 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Pi.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 namespace Pi\Model;
 
 class Form {
 	/** @var Model */
-	protected $model;
+	private $model;
 
 	/**
 	 * @param Model $model

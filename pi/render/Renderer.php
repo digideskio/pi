@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Pi.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 namespace Pi\Render;
 
@@ -30,13 +30,13 @@ use Pi\Lib\Markdown;
 
 class Renderer {
 	/** @var Twig_Loader_Filesystem */
-	protected $loader;
+	private $loader;
 
 	/** @var Twig_Environment */
-	protected $twig;
+	private $twig;
 
 	/** @var App */
-	protected $app;
+	private $app;
 
 	/**
 	 * Constructeur

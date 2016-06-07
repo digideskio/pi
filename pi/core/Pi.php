@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Pi.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 namespace Pi\Core;
 
@@ -42,6 +42,12 @@ class Pi {
 
 	/** @var array Champs enregistrés */
 	protected $fields;
+
+	/** @var array Modèles enregistrés */
+	protected $overridedModels;
+
+	/** @var array Champs enregistrés */
+	protected $overridedFields;
 
 	/** @var array Pages enregistrées */
 	protected $pages;
@@ -146,7 +152,9 @@ class Pi {
 	 */
 	public function __construct() {
 		$this->fields = [];
+		$this->overridedFields = [];
 		$this->models = [];
+		$this->overridedModels = [];
 		$this->pages = [];
 		$this->users = [];
 		$this->cssUrls = [];
@@ -259,79 +267,37 @@ class Pi {
 	}
 
 	/**
-	 * Enregistrer un nouveau modèle
-	 *
-	 * @param string $modelName Nom du modèle
-	 * @param string $modelFilename Chemin vers le fichier modèle (JSON)
-	 * @param string $viewFilename Chemin vers le fichier vue (Twig)
-	 *
-	 * @return bool true si le modèle a pu être enregistré, false sinon
-	 */
-	public function registerModel($modelName, $modelFilename = null,
-	                              $viewFilename = null) {
-		$this->models[$modelName] = new Model(
-			$modelName,
-			$modelFilename,
-			$viewFilename);
-
-		$model = Json::read($modelFilename);
-
-		$modelClass = new class($viewFilename) extends Model {
-			public function __construct($viewFilename) {
-				parent::__construct();
-
-				$this->setTitle('Test');
-				$this->setViewFilename($viewFilename);
-			}
-		};
-
-		$this->models[] = $modelClass;
-
-		return true;
-	}
-
-	/**
 	 * Enregistrer un nouveau modèle depuis une classe
 	 *
 	 * @param string $modelName Nom du modèle
 	 * @param string $modelClass Classe du modèle
 	 *
-	 * @return bool true si le modèle a pu être enregistré, false sinon
+	 * @throws Exception
 	 */
-	public function registerModelFromClass($modelName, $modelClass) {
+	public function registerModel($modelName, $modelClass) {
+		if (array_key_exists($modelName, $this->models))
+			throw new Exception('Model "' . $modelName . '" already registered');
+
 		$this->models[$modelName] = $modelClass;
-
-		return true;
 	}
 
 	/**
-	 * Enregistrer un nouveau champ
-	 *
-	 * @param string $fieldName Nom du champ
-	 * @param string $fieldClass Classe du champ
-	 *
-	 * @return bool true si le champ a pu être enregistré, false sinon
-	 */
-	public function registerField($fieldName, $fieldClass) {
-		$this->fields[$fieldName] = $fieldClass;
-
-		return true;
-	}
-
-	/**
-	 * @todo
-	 *
 	 * Surcharger un modèle
 	 *
-	 * @param string $modelName Nom du modèle
-	 * @param string $modelFilename Chemin vers le fichier modèle (JSON)
-	 * @param string $viewFilename Chemin vers le fichier vue (Twig)
+	 * @param string $modelName Nom du modèle à surcharger
+	 * @param string $modelClass Classe du modèle
 	 *
-	 * @return bool true si le modèle a pu être surchargé, false sinon
+	 * @throws Exception
 	 */
-	public function overrideModel($modelName, $modelFilename,
-	                              $viewFilename) {
-		return true;
+	public function overrideModel($modelName, $modelClass) {
+		if (!array_key_exists($modelName, $this->models))
+			throw new Exception('Model "' . $modelName . '" does not exists and
+				cannot be overrided');
+
+		if (array_key_exists($modelName, $this->overridedModels))
+			throw new Exception('Model "' . $modelName . '" already overrided');
+
+		$this->overridedModels[$modelName] = $modelClass;
 	}
 
 	/**
@@ -342,23 +308,43 @@ class Pi {
 	 * @param string $modelName Nom du modèle à surcharger
 	 * @param string $filename Chemin vers la vue surchargée
 	 *
-	 * @return bool true si la vue a pu être surchargée, false sinon
+	 * @throws Exception
 	 */
 	public function overrideViewModel($modelName, $filename) {
-		return true;
+		throw new Exception('Non-implemented');
 	}
 
 	/**
-	 * @todo
-	 *
-	 * Surcharger un champ
+	 * Enregistrer un nouveau champ
 	 *
 	 * @param string $fieldName Nom du champ
 	 * @param string $fieldClass Classe du champ
 	 *
-	 * @return bool true si la vue a pu être surchargée, false sinon
+	 * @throws Exception
+	 */
+	public function registerField($fieldName, $fieldClass) {
+		if (array_key_exists($fieldName, $this->fields))
+			throw new Exception('Field "' . $fieldName . '" already registered');
+
+		$this->fields[$fieldName] = $fieldClass;
+	}
+
+	/**
+	 * Surcharger un champ
+	 *
+	 * @param string $fieldName Nom du champ à surcharger
+	 * @param string $fieldClass Classe du champ
+	 *
+	 * @throws Exception
 	 */
 	public function overrideField($fieldName, $fieldClass) {
-		return true;
+		if (!array_key_exists($fieldName, $this->fields))
+			throw new Exception('Field "' . $fieldName . '" does not exists and
+				cannot be overrided');
+
+		if (array_key_exists($fieldName, $this->overridedFields))
+			throw new Exception('Field "' . $fieldName . '" already overrided');
+
+		$this->overridedFields[$fieldName] = $fieldClass;
 	}
 }

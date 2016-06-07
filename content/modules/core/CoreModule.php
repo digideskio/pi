@@ -44,18 +44,11 @@ class CoreModule extends Module {
 		$this->registerField('user', Field\UserField::class);
 		$this->registerField('version', Field\VersionField::class);
 
-		/*
 		$this->registerModel(
-			'all',
-			__DIR__ . DS . 'models' . DS . 'all' . DS . 'model.json',
-			__DIR__ . DS . 'models' . DS . 'all' . DS . 'view.html');
-		*/
-
-		$this->registerModelFromClass(
 			'article',
 			Model\ArticleModel::class);
 
-		$this->registerModelFromClass(
+		$this->registerModel(
 			'page',
 			Model\PageModel::class);
 	}

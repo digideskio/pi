@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Pi.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 namespace Pi\Core;
 
@@ -42,15 +42,15 @@ class App extends Pi {
 	/**
 	 * Initialise les paramètres
 	 */
-	protected function initializeSettings() {
+	private function initializeSettings() {
 		$this->settings = Json::read(PI_DIR_CONTENT . 'settings.json');
 	}
 
 	/**
 	 * Initialise le thème courant
 	 */
-	protected function initializeTheme() {
-		$this->theme = $this->settings['site']['theme'];
+	private function initializeTheme() {
+		$this->theme = $this->settings->site->theme;
 
 		if (!$this->theme)
 			$this->theme = 'classic';
@@ -61,7 +61,6 @@ class App extends Pi {
 		$filename = PI_DIR_THEME . ucfirst($this->theme) . 'Theme.php';
 
 		if (file_exists($filename)) {
-
 			require $filename;
 
 			$classname = 'Theme\\' . $this->theme . '\\'
@@ -79,7 +78,7 @@ class App extends Pi {
 	/**
 	 * Initialise le moteur de rendu
 	 */
-	protected function initializeRenderer() {
+	private function initializeRenderer() {
 		$this->renderer = new Renderer($this);
 		$this->renderer->addPath(PI_DIR_THEME . '/tpl', 'theme');
 	}
@@ -87,7 +86,7 @@ class App extends Pi {
 	/**
 	 * Initialisation des modules
 	 */
-	protected function initializeModules() {
+	private function initializeModules() {
 		foreach (scandir(PI_DIR_MODULES) as $dir) {
 			if ($dir == '.' || $dir == '..')
 				continue;
@@ -114,7 +113,8 @@ class App extends Pi {
 	 * Lance la recherche de la page et la retourne
 	 */
 	public function run() {
-		$content = Page::getLastVersion($this->router->getPath());
+		$filename = PI_DIR_PAGES . $this->router->getPath() . '/1.json';
+		$content = Page::fromFile($filename);
 
 		if (!$content)
 			$content = Page::getLastVersion('error');

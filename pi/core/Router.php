@@ -20,13 +20,17 @@
 namespace Pi\Core;
 
 class Router {
-	protected $path;
-	protected $query;
+	/** @var string Chemin */
+	private $path;
+
+	/** @var string[] Requête complémentaire */
+	private $query;
 
 	/**
 	 * Initialise le chemin courant
 	 */
 	public function __construct() {
+		// Chemin par défaut
 		$this->path = 'home';
 		$this->query = '';
 
@@ -43,14 +47,25 @@ class Router {
 			$this->query = $query;
 		}
 
+		// Si le chemin est vide, le chemin par défaut est préféré
 		if (empty($this->path))
 			$this->path = 'home';
 	}
 
+	/**
+	 * Récupérer le chemin
+	 *
+	 * @return string
+	 */
 	public function getPath() {
 		return $this->path;
 	}
 
+	/**
+	 * Récupérer la requête complémentaire
+	 *
+	 * @return string[]
+	 */
 	public function getQuery() {
 		return $this->query;
 	}

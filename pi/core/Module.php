@@ -38,65 +38,31 @@ abstract class Module {
 	abstract public function initialize();
 
 	/**
-	 * Enregistrer un nouveau modèle
-	 *
-	 * @param string $modelName Nom du modèle
-	 * @param string $modelFilename Chemin vers le fichier modèle (JSON)
-	 * @param string $viewFilename Chemin vers le fichier vue (Twig)
-	 *
-	 * @return bool true si le modèle a pu être enregistré, false sinon
-	 */
-	public function registerModel($modelName, $modelFilename = null,
-	                              $viewFilename = null) {
-		return $this->app->registerModel(
-			$modelName,
-			$modelFilename,
-			$viewFilename);
-	}
-
-	/**
-	 * Enregistrer un nouveau modèle depuis une class
+	 * Enregistrer un nouveau modèle depuis une classe
 	 *
 	 * @param string $modelName Nom du modèle
 	 * @param string $modelClass Classe du modèle
 	 *
-	 * @return bool true si le modèle a pu être enregistré, false sinon
+	 * @throws Exception
 	 */
-	public function registerModelFromClass($modelName, $modelClass) {
-		return $this->app->registerModelFromClass(
+	protected function registerModel($modelName, $modelClass) {
+		$this->app->registerModel(
 			$modelName,
 			$modelClass);
-	}
-
-	/**
-	 * Enregistrer un nouveau champ
-	 *
-	 * @param string $fieldName Nom du champ
-	 * @param string $fieldClass Classe du champ
-	 *
-	 * @return bool true si le champ a pu être enregistré, false sinon
-	 */
-	public function registerField($fieldName, $fieldClass) {
-		return $this->app->registerField(
-			$fieldName,
-			$fieldClass);
 	}
 
 	/**
 	 * Surcharger un modèle
 	 *
 	 * @param string $modelName Nom du modèle
-	 * @param string $modelFilename Chemin vers le fichier modèle (JSON)
-	 * @param string $viewFilename Chemin vers le fichier vue (Twig)
+	 * @param string $modelClass Classe du modèle
 	 *
-	 * @return bool true si le modèle a pu être surchargé, false sinon
+	 * @throws Exception
 	 */
-	public function overrideModel($modelName, $modelFilename,
-	                              $viewFilename) {
-		return $this->app->overrideModel(
+	protected function overrideModel($modelName, $fieldClass) {
+		$this->app->overrideModel(
 				$modelName,
-				$modelFilename,
-				$viewFilename);
+				$fieldClass);
 	}
 
 	/**
@@ -105,12 +71,26 @@ abstract class Module {
 	 * @param string $modelName Nom du modèle à surcharger
 	 * @param string $filename Chemin vers la vue surchargée
 	 *
-	 * @return bool true si la vue a pu être surchargée, false sinon
+	 * @throws Exception
 	 */
-	public function overrideViewModel($modelName, $filename) {
-		return $this->app->overrideViewModel(
+	protected function overrideViewModel($modelName, $filename) {
+		$this->app->overrideViewModel(
 			$modelName,
 			$filename);
+	}
+
+	/**
+	 * Enregistrer un nouveau champ
+	 *
+	 * @param string $fieldName Nom du champ
+	 * @param string $fieldClass Classe du champ
+	 *
+	 * @throws Exception
+	 */
+	protected function registerField($fieldName, $fieldClass) {
+		$this->app->registerField(
+			$fieldName,
+			$fieldClass);
 	}
 
 	/**
@@ -119,10 +99,10 @@ abstract class Module {
 	 * @param string $fieldName Nom du champ
 	 * @param string $fieldClass Classe du champ
 	 *
-	 * @return bool true si la vue a pu être surchargée, false sinon
+	 * @throws Exception
 	 */
-	public function overrideField($fieldName, $fieldClass) {
-		return $this->app->overrideField(
+	protected function overrideField($fieldName, $fieldClass) {
+		$this->app->overrideField(
 			$fieldName,
 			$fieldClass);
 	}
@@ -130,14 +110,14 @@ abstract class Module {
 	/**
 	 * @param string $url
 	 */
-	public function loadCss($url) {
+	protected function loadCss($url) {
 		$this->app->loadCss($url);
 	}
 
 	/**
 	 * @param string $url
 	 */
-	public function loadJs($url) {
+	protected function loadJs($url) {
 		$this->app->loadJs($url);
 	}
 }

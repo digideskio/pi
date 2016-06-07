@@ -42,7 +42,7 @@ abstract class Theme {
 	 *
 	 * @param string $url
 	 */
-	public function loadCss($url) {
+	protected function loadCss($url) {
 		$this->app->loadCss($url);
 	}
 
@@ -51,7 +51,7 @@ abstract class Theme {
 	 *
 	 * @param string $url
 	 */
-	public function loadJs($url) {
+	protected function loadJs($url) {
 		$this->app->loadJs($url);
 	}
 
@@ -61,10 +61,10 @@ abstract class Theme {
 	 * @param string $modelName Nom du modèle à surcharger
 	 * @param string $filename Chemin vers la vue surchargée
 	 *
-	 * @return bool true si la vue a pu être surchargée, false sinon
+	 * @throws Exception
 	 */
-	public function overrideViewModel($modelName, $filename) {
-		return $this->app->overrideViewModel(
+	protected function overrideViewModel($modelName, $filename) {
+		$this->app->overrideViewModel(
 			$modelName,
 			$filename);
 	}

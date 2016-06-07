@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Pi.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 namespace Pi\Page;
 
@@ -25,14 +25,51 @@ use Pi\Lib\Str;
 
 class PageCollection implements IteratorAggregate {
 	/** @var Page[] Pages faisant partie de la collection */
-	protected $pages;
+	private $pages;
 
 	/**
 	 * Cache de toutes les pages, pour éviter de tout recalculer à chaque fois
 	 *
 	 * @var PageCollection
 	 */
-	protected static $cacheAllPages = null;
+	private static $cacheAllPages = null;
+
+	/**
+	 * Récupérer toutes les pages
+	 *
+	 * @return PageCollection
+	 */
+	public static function getAllPages() {
+		// Retourne les pages en cache s'il y en a
+		if (static::$cacheAllPages != null)
+			return static::$cacheAllPages;
+
+		// Récupère tous les chemins du dossier des pages
+		$dirs = scandir(PI_DIR_PAGES);
+
+		// Supprime les chemins « . » et « .. »
+		$dirs = array_filter($dirs, function($dir) {
+			return ($dir != '.' && $dir != '..');
+		});
+
+		// Redéfinition de l'indexation du tableau
+		$dirs = array_values($dirs);
+
+		// Récupération de la dernière version de chacune des pages
+		$pages = [];
+
+		foreach ($dirs as $dir)
+			$pages[$dir] = Page::getLastVersion($dir);
+
+		// Création de la collection
+		$self = new static($pages);
+
+		// Complète le cache avec les pages récupérées
+		static::$cacheAllPages = $self;
+
+		// Retourne la version désormais en cache
+		return static::$cacheAllPages;
+	}
 
 	/**
 	 * @param Page[] $pages
@@ -146,42 +183,5 @@ class PageCollection implements IteratorAggregate {
 	public function getIterator() {
 		foreach ($this->pages as $slug => $page)
 			yield $slug => $page;
-	}
-
-	/**
-	 * Récupérer toutes les pages
-	 *
-	 * @return PageCollection
-	 */
-	public static function getAllPages() {
-		// Retourne les pages en cache s'il y en a
-		if (static::$cacheAllPages != null)
-			return static::$cacheAllPages;
-
-		// Récupère tous les chemins du dossier des pages
-		$dirs = scandir(PI_DIR_PAGES);
-
-		// Supprime les chemins « . » et « .. »
-		$dirs = array_filter($dirs, function($dir) {
-			return ($dir != '.' && $dir != '..');
-		});
-
-		// Redéfinition de l'indexation du tableau
-		$dirs = array_values($dirs);
-
-		// Récupération de la dernière version de chacune des pages
-		$pages = [];
-
-		foreach ($dirs as $dir)
-			$pages[$dir] = Page::getLastVersion($dir);
-
-		// Création de la collection
-		$self = new static($pages);
-
-		// Complète le cache avec les pages récupérées
-		static::$cacheAllPages = $self;
-
-		// Retourne la version désormais en cache
-		return static::$cacheAllPages;
 	}
 }
