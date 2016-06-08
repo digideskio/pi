@@ -21,5 +21,5 @@
 require 'settings.php';
 
 // Lancement de l'application (affichage de la page demandée)
-$app = new Pi\Core\App();
+$app = new Pi\App\App();
 $app->run();

@@ -24,8 +24,6 @@ use Exception;
 use Pi\Lib\Flash;
 use Pi\Lib\Json;
 use Pi\Lib\Session;
-use Pi\Model\Model;
-use Pi\Render\Renderer;
 
 class Pi {
 	/** @var Renderer Moteur de rendu */

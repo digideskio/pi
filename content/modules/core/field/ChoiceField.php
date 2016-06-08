@@ -19,7 +19,7 @@
 
 namespace Module\Core\Field;
 
-use Pi\Model\Field;
+use Pi\Core\Field;
 
 class ChoiceField extends Field {
 	/**

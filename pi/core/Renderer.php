@@ -17,7 +17,7 @@
  * along with Pi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Pi\Render;
+namespace Pi\Core;
 
 use Twig_Environment;
 use Twig_Extension_StringLoader;
@@ -25,7 +25,6 @@ use Twig_Loader_Filesystem;
 use Twig_SimpleFilter;
 use Twig_SimpleFunction;
 
-use Pi\Core\App;
 use Pi\Lib\Markdown;
 
 class Renderer {

@@ -19,7 +19,7 @@
 
 namespace Module\Core\Field;
 
-use Pi\Model\Field;
+use Pi\Core\Field;
 use Pi\Lib\Html\Tag;
 
 class UserField extends Field {

@@ -17,14 +17,13 @@
  * along with Pi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Pi\Core;
+namespace Pi\App;
 
 use Exception;
 
+use Pi\Core\Pi;
+use Pi\Core\Renderer;
 use Pi\Lib\Json;
-use Pi\Model\Model;
-use Pi\Page\Page;
-use Pi\Render\Renderer;
 
 class App extends Pi {
 	/**
@@ -110,14 +109,18 @@ class App extends Pi {
 	}
 
 	/**
+	 * @todo
+	 *
 	 * Lance la recherche de la page et la retourne
 	 */
 	public function run() {
-		$filename = PI_DIR_PAGES . $this->router->getPath() . '/1.json';
-		$content = Page::fromFile($filename);
+		$page = new Page($this->router->getPath());
+		$content = $page->getLastVersion();
 
-		if (!$content)
-			$content = Page::getLastVersion('error');
+		if (!$content) {
+			$page = new Page('error');
+			$content = $page->getLastVersion();
+		}
 
 		$model = $content->getModel();
 		$fields = $content->getFields();

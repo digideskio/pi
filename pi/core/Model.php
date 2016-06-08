@@ -17,7 +17,7 @@
  * along with Pi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Pi\Model;
+namespace Pi\Core;
 
 use Exception;
 
