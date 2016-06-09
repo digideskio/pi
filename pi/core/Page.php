@@ -45,7 +45,7 @@ class Page {
 	 *
 	 * @return static
 	 */
-	public static function fromFile($filename) {
+	public static function fromFile(string $filename): Page {
 		$json = Json::read($filename);
 
 		$page = new static();

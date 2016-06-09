@@ -2,9 +2,9 @@
 
 require 'init.php';
 
-use Pi\Core\App;
-use Pi\Model\Model;
-use Pi\Page\Page;
+use Pi\App\App;
+use Pi\Core\Model;
+use Pi\Core\Page;
 use Pi\Lib\Json;
 
 if (!isset($_GET['page']))

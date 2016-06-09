@@ -55,9 +55,9 @@ class Router {
 	/**
 	 * Récupérer le chemin
 	 *
-	 * @return string
+	 * @return Le chemin vers la page
 	 */
-	public function getPath() {
+	public function getPath(): string {
 		return $this->path;
 	}
 
@@ -66,7 +66,7 @@ class Router {
 	 *
 	 * @return string[]
 	 */
-	public function getQuery() {
+	public function getQuery(): array {
 		return $this->query;
 	}
 }

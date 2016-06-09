@@ -27,7 +27,7 @@ class CheckboxesField extends Field {
 	/**
 	 * @param $data
 	 */
-	public function __construct($data = []) {
+	public function __construct(array $data = []) {
 		parent::__construct($data);
 
 		$this->default = $data['default'] ?? [];
@@ -36,7 +36,7 @@ class CheckboxesField extends Field {
 	/**
 	 * @inheritdoc
 	 */
-	public function validate() {
+	public function validate(): bool {
 		$values = $this->value();
 
 		if ($this->required && is_array($values))
@@ -48,7 +48,7 @@ class CheckboxesField extends Field {
 	/**
 	 * @inheritdoc
 	 */
-	public function value() {
+	public function value(): string {
 		if (!empty($_POST))
 			return $_POST[$this->name] ?? [];
 		else
@@ -58,7 +58,7 @@ class CheckboxesField extends Field {
 	/**
 	 * @inheritdoc
 	 */
-	public function html() {
+	public function html(): string {
 		$values = $this->value();
 
 		$html = '';

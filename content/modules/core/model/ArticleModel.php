@@ -19,7 +19,7 @@
 
 namespace Module\Core\Model;
 
-use Pi\Model\Model;
+use Pi\Core\Model;
 use Module\Core\Field\CheckboxesField;
 use Module\Core\Field\DateField;
 use Module\Core\Field\ChoiceField;

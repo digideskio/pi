@@ -2,8 +2,8 @@
 
 require 'init.php';
 
-use Pi\Core\App;
-use Pi\Page\PageCollection;
+use Pi\App\App;
+use Pi\App\PageCollection;
 
 $pages = PageCollection::getAllPages();
 

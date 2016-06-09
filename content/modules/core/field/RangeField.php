@@ -21,30 +21,31 @@ namespace Module\Core\Field;
 
 use Pi\Core\Field;
 use Pi\Lib\Html\Tag;
+use Pi\Lib\Num;
 
 class RangeField extends Field {
 	/**
 	 * @param $data
 	 */
-	public function __construct($data = []) {
+	public function __construct(array $data = []) {
 		parent::__construct($data);
 
 		$this->min  = $data['min'] ?? 0;
-		$this->max  = $data['max']) ?? 100;
-		$this->step = $data['step']) ?? 1;
+		$this->max  = $data['max'] ?? 100;
+		$this->step = $data['step'] ?? 1;
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function value() {
+	public function value(): string {
 		return (int) parent::value();
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function validate() {
+	public function validate(): bool {
 		$value = $this->value();
 
 		if ($this->required || !empty($value))
@@ -56,7 +57,7 @@ class RangeField extends Field {
 	/**
 	 * @inheritdoc
 	 */
-	public function html() {
+	public function html(): string {
 	    $tag = new Tag('input', [
 				'name'  => $this->name,
 	      'type'  => 'range',

@@ -27,14 +27,14 @@ class TitleField extends Field {
 	/**
 	 * @param $data
 	 */
-	public function __construct($data = []) {
+	public function __construct(array $data = []) {
 		parent::__construct($data);
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function validate() {
+	public function validate(): bool {
 		$value = $this->value();
 
 		if ($this->required || !empty($value))
@@ -46,7 +46,7 @@ class TitleField extends Field {
 	/**
 	 * @inheritdoc
 	 */
-	public function html() {
+	public function html(): string {
 		$tag = new Tag('input', [
 			'name'  => $this->name,
 			'type'  => 'text',

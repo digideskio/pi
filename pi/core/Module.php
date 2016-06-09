@@ -26,9 +26,9 @@ abstract class Module {
 	/**
 	 * Constructeur
 	 *
-	 * @param App $app
+	 * @param $app Application
 	 */
-	final public function __construct($app) {
+	final public function __construct(Pi $app) {
 		$this->app = $app;
 	}
 
@@ -40,12 +40,12 @@ abstract class Module {
 	/**
 	 * Enregistrer un nouveau modèle depuis une classe
 	 *
-	 * @param string $modelName Nom du modèle
-	 * @param string $modelClass Classe du modèle
+	 * @param $modelName Nom du modèle
+	 * @param $modelClass Classe du modèle
 	 *
 	 * @throws Exception
 	 */
-	protected function registerModel($modelName, $modelClass) {
+	protected function registerModel(string $modelName, string $modelClass) {
 		$this->app->registerModel(
 			$modelName,
 			$modelClass);
@@ -54,12 +54,12 @@ abstract class Module {
 	/**
 	 * Surcharger un modèle
 	 *
-	 * @param string $modelName Nom du modèle
-	 * @param string $modelClass Classe du modèle
+	 * @param $modelName Nom du modèle
+	 * @param $modelClass Classe du modèle
 	 *
 	 * @throws Exception
 	 */
-	protected function overrideModel($modelName, $fieldClass) {
+	protected function overrideModel(string $modelName, string $fieldClass) {
 		$this->app->overrideModel(
 				$modelName,
 				$fieldClass);
@@ -68,12 +68,12 @@ abstract class Module {
 	/**
 	 * Surcharger la vue d'un modèle
 	 *
-	 * @param string $modelName Nom du modèle à surcharger
-	 * @param string $filename Chemin vers la vue surchargée
+	 * @param $modelName Nom du modèle à surcharger
+	 * @param $filename Chemin vers la vue surchargée
 	 *
 	 * @throws Exception
 	 */
-	protected function overrideViewModel($modelName, $filename) {
+	protected function overrideViewModel(string $modelName, string $filename) {
 		$this->app->overrideViewModel(
 			$modelName,
 			$filename);
@@ -82,42 +82,38 @@ abstract class Module {
 	/**
 	 * Enregistrer un nouveau champ
 	 *
-	 * @param string $fieldName Nom du champ
-	 * @param string $fieldClass Classe du champ
+	 * @param $fieldName Nom du champ
+	 * @param $fieldClass Classe du champ
 	 *
 	 * @throws Exception
 	 */
-	protected function registerField($fieldName, $fieldClass) {
-		$this->app->registerField(
-			$fieldName,
-			$fieldClass);
+	protected function registerField(string $fieldName, string $fieldClass) {
+		$this->app->registerField($fieldName, $fieldClass);
 	}
 
 	/**
 	 * Surcharger un champ
 	 *
-	 * @param string $fieldName Nom du champ
-	 * @param string $fieldClass Classe du champ
+	 * @param $fieldName Nom du champ
+	 * @param $fieldClass Classe du champ
 	 *
 	 * @throws Exception
 	 */
-	protected function overrideField($fieldName, $fieldClass) {
-		$this->app->overrideField(
-			$fieldName,
-			$fieldClass);
+	protected function overrideField(string $fieldName, string $fieldClass) {
+		$this->app->overrideField($fieldName, $fieldClass);
 	}
 
 	/**
-	 * @param string $url
+	 * @param $url
 	 */
-	protected function loadCss($url) {
+	protected function loadCss(string $url) {
 		$this->app->loadCss($url);
 	}
 
 	/**
-	 * @param string $url
+	 * @param $url
 	 */
-	protected function loadJs($url) {
+	protected function loadJs(string $url) {
 		$this->app->loadJs($url);
 	}
 }

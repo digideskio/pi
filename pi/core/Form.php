@@ -24,17 +24,16 @@ class Form {
 	private $model;
 
 	/**
-	 * @param Model $model
-	 * @param bool $bind
+	 * @param $model Modèle
 	 */
-	public function __construct($model, $bind = false) {
+	public function __construct(Model $model) {
 		$this->model = $model;
 	}
 
 	/**
-	 * @return string
+	 * @return Formulaire au format HTML
 	 */
-	public function html() {
+	public function html(): string {
 		$html  = '<form method="post" action="">';
 		$html .= '<h1>Formulaire &laquo; ' . $this->model->getTitle() . ' &raquo;</h1>';
 		$html .= '<div class="row">';
@@ -88,9 +87,9 @@ class Form {
 	}
 
 	/**
-	 * @return array
+	 * @return Champs incorrects
 	 */
-	public function validate() {
+	public function validate(): array {
 		$errors = [];
 
 		foreach ($this->model->getFields() as $field)
@@ -100,9 +99,9 @@ class Form {
 	}
 
 	/**
-	 * @return array
+	 * @return Tableau avec les valeurs
 	 */
-	public function save() {
+	public function save(): array {
 		$infos = [];
 
 		foreach ($this->model->getFields() as $field)

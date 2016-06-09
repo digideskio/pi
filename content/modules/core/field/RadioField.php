@@ -26,7 +26,7 @@ class RadioField extends Field {
 	/**
 	 * @param $data
 	 */
-	public function __construct($data = []) {
+	public function __construct(array $data = []) {
 		parent::__construct($data);
 
 		if (count($this->options))
@@ -36,7 +36,7 @@ class RadioField extends Field {
 	/**
 	 * @inheritdoc
 	 */
-	public function value() {
+	public function value(): string {
 		if (!empty($_POST))
 			return $_POST[$this->name] ?? '-';
 		else
@@ -46,7 +46,7 @@ class RadioField extends Field {
 	/**
 	 * @inheritdoc
 	 */
-	public function html() {
+	public function html(): string {
 		$html = '';
 
 		$val = $this->value();

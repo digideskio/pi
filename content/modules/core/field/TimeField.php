@@ -29,7 +29,7 @@ class TimeField extends Field {
 	/**
 	 * @param $data
 	 */
-	public function __construct($data = []) {
+	public function __construct(array $data = []) {
 		parent::__construct($data);
 
 		if (!in_array($this->format, static::$formats))
@@ -44,7 +44,7 @@ class TimeField extends Field {
 	/**
 	 * @inheritdoc
 	 */
-	public function validate() {
+	public function validate(): bool {
 		$value = $this->value();
 
 		if ($this->format == 'hh:mm')
@@ -70,7 +70,7 @@ class TimeField extends Field {
 	/**
 	 * @inheritdoc
 	 */
-	public function html() {
+	public function html(): string {
 		$tag = new Tag('input', [
 			'name'  => $this->name,
 			'type'  => 'time',

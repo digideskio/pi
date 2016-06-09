@@ -26,9 +26,9 @@ abstract class Theme {
 	/**
 	 * Constructeur
 	 *
-	 * @param App $app
+	 * @param $app Application
 	 */
-	final public function __construct($app) {
+	final public function __construct(Pi $app) {
 		$this->app = $app;
 	}
 
@@ -40,32 +40,30 @@ abstract class Theme {
 	/**
 	 * Charger un fichier CSS dans le thème
 	 *
-	 * @param string $url
+	 * @param $url Chemin vers le fichier CSS à charger
 	 */
-	protected function loadCss($url) {
+	protected function loadCss(string $url) {
 		$this->app->loadCss($url);
 	}
 
 	/**
 	 * Charger un fichier JavaScript dans le thème
 	 *
-	 * @param string $url
+	 * @param $url Chemin vers le fichier JavaScript à charger
 	 */
-	protected function loadJs($url) {
+	protected function loadJs(string $url) {
 		$this->app->loadJs($url);
 	}
 
 	/**
 	 * Surcharger la vue d'un modèle
 	 *
-	 * @param string $modelName Nom du modèle à surcharger
-	 * @param string $filename Chemin vers la vue surchargée
+	 * @param $modelName Nom du modèle dont la vue doit être surchargée
+	 * @param $filename Chemin vers la vue surchargée
 	 *
 	 * @throws Exception
 	 */
-	protected function overrideViewModel($modelName, $filename) {
-		$this->app->overrideViewModel(
-			$modelName,
-			$filename);
+	protected function overrideViewModel(string $modelName, string $filename) {
+		$this->app->overrideViewModel($modelName, $filename);
 	}
 }

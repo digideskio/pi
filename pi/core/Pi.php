@@ -20,9 +20,9 @@
 namespace Pi\Core;
 
 use Exception;
+use stdClass;
 
 use Pi\Lib\Flash;
-use Pi\Lib\Json;
 use Pi\Lib\Session;
 
 class Pi {
@@ -59,7 +59,7 @@ class Pi {
 	/** @var string[] Fichiers JavaScript enregistrés */
 	protected $jsUrls;
 
-	/** @var array Paramètres du site */
+	/** @var stdClass Paramètres du site */
 	protected $settings;
 
 	/** @var Router Routeur */
@@ -86,7 +86,7 @@ class Pi {
 	 *
 	 * @throws Exception
 	 */
-	public static function autoload($class) {
+	public static function autoload(string $class) {
 		if (strpos($class, 'Pi') !== 0
 			&& strpos($class, 'Module') !== 0
 			&& strpos($class, 'Theme') !== 0
@@ -157,7 +157,7 @@ class Pi {
 		$this->users = [];
 		$this->cssUrls = [];
 		$this->jsUrls = [];
-		$this->settings = [];
+		$this->settings = new stdClass();
 		$this->router = new Router();
 		$this->session = new Session();
 		$this->flash = new Flash();
@@ -171,7 +171,7 @@ class Pi {
 	 *
 	 * @return string
 	 */
-	public function render($file, $variables = []) {
+	public function render(string $file, array $variables = []): string {
 		return $this->renderer->render($file, $variables);
 	}
 
@@ -180,7 +180,7 @@ class Pi {
 	 *
 	 * @return array
 	 */
-	public function getModels() {
+	public function getModels(): array {
 		return $this->models;
 	}
 
@@ -189,7 +189,7 @@ class Pi {
 	 *
 	 * @return array
 	 */
-	public function getFields() {
+	public function getFields(): array {
 		return $this->fields;
 	}
 
@@ -198,25 +198,25 @@ class Pi {
 	 *
 	 * @return array
 	 */
-	public function getPages() {
+	public function getPages(): array {
 		return $this->pages;
 	}
 
 	/**
 	 * Récupérer la liste des utilisateurs
 	 *
-	 * @return array
+	 * @return User[]
 	 */
-	public function getUsers() {
+	public function getUsers(): array {
 		return $this->users;
 	}
 
 	/**
 	 * Récupérer les paramètres du site
 	 *
-	 * @return array
+	 * @return stdClass
 	 */
-	public function getSettings() {
+	public function getSettings(): stdClass {
 		return $this->settings;
 	}
 
@@ -225,42 +225,42 @@ class Pi {
 	 *
 	 * @return string
 	 */
-	public function getTheme() {
+	public function getTheme(): string {
 		return $this->theme;
 	}
 
 	/**
 	 * @param string $url
 	 */
-	public function loadCss($url) {
+	public function loadCss(string $url) {
 		$this->cssUrls[] = $url;
 	}
 
 	/**
 	 * @param string $url
 	 */
-	public function loadJs($url) {
+	public function loadJs(string $url) {
 		$this->jsUrls[] = $url;
 	}
 
 	/**
 	 * @return string[]
 	 */
-	public function getCssUrls() {
+	public function getCssUrls(): array {
 		return $this->cssUrls;
 	}
 
 	/**
 	 * @return string[]
 	 */
-	public function getJsUrls() {
+	public function getJsUrls(): array {
 		return $this->jsUrls;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getPath() {
+	public function getPath(): string {
 		return $this->router->getPath();
 	}
 
@@ -272,7 +272,7 @@ class Pi {
 	 *
 	 * @throws Exception
 	 */
-	public function registerModel($modelName, $modelClass) {
+	public function registerModel(string $modelName, string $modelClass) {
 		if (array_key_exists($modelName, $this->models))
 			throw new Exception('Model "' . $modelName . '" already registered');
 
@@ -287,7 +287,7 @@ class Pi {
 	 *
 	 * @throws Exception
 	 */
-	public function overrideModel($modelName, $modelClass) {
+	public function overrideModel(string $modelName, string $modelClass) {
 		if (!array_key_exists($modelName, $this->models))
 			throw new Exception('Model "' . $modelName . '" does not exists and
 				cannot be overrided');
@@ -308,7 +308,7 @@ class Pi {
 	 *
 	 * @throws Exception
 	 */
-	public function overrideViewModel($modelName, $filename) {
+	public function overrideViewModel(string $modelName, string $filename) {
 		throw new Exception('Non-implemented');
 	}
 
@@ -320,7 +320,7 @@ class Pi {
 	 *
 	 * @throws Exception
 	 */
-	public function registerField($fieldName, $fieldClass) {
+	public function registerField(string $fieldName, string $fieldClass) {
 		if (array_key_exists($fieldName, $this->fields))
 			throw new Exception('Field "' . $fieldName . '" already registered');
 
@@ -335,7 +335,7 @@ class Pi {
 	 *
 	 * @throws Exception
 	 */
-	public function overrideField($fieldName, $fieldClass) {
+	public function overrideField(string $fieldName, string $fieldClass) {
 		if (!array_key_exists($fieldName, $this->fields))
 			throw new Exception('Field "' . $fieldName . '" does not exists and
 				cannot be overrided');

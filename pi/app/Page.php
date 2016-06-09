@@ -28,9 +28,9 @@ class Page {
 	/**
 	 * Constructeur
 	 *
-	 * @param string $slug
+	 * @param $slug
 	 */
-	public function __construct($slug) {
+	public function __construct(string $slug) {
 
 	}
 
@@ -38,10 +38,8 @@ class Page {
 	 * @todo
 	 *
 	 * Récupérer la dernière version de la page
-	 *
-	 * @return Core\Page;
 	 */
-	public function getLastVersion() {
+	public function getLastVersion(): Core\Page {
 		$page = Core\Page::fromFile($this->slug . '/1.json');
 
 		return $page;
@@ -51,10 +49,8 @@ class Page {
 	 * @todo
 	 *
 	 * Récupérer la liste des versions de la page
-	 *
-	 * @return array
 	 */
-	public function getListVersions() {
-
+	public function getListVersions(): array {
+		return [];
 	}
 }

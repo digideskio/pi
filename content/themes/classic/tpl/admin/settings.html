@@ -6,11 +6,11 @@
 	<h1>Paramètres</h1>
 	
 	<form method="POST" action="">
-		<label>Titre du site</label>
-			<input type="text" />
+		<label for="txt-title">Titre du site</label>
+			<input type="text" id="txt-title" />
 
-		<label>Thème</label>
-			<select>
+		<label for="txt-theme">Thème</label>
+			<select id="txt-theme">
 				{% for slug, name in themes %}
 					<option value="{{ slug }}">{{ name }}</option>
 				{% endfor %}

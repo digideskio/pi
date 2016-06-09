@@ -25,14 +25,14 @@ class ChoiceField extends Field {
 	/**
 	 * @param $data
 	 */
-	public function __construct($data = []) {
+	public function __construct(array $data = []) {
 		parent::__construct($data);
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function html() {
+	public function html(): string {
 		$val = $this->value();
 
 		$html = '<select name="' . $this->name . '"' . ($this->required ? ' required' : '') . ' id="input-' . $this->id . '">';

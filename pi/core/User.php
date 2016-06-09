@@ -35,9 +35,9 @@ class User {
 	/**
 	 * Constructeur de la classe
 	 *
-	 * @param array $data Données fournies pour contruire l'utilisateur
+	 * @param $data Données fournies pour contruire l'utilisateur
 	 */
-	public function __construct($data) {
+	public function __construct(array $data) {
 		$this->username = $data['username'] ?? '';
 		$this->password = $data['password'] ?? '';
 		$this->role = $data['role'] ?? '';
@@ -47,23 +47,23 @@ class User {
 	/**
 	 * L'utilisateur dispose t-il de cette permission ?
 	 *
-	 * @param string $permission
+	 * @param $permission Permission à tester
 	 *
-	 * @return bool Retourne true si l'utilisateur dipose de la permission
-	 *              $permission, false sinon
+	 * @return Retourne true si l'utilisateur dipose de la permission
+	 *         $permission, false sinon
 	 */
-	public function hasPermission($permission) {
+	public function hasPermission(string $permission): bool {
 		return in_array($permission, $this->permissions);
 	}
 
 	/**
 	 * Ajouter une permission
 	 *
-	 * @param string $permission Permission à ajouter
+	 * @param $permission Permission à ajouter
 	 *
-	 * @return $this
+	 * @return $this L'instance de l'utilisateur.
 	 */
-	public function addPermission($permission) {
+	public function addPermission(string $permission): User {
 		$this->permissions[] = $permission;
 
 		return $this;
@@ -72,11 +72,11 @@ class User {
 	/**
 	 * Pseudonyme de l'utilisateur
 	 *
-	 * @param string $username
+	 * @param $username
 	 *
-	 * @return $this
+	 * @return $this L'instance de l'utilisateur.
 	 */
-	public function setUsername($username) {
+	public function setUsername(string $username): User {
 		$this->username = $username;
 
 		return $this;
@@ -85,11 +85,11 @@ class User {
 	/**
 	 * Mot de passe de l'utilisateur
 	 *
-	 * @param string $password
+	 * @param $password
 	 *
-	 * @return $this
+	 * @return $this L'instance de l'utilisateur.
 	 */
-	public function setPassword($password) {
+	public function setPassword(string $password): User {
 		$this->password = $password;
 
 		return $this;
@@ -98,11 +98,11 @@ class User {
 	/**
 	 * Role de l'utilisateur
 	 *
-	 * @param string $role
+	 * @param $role
 	 *
-	 * @return $this
+	 * @return $this L'instance de l'utilisateur.
 	 */
-	public function setRole($role) {
+	public function setRole(string $role): User {
 		$this->role = $role;
 
 		return $this;
@@ -113,9 +113,9 @@ class User {
 	 *
 	 * @param string[] $permissions
 	 *
-	 * @return $this
+	 * @return $this L'instance de l'utilisateur.
 	 */
-	public function setPermissions($permissions) {
+	public function setPermissions(array $permissions): User {
 		$this->permissions = $permissions;
 
 		return $this;
@@ -124,36 +124,36 @@ class User {
 	/**
 	 * Pseudonyme de l'utilisateur
 	 *
-	 * @return string
+	 * @return Pseudonyme de l'utilisateur
 	 */
-	public function getUsername() {
+	public function getUsername(): string {
 		return $this->username;
 	}
 
 	/**
 	 * Mot de passe de l'utilisateur
 	 *
-	 * @return string
+	 * @return Mot de passe de l'utilisateur
 	 */
-	public function getPassword() {
+	public function getPassword(): string {
 		return $this->password;
 	}
 
 	/**
-	 * Role de l'utilisateur
+	 * Rôle de l'utilisateur
 	 *
-	 * @return string
+	 * @return Rôle de l'utilisateur
 	 */
-	public function getRole() {
+	public function getRole(): string {
 		return $this->role;
 	}
 
 	/**
 	 * Permissions de l'utilisateur
 	 *
-	 * @return string[]
+	 * @return string[] Permissions de l'utilisateur
 	 */
-	public function getPermissions() {
+	public function getPermissions(): array {
 		return $this->permissions;
 	}
 }

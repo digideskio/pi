@@ -29,14 +29,14 @@ class TextareaField extends Field {
 	/**
 	 * @param $data
 	 */
-	public function __construct($data = []) {
+	public function __construct(array $data = []) {
 		parent::__construct($data);
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function html() {
+	public function html(): string {
 		$id = 'input-' . $this->id;
 
 		$tag = new Tag('textarea', [

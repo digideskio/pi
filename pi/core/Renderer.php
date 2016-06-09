@@ -34,15 +34,15 @@ class Renderer {
 	/** @var Twig_Environment */
 	private $twig;
 
-	/** @var App */
+	/** @var Pi */
 	private $app;
 
 	/**
 	 * Constructeur
 	 *
-	 * @param App $app
+	 * @param $app Application
 	 */
-	public function __construct($app) {
+	public function __construct(Pi $app) {
 		// Application
 		$this->app = $app;
 
@@ -68,7 +68,8 @@ class Renderer {
 			return $slug == $currentPath;
 		}));
 
-		// Fonction « template_from_string » : « {{ include(template_from_string("chaine")) }} »
+		// Fonction « template_from_string » :
+		//   « {{ include(template_from_string("chaine")) }} »
 		// Interprète avec Twig le contenu de la chaine
 		$this->twig->addExtension(new Twig_Extension_StringLoader());
 	}
@@ -76,22 +77,22 @@ class Renderer {
 	/**
 	 * Ajout un chemin vers des vues
 	 *
-	 * @param string $path Chemin vers le dossier
-	 * @param string $namespace Espace de noms
+	 * @param $path Chemin vers le dossier
+	 * @param $namespace Espace de noms
 	 *
 	 * @throws \Twig_Error_Loader
 	 */
-	public function addPath($path, $namespace = null) {
+	public function addPath(string $path, string $namespace = null) {
 		$this->loader->addPath($path, $namespace);
 	}
 
 	/**
-	 * @param string $file
-	 * @param array $variables
+	 * @param $file
+	 * @param $variables
 	 *
-	 * @return string
+	 * @return Le rendu
 	 */
-	public function render($file, $variables) {
+	public function render(string $file, array $variables): string {
 		$variables = array_merge($this->getVariables(), $variables);
 
 		return $this->twig->render($file, $variables);
@@ -100,9 +101,9 @@ class Renderer {
 	/**
 	 * Variables globales qui seront envoyées à toutes les vues
 	 *
-	 * @return array
+	 * @return Variables utilisées pour les vues
 	 */
-	public function getVariables() {
+	public function getVariables(): array {
 		return [
 			'settings' => $this->app->getSettings(),
 

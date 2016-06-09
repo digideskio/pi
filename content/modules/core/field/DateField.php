@@ -26,7 +26,7 @@ class DateField extends Field {
 	/**
 	 * @param $data
 	 */
-	public function __construct($data = []) {
+	public function __construct(array $data = []) {
 		parent::__construct($data);
 
 		if ($this->default == 'today')
@@ -36,7 +36,7 @@ class DateField extends Field {
 	/**
 	 * @inheritdoc
 	 */
-	public function validate() {
+	public function validate(): bool {
 		$value = $this->value();
 		$regex = '~[0-9]{4}(-[0-9]{1,2}){2}~'; // yyyy-mm-dd
 
@@ -58,7 +58,7 @@ class DateField extends Field {
 	/**
 	 * @inheritdoc
 	 */
-	public function html() {
+	public function html(): string {
 		$tag = new Tag('input', [
 			'name'  => $this->name,
 			'type'  => 'date',

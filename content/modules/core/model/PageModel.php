@@ -19,7 +19,7 @@
 
 namespace Module\Core\Model;
 
-use Pi\Model\Model;
+use Pi\Core\Model;
 use Module\Core\Field\TextareaField;
 
 class PageModel extends Model {

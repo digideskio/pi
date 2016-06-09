@@ -21,6 +21,7 @@ namespace Pi\App;
 
 use Exception;
 
+use Pi\Core\Model;
 use Pi\Core\Pi;
 use Pi\Core\Renderer;
 use Pi\Lib\Json;

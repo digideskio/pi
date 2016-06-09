@@ -60,9 +60,9 @@ class Model {
 	/**
 	 * Constructeur
 	 *
-	 * @param string $title Titre du modèle
+	 * @param $title Titre du modèle
 	 */
-	public function __construct($title = '') {
+	public function __construct(string $title = '') {
 		$this->setTitle($title);
 
 		$this->fields = [];
@@ -72,12 +72,13 @@ class Model {
 	/**
 	 * Définit le titre du modèle
 	 *
-	 * @param string $title
-	 * @param bool $overrideSlug
+	 * @param $title Titre du modèle
+	 * @param $overrideSlug Si true, change le slug associé au modèle, sinon,
+	 *                      celui-ci reste inchangé (true par défaut)
 	 *
 	 * @return $this
 	 */
-	public function setTitle($title, $overrideSlug = true) {
+	public function setTitle(string $title, bool $overrideSlug = true): Model {
 		$this->title = $title;
 
 		if ($overrideSlug)
@@ -89,11 +90,11 @@ class Model {
 	/**
 	 * Définit le slug du modèle
 	 *
-	 * @param string $slug
+	 * @param $slug
 	 *
 	 * @return $this
 	 */
-	public function setSlug($slug) {
+	public function setSlug(string $slug): Model {
 		$this->slug = $slug;
 
 		return $this;
@@ -102,14 +103,14 @@ class Model {
 	/**
 	 * Ajoute un champ
 	 *
-	 * @param string $fieldName
-	 * @param Field $field
+	 * @param $fieldName
+	 * @param $field
 	 *
 	 * @return $this
 	 *
 	 * @throws Exception
 	 */
-	public function addField($fieldName, $field) {
+	public function addField(string $fieldName, Field $field): Model {
 		if (!in_array($fieldName, array_keys($this->fields)))
 			$this->fields[$fieldName] = $field;
 		else
@@ -122,11 +123,11 @@ class Model {
 	/**
 	 * Définir la vue
 	 *
-	 * @param string $viewFilename
+	 * @param $viewFilename
 	 *
 	 * @return $this
 	 */
-	public function setViewFilename($viewFilename) {
+	public function setViewFilename(string $viewFilename): Model {
 		$this->viewFilename = $viewFilename;
 
 		return $this;
@@ -137,7 +138,7 @@ class Model {
 	 *
 	 * @return string
 	 */
-	public function getTitle() {
+	public function getTitle(): string {
 		return $this->title;
 	}
 
@@ -146,7 +147,7 @@ class Model {
 	 *
 	 * @return string
 	 */
-	public function getSlug() {
+	public function getSlug(): string {
 		return $this->slug;
 	}
 
@@ -155,7 +156,7 @@ class Model {
 	 *
 	 * @return Field[]
 	 */
-	public function getFields() {
+	public function getFields(): array {
 		return $this->fields;
 	}
 
@@ -164,7 +165,7 @@ class Model {
 	 *
 	 * @return string
 	 */
-	public function getViewFilename() {
+	public function getViewFilename(): string {
 		return $this->viewFilename;
 	}
 }

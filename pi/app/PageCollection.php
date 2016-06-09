@@ -58,8 +58,10 @@ class PageCollection implements IteratorAggregate {
 		// Récupération de la dernière version de chacune des pages
 		$pages = [];
 
-		foreach ($dirs as $dir)
-			$pages[$dir] = Page::getLastVersion($dir);
+		foreach ($dirs as $dir) {
+			$page = new Page($dir);
+			$pages[$dir] = $page->getLastVersion();
+		}
 
 		// Création de la collection
 		$self = new static($pages);
