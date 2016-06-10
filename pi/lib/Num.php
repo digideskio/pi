@@ -21,13 +21,13 @@ namespace Pi\Lib;
 
 class Num {
 	/**
-	 * @param float $min
-	 * @param float $max
-	 * @param float $value
+	 * @param $min
+	 * @param $max
+	 * @param $value
 	 * 
-	 * @return bool
+	 * @return true si $value est entre $min et $max, false sinon
 	 */
-	public static function between($min, $max, $value) {
+	public static function between(float $min, float $max, float $value): bool {
 		if ($min > $max) {
 			return false;
 		} else if ($min < $max) {

@@ -20,6 +20,7 @@
 namespace Pi\Lib;
 
 use \IteratorAggregate;
+use \Generator;
 
 class Pagination implements IteratorAggregate {
 	/** @var int */
@@ -47,12 +48,15 @@ class Pagination implements IteratorAggregate {
 	protected $nbPages;
 
 	/**
-	 * @param int $nbTotal
-	 * @param int $nbByPage
-	 * @param int $actual
-	 * @param int $firstPage
+	 * @param $nbTotal
+	 * @param $nbByPage
+	 * @param $actual
+	 * @param $firstPage
 	 */
-	public function __construct($nbTotal, $nbByPage, $actual = 1, $firstPage = 1) {
+	public function __construct(int $nbTotal,
+	                            int $nbByPage,
+	                            int $actual = 1,
+	                            int $firstPage = 1) {
 		$this->first    = $firstPage;
 		$this->last     = ceil($nbTotal / $nbByPage);
 		$this->actual   = max($this->first, min($this->last, $actual));
@@ -64,74 +68,74 @@ class Pagination implements IteratorAggregate {
 	}
 
 	/**
-	 * @return int
+	 * @return Numéro de la première page
 	 */
-	public function getFirstPage() {
+	public function getFirstPage(): int {
 		return $this->first;
 	}
 
 	/**
-	 * @return int
+	 * @return Numéro de la dernière page
 	 */
-	public function getLastPage() {
+	public function getLastPage(): int {
 		return $this->last;
 	}
 
 	/**
-	 * @return int
+	 * @return Numéro de la page précédente
 	 */
-	public function getPreviousPage() {
+	public function getPreviousPage(): int {
 		return $this->prev;
 	}
 
 	/**
-	 * @return int
+	 * @return Numéro de la page actuelle
 	 */
-	public function getActualPage() {
+	public function getActualPage(): int {
 		return $this->actual;
 	}
 
 	/**
-	 * @return int
+	 * @return Numéro de la page suivante
 	 */
-	public function getNextPage() {
+	public function getNextPage(): int {
 		return $this->next;
 	}
 
 	/**
-	 * @return int
+	 * @return Nombre d'éléments
 	 */
-	public function getNbTotal() {
+	public function getNbTotal(): int {
 		return $this->nbTotal;
 	}
 
 	/**
-	 * @return int
+	 * @return Nombre d'éléments par page
 	 */
-	public function getNbByPage() {
+	public function getNbByPage(): int {
 		return $this->nbByPage;
 	}
 
 	/**
-	 * @return int
+	 * @return Nombre de pages
 	 */
-	public function getNbPages() {
+	public function getNbPages(): int {
 		return $this->nbPages;
 	}
 
 	/**
-	 * @param int $i
+	 * @param $i La page $i est-elle la page actuelle ?
 	 *
-	 * @return bool
+	 * @return true si la page $i est la page actuelle, false sinon
 	 */
-	public function isActualPage($i) {
+	public function isActualPage(int $i): bool {
 		return $this->actual == $i;
 	}
 
 	/**
-	 * @return \Generator
+	 * @return Generator
 	 */
-	public function getIterator() {
+	public function getIterator(): Generator {
 		for ($i = $this->first ; $i <= $this->last ; $i++)
 			yield $i;
 	}

@@ -21,35 +21,35 @@ namespace Pi\Lib;
 
 class Session {
 	/**
-	 * @param string $key
+	 * @param $key
 	 * @param mixed $value
 	 */
-	public function set($key, $value) {
+	public function set(string $key, $value) {
 		$_SESSION[$key] = $value;
 	}
 
 	/**
-	 * @param string $key
+	 * @param $key
 	 *
 	 * @return mixed
 	 */
-	public function get($key) {
+	public function get(string $key) {
 		return $_SESSION[$key];
 	}
 
 	/**
-	 * @param string $key
+	 * @param $key
 	 */
-	public function remove($key) {
+	public function remove(string $key) {
 		unset($_SESSION[$key]);
 	}
 
 	/**
-	 * @param string $key
+	 * @param $key
 	 *
-	 * @return bool
+	 * @return true si la clé est enregistrée dans la session, false sinon
 	 */
-	public function exists($key) {
+	public function exists(string $key): bool {
 		return isset($_SESSION[$key]);
 	}
 

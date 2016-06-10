@@ -38,38 +38,40 @@ class Tag {
 	protected $content;
 
 	/**
-	 * @param string $name
-	 * @param array $attrs
-	 * @param string $content
+	 * @param $name
+	 * @param $attrs
+	 * @param $content
 	 */
-	public function __construct($name, $attrs = [], $content = '') {
+	public function __construct(string $name,
+		                          array $attrs = [],
+		                          string $content = '') {
 		$this->name = $name;
 		$this->attrs = $attrs;
 		$this->content = $content;
 	}
 
 	/**
-	 * @param string $key
+	 * @param $key
 	 * @param mixed $value
 	 */
-	public function addAttr($key, $value = true) {
+	public function addAttr(string $key, $value = true) {
 		$this->attrs[$key] = $value;
 	}
 
 	/**
-	 * @param array $attrs
+	 * @param $attrs
 	 */
-	public function addAttrs($attrs) {
+	public function addAttrs(array $attrs) {
 		foreach ($attrs as $key => $value)
 		$this->addAttr($key, $value);
 	}
 
 	/**
-	 * @param string $key
+	 * @param $key
 	 *
-	 * @return bool
+	 * @return true si l'attribut a été supprimé, false sinon
 	 */
-	public function removeAttr($key) {
+	public function removeAttr(string $key): bool {
 		if (isset($this->attrs[$key])) {
 			unset($this->attrs[$key]);
 
@@ -80,24 +82,24 @@ class Tag {
 	}
 
 	/**
-	 * @param array $attrs
+	 * @param $attrs
 	 */
-	public function removeAttrs($attrs) {
+	public function removeAttrs(array $attrs) {
 		foreach ($attrs as $key => $value)
 			$this->removeAttr($key);
 	}
 
 	/**
-	 * @param string $content
+	 * @param $content
 	 */
-	public function setContent($content) {
+	public function setContent(string $content) {
 		$this->content = $content;
 	}
 
 	/**
-	 * @return string
+	 * @return La balise au format HTML
 	 */
-	public function __toString() {
+	public function __toString(): string {
 		$html = '<' . $this->name;
 
 		foreach ($this->attrs as $key => $value)

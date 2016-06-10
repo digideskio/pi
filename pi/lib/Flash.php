@@ -40,51 +40,51 @@ class Flash {
 	}
 
 	/**
-	 * @param string $error
+	 * @param $error
 	 */
-	public function pushError($error) {
+	public function pushError(string $error) {
 		array_push($_SESSION['errors'], $error);
 	}
 
 	/**
-	 * @param string $success
+	 * @param $success
 	 */
-	public function pushSuccess($success) {
+	public function pushSuccess(string $success) {
 		array_push($_SESSION['success'], $success);
 	}
 
 	/**
-	 * @return bool
+	 *
 	 */
-	public function hasErrors() {
+	public function hasErrors(): bool {
 		return count($_SESSION['errors']) > 0;
 	}
 
 	/**
-	 * @return bool
+	 *
 	 */
-	public function hasNoErrors() {
+	public function hasNoErrors(): bool {
 		return !$this->hasErrors();
 	}
 
 	/**
-	 * @return bool
+	 *
 	 */
-	public function hasSuccess() {
+	public function hasSuccess(): bool {
 		return count($_SESSION['success']) > 0;
 	}
 
 	/**
-	 * @return mixed
+	 *
 	 */
-	public function getErrors() {
+	public function getErrors(): array {
 		return $_SESSION['errors'];
 	}
 
 	/**
-	 * @return mixed
+	 *
 	 */
-	public function getSuccess() {
+	public function getSuccess(): array {
 		return $_SESSION['success'];
 	}
 }

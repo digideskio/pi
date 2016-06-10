@@ -21,22 +21,22 @@ namespace Pi\Lib;
 
 class Str {
 	/**
-	 * @param string $txt
+	 * @param $txt
 	 * 
-	 * @return string
+	 * @return La chaine sans accent
 	 */
-	public static function stripAccents($txt) {
+	public static function stripAccents(string $txt): string {
 		return strtr(utf8_decode($txt), utf8_decode(
 			'àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'),
 			'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
 	}
 
 	/**
-	 * @param string $txt
+	 * @param $txt
 	 *
-	 * @return string
+	 * @return La chaine « slugée »
 	 */
-	public static function slug($txt) {
+	public static function slug(string $txt): string {
 		// on remplace les apostrophes et les espaces par des tirets
 		$txt = str_replace(['\'', ' '], '-', $txt);
 
@@ -59,29 +59,32 @@ class Str {
 	}
 
 	/**
-	 * @param string $txt
+	 * @todo Possibilité de passer le caractère de saut de ligne
 	 *
-	 * @return array
+	 * @param $txt
+	 *
+	 * @return Découpe les lignes d'une chaine et les retournent sous forme de
+	 *         tableau
 	 */
-	public static function lines($txt) {
+	public static function lines(string $txt): array {
 		return str_split(EOL, $txt);
 	}
 
 	/**
-	 * @param string $string
+	 * @param $string
 	 *
-	 * @return bool
+	 * @return true si la chain est une URL, false sinon
 	 */
-	public static function isURL($string) {
+	public static function isURL(string $string): bool {
 		return (bool) filter_var($string, FILTER_VALIDATE_URL);
 	}
 
 	/**
-	 * @param int $length
+	 * @param $length
 	 *
-	 * @return string
+	 * @return Chaine générée aléatoirement
 	 */
-	public static function random($length = 8) {
+	public static function random(int $length = 8): string {
 		$chars = array_merge(range('a', 'z'), range('A', 'Z'), range(0, 9));
 		$lengthChars = count($chars);
 
@@ -94,13 +97,15 @@ class Str {
 	}
 
 	/**
-	 * @param string $txt
-	 * @param int $nbWords
-	 * @param string $after
+	 * @param $txt
+	 * @param $nbWords
+	 * @param $after
 	 *
-	 * @return string
+	 * @return Garde $nbWords de la chaine $txt
 	 */
-	public static function splitWords($txt, $nbWords = 50, $after = '…') {
+	public static function splitWords(string $txt,
+		                              int $nbWords = 50,
+		                              string $after = '…'): string {
 		$txt = strip_tags($txt);
 
 		$words = explode(' ', $txt);
@@ -120,13 +125,15 @@ class Str {
 	}
 
 	/**
-	 * @param string $txt
-	 * @param string $needle
-	 * @param bool $insensitive
+	 * @param $txt
+	 * @param $needle
+	 * @param $insensitive
 	 *
-	 * @return bool
+	 * @return true si $txt contient $needle, false sinon
 	 */
-	public static function contains($txt, $needle, $insensitive = true) {
+	public static function contains(string $txt,
+		                            string $needle,
+		                            bool $insensitive = true): bool {
 		if ($insensitive) {
 			$txt = strtolower($txt);
 			$needle = strtolower($needle);
@@ -136,22 +143,22 @@ class Str {
 	}
 
 	/**
-	 * @param string $str
-	 * @param string $needle
+	 * @param $str
+	 * @param $needle
 	 *
-	 * @return bool
+	 * @return true si $str commence par $needle, false sinon
 	 */
-	public static function startsWith($str, $needle) {
+	public static function startsWith(string $str, string $needle): bool {
 		return $needle === '' || strpos($str, $needle) === 0;
 	}
 
 	/**
-	 * @param string $str
-	 * @param string $needle
+	 * @param $str
+	 * @param $needle
 	 *
-	 * @return bool
+	 * @return true si $str se termine par $needle, false sinon
 	 */
-	public static function endsWith($str, $needle) {
+	public static function endsWith(string $str, string $needle): bool {
 		return $needle === '' || substr($str, -strlen($needle)) === $needle;
 	}
 }

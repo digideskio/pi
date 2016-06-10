@@ -23,12 +23,12 @@ class Input {
 	/**
 	 * Récupérer la valeur d'un champ POST
 	 *
-	 * @param string $name
-	 * @param string $default
+	 * @param $name
+	 * @param $default
 	 *
-	 * @return string
+	 * @return La valeur du champ
 	 */
-	public static function get($name, $default = '') {
+	public static function get(string $name, string $default = '') {
 		return $_POST[$name] ?? $default;
 	}
 }

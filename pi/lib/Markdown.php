@@ -27,7 +27,7 @@ class Markdown {
 	 * 
 	 * @return mixed|string
 	 */
-	public static function html($txt) {
+	public static function html(string $txt) {
 		$parse = new ParsedownExtra();
 
 		return $parse->text($txt);
@@ -38,7 +38,7 @@ class Markdown {
 	 *
 	 * @return mixed|string
 	 */
-	public static function read($file) {
-		return static::html(file_get_contents($file));
+	public static function read(string $filename) {
+		return static::html(file_get_contents($filename));
 	}
 }
