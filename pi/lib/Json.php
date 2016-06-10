@@ -17,6 +17,8 @@
  * along with Pi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 namespace Pi\Lib;
 
 class Json {
@@ -39,7 +41,7 @@ class Json {
 	 * @return mixed
 	 */
 	public static function read(string $filename) {
-		$content = file_get_contents($filename);
+		$content = (string) file_get_contents($filename);
 
 		return static::decode($content);
 	}
