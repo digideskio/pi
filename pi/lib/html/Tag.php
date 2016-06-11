@@ -45,8 +45,8 @@ class Tag {
 	 * @param $content
 	 */
 	public function __construct(string $name,
-		                          array $attrs = [],
-		                          string $content = '') {
+	                            array $attrs = [],
+	                            string $content = '') {
 		$this->name = $name;
 		$this->attrs = $attrs;
 		$this->content = $content;
