@@ -40,9 +40,25 @@ class Page {
 	 * @todo
 	 *
 	 * Récupérer la dernière version de la page
+	 *
+	 * @throws \Exception
 	 */
 	public function getLastVersion(): Core\Page {
-		$page = Core\Page::fromFile($this->slug . '/1.json');
+		$versions = [];
+
+		foreach (glob($this->slug . '/*') as $pathfile) {
+			$filename = basename($pathfile);
+
+			$version = explode('.', $filename)[0];
+			$versions[] = (int) $version;
+		}
+
+		if (empty($versions))
+			throw new \Exception('Page "' . $this->slug . '" does not exists');
+
+		$lastVersion = max($versions);
+
+		$page = Core\Page::fromFile($this->slug . '/' . $lastVersion . '.json');
 
 		return $page;
 	}
