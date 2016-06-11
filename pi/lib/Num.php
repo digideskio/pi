@@ -32,7 +32,7 @@ class Num {
 	public static function between(float $min, float $max, float $value): bool {
 		if ($min > $max) {
 			return false;
-		} else if ($min < $max) {
+		} elseif ($min < $max) {
 			return $value >= $min && $value <= $max;
 		} else { // ($min == $max)
 			if ($min == 0 && $max == 0) { // cas particulier où aucune borne n'est définie

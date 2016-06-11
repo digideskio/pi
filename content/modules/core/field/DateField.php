@@ -50,7 +50,7 @@ class DateField extends Field {
 		} else {
 			if (empty($value))
 				return true;
-			else if (preg_match($regex, $value))
+			elseif (preg_match($regex, $value))
 				return true;
 			else
 				return false;

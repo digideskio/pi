@@ -113,7 +113,7 @@ class Pi {
 
 		if ($firstPart == 'Pi') {
 			$file = realpath(__DIR__ . '/../../') . '/' . $fileName . '.php';
-		} else if ($firstPart == 'Module') {
+		} elseif ($firstPart == 'Module') {
 			// remplace « module » par « content/modules » (seulement la
 			// première occurence)
 			$pos = strpos($fileName, 'module');
@@ -125,7 +125,7 @@ class Pi {
 
 			$file = realpath(__DIR__ . '/../../') . '/'
 				. $fileName . '.php';
-		} else if ($firstPart == 'Theme') {
+		} elseif ($firstPart == 'Theme') {
 			// remplace « theme » par « content/theme » (seulement la
 			// première occurence)
 			$pos = strpos($fileName, 'theme');
