@@ -21,11 +21,9 @@ declare(strict_types=1);
 
 namespace Pi\App;
 
-use \IteratorAggregate;
-
 use Pi\Lib\Str;
 
-class PageCollection implements IteratorAggregate {
+class PageCollection implements \IteratorAggregate {
 	/** @var Page[] Pages faisant partie de la collection */
 	private $pages;
 

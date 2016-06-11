@@ -21,8 +21,6 @@ declare(strict_types=1);
 
 namespace Pi\Core;
 
-use Exception;
-
 use Pi\Lib\Str;
 
 class Model {
@@ -110,13 +108,13 @@ class Model {
 	 *
 	 * @return $this
 	 *
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public function addField(string $fieldName, Field $field): Model {
 		if (!in_array($fieldName, array_keys($this->fields)))
 			$this->fields[$fieldName] = $field;
 		else
-			throw new Exception('Field "' . $fieldName .'" already exists in
+			throw new \Exception('Field "' . $fieldName .'" already exists in
 				model "' . $this->getTitle() . '"');
 
 		return $this;

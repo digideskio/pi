@@ -21,9 +21,6 @@ declare(strict_types=1);
 
 namespace Pi\Core;
 
-use Exception;
-use stdClass;
-
 use Pi\Lib\Flash;
 use Pi\Lib\Session;
 
@@ -61,7 +58,7 @@ class Pi {
 	/** @var string[] Fichiers JavaScript enregistrés */
 	protected $jsUrls;
 
-	/** @var stdClass Paramètres du site */
+	/** @var \stdClass Paramètres du site */
 	protected $settings;
 
 	/** @var Router Routeur */
@@ -86,14 +83,14 @@ class Pi {
 	 *
 	 * @param string $class
 	 *
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public static function autoload(string $class) {
 		if (strpos($class, 'Pi') !== 0
 			&& strpos($class, 'Module') !== 0
 			&& strpos($class, 'Theme') !== 0
 		)
-			throw new Exception('Namespace should starts with "Pi", "Module"
+			throw new \Exception('Namespace should starts with "Pi", "Module"
 				or "Theme"');
 
 		$parts = explode('\\', $class);
@@ -138,13 +135,13 @@ class Pi {
 			$file = realpath(__DIR__ . '/../../') . '/'
 				. $fileName . '.php';
 		} else {
-			throw new Exception('Unable to load class "' . $class . '"');
+			throw new \Exception('Unable to load class "' . $class . '"');
 		}
 
 		if (is_file($file))
 			require $file;
 		else
-			throw new Exception('Unable to load "' . $file . '"');
+			throw new \Exception('Unable to load "' . $file . '"');
 	}
 
 	/**
@@ -159,7 +156,7 @@ class Pi {
 		$this->users = [];
 		$this->cssUrls = [];
 		$this->jsUrls = [];
-		$this->settings = new stdClass();
+		$this->settings = new \stdClass();
 		$this->router = new Router();
 		$this->session = new Session();
 		$this->flash = new Flash();
@@ -216,9 +213,9 @@ class Pi {
 	/**
 	 * Récupérer les paramètres du site
 	 *
-	 * @return stdClass
+	 * @return \stdClass
 	 */
-	public function getSettings(): stdClass {
+	public function getSettings(): \stdClass {
 		return $this->settings;
 	}
 
@@ -272,11 +269,11 @@ class Pi {
 	 * @param string $modelName Nom du modèle
 	 * @param string $modelClass Classe du modèle
 	 *
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public function registerModel(string $modelName, string $modelClass) {
 		if (array_key_exists($modelName, $this->models))
-			throw new Exception('Model "' . $modelName . '" already registered');
+			throw new \Exception('Model "' . $modelName . '" already registered');
 
 		$this->models[$modelName] = $modelClass;
 	}
@@ -291,11 +288,11 @@ class Pi {
 	 */
 	public function overrideModel(string $modelName, string $modelClass) {
 		if (!array_key_exists($modelName, $this->models))
-			throw new Exception('Model "' . $modelName . '" does not exists and
+			throw new \Exception('Model "' . $modelName . '" does not exists and
 				cannot be overrided');
 
 		if (array_key_exists($modelName, $this->overridedModels))
-			throw new Exception('Model "' . $modelName . '" already overrided');
+			throw new \Exception('Model "' . $modelName . '" already overrided');
 
 		$this->overridedModels[$modelName] = $modelClass;
 	}
@@ -308,10 +305,10 @@ class Pi {
 	 * @param string $modelName Nom du modèle à surcharger
 	 * @param string $filename Chemin vers la vue surchargée
 	 *
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public function overrideViewModel(string $modelName, string $filename) {
-		throw new Exception('Non-implemented');
+		throw new \Exception('Non-implemented');
 	}
 
 	/**
@@ -320,11 +317,11 @@ class Pi {
 	 * @param string $fieldName Nom du champ
 	 * @param string $fieldClass Classe du champ
 	 *
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public function registerField(string $fieldName, string $fieldClass) {
 		if (array_key_exists($fieldName, $this->fields))
-			throw new Exception('Field "' . $fieldName . '" already registered');
+			throw new \Exception('Field "' . $fieldName . '" already registered');
 
 		$this->fields[$fieldName] = $fieldClass;
 	}
@@ -335,15 +332,15 @@ class Pi {
 	 * @param string $fieldName Nom du champ à surcharger
 	 * @param string $fieldClass Classe du champ
 	 *
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public function overrideField(string $fieldName, string $fieldClass) {
 		if (!array_key_exists($fieldName, $this->fields))
-			throw new Exception('Field "' . $fieldName . '" does not exists and
+			throw new \Exception('Field "' . $fieldName . '" does not exists and
 				cannot be overrided');
 
 		if (array_key_exists($fieldName, $this->overridedFields))
-			throw new Exception('Field "' . $fieldName . '" already overrided');
+			throw new \Exception('Field "' . $fieldName . '" already overrided');
 
 		$this->overridedFields[$fieldName] = $fieldClass;
 	}

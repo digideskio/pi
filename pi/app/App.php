@@ -21,8 +21,6 @@ declare(strict_types=1);
 
 namespace Pi\App;
 
-use Exception;
-
 use Pi\Core\Model;
 use Pi\Core\Pi;
 use Pi\Core\Renderer;
@@ -72,7 +70,7 @@ class App extends Pi {
 			$theme = new $classname($this);
 			$theme->initialize();
 		} else {
-			throw new Exception('Unable to load "' . $this->theme . 'Theme.php"
+			throw new \Exception('Unable to load "' . $this->theme . 'Theme.php"
 				for theme "' . $this->theme . '"');
 		}
 	}
@@ -105,7 +103,7 @@ class App extends Pi {
 				$module = new $classname($this);
 				$module->initialize();
 			} else {
-				throw new Exception('Missing "' . $dir . 'Module.php" in module
+				throw new \Exception('Missing "' . $dir . 'Module.php" in module
 					"' . $dir . '"');
 			}
 		}

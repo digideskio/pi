@@ -21,8 +21,6 @@ declare(strict_types=1);
 
 namespace Pi\Core;
 
-use Exception;
-
 abstract class Field {
 	protected static $num = 0;
 
@@ -70,7 +68,7 @@ abstract class Field {
 	 *
 	 * @param $array
 	 *
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public static function fromArray(array $array): Field {
 		$field = new static();
@@ -81,7 +79,7 @@ abstract class Field {
 			if (method_exists($field, $setter))
 				$field->$setter($value);
 			else
-				throw new Exception('No setter available for "' . $key . '"');
+				throw new \Exception('No setter available for "' . $key . '"');
 		}
 
 		return $field;

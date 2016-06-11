@@ -21,10 +21,7 @@ declare(strict_types=1);
 
 namespace Pi\Lib;
 
-use \IteratorAggregate;
-use \Generator;
-
-class Pagination implements IteratorAggregate {
+class Pagination implements \IteratorAggregate {
 	/** @var int */
 	protected $first;
 
@@ -135,9 +132,9 @@ class Pagination implements IteratorAggregate {
 	}
 
 	/**
-	 * @return Generator
+	 * @return \Generator
 	 */
-	public function getIterator(): Generator {
+	public function getIterator(): \Generator {
 		for ($i = $this->first ; $i <= $this->last ; $i++)
 			yield $i;
 	}
