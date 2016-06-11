@@ -65,7 +65,7 @@ class Tag {
 	 */
 	public function addAttrs(array $attrs) {
 		foreach ($attrs as $key => $value)
-		$this->addAttr($key, $value);
+			$this->addAttr($key, $value);
 	}
 
 	/**
