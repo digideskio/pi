@@ -117,11 +117,12 @@ class App extends Pi {
 	 * Lance la recherche de la page et la retourne
 	 */
 	public function run() {
-		$page = new Page($this->router->getPath());
-		$content = $page->getLastVersion();
+		$page = new Page(PI_DIR_PAGES . $this->router->getPath());
 
-		if (!$content) {
-			$page = new Page('error');
+		try {
+			$content = $page->getLastVersion();
+		} catch (Exception $e) {
+			$page = new Page(PI_DIR_PAGES . 'error');
 			$content = $page->getLastVersion();
 		}
 

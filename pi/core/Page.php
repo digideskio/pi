@@ -43,20 +43,31 @@ class Page {
 	/**
 	 * Créer une instance de Page à partir d'un fichier JSON
 	 *
-	 * @param string $filename Fichier JSON
+	 * @param $filename Fichier JSON
 	 *
-	 * @return static
+	 * @return Page
+	 *
+	 * @throws \Exception
 	 */
 	public static function fromFile(string $filename): Page {
+		if (!file_exists($filename))
+			throw new \Exception('File "' . $filename . '" does not exists.');
+
 		$json = Json::read($filename);
+
+		$createdAt = new DateTime();
+		$createdAt->setTimestamp($json->created_at);
+
+		$updatedAt = new DateTime();
+		$updatedAt->setTimestamp($json->updated_at);
 
 		$page = new static();
 
 		$page->setTitle($json->title);
 		$page->setModel($json->model);
-		$page->setCreatedAt($json->created_at);
-		$page->setUpdatedAt($json->updated_at);
-		$page->setFields($json->fields);
+		$page->setCreatedAt($createdAt);
+		$page->setUpdatedAt($updatedAt);
+		$page->setFields((array) $json->fields);
 
 		return $page;
 	}
@@ -79,7 +90,7 @@ class Page {
 	 *
 	 * @return $this
 	 */
-	public function setTitle($title) {
+	public function setTitle(string $title) {
 		$this->title = $title;
 
 		return $this;
@@ -92,7 +103,7 @@ class Page {
 	 *
 	 * @return $this
 	 */
-	public function setModel($model) {
+	public function setModel(string $model) {
 		$this->model = $model;
 
 		return $this;
@@ -105,7 +116,7 @@ class Page {
 	 *
 	 * @return $this
 	 */
-	public function setCreatedAt($createdAt) {
+	public function setCreatedAt(DateTime $createdAt) {
 		$this->createdAt = $createdAt;
 
 		return $this;
@@ -118,7 +129,7 @@ class Page {
 	 *
 	 * @return $this
 	 */
-	public function setUpdatedAt($updatedAt) {
+	public function setUpdatedAt(DateTime $updatedAt) {
 		$this->updatedAt = $updatedAt;
 
 		return $this;
@@ -131,7 +142,7 @@ class Page {
 	 *
 	 * @return $this
 	 */
-	public function setFields($fields) {
+	public function setFields(array $fields) {
 		$this->fields = $fields;
 
 		return $this;
@@ -142,7 +153,7 @@ class Page {
 	 *
 	 * @return string
 	 */
-	public function getTitle() {
+	public function getTitle(): string {
 		return $this->title;
 	}
 
@@ -151,7 +162,7 @@ class Page {
 	 *
 	 * @return string
 	 */
-	public function getModel() {
+	public function getModel(): string {
 		return $this->model;
 	}
 
@@ -160,7 +171,7 @@ class Page {
 	 *
 	 * @return DateTime
 	 */
-	public function getCreatedAt() {
+	public function getCreatedAt(): DateTime {
 		return $this->createdAt;
 	}
 
@@ -169,7 +180,7 @@ class Page {
 	 *
 	 * @return DateTime
 	 */
-	public function getUpdatedAt() {
+	public function getUpdatedAt(): DateTime {
 		return $this->updatedAt;
 	}
 
@@ -178,7 +189,7 @@ class Page {
 	 *
 	 * @return array
 	 */
-	public function getFields() {
+	public function getFields(): array {
 		return $this->fields;
 	}
 
@@ -189,7 +200,7 @@ class Page {
 	 *
 	 * @return int
 	 */
-	public function saveToFile($filename) {
+	public function saveToFile(string $filename): int {
 		return file_put_contents($filename, (string) $this);
 	}
 
@@ -198,7 +209,7 @@ class Page {
 	 *
 	 * @return string
 	 */
-	public function __toString() {
+	public function __toString(): string {
 		$arr = [];
 
 		$arr['title'] = $this->getTitle();
