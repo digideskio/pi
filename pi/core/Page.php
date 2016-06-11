@@ -24,7 +24,7 @@ namespace Pi\Core;
 use DateTime;
 use Pi\Lib\Json;
 
-class Page {
+class Page implements \JsonSerializable {
 	/** @var string Titre de la page */
 	private $title;
 
@@ -207,9 +207,9 @@ class Page {
 	/**
 	 * Représentation JSON de la page
 	 *
-	 * @return string
+	 * @return Tableau PHP représentant la page et pouvant être encodé en JSON
 	 */
-	public function __toString(): string {
+	public function jsonSerialize(): array {
 		$arr = [];
 
 		$arr['title'] = $this->getTitle();
@@ -218,9 +218,9 @@ class Page {
 		$arr['updated_at'] = $this->getUpdatedAt()->format(DateTime::ISO8601);
 		$arr['fields'] = [];
 
-		foreach ($this->getFields() as $field)
-			$arr['fields'] = (string) $field;
+		foreach ($this->getFields() as $fieldName => $field)
+			$arr['fields'][$fieldName] = (string) $field;
 
-		return Json::encode($arr);
+		return $arr;
 	}
 }
