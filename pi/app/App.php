@@ -22,8 +22,10 @@ declare(strict_types=1);
 namespace Pi\App;
 
 use Pi\Core\Model;
+use Pi\Core\Module;
 use Pi\Core\Pi;
 use Pi\Core\Renderer;
+use Pi\Core\Theme;
 use Pi\Lib\Json;
 
 class App extends Pi {
@@ -119,7 +121,7 @@ class App extends Pi {
 
 		try {
 			$content = $page->getLastVersion();
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			$page = new Page(PI_DIR_PAGES . 'error');
 			$content = $page->getLastVersion();
 		}

@@ -21,7 +21,6 @@ declare(strict_types=1);
 
 namespace Pi\Core;
 
-use DateTime;
 use Pi\Lib\Json;
 
 class Page implements \JsonSerializable {
@@ -31,10 +30,10 @@ class Page implements \JsonSerializable {
 	/** @var string Modèle utilisé par la page */
 	private $model;
 
-	/** @var DateTime Date de création de la page */
+	/** @var \DateTime Date de création de la page */
 	private $createdAt;
 
-	/** @var DateTime Date de dernière mise à jour de la page */
+	/** @var \DateTime Date de dernière mise à jour de la page */
 	private $updatedAt;
 
 	/** @var array Liste des champs de la page */
@@ -55,10 +54,10 @@ class Page implements \JsonSerializable {
 
 		$json = Json::read($filename);
 
-		$createdAt = new DateTime();
+		$createdAt = new \DateTime();
 		$createdAt->setTimestamp($json->created_at);
 
-		$updatedAt = new DateTime();
+		$updatedAt = new \DateTime();
 		$updatedAt->setTimestamp($json->updated_at);
 
 		$page = new static();
@@ -78,8 +77,8 @@ class Page implements \JsonSerializable {
 	public function __construct() {
 		$this->title = '';
 		$this->model = '';
-		$this->createdAt = new DateTime();
-		$this->updatedAt = new DateTime();
+		$this->createdAt = new \DateTime();
+		$this->updatedAt = new \DateTime();
 		$this->fields = [];
 	}
 
@@ -116,7 +115,7 @@ class Page implements \JsonSerializable {
 	 *
 	 * @return $this
 	 */
-	public function setCreatedAt(DateTime $createdAt) {
+	public function setCreatedAt(\DateTime $createdAt) {
 		$this->createdAt = $createdAt;
 
 		return $this;
@@ -129,7 +128,7 @@ class Page implements \JsonSerializable {
 	 *
 	 * @return $this
 	 */
-	public function setUpdatedAt(DateTime $updatedAt) {
+	public function setUpdatedAt(\DateTime $updatedAt) {
 		$this->updatedAt = $updatedAt;
 
 		return $this;
@@ -169,18 +168,18 @@ class Page implements \JsonSerializable {
 	/**
 	 * Récupérer la date de création de la page
 	 *
-	 * @return DateTime
+	 * @return \DateTime
 	 */
-	public function getCreatedAt(): DateTime {
+	public function getCreatedAt(): \DateTime {
 		return $this->createdAt;
 	}
 
 	/**
 	 * Récupérer la date de dernière mise à jour de la page
 	 *
-	 * @return DateTime
+	 * @return \DateTime
 	 */
-	public function getUpdatedAt(): DateTime {
+	public function getUpdatedAt(): \DateTime {
 		return $this->updatedAt;
 	}
 
@@ -214,8 +213,8 @@ class Page implements \JsonSerializable {
 
 		$arr['title'] = $this->getTitle();
 		$arr['model'] = $this->getModel();
-		$arr['created_at'] = $this->getCreatedAt()->format(DateTime::ISO8601);
-		$arr['updated_at'] = $this->getUpdatedAt()->format(DateTime::ISO8601);
+		$arr['created_at'] = $this->getCreatedAt()->format(\DateTime::ISO8601);
+		$arr['updated_at'] = $this->getUpdatedAt()->format(\DateTime::ISO8601);
 		$arr['fields'] = [];
 
 		foreach ($this->getFields() as $fieldName => $field)

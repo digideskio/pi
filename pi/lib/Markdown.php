@@ -21,8 +21,6 @@ declare(strict_types=1);
 
 namespace Pi\Lib;
 
-use ParsedownExtra;
-
 class Markdown {
 	/**
 	 * @param $txt
@@ -30,7 +28,7 @@ class Markdown {
 	 * @return mixed|string
 	 */
 	public static function html(string $txt) {
-		$parse = new ParsedownExtra();
+		$parse = new \ParsedownExtra();
 
 		return $parse->text($txt);
 	}
