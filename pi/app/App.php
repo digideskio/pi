@@ -23,6 +23,7 @@ namespace Pi\App;
 
 use Pi\Core\Model;
 use Pi\Core\Module;
+use Pi\Core\Page;
 use Pi\Core\Pi;
 use Pi\Core\Renderer;
 use Pi\Core\Theme;
@@ -117,13 +118,10 @@ class App extends Pi {
 	 * Lance la recherche de la page et la retourne
 	 */
 	public function run() {
-		$page = new Page(PI_DIR_PAGES . $this->router->getPath());
-
 		try {
-			$content = $page->getLastVersion();
+			$content = Page::getLastVersion($this->router->getPath());
 		} catch (\Exception $e) {
-			$page = new Page(PI_DIR_PAGES . 'error');
-			$content = $page->getLastVersion();
+			$content = Page::getLastVersion('error');
 		}
 
 		$model = $content->getModel();

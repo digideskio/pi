@@ -46,7 +46,7 @@ class Pi {
 	/** @var array Champs enregistrés */
 	protected $overridedFields;
 
-	/** @var array Pages enregistrées */
+	/** @var PageCollection Pages enregistrées */
 	protected $pages;
 
 	/** @var array Utilisateurs enregistrés */
@@ -152,7 +152,7 @@ class Pi {
 		$this->overridedFields = [];
 		$this->models = [];
 		$this->overridedModels = [];
-		$this->pages = [];
+		$this->pages = PageCollection::getAllPages();
 		$this->users = [];
 		$this->cssUrls = [];
 		$this->jsUrls = [];
@@ -195,9 +195,9 @@ class Pi {
 	/**
 	 * Récupérer la liste des pages
 	 *
-	 * @return array
+	 * @return Liste des pages
 	 */
-	public function getPages(): array {
+	public function getPages(): PageCollection {
 		return $this->pages;
 	}
 

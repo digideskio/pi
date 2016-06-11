@@ -72,6 +72,34 @@ class Page implements \JsonSerializable {
 	}
 
 	/**
+	 * @todo
+	 *
+	 * Récupérer la dernière version de la page
+	 *
+	 * @throws \Exception
+	 */
+	public static function getLastVersion($slug): Page {
+		$versions = [];
+
+		foreach (glob(PI_DIR_PAGES . $slug . '/*') as $pathfile) {
+			$filename = basename($pathfile);
+
+			$version = explode('.', $filename)[0];
+			$versions[] = (int) $version;
+		}
+
+		if (empty($versions))
+			throw new \Exception('Page "' . $slug . '" does not exists');
+
+		$lastVersion = max($versions);
+
+		$page = static::fromFile(PI_DIR_PAGES . $slug . '/'
+			. $lastVersion . '.json');
+
+		return $page;
+	}
+
+	/**
 	 * Constructeur
 	 */
 	public function __construct() {

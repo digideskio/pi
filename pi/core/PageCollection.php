@@ -19,7 +19,7 @@
 
 declare(strict_types=1);
 
-namespace Pi\App;
+namespace Pi\Core;
 
 use Pi\Lib\Str;
 
@@ -58,10 +58,8 @@ class PageCollection implements \IteratorAggregate {
 		// Récupération de la dernière version de chacune des pages
 		$pages = [];
 
-		foreach ($dirs as $dir) {
-			$page = new Page($dir);
-			$pages[$dir] = $page->getLastVersion();
-		}
+		foreach ($dirs as $dir)
+			$pages[$dir] = Page::getLastVersion($dir);
 
 		// Création de la collection
 		$self = new static($pages);
@@ -140,7 +138,8 @@ class PageCollection implements \IteratorAggregate {
 	 */
 	public function containsField(string $fieldName): PageCollection {
 		$this->pages = array_filter($this->pages, function($page) use ($fieldName) {
-			return isset($page['fields'][$fieldName]);
+			/** @var Page $page */
+			return array_key_exists($fieldName, $page->getFields());
 		});
 
 		return $this;
