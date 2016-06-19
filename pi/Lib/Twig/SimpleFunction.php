@@ -19,12 +19,6 @@
 
 declare(strict_types=1);
 
-namespace Theme\Classic;
+namespace Pi\Lib\Twig;
 
-use Pi\Core\App\Theme;
-
-class ClassicTheme extends Theme {
-	public function initialize() {
-		$this->loadCss(PI_URL_THEME . 'css/style.css');
-	}
-}
+class SimpleFunction extends \Twig_SimpleFunction { }

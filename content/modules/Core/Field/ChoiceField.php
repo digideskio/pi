@@ -19,12 +19,34 @@
 
 declare(strict_types=1);
 
-namespace Theme\Classic;
+namespace Module\Core\Field;
 
-use Pi\Core\App\Theme;
+use Pi\Core\Model\Field;
 
-class ClassicTheme extends Theme {
-	public function initialize() {
-		$this->loadCss(PI_URL_THEME . 'css/style.css');
+class ChoiceField extends Field {
+	/**
+	 * @param $data
+	 */
+	public function __construct(array $data = []) {
+		parent::__construct($data);
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function html(): string {
+		$val = $this->value();
+
+		$html = '<select name="' . $this->name . '"' . ($this->required ? ' required' : '') . ' id="input-' . $this->id . '">';
+
+		foreach ($this->options as $key => $value) {
+		 	$selected = $key == $val ? ' selected' : '';
+
+			$html .= '<option value="' . $key . '"' . $selected . '>' . $value . '</option>';
+		}
+
+		$html .= '</select>';
+
+		return $html;
 	}
 }

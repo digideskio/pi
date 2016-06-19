@@ -19,12 +19,22 @@
 
 declare(strict_types=1);
 
-namespace Theme\Classic;
+namespace Module\Core\Model;
 
-use Pi\Core\App\Theme;
+use Pi\Core\Model\Model;
+use Module\Core\Field\TextareaField;
 
-class ClassicTheme extends Theme {
-	public function initialize() {
-		$this->loadCss(PI_URL_THEME . 'css/style.css');
+class PageModel extends Model {
+	public function __construct() {
+		parent::__construct();
+
+		$this->setTitle('Page');
+		$this->setViewFilename(__DIR__ . '/views/' . 'page.html');
+
+		$content = new TextareaField();
+		$content->setLabel('Contenu');
+		$content->setFormat('twig');
+
+		$this->addField('content', $content);
 	}
 }

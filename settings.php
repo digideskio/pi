@@ -26,10 +26,7 @@ require 'pi/vendors/parsedown/Parsedown.php';
 require 'pi/vendors/parsedown/ParsedownExtra.php';
 
 // Classe d'entrée
-require 'pi/core/Pi.php';
-
-// Chargement de Twig
-Twig_Autoloader::register();
+require 'pi/Core/App/Pi.php';
 
 // Chargement de Pi
-Pi\Core\Pi::register();
+Pi\Core\App\Pi::register();

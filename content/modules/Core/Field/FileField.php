@@ -19,12 +19,33 @@
 
 declare(strict_types=1);
 
-namespace Theme\Classic;
+namespace Module\Core\Field;
 
-use Pi\Core\App\Theme;
+use Pi\Core\Model\Field;
+use Pi\Lib\Html\Tag;
 
-class ClassicTheme extends Theme {
-	public function initialize() {
-		$this->loadCss(PI_URL_THEME . 'css/style.css');
+class FileField extends Field {
+	/**
+	 * @param $data
+	 */
+	public function __construct(array $data = []) {
+		parent::__construct($data);
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function html(): string {
+		$tag = new Tag('input', [
+			'name'  => $this->name,
+			'type'  => 'file',
+			'value' => $this->value(),
+			'id'    => 'input-' . $this->id
+		]);
+
+		if ($this->required)
+			$tag->addAttr('required');
+
+		return $tag;
 	}
 }

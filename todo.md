@@ -9,6 +9,10 @@ projet utilisable en production.
 	- Gérer les utilisateurs (avec permissions) ;
 	- Gérer les paramètres du site ;
 	- Gérer les paramètres avancés du site ;
+	- Donner la possibilité, via les modules, de créer des « filtres ».
+	  C'est-à-dire de créer des pages d'administration qui n'afficheront que
+	  les pages qui correspondent à ce filtre, un peu comme le fait
+	  PageCollection pour les pages ;
 
 - Thème :
 	- Ajouter la possibilité de partager des données communes entre les thèmes ;
