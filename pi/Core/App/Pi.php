@@ -90,65 +90,43 @@ class Pi {
 	 * @throws \Exception
 	 */
 	public static function autoload(string $class) {
-		if (strpos($class, 'Twig') === 0)
+		// S'il s'agit d'une classe sans espace de nom, elle est ignorée
+		if (strpos($class, '\\') === false)
 			return;
 
-		if (strpos($class, 'Pi') !== 0
-			&& strpos($class, 'Module') !== 0
-			&& strpos($class, 'Theme') !== 0
-		)
-			throw new \Exception('Namespace should starts with "Pi", "Module"
-				or "Theme"');
+		// Espaces de nom enregistrés
+		static $namespaces = [
+			'Pi' => PI_DIR_SITE . 'pi/',
+			'Module' => PI_DIR_MODULES,
+			'Theme' => PI_DIR_THEMES
+		];
 
-		$parts = explode('\\', $class);
+		// Recherche du dossier à utiliser
+		$finalNamespace = '';
+		$finalDir = '';
 
-		$newParts = [];
-
-		for ($i = 0, $len = count($parts) ; $i < $len ; $i++) {
-			if ($i == 0)
-				$newParts[] = strtolower($parts[$i]);
-			else
-				$newParts[] = $parts[$i];
+		foreach ($namespaces as $namespace => $dir) {
+			if (strpos($class, $namespace) === 0) {
+				$finalNamespace = $namespace;
+				$finalDir = $dir;
+				break;
+			}
 		}
 
-		$fileName = implode('/', $newParts);
+		// Aucun espace de nom trouvé
+		if (!$finalNamespace)
+			throw new \Exception('Unable to find a namespace for "' . $class . '"');
 
-		$firstPart = $parts[0];
+		// Fichier à charger
+		$file = $finalDir
+			. str_replace('\\', '/', substr($class, strlen($finalNamespace) + 1))
+			. '.php';
 
-		if ($firstPart == 'Pi') {
-			$file = realpath(__DIR__ . '/../../../') . '/' . $fileName . '.php';
-		} elseif ($firstPart == 'Module') {
-			// remplace « module » par « content/modules » (seulement la
-			// première occurence)
-			$pos = strpos($fileName, 'module');
-
-			if ($pos !== false) {
-				$fileName = substr_replace($fileName, 'content/modules', $pos,
-					strlen('module'));
-			}
-
-			$file = realpath(__DIR__ . '/../../../') . '/'
-				. $fileName . '.php';
-		} elseif ($firstPart == 'Theme') {
-			// remplace « theme » par « content/theme » (seulement la
-			// première occurence)
-			$pos = strpos($fileName, 'theme');
-
-			if ($pos !== false) {
-				$fileName = substr_replace($fileName, 'content/themes', $pos,
-					strlen('theme'));
-			}
-
-			$file = realpath(__DIR__ . '/../../../') . '/'
-				. $fileName . '.php';
-		} else {
-			throw new \Exception('Unable to load class "' . $class . '"');
-		}
-
+		// Chargement du fichier
 		if (is_file($file))
 			require $file;
-		//else
-		//	throw new \Exception('Unable to load "' . $file . '"');
+		else
+			throw new \Exception('Unable to load "' . $file . '"');
 	}
 
 	/**
