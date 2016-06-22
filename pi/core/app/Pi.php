@@ -35,7 +35,7 @@ class Pi {
 	/** @var string */
 	protected $query;
 
-	/** @var string Nom du thème */
+	/** @var Theme Thème */
 	protected $theme;
 
 	/** @var array Modèles enregistrés */
@@ -121,6 +121,23 @@ class Pi {
 		$file = $finalDir
 			. str_replace('\\', '/', substr($class, strlen($finalNamespace) + 1))
 			. '.php';
+
+		$parts = explode('/', $file);
+
+		$i = 0;
+
+		$newParts = [];
+
+		foreach ($parts as $part) {
+			if ($i == count($parts) - 1)
+				$newParts[] = $part;
+			else
+				$newParts[] = strtolower($part);
+
+			$i++;
+		}
+
+		$file = join('/', $newParts);
 
 		// Chargement du fichier
 		if (is_file($file))

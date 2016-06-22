@@ -25,6 +25,9 @@ abstract class Theme {
 	/** @var App */
 	private $app;
 
+	/** @var string Nom du thème */
+	private $name;
+
 	/**
 	 * Constructeur du thème
 	 *
@@ -38,6 +41,19 @@ abstract class Theme {
 	 * Initialisation du thème
 	 */
 	abstract public function initialize();
+
+	/**
+	 * Définir le nom du thème
+	 *
+	 * @param $themeName Nom du thème
+	 *
+	 * @return $this L'instance du thème
+	 */
+	public function setName(string $themeName): Theme {
+		$this->name = $themeName;
+
+		return $this;
+	}
 
 	/**
 	 * Charger un fichier CSS dans le thème

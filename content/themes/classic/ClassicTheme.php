@@ -25,6 +25,6 @@ use Pi\Core\App\Theme;
 
 class ClassicTheme extends Theme {
 	public function initialize() {
-		$this->loadCss(PI_URL_THEME . 'css/style.css');
+		$this->loadCss(PI_URL_THEMES . 'classic/css/style.css');
 	}
 }

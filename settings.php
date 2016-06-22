@@ -26,7 +26,7 @@ require 'pi/vendors/parsedown/Parsedown.php';
 require 'pi/vendors/parsedown/ParsedownExtra.php';
 
 // Classe d'entrée
-require 'pi/Core/App/Pi.php';
+require 'pi/core/app/Pi.php';
 
 // Chargement de Pi
 Pi\Core\App\Pi::register();

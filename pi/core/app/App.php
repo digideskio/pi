@@ -27,6 +27,8 @@ use Pi\Core\View\Renderer;
 use Pi\Lib\Json;
 
 class App extends Pi {
+	private $foldersThemes;
+
 	/**
 	 * Contruction de l'application
 	 */
@@ -50,28 +52,39 @@ class App extends Pi {
 	 * Initialise le thème courant
 	 */
 	private function initializeTheme() {
-		$this->theme = $this->settings->site->theme;
+		$this->foldersThemes = [];
 
-		if (!$this->theme)
-			$this->theme = 'classic';
+		$themeName = $this->settings->site->theme;
 
-		define('PI_DIR_THEME', PI_DIR_THEMES . $this->theme . '/');
-		define('PI_URL_THEME', PI_URL_THEMES . $this->theme . '/');
+		if (!$themeName)
+			$themeName = 'classic';
 
-		$filename = PI_DIR_THEME . ucfirst($this->theme) . 'Theme.php';
+		define('PI_DIR_THEME', PI_DIR_THEMES . $themeName . '/');
+		define('PI_URL_THEME', PI_URL_THEMES . $themeName . '/');
+
+		$filename = PI_DIR_THEME . ucfirst($themeName) . 'Theme.php';
 
 		if (file_exists($filename)) {
 			require $filename;
 
-			$classname = 'Theme\\' . $this->theme . '\\'
-				. $this->theme . 'Theme';
+			$classname = 'Theme\\' . $themeName . '\\'
+				. $themeName . 'Theme';
 
 			/** @var Theme $theme */
-			$theme = new $classname($this);
-			$theme->initialize();
+			$this->theme = new $classname($this);
+			$this->theme->setName($themeName);
+			$this->theme->initialize();
+
+			$reflectTheme = new \ReflectionClass($this->theme);
+
+			$this->foldersThemes[] = dirname($reflectTheme->getFileName()). '/tpl/';
+
+			while ($reflectTheme = $reflectTheme->getParentClass())
+				if ($reflectTheme->getName() != 'Pi\Core\App\Theme')
+					$this->foldersThemes[] = dirname($reflectTheme->getFileName()) . '/tpl/';
 		} else {
-			throw new \Exception('Unable to load "' . $this->theme . 'Theme.php"
-				for theme "' . $this->theme . '"');
+			throw new \Exception('Unable to load "' . $themeName . 'Theme.php" for
+				theme "' . $themeName . '"');
 		}
 	}
 
@@ -80,7 +93,10 @@ class App extends Pi {
 	 */
 	private function initializeRenderer() {
 		$this->renderer = new Renderer($this);
-		$this->renderer->addPath(PI_DIR_THEME . '/tpl', 'theme');
+
+		foreach ($this->foldersThemes as $folderTheme)
+			if (is_dir($folderTheme))
+				$this->renderer->addPath($folderTheme, 'theme');
 	}
 
 	/**
