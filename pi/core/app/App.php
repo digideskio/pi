@@ -27,7 +27,7 @@ use Pi\Core\View\Renderer;
 use Pi\Lib\Json;
 
 class App extends Pi {
-	private $foldersThemes;
+	private $treeThemes;
 
 	/**
 	 * Contruction de l'application
@@ -53,6 +53,9 @@ class App extends Pi {
 	 */
 	private function initializeTheme() {
 		$this->foldersThemes = [];
+		$this->urlsThemes = [];
+
+		$this->treeThemes = [];
 
 		$themeName = $this->settings->site->theme;
 
@@ -77,11 +80,21 @@ class App extends Pi {
 
 			$reflectTheme = new \ReflectionClass($this->theme);
 
-			$this->foldersThemes[] = dirname($reflectTheme->getFileName()). '/tpl/';
+			$this->treeThemes[] = [
+				'folder' => dirname($reflectTheme->getFileName()) . '/',
+				'url' => PI_URL_THEMES
+					. substr(strtolower($reflectTheme->getShortName()), 0, -5) . '/'
+			];
 
-			while ($reflectTheme = $reflectTheme->getParentClass())
-				if ($reflectTheme->getName() != 'Pi\Core\App\Theme')
-					$this->foldersThemes[] = dirname($reflectTheme->getFileName()) . '/tpl/';
+			while ($reflectTheme = $reflectTheme->getParentClass()) {
+				if ($reflectTheme->getName() != 'Pi\Core\App\Theme') {
+					$this->treeThemes[] = [
+						'folder' => dirname($reflectTheme->getFileName()) . '/',
+						'url' => PI_URL_THEMES
+							. substr(strtolower($reflectTheme->getShortName()), 0, -5) . '/'
+					];
+				}
+			}
 		} else {
 			throw new \Exception('Unable to load "' . $themeName . 'Theme.php" for
 				theme "' . $themeName . '"');
@@ -94,9 +107,9 @@ class App extends Pi {
 	private function initializeRenderer() {
 		$this->renderer = new Renderer($this);
 
-		foreach ($this->foldersThemes as $folderTheme)
-			if (is_dir($folderTheme))
-				$this->renderer->addPath($folderTheme, 'theme');
+		foreach ($this->treeThemes as $theme)
+			if (is_dir($theme['folder']))
+				$this->renderer->addPath($theme['folder'] . 'tpl/', 'theme');
 	}
 
 	/**
@@ -154,5 +167,60 @@ class App extends Pi {
 			'page' => $fields,
 			'meta' => $meta
 		]);
+	}
+
+
+	/**
+	 * @return Fichiers CSS
+	 *
+	 * @throws \Exception
+	 */
+	public function getCssUrls(): array {
+		$files = [];
+
+		foreach ($this->cssUrls as $file) {
+			foreach ($this->treeThemes as $theme) {
+				$filename = $theme['folder'] . $file;
+
+				if (file_exists($filename)) {
+					$files[$file] = $theme['url'] . $file;
+					break;
+				}
+			}
+		}
+
+		foreach ($this->cssUrls as $file) {
+			if (!in_array($file, array_keys($files)))
+				throw new \Exception('Unable to load theme CSS "' . $file . '"');
+		}
+
+		return $files;
+	}
+
+	/**
+	 * @return Fichiers JavaScript
+	 *
+	 * @throws \Exception
+	 */
+	public function getJsUrls(): array {
+		$files = [];
+
+		foreach ($this->jsUrls as $file) {
+			foreach ($this->treeThemes as $theme) {
+				$filename = $theme['folder'] . $file;
+
+				if (file_exists($filename)) {
+					$files[$file] = $theme['url'] . $file;
+					break;
+				}
+			}
+		}
+
+		foreach ($this->jsUrls as $file) {
+			if (!in_array($file, array_keys($files)))
+				throw new \Exception('Unable to load theme JS "' . $file . '"');
+		}
+
+		return $files;
 	}
 }

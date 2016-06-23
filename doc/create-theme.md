@@ -5,12 +5,46 @@
 - Se placer dans le dossier `content/themes/` ;
 - Créer un dossier portant le nom du thème en minuscule : « `0-9`, `a-z`,
   `_` » ;
-- Dans ce nouveau dossier, créer un fichier `init.php` ;
-- Toujours dans ce dossier, créer un sous-dossier `tpl/` et dans celui-ci un
-  fichier nommé `layout.html`.
-  
-Sinon, il est possible de dupliquer le thème `default` et de l'étudier pour voir
-comment il est construit.
+- Dans ce nouveau dossier, créer un fichier `${NomThème}Theme.php`.
+
+Contenu du fichier `${NomThème}Theme.php` :
+
+```php
+<?php
+
+namespace Theme\Classic;
+
+use Pi\Core\App\Theme;
+
+class ${NomThème}Theme extends Theme {
+}
+```
+
+Il est aussi possible d'hériter un thème de la même manière :
+
+```php
+<?php
+
+namespace Theme\Classic;
+
+use Theme\Classic\ClassicTheme;
+
+class ${NomThème}Theme extends ClassicTheme {
+  public function initialize() {
+    parent::initialize();
+  }
+}
+```
+
+Pour charger un fichier CSS ou JavaScript, il est préférable d'utiliser la
+fonction `initialize` plutôt que de le mettre dans le code HTML :
+
+```php
+$this->registerCss('css/style.css');
+```
+
+Sinon, il est possible de dupliquer le thème `classic` et de l'étudier pour
+voir comment il est construit.
 
 ## Variables disponibles dans les vues
 

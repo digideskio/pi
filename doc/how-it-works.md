@@ -7,9 +7,7 @@ Cela est vrai pour :
 - Les utilisateurs.
 
 Cela est faux pour :
-- Les champs.
-
-Ceux-ci doivent obligatoirement être créé en PHP.
+- Les champs (ceux-ci doivent obligatoirement être créé en PHP).
 
 ---
 

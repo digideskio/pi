@@ -108,14 +108,14 @@ abstract class Module {
 	/**
 	 * @param $url
 	 */
-	protected function loadCss(string $url) {
-		$this->app->loadCss($url);
+	protected function registerCss(string $url) {
+		$this->app->registerCss($url);
 	}
 
 	/**
 	 * @param $url
 	 */
-	protected function loadJs(string $url) {
-		$this->app->loadJs($url);
+	protected function registerJs(string $url) {
+		$this->app->registerJs($url);
 	}
 }

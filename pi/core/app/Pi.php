@@ -235,14 +235,14 @@ class Pi {
 	/**
 	 * @param $url Fichier CSS à charger
 	 */
-	public function loadCss(string $url) {
+	public function registerCss(string $url) {
 		$this->cssUrls[] = $url;
 	}
 
 	/**
 	 * @param $url Fichier JavaScript à charger
 	 */
-	public function loadJs(string $url) {
+	public function registerJs(string $url) {
 		$this->jsUrls[] = $url;
 	}
 

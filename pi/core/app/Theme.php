@@ -60,8 +60,8 @@ abstract class Theme {
 	 *
 	 * @param $url Chemin vers le fichier CSS à charger
 	 */
-	protected function loadCss(string $url) {
-		$this->app->loadCss($url);
+	protected function registerCss(string $url) {
+		$this->app->registerCss($url);
 	}
 
 	/**
@@ -69,8 +69,8 @@ abstract class Theme {
 	 *
 	 * @param $url Chemin vers le fichier JavaScript à charger
 	 */
-	protected function loadJs(string $url) {
-		$this->app->loadJs($url);
+	protected function registerJs(string $url) {
+		$this->app->registerJs($url);
 	}
 
 	/**

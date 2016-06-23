@@ -2,14 +2,36 @@
 
 ## Créer le dossier du modèle et les fichiers obligatoires
 
-- Se placer dans le dossier `content/models/` ;
-- Créer un dossier portant le nom du modèle en minuscule : « `0-9`, `a-z`,
+Pour créer un modèle, il faut créer un module :
+
+- Se placer dans le dossier `content/modules/` ;
+- Créer un dossier portant le nom du module en minuscule : « `0-9`, `a-z` et
   `_` » ;
-- Créer deux fichiers dans ce nouveau dossier :
+- Créer trois fichiers dans ce nouveau dossier :
+  - `${NomModule}Module.php` ;
   - `view.html` ;
   - `model.json`.
 
-Le modèle (model.json) contient deux valeurs :
+Contenu du fichier `${NomModule}Module.php` :
+
+```php
+<?php
+
+namespace Module\${NomModule};
+
+use Pi\Core\App\Module;
+
+class ${NomModule}Module extends Module {
+  public function initialize() {
+    $this->registerModelFromJson(
+      'nom_du_modele',
+      __DIR__ . '/model.json',
+      __DIR__ . '/view.html');
+  }
+}
+```
+
+Le modèle (`model.json`) contient deux valeurs :
 - `title` : le titre du modèle ;
 - `fields` : la liste des champs.
 
@@ -83,6 +105,9 @@ n = non implémenté
 | version    |   y   |    y    |    y    |   y   |    y     |  n  |  n  |      y      |    n    |   n    |  n   |
 +------------+-------+---------+---------+-------+----------+-----+-----+-------------+---------+--------+------+
 ```
+
+Note : ici sont décrits les champs fournit avec le CMS. Il est possible (via la
+création d'un module) d'en ajouter.
 
 ### Définition des valeurs
 

@@ -16,10 +16,6 @@ projet utilisable en production.
 
 - Thème :
 	- Ajouter la possibilité de partager des données communes entre les thèmes ;
-	- Ajouter la possibilité de faire un thème hérité. Une vue inexistante dans
-	  le thème sera recherchée dans le thème parent en remontant jusqu'au premier
-	  thème et utilisera la vue du thème « classic » dans le cas où la vue
-	  n'existe dans aucun des thèmes ;
 	- Ajouter la possibilité de désenregistrer un CSS ou JS ;
 	- Un thème doit pouvoir surcharger la vue d'un modèle ;
 
