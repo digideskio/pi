@@ -234,17 +234,64 @@ class Pi {
 
 	/**
 	 * @param $url Fichier CSS à charger
+	 *
+	 * @throws \Exception
 	 */
 	public function registerCss(string $url) {
+		if (in_array($url, $this->cssUrls))
+			throw new \Exception('Try to load an already loaded CSS "'
+				. $url . '"');
+
 		$this->cssUrls[] = $url;
 	}
 
 	/**
 	 * @param $url Fichier JavaScript à charger
+	 *
+	 * @throws \Exception
 	 */
 	public function registerJs(string $url) {
+		if (in_array($url, $this->jsUrls))
+			throw new \Exception('Try to load an already loaded JS "'
+				. $url . '"');
+
 		$this->jsUrls[] = $url;
 	}
+
+	/**
+	 * @param $url Fichier CSS à décharger
+	 *
+	 * @throws \Exception
+	 */
+	public function unregisterCss(string $url) {
+		foreach ($this->cssUrls as $key => $cssUrl) {
+			if ($url == $cssUrl) {
+				unset($this->cssUrls[$key]);
+
+				return;
+			}
+		}
+
+		throw new \Exception('Try to unregister a non-loaded CSS file "'
+			. $url . '"');
+	}
+
+	/**
+	 * @param $url Fichier JavaScript à décharger
+	 *
+	 * @throws \Exception
+	 */
+	public function unregisterJs(string $url) {
+		foreach ($this->jsUrls as $key => $jsUrl) {
+			if ($url == $jsUrl) {
+				unset($this->jsUrls[$key]);
+
+				return;
+			}
+		}
+
+		throw new \Exception('Try to unregister a non-loaded JS file "'
+			. $url . '"');	}
 
 	/**
 	 * @return string[] Fichiers CSS

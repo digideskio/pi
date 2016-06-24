@@ -106,16 +106,46 @@ abstract class Module {
 	}
 
 	/**
-	 * @param $url
+	 * Charger un fichier CSS dans le thème
+	 *
+	 * @param $url Chemin vers le fichier CSS à charger
+	 *
+	 * @throws \Exception
 	 */
 	protected function registerCss(string $url) {
 		$this->app->registerCss($url);
 	}
 
 	/**
-	 * @param $url
+	 * Charger un fichier JavaScript dans le thème
+	 *
+	 * @param $url Chemin vers le fichier JavaScript à charger
+	 *
+	 * @throws \Exception
 	 */
 	protected function registerJs(string $url) {
 		$this->app->registerJs($url);
+	}
+
+	/**
+	 * Décharger un fichier CSS dans le thème
+	 *
+	 * @param $url Chemin vers le fichier CSS à décharger
+	 *
+	 * @throws \Exception
+	 */
+	protected function unregisterCss(string $url) {
+		$this->app->unregisterCss($url);
+	}
+
+	/**
+	 * Décharger un fichier JavaScript dans le thème
+	 *
+	 * @param $url Chemin vers le fichier JavaScript à décharger
+	 *
+	 * @throws \Exception
+	 */
+	protected function unregisterJs(string $url) {
+		$this->app->unregisterJs($url);
 	}
 }

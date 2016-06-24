@@ -16,7 +16,6 @@ projet utilisable en production.
 
 - Thème :
 	- Ajouter la possibilité de partager des données communes entre les thèmes ;
-	- Ajouter la possibilité de désenregistrer un CSS ou JS ;
 	- Un thème doit pouvoir surcharger la vue d'un modèle ;
 
 - Module :
