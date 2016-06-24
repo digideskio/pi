@@ -8,7 +8,7 @@ Pi est un CMS qui se veut modulaire. Voici comment il fonctionne :
 
 Il s'agit d'un CMS plutôt orienté pour les développeurs car le format des
 modèles est JSON (ou PHP, au choix) et la vue associée utilise [Twig][] (et
-donc HTMl).
+donc HTML).
 
 Un modèle, c'est une liste de champs. Par exemple pour le modèle « Article » il
 faut définir un champ titre et un champ contenu (l'exemple est simplifié ici

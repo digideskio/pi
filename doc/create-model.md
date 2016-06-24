@@ -2,34 +2,25 @@
 
 ## Créer le dossier du modèle et les fichiers obligatoires
 
-Pour créer un modèle, il faut créer un module :
+Pour créer un modèle, suivez d'abord la [procédure de création d'un
+module](create-module.md) puis revenez ici pour la suite.
 
-- Se placer dans le dossier `content/modules/` ;
-- Créer un dossier portant le nom du module en minuscule : « `0-9`, `a-z` et
-  `_` » ;
-- Créer trois fichiers dans ce nouveau dossier :
-  - `${NomModule}Module.php` ;
+Dans le dossier du module, créez les fichiers suivants :
   - `view.html` ;
   - `model.json`.
 
-Contenu du fichier `${NomModule}Module.php` :
+Dans la fonction `initialize` du module, inscrivez ceci :
 
 ```php
-<?php
-
-namespace Module\${NomModule};
-
-use Pi\Core\App\Module;
-
-class ${NomModule}Module extends Module {
-  public function initialize() {
-    $this->registerModelFromJson(
-      'nom_du_modele',
-      __DIR__ . '/model.json',
-      __DIR__ . '/view.html');
-  }
+public function initialize() {
+$this->registerModelFromJson(
+  'nom_du_modele',
+  __DIR__ . '/model.json',
+  __DIR__ . '/view.html');
 }
 ```
+
+(PARTIE INCOMPLETE)
 
 Le modèle (`model.json`) contient deux valeurs :
 - `title` : le titre du modèle ;

@@ -46,6 +46,16 @@ $this->registerCss('css/style.css');
 Sinon, il est possible de dupliquer le thème `classic` et de l'étudier pour
 voir comment il est construit.
 
+## Héritage des fichiers
+
+Prenons un exemple, vous avez un thème `A` qui enregistre un fichier CSS dont
+le chemin est `css/style.css`. Vous créez un thème `B` qui hérite du thème `A`,
+si dans le dossier de ce thème, vous créez un fichier dont le chemin est
+identique, alors ce sera ce fichier qui sera chargé à la place de celui du
+thème hérité.
+
+Cela vaut pour tous les fichiers *templates* ou enregistrés via le thème.
+
 ## Variables disponibles dans les vues
 
 - `url`
