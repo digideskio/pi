@@ -22,9 +22,8 @@ projet utilisable en production.
 	  utilisée) ;
 
 - Module :
-	- Un module doit pouvoir créer un modèle, surcharger un modèle, ajouter et
-      modifier des permissions utilisateur, ajouter un champ, surcharger un
-      champ, ... ;
+	- Un module doit pouvoir surcharger un modèle, ajouter et modifier des
+	  permissions utilisateur, surcharger un champ, ... ;
 
 - Autre :
 	- Ajouter la possibilité d'ajouter une table des matière n'importe où (dans
