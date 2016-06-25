@@ -91,42 +91,8 @@ class Renderer {
 	 * @return Le rendu
 	 */
 	public function render(string $file, array $variables): string {
-		$variables = array_merge($this->getVariables(), $variables);
+		$variables = array_merge($this->app->getVariables(), $variables);
 
 		return $this->twig->render($file, $variables);
-	}
-
-	/**
-	 * Variables globales qui seront envoyées à toutes les vues
-	 *
-	 * @return Variables utilisées pour les vues
-	 */
-	public function getVariables(): array {
-		return [
-			'settings' => $this->app->getSettings(),
-
-			'url' => [
-				'site' => PI_URL_SITE,
-				'content' => PI_URL_CONTENT,
-				'pages' => PI_URL_PAGES,
-				'themes' => PI_URL_THEMES,
-				'theme' => PI_URL_THEME,
-				'curent' => $this->app->getPath()
-			],
-
-			'dir' => [
-				'site' => PI_DIR_SITE,
-				'content' => PI_DIR_CONTENT,
-				'pages' => PI_DIR_PAGES,
-				'themes' => PI_DIR_THEMES,
-				'theme' => PI_DIR_THEME
-			],
-
-			'jsUrls' => $this->app->getJsUrls(),
-			'cssUrls' => $this->app->getCssUrls(),
-
-			'pages' => $this->app->getPages(),
-			'users' => $this->app->getUsers()
-		];
 	}
 }

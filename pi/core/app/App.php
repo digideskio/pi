@@ -223,4 +223,38 @@ class App extends Pi {
 
 		return $files;
 	}
+
+	/**
+	 * Variables globales qui seront envoyées à toutes les vues
+	 *
+	 * @return Variables utilisées pour les vues
+	 */
+	public function getVariables(): array {
+		return [
+			'settings' => $this->getSettings(),
+
+			'url' => [
+				'site' => PI_URL_SITE,
+				'content' => PI_URL_CONTENT,
+				'pages' => PI_URL_PAGES,
+				'themes' => PI_URL_THEMES,
+				'theme' => PI_URL_THEME,
+				'curent' => $this->getPath()
+			],
+
+			'dir' => [
+				'site' => PI_DIR_SITE,
+				'content' => PI_DIR_CONTENT,
+				'pages' => PI_DIR_PAGES,
+				'themes' => PI_DIR_THEMES,
+				'theme' => PI_DIR_THEME
+			],
+
+			'jsUrls' => $this->getJsUrls(),
+			'cssUrls' => $this->getCssUrls(),
+
+			'pages' => $this->getPages(),
+			'users' => $this->getUsers()
+		];
+	}
 }
