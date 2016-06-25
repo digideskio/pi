@@ -62,9 +62,7 @@ abstract class Module {
 	 * @throws Exception
 	 */
 	protected function overrideModel(string $modelName, string $fieldClass) {
-		$this->app->overrideModel(
-				$modelName,
-				$fieldClass);
+		$this->app->overrideModel($modelName, $fieldClass);
 	}
 
 	/**
@@ -76,9 +74,7 @@ abstract class Module {
 	 * @throws Exception
 	 */
 	protected function overrideViewModel(string $modelName, string $filename) {
-		$this->app->overrideViewModel(
-			$modelName,
-			$filename);
+		$this->app->overrideViewModel($modelName, $filename);
 	}
 
 	/**

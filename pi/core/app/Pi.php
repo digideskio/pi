@@ -21,6 +21,8 @@ declare(strict_types=1);
 
 namespace Pi\Core\App;
 
+use Pi\Core\Model\Field;
+use Pi\Core\Model\Model;
 use Pi\Core\Routing\Router;
 use Pi\Core\View\Renderer;
 use Pi\Core\Page\PageCollection;
@@ -38,10 +40,10 @@ class Pi {
 	/** @var Theme Thème */
 	protected $theme;
 
-	/** @var array Modèles enregistrés */
+	/** @var Model[] Modèles enregistrés */
 	protected $models;
 
-	/** @var array Champs enregistrés */
+	/** @var Field[] Champs enregistrés */
 	protected $fields;
 
 	/** @var array Modèles enregistrés */
@@ -326,7 +328,7 @@ class Pi {
 		if (array_key_exists($modelName, $this->models))
 			throw new \Exception('Model "' . $modelName . '" already registered');
 
-		$this->models[$modelName] = $modelClass;
+		$this->models[$modelName] = new $modelClass();
 	}
 
 	/**
@@ -359,7 +361,17 @@ class Pi {
 	 * @throws \Exception
 	 */
 	public function overrideViewModel(string $modelName, string $filename) {
-		throw new \Exception('Non-implemented');
+		if (!array_key_exists($modelName, $this->models))
+			throw new \Exception('Unable to override the view of an unexisting'
+				. ' model "' . $modelName . '"');
+
+		if (!file_exists($filename))
+			throw new \Exception('The overrided-model-view file does not exists'
+				. ' "' . $filename . '"');
+
+		/** @var Model $model */
+		$model = $this->models[$modelName];
+		$model->setViewFilename($filename);
 	}
 
 	/**

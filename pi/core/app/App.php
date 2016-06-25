@@ -154,7 +154,7 @@ class App extends Pi {
 		$fields = $content->getFields();
 
 		/** @var Model $modelObject */
-		$modelObject = new $this->models[$model]();
+		$modelObject = $this->models[$model];
 
 		$meta = [
 			'title' => $content->getTitle(),

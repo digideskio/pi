@@ -16,12 +16,15 @@ projet utilisable en production.
 
 - Thème :
 	- Ajouter la possibilité de partager des données communes entre les thèmes ;
-	- Un thème doit pouvoir surcharger la vue d'un modèle ;
+	- Un thème doit pouvoir surcharger la vue d'un modèle (fait, mais
+	  actuellement plusieurs bouts de code peuvent surcharger le même modèle,
+	  ce n'est pas bon car il est difficile pour le développeur de suivre la vue
+	  utilisée) ;
 
 - Module :
 	- Un module doit pouvoir créer un modèle, surcharger un modèle, ajouter et
-    modifier des permissions utilisateur, ajouter un champ, surcharger un
-    champ, ... ;
+      modifier des permissions utilisateur, ajouter un champ, surcharger un
+      champ, ... ;
 
 - Autre :
 	- Ajouter la possibilité d'ajouter une table des matière n'importe où (dans

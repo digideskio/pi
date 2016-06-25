@@ -50,11 +50,9 @@ class SampleModule extends Module {
 		*/
 
 		// Surcharger la vue d'un modèle
-		/*
 		$this->overrideViewModel(
-			'all',
-			__DIR__ . '/override-view-model/all.html');
-		*/
+			'page',
+			__DIR__ . '/override-view-model/page.html');
 
 		// Surcharger un champ
 		/*
