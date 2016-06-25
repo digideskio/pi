@@ -22,6 +22,7 @@ declare(strict_types=1);
 namespace Module\Sample;
 
 use Module\Core\Field\TextField;
+use Module\Core\Model\PageModel;
 use Pi\Core\App\Module;
 
 class SampleModule extends Module {
@@ -44,9 +45,8 @@ class SampleModule extends Module {
 		// Surcharger un modèle
 		/*
 		$this->overrideModel(
-			'all',
-			__DIR__ . '/override-model/all.json',
-			__DIR__ . '/override-model/all.html');
+			'page',
+			MyModel::class);
 		*/
 
 		// Surcharger la vue d'un modèle
@@ -65,5 +65,5 @@ class SampleModule extends Module {
 	}
 }
 
-class MyTestField extends TextField { }
+class MyModel extends PageModel { }
 class MyTextField extends TextField { }

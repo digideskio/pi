@@ -154,7 +154,7 @@ class App extends Pi {
 		$fields = $content->getFields();
 
 		/** @var Model $modelObject */
-		$modelObject = $this->models[$model];
+		$modelObject = $this->getModel($model);
 
 		$meta = [
 			'title' => $content->getTitle(),
@@ -168,7 +168,6 @@ class App extends Pi {
 			'meta' => $meta
 		]);
 	}
-
 
 	/**
 	 * @return Fichiers CSS

@@ -337,7 +337,7 @@ class Pi {
 	 * @param $modelName Nom du modèle à surcharger
 	 * @param $modelClass Classe du modèle
 	 *
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public function overrideModel(string $modelName, string $modelClass) {
 		if (!array_key_exists($modelName, $this->models))
@@ -347,7 +347,7 @@ class Pi {
 		if (array_key_exists($modelName, $this->overridedModels))
 			throw new \Exception('Model "' . $modelName . '" already overrided');
 
-		$this->overridedModels[$modelName] = $modelClass;
+		$this->overridedModels[$modelName] = new $modelClass();
 	}
 
 	/**
@@ -406,5 +406,39 @@ class Pi {
 			throw new \Exception('Field "' . $fieldName . '" already overrided');
 
 		$this->overridedFields[$fieldName] = $fieldClass;
+	}
+
+	/**
+	 * @param $fieldName
+	 *
+	 * @return Champ
+	 *
+	 * @throws \Exception
+	 */
+	protected function getField(string $fieldName): Field {
+		if (array_key_exists($fieldName, $this->overridedFields))
+			return $this->overridedFields[$fieldName];
+
+		if (array_key_exists($fieldName, $this->fields))
+			return $this->fields[$fieldName];
+
+		throw new \Exception('Field "' . $fieldName . '" does not exists');
+	}
+
+	/**
+	 * @param $modelName
+	 *
+	 * @return Modèle
+	 *
+	 * @throws \Exception
+	 */
+	protected function getModel(string $modelName): Model {
+		if (array_key_exists($modelName, $this->overridedModels))
+			return $this->overridedModels[$modelName];
+
+		if (array_key_exists($modelName, $this->models))
+			return $this->models[$modelName];
+
+		throw new \Exception('Model "' . $modelName . '" does not exists');
 	}
 }
