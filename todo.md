@@ -17,6 +17,7 @@ projet utilisable en production.
 - Module :
 	- Un module doit pouvoir, ajouter et modifier des permissions utilisateur,
 	  surcharger un champ, ... ;
+    - Un modèle doit pouvoir être enregistré depuis un fichier JSON ;
 
 - Autre :
 	- Ajouter la possibilité d'ajouter une table des matière n'importe où (dans
