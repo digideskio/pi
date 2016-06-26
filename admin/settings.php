@@ -2,18 +2,16 @@
 
 require 'init.php';
 
-use Pi\App\App;
-use Pi\App\PageCollection;
+use Pi\Core\Page\PageCollection;
 
 $pages = PageCollection::getAllPages();
 
-$app = new App();
-
+/** @todo */
 $themes = [
 	'default' => 'Default'
 ];
 
-echo $app->render('admin/settings.html', [
+echo $app->render('@theme/admin/settings.html', [
 	'pages' => $pages,
 	'menu_items' => $menuItems,
 	'themes' => $themes

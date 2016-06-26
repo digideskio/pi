@@ -2,7 +2,9 @@
 
 require '../settings.php';
 
-use Pi\Core\Settings;
+use Pi\Core\App\App;
+
+$app = new App();
 
 session_start();
 
@@ -12,7 +14,7 @@ function isConnected() {
 
 $_SESSION['username'] = 'super-admin';
 
-$user = Settings::getUser($_SESSION['username']);
+$user = $app->getUser($_SESSION['username']);
 
 $menuItems = [];
 

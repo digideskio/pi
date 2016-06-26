@@ -24,6 +24,7 @@ namespace Pi\Core\App;
 use Pi\Core\Model\Field;
 use Pi\Core\Model\Model;
 use Pi\Core\Routing\Router;
+use Pi\Core\User\User;
 use Pi\Core\View\Renderer;
 use Pi\Core\Page\PageCollection;
 use Pi\Lib\Flash;
@@ -232,6 +233,20 @@ class Pi {
 	 */
 	public function getTheme(): string {
 		return $this->theme;
+	}
+
+	/**
+	 * Récupérer la liste des utilisateurs
+	 *
+	 * @return Utilisateur
+	 *
+	 * @throws \Exception
+	 */
+	public function getUser($username): User {
+		if (!array_key_exists($username, $this->users))
+			throw new \Exception('User "' . $username . '" does not exists.');
+
+		return $this->users[$username];
 	}
 
 	/**

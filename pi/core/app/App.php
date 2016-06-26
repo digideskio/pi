@@ -23,6 +23,7 @@ namespace Pi\Core\App;
 
 use Pi\Core\Model\Model;
 use Pi\Core\Page\Page;
+use Pi\Core\User\User;
 use Pi\Core\View\Renderer;
 use Pi\Lib\Json;
 
@@ -36,6 +37,7 @@ class App extends Pi {
 		parent::__construct();
 
 		$this->initializeSettings();
+		$this->initializeUsers();
 		$this->initializeTheme();
 		$this->initializeRenderer();
 		$this->initializeModules();
@@ -46,6 +48,23 @@ class App extends Pi {
 	 */
 	private function initializeSettings() {
 		$this->settings = Json::read(PI_DIR_CONTENT . 'settings.json');
+	}
+
+	/**
+	 * @todo
+	 *
+	 * Initialise les utilisateurs
+	 */
+	private function initializeUsers() {
+		foreach ($this->settings->users as $username => $user) {
+			$user->username = $username;
+			$user->permissions = $this->settings
+									  ->roles
+									  ->{$user->role}
+									  ->permissions;
+
+			$this->users[$username] = new User((array) $user);
+		}
 	}
 
 	/**
