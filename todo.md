@@ -14,9 +14,6 @@ projet utilisable en production.
 	  les pages qui correspondent à ce filtre, un peu comme le fait
 	  PageCollection pour les pages ;
 
-- Thème :
-	- Ajouter la possibilité de partager des données communes entre les thèmes ;
-
 - Module :
 	- Un module doit pouvoir, ajouter et modifier des permissions utilisateur,
 	  surcharger un champ, ... ;
