@@ -5,6 +5,8 @@
 Pour créer un modèle, suivez d'abord la [procédure de création d'un
 module](create-module.md) puis revenez ici pour la suite.
 
+### Créer un modèle avec JSON
+
 Dans le dossier du module, créez les fichiers suivants :
   - `view.html` ;
   - `model.json`.
@@ -25,6 +27,70 @@ $this->registerModelFromJson(
 Le modèle (`model.json`) contient deux valeurs :
 - `title` : le titre du modèle ;
 - `fields` : la liste des champs.
+
+### Créer un modèle avec PHP
+
+Créez un dossier `model` dans le dossier du module puis dans ce nouveau dossier
+créez un fichier nommé `${NomModèle}Model.php`.
+
+Dans le fichier `{NomModèle}Model.php`, écrivez ceci :
+
+```php
+<?php
+
+namespace Module\${NomModule}\Model;
+
+use Pi\Core\Model\Model;
+use Module\${NomModule}\Field\TextareaField;
+
+class {NomModèle} extends Model {
+  public function __construct() {
+    parent::__construct();
+
+    // Ici, description du modèle
+  }
+}
+```
+
+Puis, dans la classe du module placée à la racine du dossier du module, écrivez
+ceci dans la méthode `initialize` :
+
+```php
+$this->registerModel(
+  'nom_du_modele',
+  Model\${NomModèle}::class);
+```
+
+#### Description du modèle
+
+Un modèle se décrit par un titre, une vue et des champs.
+
+Définir le titre :
+
+```php
+$this->setTitle('Page');
+```
+
+Définir la vue :
+
+```php
+$this->setViewFilename(__DIR__ . '/views/' . 'nom_du_modele.html');
+```
+
+Pour la vue, le fichier `views/nom_du_modele.html` doit exister.
+
+Créer un champ :
+
+```php
+$content = $this->newField('textarea');
+$content->setLabel('Contenu');
+$content->setFormat('twig');
+
+$this->addField('content', $content);
+```
+
+Ceci crée un champ de type textarea (champ sur plusieurs lignes) interprété par
+le moteut Twig.
 
 ## Variables disponibles dans la vue
 
