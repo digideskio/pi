@@ -13,8 +13,7 @@ $page = $_GET['page'];
 
 $page = Page::getLastVersion($page);
 
-$json = Json::decode('');
-$model = Model::fromArray($page['model']);
+$model = Model::fromArray($page->model);
 
 echo $app->render('@theme/admin/edit-page.html', [
 	'menu_items' => $menuItems,
