@@ -21,6 +21,7 @@ declare(strict_types=1);
 
 namespace Pi\Core\Model;
 
+use Module\Core\Field\TextField;
 use Pi\Lib\Str;
 
 class Model {
@@ -128,7 +129,10 @@ class Model {
 	 * @return $this
 	 */
 	public function setViewFilename(string $viewFilename): Model {
-		$this->viewFilename = $viewFilename;
+		// Supprime le chemin racine
+		// Exemple : /var/www/truc/content/modules/exemple/test.html
+		//   devient content/modules/exemple/test.html
+		$this->viewFilename = substr($viewFilename, strlen(PI_DIR_SITE));
 
 		return $this;
 	}
@@ -167,5 +171,21 @@ class Model {
 	 */
 	public function getViewFilename(): string {
 		return $this->viewFilename;
+	}
+
+	/**
+	 * @todo
+	 *
+	 * Créer un nouveau champ
+	 *
+	 * @param $fieldName Nom du champ
+	 *
+	 * @return Champ créé
+	 *
+	 * @throws \Exception
+	 */
+	protected function newField(string $fieldName): Field {
+		return new TextField();
+		//return $this->app->newField($fieldName);
 	}
 }
