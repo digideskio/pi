@@ -33,9 +33,9 @@ class ArticleModel extends Model {
 		parent::__construct();
 
 		$this->setTitle('Article');
-		$this->setViewFilename(__DIR__ . '/views/' . 'article.html');
+		$this->setViewFilename(__DIR__ . '/views/article.html');
 
-		$categories = new CheckboxesField();
+		$categories = $this->newField('checkboxes');
 		$categories->setLabel('Catégories');
 		$categories->setMessage('Organiser le contenu');
 		$categories->setWidth('1/4');
@@ -45,14 +45,14 @@ class ArticleModel extends Model {
 			'graphics' => 'Graphisme'
 		]);
 
-		$date = new DateField();
+		$date = $this->newField('date');
 		$date->setLabel('Date de publication');
 		$date->setMessage('Format : aaaa-mm-jj');
 		$date->setWidth('1/4');
 		$date->setDefault('today');
 		$date->setRequired(true);
 
-		$status = new ChoiceField();
+		$status = $this->newField('choice');
 		$status->setLabel('Status de publication');
 		$status->setWidth('1/4');
 		$status->setDefault('draft');
@@ -62,7 +62,7 @@ class ArticleModel extends Model {
 			'public' => 'Public'
 		]);
 
-		$comments = new RadioField();
+		$comments = $this->newField('radio');
 		$comments->setLabel('Commentaires');
 		$comments->setMessage('Activer les commentaires');
 		$comments->setWidth('1/4');
@@ -72,7 +72,7 @@ class ArticleModel extends Model {
 			'yes' => 'Oui'
 		]);
 
-		$content = new TextareaField();
+		$content = $this->newField('textarea');
 		$content->setLabel('Contenu');
 		$content->setRequired(true);
 

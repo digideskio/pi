@@ -243,6 +243,24 @@ class App extends Pi {
 	}
 
 	/**
+	 * @todo
+	 *
+	 * Créer un nouveau champ
+	 *
+	 * @param $fieldName Nom du champ
+	 *
+	 * @return Champ créé
+	 *
+	 * @throws \Exception
+	 */
+	protected function newField(string $fieldName): Field {
+		if ($field_does_not_exists)
+			throw new \Exception('Field "' . $fieldName . '" does not exists.');
+
+		return null;
+	}
+
+	/**
 	 * Variables globales qui seront envoyées à toutes les vues
 	 *
 	 * @return Variables utilisées pour les vues

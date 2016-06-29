@@ -29,9 +29,9 @@ class PageModel extends Model {
 		parent::__construct();
 
 		$this->setTitle('Page');
-		$this->setViewFilename(__DIR__ . '/views/' . 'page.html');
+		$this->setViewFilename(__DIR__ . '/views/page.html');
 
-		$content = new TextareaField();
+		$content = $this->newField('textarea');
 		$content->setLabel('Contenu');
 		$content->setFormat('twig');
 
