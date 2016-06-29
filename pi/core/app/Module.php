@@ -45,7 +45,7 @@ abstract class Module {
 	 * @param $modelName Nom du modèle
 	 * @param $modelClass Classe du modèle
 	 *
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	protected function registerModel(string $modelName, string $modelClass) {
 		$this->app->registerModel(
@@ -59,7 +59,7 @@ abstract class Module {
 	 * @param $modelName Nom du modèle
 	 * @param $modelClass Classe du modèle
 	 *
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	protected function overrideModel(string $modelName, string $fieldClass) {
 		$this->app->overrideModel($modelName, $fieldClass);
@@ -71,7 +71,7 @@ abstract class Module {
 	 * @param $modelName Nom du modèle à surcharger
 	 * @param $filename Chemin vers la vue surchargée
 	 *
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	protected function overrideViewModel(string $modelName, string $filename) {
 		$this->app->overrideViewModel($modelName, $filename);
@@ -83,7 +83,7 @@ abstract class Module {
 	 * @param $fieldName Nom du champ
 	 * @param $fieldClass Classe du champ
 	 *
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	protected function registerField(string $fieldName, string $fieldClass) {
 		$this->app->registerField($fieldName, $fieldClass);
@@ -95,7 +95,7 @@ abstract class Module {
 	 * @param $fieldName Nom du champ
 	 * @param $fieldClass Classe du champ
 	 *
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	protected function overrideField(string $fieldName, string $fieldClass) {
 		$this->app->overrideField($fieldName, $fieldClass);
