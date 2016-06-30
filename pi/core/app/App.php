@@ -23,6 +23,7 @@ namespace Pi\Core\App;
 
 use Pi\Core\Model\Model;
 use Pi\Core\Page\Page;
+use Pi\Core\User\Role;
 use Pi\Core\User\User;
 use Pi\Core\View\Renderer;
 use Pi\Lib\Json;
@@ -37,6 +38,7 @@ class App extends Pi {
 		parent::__construct();
 
 		$this->initializeSettings();
+		$this->initializeRoles();
 		$this->initializeUsers();
 		$this->initializeTheme();
 		$this->initializeRenderer();
@@ -51,17 +53,24 @@ class App extends Pi {
 	}
 
 	/**
-	 * @todo
-	 *
+	 * Initialise les rôles
+	 */
+	private function initializeRoles() {
+		foreach ($this->settings->roles as $name => $permissions) {
+			$this->roles[$name] = new Role([
+				'name' => $name,
+				'permissions' => (array) $permissions
+			]);
+		}
+	}
+
+	/**
 	 * Initialise les utilisateurs
 	 */
 	private function initializeUsers() {
 		foreach ($this->settings->users as $username => $user) {
 			$user->username = $username;
-			$user->permissions = $this->settings
-									  ->roles
-									  ->{$user->role}
-									  ->permissions;
+			$user->role = $this->roles[$user->role];
 
 			$this->users[$username] = new User((array) $user);
 		}
