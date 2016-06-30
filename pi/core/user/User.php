@@ -28,11 +28,8 @@ class User {
 	/** @var string Mot de passe */
 	private $password;
 
-	/** @var string Nom du rôle */
+	/** @var Role Rôle */
 	private $role;
-
-	/** @var string[] Permissions accordées à l'utilisateur */
-	private $permissions;
 
 	/**
 	 * Créer l'utilisateur à partir d'un tableau
@@ -43,7 +40,6 @@ class User {
 		$this->setUsername($data['username']);
 		$this->setPassword($data['password']);
 		$this->setRole($data['role']);
-		$this->setPermissions($data['permissions']);
 	}
 
 	/**
@@ -55,20 +51,7 @@ class User {
 	 *         $permission, false sinon
 	 */
 	public function hasPermission(string $permission): bool {
-		return in_array($permission, $this->permissions);
-	}
-
-	/**
-	 * Ajouter une permission
-	 *
-	 * @param $permission Permission à ajouter
-	 *
-	 * @return $this L'instance de l'utilisateur.
-	 */
-	public function addPermission(string $permission): User {
-		$this->permissions[] = $permission;
-
-		return $this;
+		return $this->role->hasPermission($permission);
 	}
 
 	/**
@@ -104,21 +87,8 @@ class User {
 	 *
 	 * @return $this L'instance de l'utilisateur.
 	 */
-	public function setRole(string $role): User {
+	public function setRole(Role $role): User {
 		$this->role = $role;
-
-		return $this;
-	}
-
-	/**
-	 * Modifier les permissions de l'utilisateur
-	 *
-	 * @param string[] $permissions Nouvelles permissions
-	 *
-	 * @return $this L'instance de l'utilisateur.
-	 */
-	public function setPermissions(array $permissions): User {
-		$this->permissions = $permissions;
 
 		return $this;
 	}
@@ -156,6 +126,6 @@ class User {
 	 * @return string[] Permissions de l'utilisateur
 	 */
 	public function getPermissions(): array {
-		return $this->permissions;
+		return $this->role->getPermissions();
 	}
 }

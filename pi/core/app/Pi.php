@@ -24,6 +24,7 @@ namespace Pi\Core\App;
 use Pi\Core\Model\Field;
 use Pi\Core\Model\Model;
 use Pi\Core\Routing\Router;
+use Pi\Core\User\Role;
 use Pi\Core\User\User;
 use Pi\Core\View\Renderer;
 use Pi\Core\Page\PageCollection;
@@ -56,7 +57,10 @@ class Pi {
 	/** @var PageCollection Pages enregistrées */
 	protected $pages;
 
-	/** @var array Utilisateurs enregistrés */
+	/** @var Role[] Rôles enregistrés */
+	protected $roles;
+
+	/** @var User[] Utilisateurs enregistrés */
 	protected $users;
 
 	/** @var string[] Fichiers CSS enregistrés */
@@ -160,6 +164,7 @@ class Pi {
 		$this->models = [];
 		$this->overridedModels = [];
 		$this->pages = PageCollection::getAllPages();
+		$this->roles = [];
 		$this->users = [];
 		$this->cssUrls = [];
 		$this->jsUrls = [];

@@ -57,7 +57,7 @@ class Role {
 	 *
 	 * @return $this L'instance du rôle
 	 */
-	public function addPermission(string $permission): User {
+	public function addPermission(string $permission): Role {
 		$this->permissions[] = $permission;
 
 		return $this;
@@ -70,7 +70,7 @@ class Role {
 	 *
 	 * @return $this L'instance du rôle
 	 */
-	public function setName(string $name): User {
+	public function setName(string $name): Role {
 		$this->name = $name;
 
 		return $this;
@@ -83,7 +83,7 @@ class Role {
 	 *
 	 * @return $this L'instance du rôle
 	 */
-	public function setPermissions(array $permissions): User {
+	public function setPermissions(array $permissions): Role {
 		$this->permissions = $permissions;
 
 		return $this;
