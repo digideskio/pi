@@ -25,6 +25,18 @@ abstract class Module {
 	/** @var App */
 	private $app;
 
+	/** @var string */
+	private $name;
+
+	/** @var string */
+	private $version;
+
+	/** @var string */
+	private $description;
+
+	/** @var string */
+	private $author;
+
 	/**
 	 * Constructeur
 	 *
@@ -38,6 +50,94 @@ abstract class Module {
 	 * Initialisation du module
 	 */
 	abstract public function initialize();
+
+	/**
+	 * Définir le nom du module
+	 *
+	 * @param $themeName Nom du module
+	 *
+	 * @return $this L'instance du module
+	 */
+	public function setName(string $name): Module {
+		$this->name = $name;
+
+		return $this;
+	}
+
+	/**
+	 * Définir la version du module
+	 *
+	 * @param $themeName Nom du module
+	 *
+	 * @return $this L'instance du module
+	 */
+	public function setVersion(string $version): Module {
+		$this->version = $version;
+
+		return $this;
+	}
+
+	/**
+	 * Définir la description du module
+	 *
+	 * @param $themeName Nom du module
+	 *
+	 * @return $this L'instance du module
+	 */
+	public function setDescription(string $description): Module {
+		$this->description = $description;
+
+		return $this;
+	}
+
+	/**
+	 * Définir l'auteur du module
+	 *
+	 * @param $themeName Nom du module
+	 *
+	 * @return $this L'instance du module
+	 */
+	public function setAuthor(string $author): Module {
+		$this->author = $author;
+
+		return $this;
+	}
+
+	/**
+	 * Récupérer le nom du module
+	 *
+	 * @return Le nom du module
+	 */
+	public function getName(): string {
+		return $this->name;
+	}
+
+	/**
+	 * Récupérer la version du module
+	 *
+	 * @return La version du module
+	 */
+	public function getVersion(): string {
+		return $this->version;
+	}
+
+	/**
+	 * Récupérer la description du module
+	 *
+	 * @return La description du module
+	 */
+	public function getDescription(): string {
+		return $this->description;
+	}
+
+	/**
+	 * Récupérer l'auteur du module
+	 *
+	 * @return L'auteur du module
+	 */
+	public function getAuthor(): string {
+		return $this->author;
+	}
 
 	/**
 	 * Enregistrer un nouveau modèle depuis une classe
