@@ -14,8 +14,9 @@
 			"name": "Administrateur",
 			"permissions": [
 				"can-manage-pages",
-				"can-manage-models",
 				"can-manage-users",
+				"can-manage-modules",
+				"can-manage-themes",
 				"can-manage-settings"
 			]
 		},
@@ -24,7 +25,6 @@
 			"permissions": [
 				"can-manage-pages",
 				"can-manage-users",
-				"can-manage-models",
 				"can-manage-settings",
 				"can-manage-advanced"
 			]
