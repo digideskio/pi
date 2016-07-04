@@ -163,7 +163,7 @@ class Pi {
 		$this->overridedFields = [];
 		$this->models = [];
 		$this->overridedModels = [];
-		$this->pages = PageCollection::getAllPages();
+		$this->pages = null;
 		$this->roles = [];
 		$this->users = [];
 		$this->cssUrls = [];
@@ -211,6 +211,15 @@ class Pi {
 	 */
 	public function getPages(): PageCollection {
 		return $this->pages;
+	}
+
+	/**
+	 * Récupérer la liste des rôles
+	 *
+	 * @return Role[]
+	 */
+	public function getRoles(): array {
+		return $this->roles;
 	}
 
 	/**

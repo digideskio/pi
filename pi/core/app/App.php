@@ -23,6 +23,7 @@ namespace Pi\Core\App;
 
 use Pi\Core\Model\Model;
 use Pi\Core\Page\Page;
+use Pi\Core\Page\PageCollection;
 use Pi\Core\User\Role;
 use Pi\Core\User\User;
 use Pi\Core\View\Renderer;
@@ -40,6 +41,7 @@ class App extends Pi {
 		$this->initializeSettings();
 		$this->initializeRoles();
 		$this->initializeUsers();
+		$this->initializePages();
 		$this->initializeTheme();
 		$this->initializeRenderer();
 		$this->initializeModules();
@@ -74,6 +76,13 @@ class App extends Pi {
 
 			$this->users[$username] = new User((array) $user);
 		}
+	}
+
+	/**
+	 * Initialise les pages
+	 */
+	private function initializePages() {
+		$this->pages = PageCollection::getAllPages();
 	}
 
 	/**

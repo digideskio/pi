@@ -27,7 +27,10 @@ const PI_DIR_MODULES = PI_DIR_CONTENT . 'modules/';
 const PI_DIR_PAGES = PI_DIR_CONTENT . 'pages/';
 const PI_DIR_THEMES = PI_DIR_CONTENT . 'themes/';
 
-define('PI_URL_SITE', $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['SERVER_NAME'] . '/');
+$serverRequestScheme = $_SERVER['REQUEST_SCHEME'] ?? '';
+$serverName = $_SERVER['SERVER_NAME'] ?? '';
+
+define('PI_URL_SITE', $serverRequestScheme . '://' . $serverName . '/');
 define('PI_URL_ADMIN', PI_URL_SITE . 'admin/');
 define('PI_URL_CONTENT', PI_URL_SITE . 'content/');
 define('PI_URL_MODULES', PI_URL_CONTENT . 'modules/');

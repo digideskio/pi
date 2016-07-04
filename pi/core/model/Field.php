@@ -139,107 +139,155 @@ abstract class Field {
 	 * Définir le nom du champ
 	 *
 	 * @param $name Nom du champ
+	 *
+	 * @return $this L'instance du champ
 	 */
-	public function setName(string $name) {
+	public function setName(string $name): Field {
 		$this->name = $name;
+
+		return $this;
 	}
 
 	/**
 	 * Définir le label du champ
 	 *
 	 * @param $label Label du champ
+	 *
+	 * @return $this L'instance du champ
 	 */
-	public function setLabel(string $label) {
+	public function setLabel(string $label): Field {
 		$this->label = $label;
+
+		return $this;
 	}
 
 	/**
 	 * Définir la valeur par défaut
 	 *
 	 * @param $default Valeur par défaut du champ
+	 *
+	 * @return $this L'instance du champ
 	 */
-	public function setDefault(string $default) {
+	public function setDefault(string $default): Field {
 		$this->default = $default;
+
+		return $this;
 	}
 
 	/**
 	 * Définir si le champ est obligatoire ou non
 	 *
 	 * @param $required true si le champ est requis, false sinon
+	 *
+	 * @return $this L'instance du champ
 	 */
-	public function setRequired(bool $required) {
+	public function setRequired(bool $required): Field {
 		$this->required = $required;
+
+		return $this;
 	}
 
 	/**
 	 * Définir le message du champ
 	 *
 	 * @param $message Message du champ
+	 *
+	 * @return $this L'instance du champ
 	 */
-	public function setMessage(string $message) {
+	public function setMessage(string $message): Field {
 		$this->message = $message;
+
+		return $this;
 	}
 
 	/**
 	 * Définir la largeur du champ
 	 *
 	 * @param $width Largeur du champ
+	 *
+	 * @return $this L'instance du champ
 	 */
-	public function setWidth(string $width) {
+	public function setWidth(string $width): Field {
 		$this->width = $width;
+
+		return $this;
 	}
 
 	/**
 	 * Définir le « placeholder » du champ
 	 *
 	 * @param $placeholder
+	 *
+	 * @return $this L'instance du champ
 	 */
-	public function setPlaceholder(string $placeholder) {
+	public function setPlaceholder(string $placeholder): Field {
 		$this->placeholder = $placeholder;
+
+		return $this;
 	}
 
 	/**
 	 * Définir les valeurs disponibles pour ce champ
 	 *
 	 * @param $options Valeurs disponibles pour ce champ
+	 *
+	 * @return $this L'instance du champ
 	 */
-	public function setOptions(array $options) {
+	public function setOptions(array $options): Field {
 		$this->options = $options;
+
+		return $this;
 	}
 
 	/**
 	 * Définir la valeur minimale que pour avoir le champ
 	 *
 	 * @param int|float $min Valeur minimale que pour avoir le champ
+	 *
+	 * @return $this L'instance du champ
 	 */
-	public function setMin(float $min) {
+	public function setMin(float $min): Field {
 		$this->min = $min;
+
+		return $this;
 	}
 
 	/**
 	 * Définir la valeur maximale que peut avoir le champ
 	 *
 	 * @param int|float $max Valeur maximale que peut avoir le champ
+	 *
+	 * @return $this L'instance du champ
 	 */
-	public function setMax(float $max) {
+	public function setMax(float $max): Field {
 		$this->max = $max;
+
+		return $this;
 	}
 
 	/**
 	 * Définir le pas du champ
 	 *
 	 * @param int|float $step Pas du champ
+	 *
+	 * @return $this L'instance du champ
 	 */
-	public function setStep(float $step) {
+	public function setStep(float $step): Field {
 		$this->step = $step;
+
+		return $this;
 	}
 
 	/**
 	 * Définir le format du champ
 	 *
 	 * @param $format Formati du champ
+	 *
+	 * @return $this L'instance du champ
 	 */
-	public function setFormat(string $format) {
+	public function setFormat(string $format): Field {
 		$this->format = $format;
+
+		return $this;
 	}
 }

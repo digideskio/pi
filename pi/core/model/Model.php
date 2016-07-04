@@ -122,6 +122,8 @@ class Model {
 	}
 
 	/**
+	 * @todo Supprimer la dépendance dangereuse envers une constante
+	 *
 	 * Définir la vue
 	 *
 	 * @param $viewFilename

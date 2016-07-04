@@ -30,14 +30,19 @@ class Router {
 
 	/**
 	 * Initialise le chemin courant
+	 *
+	 * @param $path
 	 */
-	public function __construct() {
+	public function __construct(string $path = null) {
+		if (!$path)
+			$path = $_SERVER['PATH_INFO'] ?? '';
+
 		// Chemin par défaut
 		$this->path = 'home';
 		$this->query = '';
 
-		if (isset($_SERVER['PATH_INFO'])) {
-			preg_match('/\/?([a-zA-Z0-9\/_-]*)\/?&?(.*)/', $_SERVER['PATH_INFO'], $matches);
+		if ($path) {
+			preg_match('/\/?([a-zA-Z0-9\/_-]*)\/?&?(.*)/', $path, $matches);
 
 			$parts = explode('&', $matches[2]);
 			$query = [];

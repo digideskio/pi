@@ -105,8 +105,8 @@ class Page implements \JsonSerializable {
 	public function __construct() {
 		$this->title = '';
 		$this->model = '';
-		$this->createdAt = new \DateTime();
-		$this->updatedAt = new \DateTime();
+		$this->createdAt = null;
+		$this->updatedAt = null;
 		$this->fields = [];
 	}
 
@@ -117,7 +117,7 @@ class Page implements \JsonSerializable {
 	 *
 	 * @return $this
 	 */
-	public function setTitle(string $title) {
+	public function setTitle(string $title): Page {
 		$this->title = $title;
 
 		return $this;
@@ -130,7 +130,7 @@ class Page implements \JsonSerializable {
 	 *
 	 * @return $this
 	 */
-	public function setModel(string $model) {
+	public function setModel(string $model): Page {
 		$this->model = $model;
 
 		return $this;
@@ -143,7 +143,7 @@ class Page implements \JsonSerializable {
 	 *
 	 * @return $this
 	 */
-	public function setCreatedAt(\DateTime $createdAt) {
+	public function setCreatedAt(\DateTime $createdAt): Page {
 		$this->createdAt = $createdAt;
 
 		return $this;
@@ -156,7 +156,7 @@ class Page implements \JsonSerializable {
 	 *
 	 * @return $this
 	 */
-	public function setUpdatedAt(\DateTime $updatedAt) {
+	public function setUpdatedAt(\DateTime $updatedAt): Page {
 		$this->updatedAt = $updatedAt;
 
 		return $this;
@@ -169,7 +169,7 @@ class Page implements \JsonSerializable {
 	 *
 	 * @return $this
 	 */
-	public function setFields(array $fields) {
+	public function setFields(array $fields): Page {
 		$this->fields = $fields;
 
 		return $this;
