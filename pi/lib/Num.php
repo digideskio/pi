@@ -23,6 +23,10 @@ namespace Pi\Lib;
 
 class Num {
 	/**
+	 * @todo Le cas particulier `($min == 0 && $max == 0)` est-il utile ?
+	 *
+	 * Le nombre $value est-il compris entre $min et $max (bornes incluses)
+	 *
 	 * @param $min
 	 * @param $max
 	 * @param $value
@@ -30,19 +34,7 @@ class Num {
 	 * @return true si $value est entre $min et $max, false sinon
 	 */
 	public static function between(float $min, float $max, float $value): bool {
-		if ($min > $max) {
-			return false;
-		} elseif ($min < $max) {
-			return $value >= $min && $value <= $max;
-		} else { // ($min == $max)
-			if ($min == 0 && $max == 0) { // cas particulier où aucune borne n'est définie
-				return true;
-			} else {
-				if ($value == $min && $value == $max)
-					return true;
-				else
-					return false;
-			}
-		}
+		return ($min == 0 && $max == 0)
+			|| ($min <= $max && $value >= $min && $value <= $max);
 	}
 }

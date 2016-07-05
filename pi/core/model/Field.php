@@ -22,8 +22,9 @@ declare(strict_types=1);
 namespace Pi\Core\Model;
 
 abstract class Field {
+	/** @todo Ne pas utiliser de variables statiques */
 	/** @var int */
-	protected static $num = 0;
+	protected static $globalId = 0;
 
 	/** @var int */
 	public $id;
@@ -90,7 +91,7 @@ abstract class Field {
 	 * @param $data
 	 */
 	public function __construct(array $data = []) {
-		$this->id = ++static::$num;
+		$this->id = ++static::$globalId;
 
 		$this->name        = $data['name']        ?? '';
 		$this->label       = $data['label']       ?? '';

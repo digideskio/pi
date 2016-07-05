@@ -23,6 +23,11 @@ namespace Pi\Lib;
 
 class Str {
 	/**
+	 * @todo Compléter cette fonction. Il manque des caractères accentués. Et
+	 *       comment sont traités les caractères non latins ?
+	 *
+	 * Prend une chaine et la retourne sans les accents
+	 *
 	 * @param $txt
 	 * 
 	 * @return La chaine sans accent
@@ -34,34 +39,44 @@ class Str {
 	}
 
 	/**
-	 * @param $txt
+	 * « Slugifie » une chaine. C'est-à-dire qu'elle devient tout en minuscule,
+	 * que les espaces sont remplacés par des tirets et que seuls les caractères
+	 * A-Z, a-z et le tiret sont conservés
+	 *
+	 * @param $txt Chaine à « sluger »
+	 * @param $default Valeur à utiliser si le slug final est vide
 	 *
 	 * @return La chaine « slugée »
 	 */
-	public static function slug(string $txt): string {
-		// on remplace les apostrophes et les espaces par des tirets
+	public static function slug(string $txt,
+		                          string $default = 'unnamed'): string {
+		// On remplace les apostrophes et les espaces par des tirets
 		$txt = str_replace(['\'', ' '], '-', $txt);
 
-		// on retire les accents des caractères spéciaux
+		// On retire les accents des caractères spéciaux
 		$txt = static::stripAccents($txt);
 
-		// on ne garde que les caractères alphanumérique et les tirets
+		// On ne garde que les caractères alphanumérique et les tirets
 		$txt = preg_replace('~[^a-zA-Z0-9-]~', '', $txt);
 
-		// on met en minuscule
+		// On met en minuscule
 		$txt = strtolower($txt);
 
-		// on remplace les groupe de tirets par un seul
+		// On remplace les groupe de tirets par un seul
 		$txt = preg_replace('~-+~', '-', $txt);
 
-		// on retire les tirets initiaux et finaux s'il y en a
+		// On retire les tirets initiaux et finaux s'il y en a
 		$txt = trim($txt, '-');
+
+		// Si la chaine finale est vide, on lui donne une valeur par défaut
+		$txt = $txt ?? $default;
 
 		return $txt;
 	}
 
 	/**
 	 * @todo Possibilité de passer le caractère de saut de ligne
+	 * @todo Gérer par défaut \r\n, \r et \n, pas seulement PHP_EOL
 	 *
 	 * @param $txt
 	 *
@@ -75,14 +90,18 @@ class Str {
 	/**
 	 * @param $string
 	 *
-	 * @return true si la chain est une URL, false sinon
+	 * @return true si la chaine est une URL, false sinon
 	 */
 	public static function isURL(string $string): bool {
 		return (bool) filter_var($string, FILTER_VALIDATE_URL);
 	}
 
 	/**
-	 * @param $length
+	 * @todo Une taille par défaut de 8 est-elle pertinente ?
+	 *
+	 * Générer une chaine aléatoirement avec une taille donnée
+	 *
+	 * @param $length Taille de la chaine à générer
 	 *
 	 * @return Chaine générée aléatoirement
 	 */
@@ -106,8 +125,8 @@ class Str {
 	 * @return Garde $nbWords de la chaine $txt
 	 */
 	public static function splitWords(string $txt,
-		                              int $nbWords = 50,
-		                              string $after = '…'): string {
+		                                int $nbWords = 50,
+		                                string $after = '…'): string {
 		$txt = strip_tags($txt);
 
 		$words = explode(' ', $txt);
@@ -134,8 +153,8 @@ class Str {
 	 * @return true si $txt contient $needle, false sinon
 	 */
 	public static function contains(string $txt,
-		                            string $needle,
-		                            bool $insensitive = true): bool {
+		                              string $needle,
+		                              bool $insensitive = true): bool {
 		if ($insensitive) {
 			$txt = strtolower($txt);
 			$needle = strtolower($needle);

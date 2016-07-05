@@ -29,7 +29,7 @@ class Json {
 	 *
 	 * @return true en cas de succès, false sinon
 	 */
-	public static function write(string $file, array $array) {
+	public static function write(string $file, array $array): bool {
 		$encodedArray = static::encode($array);
 
 		return file_put_contents($file, $encodedArray) !== false;
@@ -47,9 +47,9 @@ class Json {
 	}
 
 	/**
-	 * @param $array Tableau à encoder : tableau PHP => chaine JSON
+	 * @param $array Données à encoder : données PHP => chaine JSON
 	 *
-	 * @return Le tableau au format JSON
+	 * @return Les données au format JSON
 	 */
 	public static function encode(array $array): string {
 		return json_encode($array, JSON_PRETTY_PRINT);

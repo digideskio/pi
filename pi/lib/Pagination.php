@@ -47,10 +47,12 @@ class Pagination implements \IteratorAggregate {
 	protected $nbPages;
 
 	/**
-	 * @param $nbTotal
-	 * @param $nbByPage
-	 * @param $actual
-	 * @param $firstPage
+	 * Construit une pagination
+	 *
+	 * @param $nbTotal Nombre total d'éléments
+	 * @param $nbByPage Nombre d'éléments par page
+	 * @param $actual Page actuellement ouverte
+	 * @param $firstPage Numéro de la première page
 	 */
 	public function __construct(int $nbTotal,
 	                            int $nbByPage,

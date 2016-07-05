@@ -23,6 +23,9 @@ namespace Pi\Core\Page;
 
 use Pi\Lib\Str;
 
+/**
+ * @todo Faire en sorte que cette classe soit moins statique
+ */
 class PageCollection implements \IteratorAggregate {
 	/** @var Page[] Pages faisant partie de la collection */
 	private $pages;

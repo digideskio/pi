@@ -47,28 +47,7 @@ class Form {
 		$accum = 0;
 
 		foreach ($this->model->getFields() as $field) {
-			switch ($field->width) {
-				case '1/2': $width = 'col-xs-6'; break;
-				case '1/3': $width = 'col-xs-4'; break;
-				case '2/3': $width = 'col-xs-8'; break;
-				case '1/4': $width = 'col-xs-3'; break;
-				case '3/4': $width = 'col-xs-9'; break;
-				default:    $width = 'col-xs-12';
-			}
-
-			$html .= '<div class="' . $width . '">';
-			$html .= '<label for="input-' . $field->id . '">' . $field->label;
-
-			if ($field->required)
-				$html .= ' *';
-
-			$html .= '</label><br />';
-
-			if (!empty($field->message))
-				$html .= '<small>' . $field->message . '</small><br />';
-
-			$html .= $field->html();
-			$html .= '</div> ';
+			$html .= $this->getHtmlFromField($field);
 
 			// L'accumulateur sert à déterminer les lignes pour garder un
 			// affichage propre (en grille)
@@ -110,5 +89,54 @@ class Form {
 			$infos[$field->name] = $field->save();
 
 		return $infos;
+	}
+
+	/**
+	 * Génère le HTML d'un champ donné
+	 *
+	 * @param $field Champ
+	 *
+	 * @return Code HTML du champ
+	 */
+	private function getHtmlFromField(Field $field): string {
+		$html = '';
+
+		$width = $this->getCssClassFromWidth($field->width);
+
+		$html .= '<div class="' . $width . '">';
+		$html .= '<label for="input-' . $field->id . '">' . $field->label;
+
+		if ($field->required)
+			$html .= ' *';
+
+		$html .= '</label><br />';
+
+		if (!empty($field->message))
+			$html .= '<small>' . $field->message . '</small><br />';
+
+		$html .= $field->html();
+		$html .= '</div>';
+
+		return $html;
+	}
+
+	/**
+	 * Classe CSS à utiliser en fonction de la taille du champ donné
+	 *
+	 * @param $width Largeur (1/2, 1/3, 2/3, 1/4 ou 3/4)
+	 *
+	 * @return Classe CSS à utiliser pour la largeur du champ
+	 */
+	private function getCssClassFromWidth(string $width): string {
+		switch ($field->width) {
+			case '1/2': $width = 'col-xs-6'; break;
+			case '1/3': $width = 'col-xs-4'; break;
+			case '2/3': $width = 'col-xs-8'; break;
+			case '1/4': $width = 'col-xs-3'; break;
+			case '3/4': $width = 'col-xs-9'; break;
+			default:    $width = 'col-xs-12';
+		}
+
+		return $width;
 	}
 }

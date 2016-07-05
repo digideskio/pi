@@ -74,7 +74,7 @@ class Model {
 	 * Définit le titre du modèle
 	 *
 	 * @param $title Titre du modèle
-	 * @param $overrideSlug Si true, change le slug associé au modèle, sinon,
+	 * @param $overrideSlug Si true, change le slug associé au modèle, sinon
 	 *                      celui-ci reste inchangé (true par défaut)
 	 *
 	 * @return $this
