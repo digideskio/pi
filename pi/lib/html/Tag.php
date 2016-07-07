@@ -23,7 +23,7 @@ namespace Pi\Lib\Html;
 
 class Tag {
 	/** @var string[] */
-	protected static $inlineTags = [
+	private static $inlineTags = [
 		'br',
 		'hr',
 		'img',
@@ -31,13 +31,13 @@ class Tag {
 	];
 
 	/** @var string */
-	protected $name;
+	private $name;
 
 	/** @var array */
-	protected $attrs;
+	private $attrs;
 
 	/** @var string */
-	protected $content;
+	private $content;
 
 	/**
 	 * @param $name

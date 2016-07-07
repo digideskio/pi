@@ -28,7 +28,7 @@ class Str {
 	 *
 	 * Prend une chaine et la retourne sans les accents
 	 *
-	 * @param $txt
+	 * @param $txt La chaine dont on veut enlever les accents
 	 * 
 	 * @return La chaine sans accent
 	 */
@@ -75,20 +75,22 @@ class Str {
 	}
 
 	/**
-	 * @todo Possibilité de passer le caractère de saut de ligne
-	 * @todo Gérer par défaut \r\n, \r et \n, pas seulement PHP_EOL
-	 *
-	 * @param $txt
+	 * @param $txt La chaine à découper
+	 * @param $newlineChar Caractère de saut de ligne, par défaut « \n »
 	 *
 	 * @return Découpe les lignes d'une chaine et les retournent sous forme de
 	 *         tableau
 	 */
-	public static function lines(string $txt): array {
-		return str_split(EOL, $txt);
+	public static function lines(string $txt,
+	                             string $newlineChar = "\n"): array {
+		$txt = str_replace("\r\n", "\n", $txt);
+		$txt = str_replace("\r", "\n", $txt);
+
+		return str_split("\n", $newlineChar);
 	}
 
 	/**
-	 * @param $string
+	 * @param $string La chaine à tester
 	 *
 	 * @return true si la chaine est une URL, false sinon
 	 */
@@ -97,15 +99,13 @@ class Str {
 	}
 
 	/**
-	 * @todo Une taille par défaut de 8 est-elle pertinente ?
+	 * Générer une chaine aléatoirement avec une longueur donnée
 	 *
-	 * Générer une chaine aléatoirement avec une taille donnée
-	 *
-	 * @param $length Taille de la chaine à générer
+	 * @param $length Longueur de la chaine à générer
 	 *
 	 * @return Chaine générée aléatoirement
 	 */
-	public static function random(int $length = 8): string {
+	public static function random(int $length): string {
 		$chars = array_merge(range('a', 'z'), range('A', 'Z'), range(0, 9));
 		$lengthChars = count($chars);
 
@@ -146,9 +146,9 @@ class Str {
 	}
 
 	/**
-	 * @param $txt
-	 * @param $needle
-	 * @param $insensitive
+	 * @param $txt La chaine à tester
+	 * @param $needle La chaine interne à tester
+	 * @param $insensitive Sensibilité à la casse
 	 *
 	 * @return true si $txt contient $needle, false sinon
 	 */
@@ -164,8 +164,8 @@ class Str {
 	}
 
 	/**
-	 * @param $str
-	 * @param $needle
+	 * @param $str La chaine à tester
+	 * @param $needle La chaine interne à tester
 	 *
 	 * @return true si $str commence par $needle, false sinon
 	 */
@@ -174,8 +174,8 @@ class Str {
 	}
 
 	/**
-	 * @param $str
-	 * @param $needle
+	 * @param $str La chaine à tester
+	 * @param $needle La chaine interne à tester
 	 *
 	 * @return true si $str se termine par $needle, false sinon
 	 */

@@ -21,6 +21,10 @@ declare(strict_types=1);
 
 namespace Pi\Lib;
 
+/**
+ * @todo Du fait de l'utilisation de $_SESSION, les variables sont partagées
+         entre toutes les instances de cette classe, ce qui peut poser problème
+ */
 class Session {
 	/**
 	 * @param $key

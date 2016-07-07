@@ -21,6 +21,10 @@ declare(strict_types=1);
 
 namespace Pi\Lib;
 
+/**
+ * @todo Éviter le conflit possible avec la classe Session (à cause de
+ *       l'utilisation commune de $_SESSION)
+ */
 class Flash {
 	/**
 	 * Initilisation du flash
@@ -42,49 +46,59 @@ class Flash {
 	}
 
 	/**
-	 * @param $error
+	 * @param $error Message d'erreur à insérer
 	 */
 	public function pushError(string $error) {
 		array_push($_SESSION['errors'], $error);
 	}
 
 	/**
-	 * @param $success
+	 * @param $success Message de succès à insérer
 	 */
 	public function pushSuccess(string $success) {
 		array_push($_SESSION['success'], $success);
 	}
 
 	/**
+	 * Y a-t'-il des erreurs ?
 	 *
+	 * @return true s'il y a des erreurs, false sinon
 	 */
 	public function hasErrors(): bool {
 		return count($_SESSION['errors']) > 0;
 	}
 
 	/**
+	 * N'y a-t-il pas d'erreurs ?
 	 *
+	 * @return true s'il n'y a pas d'erreurs, false sinon
 	 */
 	public function hasNoErrors(): bool {
 		return !$this->hasErrors();
 	}
 
 	/**
+	 * Y a-t'-il des succès ?
 	 *
+	 * @return true s'il y a des succès, false sinon
 	 */
 	public function hasSuccess(): bool {
 		return count($_SESSION['success']) > 0;
 	}
 
 	/**
+	 * Récupérer les erreurs
 	 *
+	 * @return La liste des erreurs
 	 */
 	public function getErrors(): array {
 		return $_SESSION['errors'];
 	}
 
 	/**
+	 * Récupérer les succès
 	 *
+	 * @return La liste des succès
 	 */
 	public function getSuccess(): array {
 		return $_SESSION['success'];
