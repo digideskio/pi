@@ -171,7 +171,7 @@ class Pi {
 		$this->settings = new \stdClass();
 		$this->router = new Router();
 		$this->session = new Session();
-		$this->flash = new Flash();
+		$this->flash = new Flash($this->session);
 	}
 
 	/**
@@ -380,8 +380,6 @@ class Pi {
 	}
 
 	/**
-	 * @todo
-	 *
 	 * Surcharger la vue d'un modèle
 	 *
 	 * @param $modelName Nom du modèle à surcharger

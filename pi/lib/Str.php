@@ -23,9 +23,6 @@ namespace Pi\Lib;
 
 class Str {
 	/**
-	 * @todo Compléter cette fonction. Il manque des caractères accentués. Et
-	 *       comment sont traités les caractères non latins ?
-	 *
 	 * Prend une chaine et la retourne sans les accents
 	 *
 	 * @param $txt La chaine dont on veut enlever les accents

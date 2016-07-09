@@ -176,8 +176,6 @@ class App extends Pi {
 	}
 
 	/**
-	 * @todo
-	 *
 	 * Lance la recherche de la page et la retourne
 	 */
 	public function run() {
@@ -310,5 +308,34 @@ class App extends Pi {
 			'pages' => $this->getPages(),
 			'users' => $this->getUsers()
 		];
+	}
+
+	/**
+	 * Récupérer la racine du site
+	 *
+	 * @return Racine du site
+	 */
+	public function getRoot(): string {
+		return PI_DIR_SITE;
+	}
+
+	/**
+	 * @todo Avoir plus d'informations à propos du thème, pas seulement son slug
+	 *
+	 * Récupérer la liste des thèmes
+	 *
+	 * @return
+	 */
+	public function getThemes(): array {
+		$scan = scandir(PI_DIR_THEMES);
+
+		$dirs = [];
+
+		foreach ($scan as $dir) {
+			if (is_dir($dir))
+				$dirs[$dir] = $dir;
+		}
+
+		return $dirs;
 	}
 }

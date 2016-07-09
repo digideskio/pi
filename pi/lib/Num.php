@@ -23,8 +23,6 @@ namespace Pi\Lib;
 
 class Num {
 	/**
-	 * @todo Le cas particulier `($min == 0 && $max == 0)` est-il utile ?
-	 *
 	 * Le nombre $value est-il compris entre $min et $max (bornes incluses)
 	 *
 	 * @param $min

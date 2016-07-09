@@ -21,21 +21,34 @@ declare(strict_types=1);
 
 namespace Pi\Lib;
 
-/**
- * @todo Du fait de l'utilisation de $_SESSION, les variables sont partagées
-         entre toutes les instances de cette classe, ce qui peut poser problème
- */
 class Session {
 	/**
-	 * @param $key
-	 * @param mixed $value
+	 * Définir une valeur à une clé
+	 *
+	 * @param $key Clé
+	 * @param mixed $value Valeur de la clé
 	 */
 	public function set(string $key, $value) {
 		$_SESSION[$key] = $value;
 	}
 
 	/**
-	 * @param $key
+	 * Ajouter une valeur à une clé
+	 *
+	 * @param $key Clé
+	 * @param mixed $value Valeur à ajouter
+	 */
+	public function push(string $key, $value) {
+		if (!$this->exists($key))
+			$_SESSION[$key] = [];
+
+		$_SESSION[$key][] = $value;
+	}
+
+	/**
+	 * Récupérer la valeur associée à une clé
+	 *
+	 * @param $key Clé à récupérer
 	 *
 	 * @return mixed
 	 */
@@ -44,14 +57,18 @@ class Session {
 	}
 
 	/**
-	 * @param $key
+	 * Supprimer une clé
+	 *
+	 * @param $key Clé à supprimer
 	 */
 	public function remove(string $key) {
 		unset($_SESSION[$key]);
 	}
 
 	/**
-	 * @param $key
+	 * La clé $key existe-t-elle ?
+	 *
+	 * @param $key Clé à vérifier
 	 *
 	 * @return true si la clé est enregistrée dans la session, false sinon
 	 */

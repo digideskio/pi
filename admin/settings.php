@@ -6,10 +6,7 @@ use Pi\Core\Page\PageCollection;
 
 $pages = PageCollection::getAllPages();
 
-/** @todo */
-$themes = [
-	'default' => 'Default'
-];
+$themes = $app->getThemes();
 
 echo $app->render('@theme/admin/settings.html', [
 	'pages' => $pages,

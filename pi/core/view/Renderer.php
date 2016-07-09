@@ -45,7 +45,7 @@ class Renderer {
 		$this->app = $app;
 
 		// Définition du dossier des modèles de page
-		$this->loader = new Twig\Loader\Filesystem(PI_DIR_SITE);
+		$this->loader = new Twig\Loader\Filesystem($app->getRoot());
 		$this->twig = new Twig\Environment($this->loader);
 
 		// Filtre markdown : « {{ ma_variable|markdown }} »

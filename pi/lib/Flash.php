@@ -21,42 +21,41 @@ declare(strict_types=1);
 
 namespace Pi\Lib;
 
-/**
- * @todo Éviter le conflit possible avec la classe Session (à cause de
- *       l'utilisation commune de $_SESSION)
- */
 class Flash {
+	/** @var Session Session */
+	private $session;
+
 	/**
 	 * Initilisation du flash
+	 *
+	 * @param Session
 	 */
-	public function __construct() {
-		if (!isset($_SESSION['errors']))
-			$_SESSION['errors'] = [];
+	public function __construct(Session $session) {
+		$this->session = $session;
 
-		if (!isset($_SESSION['success']))
-			$_SESSION['success'] = [];
+		$this->clean();
 	}
 
 	/**
 	 * Nettoyage du flash
 	 */
 	public function clean() {
-		$_SESSION['errors'] = [];
-		$_SESSION['success'] = [];
+		$this->session->set('errors', []);
+		$this->session->set('successes', []);
 	}
 
 	/**
 	 * @param $error Message d'erreur à insérer
 	 */
 	public function pushError(string $error) {
-		array_push($_SESSION['errors'], $error);
+		$this->session->push('errors', $error);
 	}
 
 	/**
 	 * @param $success Message de succès à insérer
 	 */
 	public function pushSuccess(string $success) {
-		array_push($_SESSION['success'], $success);
+		$this->session->push('successes', $success);
 	}
 
 	/**
@@ -65,7 +64,7 @@ class Flash {
 	 * @return true s'il y a des erreurs, false sinon
 	 */
 	public function hasErrors(): bool {
-		return count($_SESSION['errors']) > 0;
+		return count($this->session->get('errors')) > 0;
 	}
 
 	/**
@@ -82,8 +81,8 @@ class Flash {
 	 *
 	 * @return true s'il y a des succès, false sinon
 	 */
-	public function hasSuccess(): bool {
-		return count($_SESSION['success']) > 0;
+	public function hasSuccesses(): bool {
+		return count($this->session->get('successes')) > 0;
 	}
 
 	/**
@@ -92,7 +91,7 @@ class Flash {
 	 * @return La liste des erreurs
 	 */
 	public function getErrors(): array {
-		return $_SESSION['errors'];
+		return $this->session->get('errors');
 	}
 
 	/**
@@ -100,7 +99,7 @@ class Flash {
 	 *
 	 * @return La liste des succès
 	 */
-	public function getSuccess(): array {
-		return $_SESSION['success'];
+	public function getSuccesses(): array {
+		return $this->session->get('successes');
 	}
 }

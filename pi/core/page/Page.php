@@ -72,8 +72,6 @@ class Page implements \JsonSerializable {
 	}
 
 	/**
-	 * @todo
-	 *
 	 * Récupérer la dernière version de la page
 	 *
 	 * @throws \Exception
