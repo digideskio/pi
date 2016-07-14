@@ -54,11 +54,13 @@ class Page implements \JsonSerializable {
 
 		$json = Json::read($filename);
 
-		$createdAt = new \DateTime();
-		$createdAt->setTimestamp($json->created_at);
+		$createdAt = \DateTime::createFromFormat(
+			\DateTime::ISO8601,
+			$json->created_at);
 
-		$updatedAt = new \DateTime();
-		$updatedAt->setTimestamp($json->updated_at);
+		$updatedAt = \DateTime::createFromFormat(
+			\DateTime::ISO8601,
+			$json->updated_at);
 
 		$page = new static();
 
@@ -226,15 +228,15 @@ class Page implements \JsonSerializable {
 	 * @return int
 	 */
 	public function saveToFile(string $filename): int {
-		return file_put_contents($filename, (string) $this);
+		return file_put_contents($filename, $this->jsonSerialize());
 	}
 
 	/**
 	 * Représentation JSON de la page
 	 *
-	 * @return Tableau PHP représentant la page et pouvant être encodé en JSON
+	 * @return Représentation JSON de la page
 	 */
-	public function jsonSerialize(): array {
+	public function jsonSerialize(): string {
 		$arr = [];
 
 		$arr['title'] = $this->getTitle();
@@ -246,6 +248,6 @@ class Page implements \JsonSerializable {
 		foreach ($this->getFields() as $fieldName => $field)
 			$arr['fields'][$fieldName] = (string) $field;
 
-		return $arr;
+		return json_encode($arr);
 	}
 }

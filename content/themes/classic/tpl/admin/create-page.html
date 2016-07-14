@@ -11,8 +11,8 @@
 
         <label for="list-models">Modèle</label>
             <select name="model" id="list-models">
-                {% for slug, name in models %}
-                    <option value="{{ slug }}">{{ name }}</option>
+                {% for slug, model in models %}
+                    <option value="{{ slug }}">{{ model.title }}</option>
                 {% endfor %}
             </select>
 
