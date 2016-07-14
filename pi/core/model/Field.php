@@ -70,6 +70,8 @@ abstract class Field {
 	 *
 	 * @param $array
 	 *
+	 * @return static
+	 *
 	 * @throws \Exception
 	 */
 	public static function fromArray(array $array): Field {

@@ -22,11 +22,6 @@ declare(strict_types=1);
 namespace Module\Core\Model;
 
 use Pi\Core\Model\Model;
-use Module\Core\Field\CheckboxesField;
-use Module\Core\Field\DateField;
-use Module\Core\Field\ChoiceField;
-use Module\Core\Field\RadioField;
-use Module\Core\Field\TextareaField;
 
 class ArticleModel extends Model {
 	public function __construct() {

@@ -47,6 +47,7 @@ class Form {
 		$accum = 0;
 
 		foreach ($this->model->getFields() as $field) {
+			$width = $this->getCssClassFromWidth($field->width);
 			$html .= $this->getHtmlFromField($field);
 
 			// L'accumulateur sert à déterminer les lignes pour garder un
@@ -128,7 +129,7 @@ class Form {
 	 * @return Classe CSS à utiliser pour la largeur du champ
 	 */
 	private function getCssClassFromWidth(string $width): string {
-		switch ($field->width) {
+		switch ($width) {
 			case '1/2': $width = 'col-xs-6'; break;
 			case '1/3': $width = 'col-xs-4'; break;
 			case '2/3': $width = 'col-xs-8'; break;

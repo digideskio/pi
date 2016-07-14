@@ -22,7 +22,6 @@ declare(strict_types=1);
 namespace Module\Core\Model;
 
 use Pi\Core\Model\Model;
-use Module\Core\Field\TextareaField;
 
 class PageModel extends Model {
 	public function __construct() {

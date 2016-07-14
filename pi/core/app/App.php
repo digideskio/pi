@@ -89,9 +89,6 @@ class App extends Pi {
 	 * Initialise le thème courant
 	 */
 	private function initializeTheme() {
-		$this->foldersThemes = [];
-		$this->urlsThemes = [];
-
 		$this->treeThemes = [];
 
 		$themeName = $this->settings->site->theme;

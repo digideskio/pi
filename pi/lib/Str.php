@@ -73,17 +73,15 @@ class Str {
 
 	/**
 	 * @param $txt La chaine à découper
-	 * @param $newlineChar Caractère de saut de ligne, par défaut « \n »
 	 *
 	 * @return Découpe les lignes d'une chaine et les retournent sous forme de
 	 *         tableau
 	 */
-	public static function lines(string $txt,
-	                             string $newlineChar = "\n"): array {
+	public static function lines(string $txt): array {
 		$txt = str_replace("\r\n", "\n", $txt);
 		$txt = str_replace("\r", "\n", $txt);
 
-		return str_split("\n", $newlineChar);
+		return explode("\n", $txt);
 	}
 
 	/**
