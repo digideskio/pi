@@ -58,10 +58,10 @@ class App extends Pi {
 	 * Initialise les rôles
 	 */
 	private function initializeRoles() {
-		foreach ($this->settings->roles as $name => $permissions) {
-			$this->roles[$name] = new Role([
-				'name' => $name,
-				'permissions' => (array) $permissions
+		foreach ($this->settings->roles as $slug => $role) {
+			$this->roles[$slug] = new Role([
+				'name' => $role->name,
+				'permissions' => (array) $role->permissions
 			]);
 		}
 	}
