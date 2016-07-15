@@ -40,7 +40,7 @@ class RangeField extends Field {
 	/**
 	 * @inheritdoc
 	 */
-	public function value(): string {
+	public function value(): int {
 		return (int) parent::value();
 	}
 

@@ -117,7 +117,7 @@ abstract class Field {
 	/**
 	 * Récupérer la valeur du champ
 	 */
-	public function value(): string {
+	public function value() {
 		return $_POST[$this->name] ?? $this->default;
 	}
 

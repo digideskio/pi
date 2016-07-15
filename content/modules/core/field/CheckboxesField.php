@@ -50,7 +50,7 @@ class CheckboxesField extends Field {
 	/**
 	 * @inheritdoc
 	 */
-	public function value(): string {
+	public function value(): array {
 		if (!empty($_POST))
 			return $_POST[$this->name] ?? [];
 		else

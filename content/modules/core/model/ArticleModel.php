@@ -21,11 +21,12 @@ declare(strict_types=1);
 
 namespace Module\Core\Model;
 
+use Pi\Core\App\Pi;
 use Pi\Core\Model\Model;
 
 class ArticleModel extends Model {
-	public function __construct() {
-		parent::__construct();
+	public function __construct(Pi $app) {
+		parent::__construct($app);
 
 		$this->setTitle('Article');
 		$this->setViewFilename(__DIR__ . '/views/article.html');

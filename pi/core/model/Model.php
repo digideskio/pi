@@ -22,9 +22,13 @@ declare(strict_types=1);
 namespace Pi\Core\Model;
 
 use Module\Core\Field\TextField;
+use Pi\Core\App\Pi;
 use Pi\Lib\Str;
 
 class Model {
+	/** @var Pi Application */
+	private $app;
+
 	/** @var string Nom du modèle */
 	private $title;
 
@@ -61,9 +65,12 @@ class Model {
 	/**
 	 * Constructeur du modèle
 	 *
+	 * @param $pi Application
 	 * @param $title Titre du modèle
 	 */
-	public function __construct(string $title = '') {
+	public function __construct(Pi $app, string $title = '') {
+		$this->app = $app;
+
 		$this->setTitle($title);
 
 		$this->fields = [];
@@ -187,7 +194,7 @@ class Model {
 	 * @throws \Exception
 	 */
 	protected function newField(string $fieldName): Field {
-		return new TextField();
+		return $this->app->getField($fieldName);
 		//return $this->app->newField($fieldName);
 	}
 }

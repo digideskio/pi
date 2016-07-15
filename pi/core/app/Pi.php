@@ -339,6 +339,8 @@ class Pi {
 	}
 
 	/**
+	 * Récupérer le chemin
+	 *
 	 * @return Chemin
 	 */
 	public function getPath(): string {
@@ -357,7 +359,7 @@ class Pi {
 		if (array_key_exists($modelName, $this->models))
 			throw new \Exception('Model "' . $modelName . '" already registered');
 
-		$this->models[$modelName] = new $modelClass();
+		$this->models[$modelName] = new $modelClass($this);
 	}
 
 	/**
@@ -442,12 +444,12 @@ class Pi {
 	 *
 	 * @throws \Exception
 	 */
-	protected function getField(string $fieldName): Field {
+	public function getField(string $fieldName): Field {
 		if (array_key_exists($fieldName, $this->overridedFields))
-			return $this->overridedFields[$fieldName];
+			return new $this->overridedFields[$fieldName];
 
 		if (array_key_exists($fieldName, $this->fields))
-			return $this->fields[$fieldName];
+			return new $this->fields[$fieldName];
 
 		throw new \Exception('Field "' . $fieldName . '" does not exists');
 	}
@@ -459,7 +461,7 @@ class Pi {
 	 *
 	 * @throws \Exception
 	 */
-	protected function getModel(string $modelName): Model {
+	public function getModel(string $modelName): Model {
 		if (array_key_exists($modelName, $this->overridedModels))
 			return $this->overridedModels[$modelName];
 
