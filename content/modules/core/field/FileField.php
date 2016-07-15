@@ -46,6 +46,6 @@ class FileField extends Field {
 		if ($this->required)
 			$tag->addAttr('required');
 
-		return $tag;
+		return (string) $tag;
 	}
 }

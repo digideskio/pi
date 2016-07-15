@@ -61,6 +61,6 @@ class VersionField extends Field {
 		if ($this->placeholder)
 			$tag->addAttr('placeholder', $this->placeholder);
 
-		return $tag;
+		return (string) $tag;
 	}
 }

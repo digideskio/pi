@@ -70,6 +70,6 @@ class RangeField extends Field {
 				'id'    => 'input-' . $this->id
 	    ]);
 
-	    return $tag;
+	    return (string) $tag;
 	}
 }

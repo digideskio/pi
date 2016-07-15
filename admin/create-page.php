@@ -23,6 +23,8 @@ if (isset($_POST)) {
 		$page->setUpdatedAt(new DateTime());
 
 		$page->saveToFile(PI_DIR_PAGES . $slug . '/' . time() . '.json');
+
+		header('Location: ' . PI_URL_SITE . 'admin/edit-page.php?page=' . $slug);
 	}
 }
 

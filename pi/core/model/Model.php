@@ -43,7 +43,8 @@ class Model {
 	 * @param array $array
 	 *
 	 * @return static
-	public static function fromArray($array) {
+	 */
+	public static function fromArray($array): Model {
 		$model = new Model($array['title']);
 
 		foreach ($array['fields'] as $name => $field) {
@@ -56,7 +57,6 @@ class Model {
 
 		return $model;
 	}
-	*/
 
 	/**
 	 * Constructeur du modèle

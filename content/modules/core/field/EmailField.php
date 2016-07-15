@@ -55,6 +55,6 @@ class EmailField extends Field {
 		if ($this->max > 0 && $this->max >= $this->min)
 			$tag->addAttr('maxlength', $this->max);
 
-		return $tag;
+		return (string) $tag;
 	}
 }

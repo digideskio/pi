@@ -89,6 +89,6 @@ class TimeField extends Field {
 		if ($this->format == 'hh:mm:ss')
 			$tag->addAttr('step', 1);
 
-		return $tag;
+		return (string) $tag;
 	}
 }
