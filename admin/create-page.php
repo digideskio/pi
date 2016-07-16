@@ -14,15 +14,13 @@ if (isset($_POST)) {
 		if (empty($title))
 			header('Location: ' . PI_URL_SITE);
 
-		mkdir(PI_DIR_PAGES . $slug);
-
 		$page = new Page();
 		$page->setTitle($title);
 		$page->setModel($model);
 		$page->setCreatedAt(new DateTime());
 		$page->setUpdatedAt(new DateTime());
 
-		$page->saveToFile(PI_DIR_PAGES . $slug . '/' . time() . '.json');
+		$app->getPagesRepository()->save($page);
 
 		header('Location: ' . PI_URL_SITE . 'admin/edit-page.php?page=' . $slug);
 	}

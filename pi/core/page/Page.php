@@ -21,9 +21,12 @@ declare(strict_types=1);
 
 namespace Pi\Core\Page;
 
-use Pi\Lib\Json;
+use Pi\Lib\Str;
 
 class Page implements \JsonSerializable {
+	/** @var string Slug de la page */
+	private $slug;
+
 	/** @var string Titre de la page */
 	private $title;
 
@@ -40,69 +43,10 @@ class Page implements \JsonSerializable {
 	private $fields;
 
 	/**
-	 * Créer une instance de Page à partir d'un fichier JSON
-	 *
-	 * @param $filename Fichier JSON
-	 *
-	 * @return Page
-	 *
-	 * @throws \Exception
-	 */
-	public static function fromFile(string $filename): Page {
-		if (!file_exists($filename))
-			throw new \Exception('File "' . $filename . '" does not exists.');
-
-		$json = Json::read($filename);
-
-		$createdAt = \DateTime::createFromFormat(
-			\DateTime::ISO8601,
-			$json->created_at);
-
-		$updatedAt = \DateTime::createFromFormat(
-			\DateTime::ISO8601,
-			$json->updated_at);
-
-		$page = new static();
-
-		$page->setTitle($json->title);
-		$page->setModel($json->model);
-		$page->setCreatedAt($createdAt);
-		$page->setUpdatedAt($updatedAt);
-		$page->setFields((array) $json->fields);
-
-		return $page;
-	}
-
-	/**
-	 * Récupérer la dernière version de la page
-	 *
-	 * @throws \Exception
-	 */
-	public static function getLastVersion($slug): Page {
-		$versions = [];
-
-		foreach (glob(PI_DIR_PAGES . $slug . '/*') as $pathfile) {
-			$filename = basename($pathfile);
-
-			$version = explode('.', $filename)[0];
-			$versions[] = (int) $version;
-		}
-
-		if (empty($versions))
-			throw new \Exception('Page "' . $slug . '" does not exists');
-
-		$lastVersion = max($versions);
-
-		$page = static::fromFile(PI_DIR_PAGES . $slug . '/'
-			. $lastVersion . '.json');
-
-		return $page;
-	}
-
-	/**
 	 * Constructeur
 	 */
 	public function __construct() {
+		$this->slug = '';
 		$this->title = '';
 		$this->model = '';
 		$this->createdAt = null;
@@ -111,14 +55,19 @@ class Page implements \JsonSerializable {
 	}
 
 	/**
-	 * Définir le titre
+	 * Définit le titre du modèle
 	 *
-	 * @param $title
+	 * @param $title Titre de la page
+	 * @param $overrideSlug Si true, change le slug associé à la page, sinon
+	 *                      celui-ci reste inchangé (true par défaut)
 	 *
 	 * @return $this
 	 */
-	public function setTitle(string $title): Page {
+	public function setTitle(string $title, bool $overrideSlug = true): Page {
 		$this->title = $title;
+
+		if ($overrideSlug)
+			$this->slug = Str::slug($title);
 
 		return $this;
 	}
@@ -173,6 +122,15 @@ class Page implements \JsonSerializable {
 		$this->fields = $fields;
 
 		return $this;
+	}
+
+	/**
+	 * Récupérer le slug
+	 *
+	 * @return string
+	 */
+	public function getSlug(): string {
+		return $this->slug;
 	}
 
 	/**

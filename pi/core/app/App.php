@@ -22,15 +22,19 @@ declare(strict_types=1);
 namespace Pi\Core\App;
 
 use Pi\Core\Model\Model;
-use Pi\Core\Page\Page;
 use Pi\Core\Page\PageCollection;
+use Pi\Core\Repository\PageRepository;
 use Pi\Core\User\Role;
 use Pi\Core\User\User;
 use Pi\Core\View\Renderer;
 use Pi\Lib\Json;
 
 class App extends Pi {
+	/** @var array */
 	private $treeThemes;
+
+	/** @var PageRepository */
+	private $pagesRepository;
 
 	/**
 	 * Contruction de l'application
@@ -38,6 +42,7 @@ class App extends Pi {
 	public function __construct() {
 		parent::__construct();
 
+		$this->initializeRepositories();
 		$this->initializeSettings();
 		$this->initializeRoles();
 		$this->initializeUsers();
@@ -82,7 +87,7 @@ class App extends Pi {
 	 * Initialise les pages
 	 */
 	private function initializePages() {
-		$this->pages = PageCollection::getAllPages();
+		$this->pages = new PageCollection($this->pagesRepository->findAll());
 	}
 
 	/**
@@ -177,9 +182,9 @@ class App extends Pi {
 	 */
 	public function run() {
 		try {
-			$content = Page::getLastVersion($this->router->getPath());
+			$content = $this->pagesRepository->findBySlug($this->router->getPath());
 		} catch (\Exception $e) {
-			$content = Page::getLastVersion('error');
+			$content = $this->pagesRepository->findBySlug('error');
 		}
 
 		$model = $content->getModel();
@@ -199,6 +204,10 @@ class App extends Pi {
 			'page' => $fields,
 			'meta' => $meta
 		]);
+	}
+
+	private function initializeRepositories() {
+		$this->pagesRepository = new PageRepository();
 	}
 
 	/**
@@ -334,5 +343,12 @@ class App extends Pi {
 		}
 
 		return $dirs;
+	}
+
+	/**
+	 * @return
+	 */
+	public function getPagesRepository(): PageRepository {
+		return $this->pagesRepository;
 	}
 }

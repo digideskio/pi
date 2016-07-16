@@ -21,7 +21,6 @@ declare(strict_types=1);
 
 namespace Pi\Core\Model;
 
-use Module\Core\Field\TextField;
 use Pi\Core\App\Pi;
 use Pi\Lib\Str;
 

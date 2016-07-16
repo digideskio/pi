@@ -31,53 +31,9 @@ class PageCollection implements \IteratorAggregate {
 	private $pages;
 
 	/**
-	 * Cache de toutes les pages, pour éviter de tout recalculer à chaque fois
-	 *
-	 * @var PageCollection
-	 */
-	private static $cacheAllPages = null;
-
-	/**
-	 * Récupérer toutes les pages
-	 *
-	 * @return Liste de toutes les pages du site
-	 */
-	public static function getAllPages(): PageCollection {
-		// Retourne les pages en cache s'il y en a
-		if (static::$cacheAllPages != null)
-			return static::$cacheAllPages;
-
-		// Récupère tous les chemins du dossier des pages
-		$dirs = scandir(PI_DIR_PAGES);
-
-		// Supprime les chemins « . » et « .. »
-		$dirs = array_filter($dirs, function($dir) {
-			return ($dir != '.' && $dir != '..');
-		});
-
-		// Redéfinition de l'indexation du tableau
-		$dirs = array_values($dirs);
-
-		// Récupération de la dernière version de chacune des pages
-		$pages = [];
-
-		foreach ($dirs as $dir)
-			$pages[$dir] = Page::getLastVersion($dir);
-
-		// Création de la collection
-		$self = new static($pages);
-
-		// Complète le cache avec les pages récupérées
-		static::$cacheAllPages = $self;
-
-		// Retourne la version désormais en cache
-		return static::$cacheAllPages;
-	}
-
-	/**
 	 * @param Page[] $pages
 	 */
-	protected function __construct(array $pages) {
+	public function __construct(array $pages) {
 		// Récupération des pages passées en paramètre
 		$this->pages = $pages;
 
