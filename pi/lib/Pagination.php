@@ -49,10 +49,10 @@ class Pagination implements \IteratorAggregate {
 	/**
 	 * Construit une pagination
 	 *
-	 * @param $nbTotal Nombre total d'éléments
-	 * @param $nbByPage Nombre d'éléments par page
-	 * @param $actual Page actuellement ouverte
-	 * @param $firstPage Numéro de la première page
+	 * @param int $nbTotal Nombre total d'éléments
+	 * @param int $nbByPage Nombre d'éléments par page
+	 * @param int $actual Page actuellement ouverte
+	 * @param int $firstPage Numéro de la première page
 	 */
 	public function __construct(int $nbTotal,
 	                            int $nbByPage,
@@ -69,65 +69,65 @@ class Pagination implements \IteratorAggregate {
 	}
 
 	/**
-	 * @return Numéro de la première page
+	 * @return int Numéro de la première page
 	 */
 	public function getFirstPage(): int {
 		return $this->first;
 	}
 
 	/**
-	 * @return Numéro de la dernière page
+	 * @return int Numéro de la dernière page
 	 */
 	public function getLastPage(): int {
 		return $this->last;
 	}
 
 	/**
-	 * @return Numéro de la page précédente
+	 * @return int Numéro de la page précédente
 	 */
 	public function getPreviousPage(): int {
 		return $this->prev;
 	}
 
 	/**
-	 * @return Numéro de la page actuelle
+	 * @return int Numéro de la page actuelle
 	 */
 	public function getActualPage(): int {
 		return $this->actual;
 	}
 
 	/**
-	 * @return Numéro de la page suivante
+	 * @return int Numéro de la page suivante
 	 */
 	public function getNextPage(): int {
 		return $this->next;
 	}
 
 	/**
-	 * @return Nombre d'éléments
+	 * @return int Nombre d'éléments
 	 */
 	public function getNbTotal(): int {
 		return $this->nbTotal;
 	}
 
 	/**
-	 * @return Nombre d'éléments par page
+	 * @return int Nombre d'éléments par page
 	 */
 	public function getNbByPage(): int {
 		return $this->nbByPage;
 	}
 
 	/**
-	 * @return Nombre de pages
+	 * @return int Nombre de pages
 	 */
 	public function getNbPages(): int {
 		return $this->nbPages;
 	}
 
 	/**
-	 * @param $i La page $i est-elle la page actuelle ?
+	 * @param int $i La page $i est-elle la page actuelle ?
 	 *
-	 * @return true si la page $i est la page actuelle, false sinon
+	 * @return bool true si la page $i est la page actuelle, false sinon
 	 */
 	public function isActualPage(int $i): bool {
 		return $this->actual == $i;

@@ -28,9 +28,9 @@ class Input {
 	 * @param $name
 	 * @param $default
 	 *
-	 * @return La valeur du champ
+	 * @return string La valeur du champ
 	 */
-	public static function get(string $name, string $default = '') {
+	public static function get(string $name, string $default = ''): string {
 		return $_POST[$name] ?? $default;
 	}
 }

@@ -22,6 +22,7 @@ declare(strict_types=1);
 namespace Pi\Core\View;
 
 use Pi\Core\App\App;
+use Pi\Core\App\Pi;
 use Pi\Lib\Twig;
 use Pi\Lib\Markdown;
 
@@ -38,7 +39,7 @@ class Renderer {
 	/**
 	 * Constructeur
 	 *
-	 * @param $app Application
+	 * @param App $app Application
 	 */
 	public function __construct(App $app) {
 		// Application
@@ -75,8 +76,8 @@ class Renderer {
 	/**
 	 * Ajout un chemin vers des vues
 	 *
-	 * @param $path Chemin vers le dossier
-	 * @param $namespace Espace de noms
+	 * @param string $path Chemin vers le dossier
+	 * @param string $namespace Espace de noms
 	 *
 	 * @throws Twig\Error\Loader
 	 */
@@ -85,10 +86,10 @@ class Renderer {
 	}
 
 	/**
-	 * @param $file
-	 * @param $variables
+	 * @param string $file
+	 * @param array $variables
 	 *
-	 * @return Le rendu
+	 * @return string Le rendu
 	 */
 	public function render(string $file, array $variables): string {
 		$variables = array_merge($this->app->getVariables(), $variables);

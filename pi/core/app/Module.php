@@ -40,7 +40,7 @@ abstract class Module {
 	/**
 	 * Constructeur
 	 *
-	 * @param $app Application
+	 * @param $app App Application
 	 */
 	final public function __construct(App $app) {
 		$this->app = $app;
@@ -54,7 +54,7 @@ abstract class Module {
 	/**
 	 * Définir le nom du module
 	 *
-	 * @param $themeName Nom du module
+	 * @param string $name Nom du module
 	 *
 	 * @return $this L'instance du module
 	 */
@@ -67,7 +67,7 @@ abstract class Module {
 	/**
 	 * Définir la version du module
 	 *
-	 * @param $themeName Nom du module
+	 * @param string $version Nom du module
 	 *
 	 * @return $this L'instance du module
 	 */
@@ -80,7 +80,7 @@ abstract class Module {
 	/**
 	 * Définir la description du module
 	 *
-	 * @param $themeName Nom du module
+	 * @param string $description Nom du module
 	 *
 	 * @return $this L'instance du module
 	 */
@@ -93,7 +93,7 @@ abstract class Module {
 	/**
 	 * Définir l'auteur du module
 	 *
-	 * @param $themeName Nom du module
+	 * @param string $author Nom du module
 	 *
 	 * @return $this L'instance du module
 	 */
@@ -106,7 +106,7 @@ abstract class Module {
 	/**
 	 * Récupérer le nom du module
 	 *
-	 * @return Le nom du module
+	 * @return string Le nom du module
 	 */
 	public function getName(): string {
 		return $this->name;
@@ -115,7 +115,7 @@ abstract class Module {
 	/**
 	 * Récupérer la version du module
 	 *
-	 * @return La version du module
+	 * @return string La version du module
 	 */
 	public function getVersion(): string {
 		return $this->version;
@@ -124,7 +124,7 @@ abstract class Module {
 	/**
 	 * Récupérer la description du module
 	 *
-	 * @return La description du module
+	 * @return string La description du module
 	 */
 	public function getDescription(): string {
 		return $this->description;
@@ -133,7 +133,7 @@ abstract class Module {
 	/**
 	 * Récupérer l'auteur du module
 	 *
-	 * @return L'auteur du module
+	 * @return string L'auteur du module
 	 */
 	public function getAuthor(): string {
 		return $this->author;
@@ -142,8 +142,8 @@ abstract class Module {
 	/**
 	 * Enregistrer un nouveau modèle depuis une classe
 	 *
-	 * @param $modelName Nom du modèle
-	 * @param $modelClass Classe du modèle
+	 * @param string $modelName Nom du modèle
+	 * @param string $modelClass Classe du modèle
 	 *
 	 * @throws \Exception
 	 */
@@ -156,8 +156,8 @@ abstract class Module {
 	/**
 	 * Surcharger un modèle
 	 *
-	 * @param $modelName Nom du modèle
-	 * @param $modelClass Classe du modèle
+	 * @param string $modelName Nom du modèle
+	 * @param string $fieldClass Classe du modèle
 	 *
 	 * @throws \Exception
 	 */
@@ -168,8 +168,8 @@ abstract class Module {
 	/**
 	 * Surcharger la vue d'un modèle
 	 *
-	 * @param $modelName Nom du modèle à surcharger
-	 * @param $filename Chemin vers la vue surchargée
+	 * @param string $modelName Nom du modèle à surcharger
+	 * @param string $filename Chemin vers la vue surchargée
 	 *
 	 * @throws \Exception
 	 */
@@ -180,8 +180,8 @@ abstract class Module {
 	/**
 	 * Enregistrer un nouveau champ
 	 *
-	 * @param $fieldName Nom du champ
-	 * @param $fieldClass Classe du champ
+	 * @param string $fieldName Nom du champ
+	 * @param string $fieldClass Classe du champ
 	 *
 	 * @throws \Exception
 	 */
@@ -192,8 +192,8 @@ abstract class Module {
 	/**
 	 * Surcharger un champ
 	 *
-	 * @param $fieldName Nom du champ
-	 * @param $fieldClass Classe du champ
+	 * @param string $fieldName Nom du champ
+	 * @param string $fieldClass Classe du champ
 	 *
 	 * @throws \Exception
 	 */
@@ -204,7 +204,7 @@ abstract class Module {
 	/**
 	 * Charger un fichier CSS dans le thème
 	 *
-	 * @param $url Chemin vers le fichier CSS à charger
+	 * @param string $url Chemin vers le fichier CSS à charger
 	 *
 	 * @throws \Exception
 	 */
@@ -215,7 +215,7 @@ abstract class Module {
 	/**
 	 * Charger un fichier JavaScript dans le thème
 	 *
-	 * @param $url Chemin vers le fichier JavaScript à charger
+	 * @param string $url Chemin vers le fichier JavaScript à charger
 	 *
 	 * @throws \Exception
 	 */
@@ -226,7 +226,7 @@ abstract class Module {
 	/**
 	 * Décharger un fichier CSS dans le thème
 	 *
-	 * @param $url Chemin vers le fichier CSS à décharger
+	 * @param string $url Chemin vers le fichier CSS à décharger
 	 *
 	 * @throws \Exception
 	 */
@@ -237,7 +237,7 @@ abstract class Module {
 	/**
 	 * Décharger un fichier JavaScript dans le thème
 	 *
-	 * @param $url Chemin vers le fichier JavaScript à décharger
+	 * @param string $url Chemin vers le fichier JavaScript à décharger
 	 *
 	 * @throws \Exception
 	 */

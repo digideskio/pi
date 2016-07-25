@@ -31,7 +31,7 @@ class Router {
 	/**
 	 * Initialise le chemin courant
 	 *
-	 * @param $path
+	 * @param string $path
 	 */
 	public function __construct(string $path = null) {
 		if (!$path)
@@ -62,7 +62,7 @@ class Router {
 	/**
 	 * Récupérer le chemin
 	 *
-	 * @return Le chemin vers la page
+	 * @return string Le chemin vers la page
 	 */
 	public function getPath(): string {
 		return $this->path;

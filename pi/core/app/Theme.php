@@ -31,7 +31,7 @@ abstract class Theme {
 	/**
 	 * Constructeur du thème
 	 *
-	 * @param $app Application
+	 * @param $app App Application
 	 */
 	final public function __construct(App $app) {
 		$this->app = $app;
@@ -45,7 +45,7 @@ abstract class Theme {
 	/**
 	 * Définir le nom du thème
 	 *
-	 * @param $themeName Nom du thème
+	 * @param string $themeName Nom du thème
 	 *
 	 * @return $this L'instance du thème
 	 */
@@ -58,7 +58,7 @@ abstract class Theme {
 	/**
 	 * Charger un fichier CSS dans le thème
 	 *
-	 * @param $url Chemin vers le fichier CSS à charger
+	 * @param string $url Chemin vers le fichier CSS à charger
 	 *
 	 * @throws \Exception
 	 */
@@ -69,7 +69,7 @@ abstract class Theme {
 	/**
 	 * Charger un fichier JavaScript dans le thème
 	 *
-	 * @param $url Chemin vers le fichier JavaScript à charger
+	 * @param string $url Chemin vers le fichier JavaScript à charger
 	 *
 	 * @throws \Exception
 	 */
@@ -80,7 +80,7 @@ abstract class Theme {
 	/**
 	 * Décharger un fichier CSS dans le thème
 	 *
-	 * @param $url Chemin vers le fichier CSS à décharger
+	 * @param string $url Chemin vers le fichier CSS à décharger
 	 *
 	 * @throws \Exception
 	 */
@@ -91,7 +91,7 @@ abstract class Theme {
 	/**
 	 * Décharger un fichier JavaScript dans le thème
 	 *
-	 * @param $url Chemin vers le fichier JavaScript à décharger
+	 * @param string $url Chemin vers le fichier JavaScript à décharger
 	 *
 	 * @throws \Exception
 	 */
@@ -102,10 +102,10 @@ abstract class Theme {
 	/**
 	 * Surcharger la vue d'un modèle
 	 *
-	 * @param $modelName Nom du modèle dont la vue doit être surchargée
-	 * @param $filename Chemin vers la vue surchargée
+	 * @param string $modelName Nom du modèle dont la vue doit être surchargée
+	 * @param string $filename Chemin vers la vue surchargée
 	 *
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	protected function overrideViewModel(string $modelName, string $filename) {
 		$this->app->overrideViewModel($modelName, $filename);

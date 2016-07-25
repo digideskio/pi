@@ -31,7 +31,7 @@ class Role {
 	/**
 	 * Créer le rôle à partir d'un tableau
 	 *
-	 * @param $data Données fournies pour contruire le rôle
+	 * @param array $data Données fournies pour contruire le rôle
 	 */
 	public function __construct(array $data) {
 		$this->setName($data['name']);
@@ -41,10 +41,10 @@ class Role {
 	/**
 	 * Le rôle dispose t-il de la permission $permission ?
 	 *
-	 * @param $permission Permission à tester
+	 * @param string $permission Permission à tester
 	 *
-	 * @return Retourne true si le rôle dipose de la permission
-	 *         $permission, false sinon
+	 * @return bool Retourne true si le rôle dipose de la permission
+	 *              $permission, false sinon
 	 */
 	public function hasPermission(string $permission): bool {
 		return in_array($permission, $this->permissions);
@@ -53,7 +53,7 @@ class Role {
 	/**
 	 * Ajouter une permission
 	 *
-	 * @param $permission Permission à ajouter
+	 * @param string $permission Permission à ajouter
 	 *
 	 * @return $this L'instance du rôle
 	 */
@@ -66,7 +66,7 @@ class Role {
 	/**
 	 * Modifier le nom du rôle
 	 *
-	 * @param $username Nouveau nom
+	 * @param string $name Nouveau nom
 	 *
 	 * @return $this L'instance du rôle
 	 */
@@ -92,7 +92,7 @@ class Role {
 	/**
 	 * Récupérer le nom du rôle
 	 *
-	 * @return Nom du rôle
+	 * @return string Nom du rôle
 	 */
 	public function getName(): string {
 		return $this->name;

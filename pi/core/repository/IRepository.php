@@ -20,8 +20,31 @@
 namespace Pi\Core\Repository;
 
 interface IRepository {
-	public function findAll();
-	public function findBySlug($slug);
-	public function save($model);
-	public function remove($model);
+	/**
+	 * Récupérer tous les éléments
+	 *
+	 * @return array Liste de tous les éléments
+	 */
+	public function findAll(): array;
+
+	/**
+	 * @param string $slug
+	 *
+	 * @return mixed
+	 */
+	public function findBySlug(string $slug);
+
+	/**
+	 * @param $model
+	 *
+	 * @return bool Succès
+	 */
+	public function save($model): bool;
+
+	/**
+	 * @param $model
+	 *
+	 * @return bool Succès
+	 */
+	public function remove($model): bool;
 }

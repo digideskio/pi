@@ -21,6 +21,7 @@ declare(strict_types=1);
 
 namespace Pi\Core\App;
 
+use Pi\Core\Model\Field;
 use Pi\Core\Model\Model;
 use Pi\Core\Page\PageCollection;
 use Pi\Core\Repository\PageRepository;
@@ -211,7 +212,7 @@ class App extends Pi {
 	}
 
 	/**
-	 * @return Fichiers CSS
+	 * @return array Fichiers CSS
 	 *
 	 * @throws \Exception
 	 */
@@ -238,7 +239,7 @@ class App extends Pi {
 	}
 
 	/**
-	 * @return Fichiers JavaScript
+	 * @return array Fichiers JavaScript
 	 *
 	 * @throws \Exception
 	 */
@@ -269,9 +270,9 @@ class App extends Pi {
 	 *
 	 * Créer un nouveau champ
 	 *
-	 * @param $fieldName Nom du champ
+	 * @param string $fieldName Nom du champ
 	 *
-	 * @return Champ créé
+	 * @return Field Champ créé
 	 *
 	 * @throws \Exception
 	 */
@@ -285,7 +286,7 @@ class App extends Pi {
 	/**
 	 * Variables globales qui seront envoyées à toutes les vues
 	 *
-	 * @return Variables utilisées pour les vues
+	 * @return array Variables utilisées pour les vues
 	 */
 	public function getVariables(): array {
 		return [
@@ -319,7 +320,7 @@ class App extends Pi {
 	/**
 	 * Récupérer la racine du site
 	 *
-	 * @return Racine du site
+	 * @return string Racine du site
 	 */
 	public function getRoot(): string {
 		return PI_DIR_SITE;
@@ -330,7 +331,7 @@ class App extends Pi {
 	 *
 	 * Récupérer la liste des thèmes
 	 *
-	 * @return
+	 * @return array
 	 */
 	public function getThemes(): array {
 		$scan = scandir(PI_DIR_THEMES);
@@ -346,7 +347,7 @@ class App extends Pi {
 	}
 
 	/**
-	 * @return
+	 * @return PageRepository
 	 */
 	public function getPagesRepository(): PageRepository {
 		return $this->pagesRepository;

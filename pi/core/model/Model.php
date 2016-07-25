@@ -21,6 +21,7 @@ declare(strict_types=1);
 
 namespace Pi\Core\Model;
 
+use Pi\Core\App\App;
 use Pi\Core\App\Pi;
 use Pi\Lib\Str;
 
@@ -51,6 +52,7 @@ class Model {
 		$model = new Model($array['title']);
 
 		foreach ($array['fields'] as $name => $field) {
+			// @todo Corriger cet appel
 			$fieldClass = App::getField($field['type']);
 
 			$field['name'] = $name;
@@ -64,8 +66,8 @@ class Model {
 	/**
 	 * Constructeur du modèle
 	 *
-	 * @param $pi Application
-	 * @param $title Titre du modèle
+	 * @param Pi $app Application
+	 * @param string $title Titre du modèle
 	 */
 	public function __construct(Pi $app, string $title = '') {
 		$this->app = $app;
@@ -79,9 +81,9 @@ class Model {
 	/**
 	 * Définit le titre du modèle
 	 *
-	 * @param $title Titre du modèle
-	 * @param $overrideSlug Si true, change le slug associé au modèle, sinon
-	 *                      celui-ci reste inchangé (true par défaut)
+	 * @param string $title Titre du modèle
+	 * @param bool $overrideSlug Si true, change le slug associé au modèle,
+	 *                           sinon celui-ci reste inchangé (true par défaut)
 	 *
 	 * @return $this
 	 */
@@ -97,7 +99,7 @@ class Model {
 	/**
 	 * Définit le slug du modèle
 	 *
-	 * @param $slug
+	 * @param string $slug
 	 *
 	 * @return $this
 	 */
@@ -110,8 +112,8 @@ class Model {
 	/**
 	 * Ajoute un champ
 	 *
-	 * @param $fieldName
-	 * @param $field
+	 * @param string $fieldName
+	 * @param Field $field
 	 *
 	 * @return $this
 	 *
@@ -132,7 +134,7 @@ class Model {
 	 *
 	 * Définir la vue
 	 *
-	 * @param $viewFilename
+	 * @param string $viewFilename
 	 *
 	 * @return $this
 	 */
@@ -148,7 +150,7 @@ class Model {
 	/**
 	 * Récupérer le titre
 	 *
-	 * @return Titre du modèle
+	 * @return string Titre du modèle
 	 */
 	public function getTitle(): string {
 		return $this->title;
@@ -157,7 +159,7 @@ class Model {
 	/**
 	 * Récupérer le slug
 	 *
-	 * @return Slug du modèle
+	 * @return string Slug du modèle
 	 */
 	public function getSlug(): string {
 		return $this->slug;
@@ -175,7 +177,7 @@ class Model {
 	/**
 	 * Récupérer le chemin vers la vue
 	 *
-	 * @return Chemin vers la vue du modèle
+	 * @return string Chemin vers la vue du modèle
 	 */
 	public function getViewFilename(): string {
 		return $this->viewFilename;
@@ -186,9 +188,9 @@ class Model {
 	 *
 	 * Créer un nouveau champ
 	 *
-	 * @param $fieldName Nom du champ
+	 * @param string $fieldName Nom du champ
 	 *
-	 * @return Champ créé
+	 * @return Field Champ créé
 	 *
 	 * @throws \Exception
 	 */

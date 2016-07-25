@@ -34,7 +34,7 @@ class Markdown {
 	}
 
 	/**
-	 * @param $file
+	 * @param string $filename
 	 *
 	 * @return mixed|string
 	 */

@@ -29,7 +29,7 @@ class Num {
 	 * @param $max
 	 * @param $value
 	 * 
-	 * @return true si $value est entre $min et $max, false sinon
+	 * @return bool true si $value est entre $min et $max, false sinon
 	 */
 	public static function between(float $min, float $max, float $value): bool {
 		return ($min == 0 && $max == 0)

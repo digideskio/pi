@@ -2,9 +2,7 @@
 
 require 'init.php';
 
-use Pi\Core\Page\PageCollection;
-
-$pages = PageCollection::getAllPages();
+$pages = $app->getPagesRepository()->findAll();
 
 $themes = $app->getThemes();
 

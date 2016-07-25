@@ -30,7 +30,12 @@ class PageRepository implements IRepository {
 	 */
 	private static $cacheAllPages = null;
 
-	public function findAll() {
+	/**
+	 * Récupérer tous les éléments
+	 *
+	 * @return array Liste de tous les éléments
+	 */
+	public function findAll(): array {
 		// Retourne les pages en cache s'il y en a
 		if (static::$cacheAllPages != null)
 			return static::$cacheAllPages;
@@ -59,7 +64,14 @@ class PageRepository implements IRepository {
 		return static::$cacheAllPages;
 	}
 
-	public function findBySlug($slug) {
+	/**
+	 * @param string $slug
+	 *
+	 * @return mixed
+	 *
+	 * @throws \Exception
+	 */
+	public function findBySlug(string $slug) {
 		$filename = $this->getLastVersionFileName($slug);
 
 		if (!file_exists($filename))
@@ -89,9 +101,13 @@ class PageRepository implements IRepository {
 	/**
 	 * Récupérer la dernière version de la page
 	 *
+	 * @param string $slug
+	 *
+	 * @return string
+	 *
 	 * @throws \Exception
 	 */
-	public function getLastVersionFileName($slug) {
+	public function getLastVersionFileName(string $slug): string {
 		$versions = [];
 
 		foreach (glob(PI_DIR_PAGES . $slug . '/*') as $pathfile) {
@@ -109,16 +125,29 @@ class PageRepository implements IRepository {
 		return PI_DIR_PAGES . $slug . '/' . $lastVersion . '.json';
 	}
 
-	public function save($page) {
+	/**
+	 * @param Page $page
+	 *
+	 * @return bool Succès
+	 */
+	public function save($page): bool {
 		/** @var $page Page */
 		$slug = $page->getSlug();
 
-		mkdir(PI_DIR_PAGES . $slug, 0655, true);
+		$dir = PI_DIR_PAGES . $slug;
 
-		$page->saveToFile(PI_DIR_PAGES . $slug . '/' . time() . '.json');
+		if (!is_dir($dir))
+			mkdir($dir, 0777, true);
+
+		return $page->saveToFile(PI_DIR_PAGES . $slug . '/' . time() . '.json');
 	}
 
-	public function remove($page) {
-
+	/**
+	 * @param Page $page
+	 *
+	 * @return bool Succès
+	 */
+	public function remove($page): bool {
+		return false;
 	}
 }

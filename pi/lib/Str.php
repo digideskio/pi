@@ -25,9 +25,9 @@ class Str {
 	/**
 	 * Prend une chaine et la retourne sans les accents
 	 *
-	 * @param $txt La chaine dont on veut enlever les accents
+	 * @param string $txt La chaine dont on veut enlever les accents
 	 * 
-	 * @return La chaine sans accent
+	 * @return string La chaine sans accent
 	 */
 	public static function stripAccents(string $txt): string {
 		return strtr(utf8_decode($txt), utf8_decode(
@@ -40,13 +40,13 @@ class Str {
 	 * que les espaces sont remplacés par des tirets et que seuls les caractères
 	 * A-Z, a-z et le tiret sont conservés
 	 *
-	 * @param $txt Chaine à « sluger »
-	 * @param $default Valeur à utiliser si le slug final est vide
+	 * @param string $txt Chaine à « sluger »
+	 * @param string $default Valeur à utiliser si le slug final est vide
 	 *
-	 * @return La chaine « slugée »
+	 * @return string La chaine « slugée »
 	 */
 	public static function slug(string $txt,
-		                          string $default = 'unnamed'): string {
+	                            string $default = 'unnamed'): string {
 		// On remplace les apostrophes et les espaces par des tirets
 		$txt = str_replace(['\'', ' '], '-', $txt);
 
@@ -72,10 +72,10 @@ class Str {
 	}
 
 	/**
-	 * @param $txt La chaine à découper
+	 * @param string $txt La chaine à découper
 	 *
-	 * @return Découpe les lignes d'une chaine et les retournent sous forme de
-	 *         tableau
+	 * @return array Découpe les lignes d'une chaine et les retournent sous forme de
+	 *               tableau
 	 */
 	public static function lines(string $txt): array {
 		$txt = str_replace("\r\n", "\n", $txt);
@@ -85,9 +85,9 @@ class Str {
 	}
 
 	/**
-	 * @param $string La chaine à tester
+	 * @param string $string La chaine à tester
 	 *
-	 * @return true si la chaine est une URL, false sinon
+	 * @return bool true si la chaine est une URL, false sinon
 	 */
 	public static function isURL(string $string): bool {
 		return (bool) filter_var($string, FILTER_VALIDATE_URL);
@@ -96,9 +96,9 @@ class Str {
 	/**
 	 * Générer une chaine aléatoirement avec une longueur donnée
 	 *
-	 * @param $length Longueur de la chaine à générer
+	 * @param int $length Longueur de la chaine à générer
 	 *
-	 * @return Chaine générée aléatoirement
+	 * @return string Chaine générée aléatoirement
 	 */
 	public static function random(int $length): string {
 		$chars = array_merge(range('a', 'z'), range('A', 'Z'), range(0, 9));
@@ -113,15 +113,15 @@ class Str {
 	}
 
 	/**
-	 * @param $txt
-	 * @param $nbWords
-	 * @param $after
+	 * @param string $txt
+	 * @param int $nbWords
+	 * @param string $after
 	 *
-	 * @return Garde $nbWords de la chaine $txt
+	 * @return string Garde $nbWords de la chaine $txt
 	 */
 	public static function splitWords(string $txt,
-		                                int $nbWords = 50,
-		                                string $after = '…'): string {
+	                                  int $nbWords = 50,
+	                                  string $after = '…'): string {
 		$txt = strip_tags($txt);
 
 		$words = explode(' ', $txt);
@@ -141,15 +141,15 @@ class Str {
 	}
 
 	/**
-	 * @param $txt La chaine à tester
-	 * @param $needle La chaine interne à tester
-	 * @param $insensitive Sensibilité à la casse
+	 * @param string $txt La chaine à tester
+	 * @param string $needle La chaine interne à tester
+	 * @param bool $insensitive Sensibilité à la casse
 	 *
-	 * @return true si $txt contient $needle, false sinon
+	 * @return bool true si $txt contient $needle, false sinon
 	 */
 	public static function contains(string $txt,
-		                              string $needle,
-		                              bool $insensitive = true): bool {
+	                                string $needle,
+	                                bool $insensitive = true): bool {
 		if ($insensitive) {
 			$txt = strtolower($txt);
 			$needle = strtolower($needle);
@@ -159,20 +159,20 @@ class Str {
 	}
 
 	/**
-	 * @param $str La chaine à tester
-	 * @param $needle La chaine interne à tester
+	 * @param string $str La chaine à tester
+	 * @param string $needle La chaine interne à tester
 	 *
-	 * @return true si $str commence par $needle, false sinon
+	 * @return bool true si $str commence par $needle, false sinon
 	 */
 	public static function startsWith(string $str, string $needle): bool {
 		return $needle === '' || strpos($str, $needle) === 0;
 	}
 
 	/**
-	 * @param $str La chaine à tester
-	 * @param $needle La chaine interne à tester
+	 * @param string $str La chaine à tester
+	 * @param string $needle La chaine interne à tester
 	 *
-	 * @return true si $str se termine par $needle, false sinon
+	 * @return bool true si $str se termine par $needle, false sinon
 	 */
 	public static function endsWith(string $str, string $needle): bool {
 		return $needle === '' || substr($str, -strlen($needle)) === $needle;

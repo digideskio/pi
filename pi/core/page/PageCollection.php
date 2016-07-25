@@ -23,9 +23,6 @@ namespace Pi\Core\Page;
 
 use Pi\Lib\Str;
 
-/**
- * @todo Faire en sorte que cette classe soit moins statique
- */
 class PageCollection implements \IteratorAggregate {
 	/** @var Page[] Pages faisant partie de la collection */
 	private $pages;
@@ -46,7 +43,7 @@ class PageCollection implements \IteratorAggregate {
 	/**
 	 * Pages dont le slug commence par
 	 *
-	 * @param $name
+	 * @param string $name
 	 *
 	 * @return $this
 	 */
@@ -61,7 +58,7 @@ class PageCollection implements \IteratorAggregate {
 	/**
 	 * Pages dont le slug finit par
 	 *
-	 * @param $name
+	 * @param string $name
 	 *
 	 * @return $this
 	 */
@@ -76,7 +73,7 @@ class PageCollection implements \IteratorAggregate {
 	/**
 	 * Pages dont le slug contient
 	 *
-	 * @param $name
+	 * @param string $name
 	 *
 	 * @return $this
 	 */
@@ -91,7 +88,7 @@ class PageCollection implements \IteratorAggregate {
 	/**
 	 * Pages qui contiennent le champ
 	 *
-	 * @param $fieldName
+	 * @param string $fieldName
 	 *
 	 * @return $this
 	 */
@@ -107,7 +104,7 @@ class PageCollection implements \IteratorAggregate {
 	/**
 	 * @todo Pages dont le champ vaut
 	 *
-	 * @param $fieldName
+	 * @param string $fieldName
 	 * @param mixed $fieldValue
 	 *
 	 * @return $this
@@ -123,7 +120,7 @@ class PageCollection implements \IteratorAggregate {
 	/**
 	 * Pages dont le modèle est
 	 *
-	 * @param $modelName
+	 * @param string $modelName
 	 *
 	 * @return $this
 	 */

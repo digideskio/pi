@@ -2,9 +2,7 @@
 
 require 'init.php';
 
-use Pi\Core\Page\PageCollection;
-
-$pages = PageCollection::getAllPages();
+$pages = $app->getPagesRepository()->findAll();
 
 echo $app->render('@theme/admin/list-users.html', [
 	'pages' => $pages,

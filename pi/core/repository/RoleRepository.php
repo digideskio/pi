@@ -20,19 +20,39 @@
 namespace Pi\Core\Repository;
 
 class RoleRepository implements IRepository {
-	public function findAll() {
-
+	/**
+	 * Récupérer tous les éléments
+	 *
+	 * @return array Liste de tous les éléments
+	 */
+	public function findAll(): array {
+		return [];
 	}
 
-	public function findBySlug($slug) {
-
+	/**
+	 * @param string $slug
+	 *
+	 * @return mixed
+	 */
+	public function findBySlug(string $slug) {
+		return null;
 	}
 
-	public function save($role) {
-
+	/**
+	 * @param $role
+	 *
+	 * @return bool Succès
+	 */
+	public function save($role): bool {
+		return false;
 	}
 
-	public function remove($role) {
-
+	/**
+	 * @param $role
+	 *
+	 * @return bool Succès
+	 */
+	public function remove($role): bool {
+		return false;
 	}
 }

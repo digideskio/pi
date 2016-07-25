@@ -70,7 +70,6 @@ class ArticleModel extends Model {
 
 		$content = $this->newField('textarea');
 		$content->setLabel('Contenu');
-		$content->setRequired(true);
 
 		$this->addField('categories', $categories);
 		$this->addField('date', $date);

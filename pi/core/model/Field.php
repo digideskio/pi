@@ -132,7 +132,7 @@ abstract class Field {
 	}
 
 	/**
-	 * @return Valeur du champ
+	 * @return string Valeur du champ
 	 */
 	public function save(): string {
 		return $this->value();
@@ -141,7 +141,7 @@ abstract class Field {
 	/**
 	 * Définir le nom du champ
 	 *
-	 * @param $name Nom du champ
+	 * @param string $name Nom du champ
 	 *
 	 * @return $this L'instance du champ
 	 */
@@ -154,7 +154,7 @@ abstract class Field {
 	/**
 	 * Définir le label du champ
 	 *
-	 * @param $label Label du champ
+	 * @param string $label Label du champ
 	 *
 	 * @return $this L'instance du champ
 	 */
@@ -167,7 +167,7 @@ abstract class Field {
 	/**
 	 * Définir la valeur par défaut
 	 *
-	 * @param $default Valeur par défaut du champ
+	 * @param string $default Valeur par défaut du champ
 	 *
 	 * @return $this L'instance du champ
 	 */
@@ -180,7 +180,7 @@ abstract class Field {
 	/**
 	 * Définir si le champ est obligatoire ou non
 	 *
-	 * @param $required true si le champ est requis, false sinon
+	 * @param bool $required true si le champ est requis, false sinon
 	 *
 	 * @return $this L'instance du champ
 	 */
@@ -193,7 +193,7 @@ abstract class Field {
 	/**
 	 * Définir le message du champ
 	 *
-	 * @param $message Message du champ
+	 * @param string $message Message du champ
 	 *
 	 * @return $this L'instance du champ
 	 */
@@ -206,7 +206,7 @@ abstract class Field {
 	/**
 	 * Définir la largeur du champ
 	 *
-	 * @param $width Largeur du champ
+	 * @param string $width Largeur du champ
 	 *
 	 * @return $this L'instance du champ
 	 */
@@ -219,7 +219,7 @@ abstract class Field {
 	/**
 	 * Définir le « placeholder » du champ
 	 *
-	 * @param $placeholder
+	 * @param string $placeholder
 	 *
 	 * @return $this L'instance du champ
 	 */
@@ -232,7 +232,7 @@ abstract class Field {
 	/**
 	 * Définir les valeurs disponibles pour ce champ
 	 *
-	 * @param $options Valeurs disponibles pour ce champ
+	 * @param array $options Valeurs disponibles pour ce champ
 	 *
 	 * @return $this L'instance du champ
 	 */
@@ -284,7 +284,7 @@ abstract class Field {
 	/**
 	 * Définir le format du champ
 	 *
-	 * @param $format Formati du champ
+	 * @param string $format Format du champ
 	 *
 	 * @return $this L'instance du champ
 	 */

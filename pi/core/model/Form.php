@@ -26,14 +26,14 @@ class Form {
 	private $model;
 
 	/**
-	 * @param $model Modèle
+	 * @param $model Model Modèle
 	 */
 	public function __construct(Model $model) {
 		$this->model = $model;
 	}
 
 	/**
-	 * @return Formulaire au format HTML
+	 * @return string Formulaire au format HTML
 	 */
 	public function html(): string {
 		$html  = '<form method="post" action="">';
@@ -69,7 +69,7 @@ class Form {
 	}
 
 	/**
-	 * @return Champs incorrects
+	 * @return array Champs incorrects
 	 */
 	public function validate(): array {
 		$errors = [];
@@ -81,7 +81,7 @@ class Form {
 	}
 
 	/**
-	 * @return Tableau avec les valeurs
+	 * @return array Tableau avec les valeurs
 	 */
 	public function save(): array {
 		$infos = [];
@@ -95,9 +95,9 @@ class Form {
 	/**
 	 * Génère le HTML d'un champ donné
 	 *
-	 * @param $field Champ
+	 * @param Field $field Champ
 	 *
-	 * @return Code HTML du champ
+	 * @return string Code HTML du champ
 	 */
 	private function getHtmlFromField(Field $field): string {
 		$html = '';
@@ -124,9 +124,9 @@ class Form {
 	/**
 	 * Classe CSS à utiliser en fonction de la taille du champ donné
 	 *
-	 * @param $width Largeur (1/2, 1/3, 2/3, 1/4 ou 3/4)
+	 * @param string $width Largeur (1/2, 1/3, 2/3, 1/4 ou 3/4)
 	 *
-	 * @return Classe CSS à utiliser pour la largeur du champ
+	 * @return string Classe CSS à utiliser pour la largeur du champ
 	 */
 	private function getCssClassFromWidth(string $width): string {
 		switch ($width) {

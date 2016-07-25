@@ -92,7 +92,7 @@ class Pi {
 	 * Quand l'utilisation d'une classe est repérée, le fichier créant la
 	 * classe est chargé
 	 *
-	 * @param $class Classe à charger
+	 * @param string $class Classe à charger
 	 *
 	 * @throws \Exception
 	 */
@@ -177,10 +177,10 @@ class Pi {
 	/**
 	 * Rendu du fichier
 	 *
-	 * @param $file
-	 * @param $variables
+	 * @param string $file
+	 * @param array $variables
 	 *
-	 * @return Rendu de la page
+	 * @return string Rendu de la page
 	 */
 	public function render(string $file, array $variables = []): string {
 		return $this->renderer->render($file, $variables);
@@ -189,7 +189,7 @@ class Pi {
 	/**
 	 * Récupérer la liste des modèles
 	 *
-	 * @return Liste des modèles
+	 * @return array Liste des modèles
 	 */
 	public function getModels(): array {
 		return $this->models;
@@ -198,7 +198,7 @@ class Pi {
 	/**
 	 * Récupérer la liste des champs
 	 *
-	 * @return Liste des champs
+	 * @return array Liste des champs
 	 */
 	public function getFields(): array {
 		return $this->fields;
@@ -207,7 +207,7 @@ class Pi {
 	/**
 	 * Récupérer la liste des pages
 	 *
-	 * @return Liste des pages
+	 * @return PageCollection Liste des pages
 	 */
 	public function getPages(): PageCollection {
 		return $this->pages;
@@ -234,7 +234,7 @@ class Pi {
 	/**
 	 * Récupérer les paramètres du site
 	 *
-	 * @return Paramètres du site
+	 * @return \stdClass Paramètres du site
 	 */
 	public function getSettings(): \stdClass {
 		return $this->settings;
@@ -243,7 +243,7 @@ class Pi {
 	/**
 	 * Récupérer le thème du site
 	 *
-	 * @return Slug du thème
+	 * @return string Slug du thème
 	 */
 	public function getTheme(): string {
 		return $this->theme;
@@ -252,11 +252,13 @@ class Pi {
 	/**
 	 * Récupérer la liste des utilisateurs
 	 *
-	 * @return Utilisateur
+	 * @param string $username Pseudonyme
+	 * 
+	 * @return User Utilisateur
 	 *
 	 * @throws \Exception
 	 */
-	public function getUser($username): User {
+	public function getUser(string $username): User {
 		if (!array_key_exists($username, $this->users))
 			throw new \Exception('User "' . $username . '" does not exists.');
 
@@ -264,7 +266,7 @@ class Pi {
 	}
 
 	/**
-	 * @param $url Fichier CSS à charger
+	 * @param string $url Fichier CSS à charger
 	 *
 	 * @throws \Exception
 	 */
@@ -277,7 +279,7 @@ class Pi {
 	}
 
 	/**
-	 * @param $url Fichier JavaScript à charger
+	 * @param string $url Fichier JavaScript à charger
 	 *
 	 * @throws \Exception
 	 */
@@ -290,7 +292,7 @@ class Pi {
 	}
 
 	/**
-	 * @param $url Fichier CSS à décharger
+	 * @param string $url Fichier CSS à décharger
 	 *
 	 * @throws \Exception
 	 */
@@ -308,7 +310,7 @@ class Pi {
 	}
 
 	/**
-	 * @param $url Fichier JavaScript à décharger
+	 * @param string $url Fichier JavaScript à décharger
 	 *
 	 * @throws \Exception
 	 */
@@ -341,7 +343,7 @@ class Pi {
 	/**
 	 * Récupérer le chemin
 	 *
-	 * @return Chemin
+	 * @return string Chemin
 	 */
 	public function getPath(): string {
 		return $this->router->getPath();
@@ -350,8 +352,8 @@ class Pi {
 	/**
 	 * Enregistrer un nouveau modèle depuis une classe
 	 *
-	 * @param $modelName Nom du modèle
-	 * @param $modelClass Classe du modèle
+	 * @param string $modelName Nom du modèle
+	 * @param string $modelClass Classe du modèle
 	 *
 	 * @throws \Exception
 	 */
@@ -365,8 +367,8 @@ class Pi {
 	/**
 	 * Surcharger un modèle
 	 *
-	 * @param $modelName Nom du modèle à surcharger
-	 * @param $modelClass Classe du modèle
+	 * @param string $modelName Nom du modèle à surcharger
+	 * @param string $modelClass Classe du modèle
 	 *
 	 * @throws \Exception
 	 */
@@ -384,8 +386,8 @@ class Pi {
 	/**
 	 * Surcharger la vue d'un modèle
 	 *
-	 * @param $modelName Nom du modèle à surcharger
-	 * @param $filename Chemin vers la vue surchargée
+	 * @param string $modelName Nom du modèle à surcharger
+	 * @param string $filename Chemin vers la vue surchargée
 	 *
 	 * @throws \Exception
 	 */
@@ -406,8 +408,8 @@ class Pi {
 	/**
 	 * Enregistrer un nouveau champ
 	 *
-	 * @param $fieldName Nom du champ
-	 * @param $fieldClass Classe du champ
+	 * @param string $fieldName Nom du champ
+	 * @param string $fieldClass Classe du champ
 	 *
 	 * @throws \Exception
 	 */
@@ -421,8 +423,8 @@ class Pi {
 	/**
 	 * Surcharger un champ
 	 *
-	 * @param $fieldName Nom du champ à surcharger
-	 * @param $fieldClass Classe du champ
+	 * @param string $fieldName Nom du champ à surcharger
+	 * @param string $fieldClass Classe du champ
 	 *
 	 * @throws \Exception
 	 */
@@ -440,7 +442,7 @@ class Pi {
 	/**
 	 * @param $fieldName
 	 *
-	 * @return Champ
+	 * @return string Champ
 	 *
 	 * @throws \Exception
 	 */
@@ -455,9 +457,9 @@ class Pi {
 	}
 
 	/**
-	 * @param $modelName
+	 * @param string $modelName
 	 *
-	 * @return Modèle
+	 * @return Model Modèle
 	 *
 	 * @throws \Exception
 	 */

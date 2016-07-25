@@ -71,7 +71,7 @@ class Tag {
 	/**
 	 * @param $key
 	 *
-	 * @return true si l'attribut a été supprimé, false sinon
+	 * @return bool true si l'attribut a été supprimé, false sinon
 	 */
 	public function removeAttr(string $key): bool {
 		if (isset($this->attrs[$key])) {
@@ -99,7 +99,7 @@ class Tag {
 	}
 
 	/**
-	 * @return La balise au format HTML
+	 * @return string La balise au format HTML
 	 */
 	public function __toString(): string {
 		$html = '<' . $this->name;

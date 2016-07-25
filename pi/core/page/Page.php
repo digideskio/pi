@@ -57,9 +57,9 @@ class Page implements \JsonSerializable {
 	/**
 	 * Définit le titre du modèle
 	 *
-	 * @param $title Titre de la page
-	 * @param $overrideSlug Si true, change le slug associé à la page, sinon
-	 *                      celui-ci reste inchangé (true par défaut)
+	 * @param string $title Titre de la page
+	 * @param bool $overrideSlug Si true, change le slug associé à la page,
+	 *                           sinon celui-ci reste inchangé (true par défaut)
 	 *
 	 * @return $this
 	 */
@@ -75,7 +75,7 @@ class Page implements \JsonSerializable {
 	/**
 	 * Définir le modèle utilisé
 	 *
-	 * @param $model
+	 * @param string $model
 	 *
 	 * @return $this
 	 */
@@ -88,7 +88,7 @@ class Page implements \JsonSerializable {
 	/**
 	 * Définir la date de création
 	 *
-	 * @param $createdAt
+	 * @param \DateTime $createdAt
 	 *
 	 * @return $this
 	 */
@@ -101,7 +101,7 @@ class Page implements \JsonSerializable {
 	/**
 	 * Définir la date de dernière mise à jour
 	 *
-	 * @param $updatedAt
+	 * @param \DateTime $updatedAt
 	 *
 	 * @return $this
 	 */
@@ -114,7 +114,7 @@ class Page implements \JsonSerializable {
 	/**
 	 * Définir les champs
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return $this
 	 */
@@ -183,16 +183,18 @@ class Page implements \JsonSerializable {
 	 *
 	 * @param $filename
 	 *
-	 * @return int
+	 * @return bool
 	 */
-	public function saveToFile(string $filename): int {
-		return file_put_contents($filename, $this->jsonSerialize());
+	public function saveToFile(string $filename): bool {
+		$bytesWritten = file_put_contents($filename, $this->jsonSerialize());
+
+		return $bytesWritten !== false;
 	}
 
 	/**
 	 * Représentation JSON de la page
 	 *
-	 * @return Représentation JSON de la page
+	 * @return string Représentation JSON de la page
 	 */
 	public function jsonSerialize(): string {
 		$arr = [];
