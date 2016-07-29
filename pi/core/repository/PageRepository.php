@@ -143,11 +143,31 @@ class PageRepository implements IRepository {
 	}
 
 	/**
+	 * @todo Créer une fonction générique pour la suppression récursive
+	 * cf. http://stackoverflow.com/questions/7288029/php-delete-directory-that-is-not-empty#answer-7288067
+	 *
 	 * @param Page $page
 	 *
 	 * @return bool Succès
 	 */
 	public function remove($page): bool {
-		return false;
+		$result = true;
+
+		$dir = PI_DIR_PAGES . $page->getSlug();
+
+		$it = new \RecursiveDirectoryIterator($dir);
+		$it = new \RecursiveIteratorIterator($it, \RecursiveIteratorIterator::CHILD_FIRST);
+		foreach($it as $file) {
+			if ('.' === $file->getBasename() || '..' ===  $file->getBasename())
+				continue;
+			if ($file->isDir())
+				$result &= rmdir($file->getPathname());
+			else
+				$result &= unlink($file->getPathname());
+		}
+
+		$result &= rmdir($dir);
+
+		return $result;
 	}
 }
