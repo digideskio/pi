@@ -393,22 +393,22 @@ class Pi {
 	 * Surcharger la vue d'un modèle
 	 *
 	 * @param string $modelName Nom du modèle à surcharger
-	 * @param string $filename Chemin vers la vue surchargée
+	 * @param string $fileName Chemin vers la vue surchargée
 	 *
 	 * @throws \Exception
 	 */
-	public function overrideViewModel(string $modelName, string $filename) {
+	public function overrideViewModel(string $modelName, string $fileName) {
 		if (!array_key_exists($modelName, $this->models))
 			throw new \Exception('Unable to override the view of an unexisting'
 				. ' model "' . $modelName . '"');
 
-		if (!file_exists($filename))
+		if (!file_exists($fileName))
 			throw new \Exception('The overrided-model-view file does not exists'
-				. ' "' . $filename . '"');
+				. ' "' . $fileName . '"');
 
 		/** @var Model $model */
 		$model = $this->models[$modelName];
-		$model->setViewFilename($filename);
+		$model->setViewFilename($fileName);
 	}
 
 	/**

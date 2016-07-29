@@ -169,12 +169,12 @@ abstract class Module {
 	 * Surcharger la vue d'un modèle
 	 *
 	 * @param string $modelName Nom du modèle à surcharger
-	 * @param string $filename Chemin vers la vue surchargée
+	 * @param string $fileName Chemin vers la vue surchargée
 	 *
 	 * @throws \Exception
 	 */
-	protected function overrideViewModel(string $modelName, string $filename) {
-		$this->app->overrideViewModel($modelName, $filename);
+	protected function overrideViewModel(string $modelName, string $fileName) {
+		$this->app->overrideViewModel($modelName, $fileName);
 	}
 
 	/**

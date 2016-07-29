@@ -36,12 +36,12 @@ class Json {
 	}
 
 	/**
-	 * @param string $filename Fichier à décoder
+	 * @param string $fileName Fichier à décoder
 	 *
 	 * @return mixed
 	 */
-	public static function read(string $filename) {
-		$content = (string) file_get_contents($filename);
+	public static function read(string $fileName) {
+		$content = (string) file_get_contents($fileName);
 
 		return static::decode($content);
 	}

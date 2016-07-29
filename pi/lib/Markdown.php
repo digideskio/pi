@@ -34,11 +34,11 @@ class Markdown {
 	}
 
 	/**
-	 * @param string $filename
+	 * @param string $fileName
 	 *
 	 * @return mixed|string
 	 */
-	public static function read(string $filename) {
-		return static::html(file_get_contents($filename));
+	public static function read(string $fileName) {
+		return static::html(file_get_contents($fileName));
 	}
 }

@@ -74,12 +74,12 @@ class PageRepository implements IRepository {
 	 * @throws \Exception
 	 */
 	public function findBySlug(string $slug) {
-		$filename = $this->getLastVersionFileName($slug);
+		$fileName = $this->getLastVersionFileName($slug);
 
-		if (!file_exists($filename))
-			throw new \Exception('File "' . $filename . '" does not exists.');
+		if (!file_exists($fileName))
+			throw new \Exception('File "' . $fileName . '" does not exists.');
 
-		$json = Json::read($filename);
+		$json = Json::read($fileName);
 
 		$createdAt = \DateTime::createFromFormat(
 			\DateTime::ISO8601,
@@ -113,9 +113,9 @@ class PageRepository implements IRepository {
 		$versions = [];
 
 		foreach (glob(PI_DIR_PAGES . $slug . '/*') as $pathfile) {
-			$filename = basename($pathfile);
+			$fileName = basename($pathfile);
 
-			$version = explode('.', $filename)[0];
+			$version = explode('.', $fileName)[0];
 			$versions[] = (int) $version;
 		}
 

@@ -112,10 +112,10 @@ class App extends Pi {
 		define('PI_DIR_THEME', PI_DIR_THEMES . $themeName . '/');
 		define('PI_URL_THEME', PI_URL_THEMES . $themeName . '/');
 
-		$filename = PI_DIR_THEME . ucfirst($themeName) . 'Theme.php';
+		$fileName = PI_DIR_THEME . ucfirst($themeName) . 'Theme.php';
 
-		if (file_exists($filename)) {
-			require $filename;
+		if (file_exists($fileName)) {
+			require $fileName;
 
 			$classname = 'Theme\\' . $themeName . '\\'
 				. $themeName . 'Theme';
@@ -167,11 +167,11 @@ class App extends Pi {
 			if ($dir == '.' || $dir == '..')
 				continue;
 
-			$filename = PI_DIR_MODULES . $dir . '/'
+			$fileName = PI_DIR_MODULES . $dir . '/'
 				. ucfirst($dir) . 'Module.php';
 
-			if (file_exists($filename)) {
-				require $filename;
+			if (file_exists($fileName)) {
+				require $fileName;
 
 				$classname = 'Module\\' . $dir . '\\' . $dir . 'Module';
 
@@ -228,9 +228,9 @@ class App extends Pi {
 
 		foreach ($this->cssUrls as $file) {
 			foreach ($this->treeThemes as $theme) {
-				$filename = $theme['folder'] . $file;
+				$fileName = $theme['folder'] . $file;
 
-				if (file_exists($filename)) {
+				if (file_exists($fileName)) {
 					$files[$file] = $theme['url'] . $file;
 					break;
 				}
@@ -255,9 +255,9 @@ class App extends Pi {
 
 		foreach ($this->jsUrls as $file) {
 			foreach ($this->treeThemes as $theme) {
-				$filename = $theme['folder'] . $file;
+				$fileName = $theme['folder'] . $file;
 
-				if (file_exists($filename)) {
+				if (file_exists($fileName)) {
 					$files[$file] = $theme['url'] . $file;
 					break;
 				}
