@@ -25,10 +25,13 @@ use Pi\Core\Model\Field;
 use Pi\Core\Model\Model;
 use Pi\Core\Page\PageCollection;
 use Pi\Core\Repository\PageRepository;
+use Pi\Core\Routing\Router;
 use Pi\Core\User\Role;
 use Pi\Core\User\User;
 use Pi\Core\View\Renderer;
+use Pi\Lib\Flash;
 use Pi\Lib\Json;
+use Pi\Lib\Session;
 
 class App extends Pi {
 	/** @var array */
@@ -41,7 +44,11 @@ class App extends Pi {
 	 * Contruction de l'application
 	 */
 	public function __construct() {
-		parent::__construct();
+		$router = new Router();
+		$session = new Session();
+		$flash = new Flash($session);
+
+		parent::__construct($router, $session, $flash);
 
 		$this->initializeRepositories();
 		$this->initializeSettings();
