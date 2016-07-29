@@ -177,17 +177,4 @@ class Page {
 	public function getFields(): array {
 		return $this->fields;
 	}
-
-	/**
-	 * Enregistrer la page dans un fichier
-	 *
-	 * @param $filename
-	 *
-	 * @return bool
-	 */
-	public function saveToFile(string $filename): bool {
-		$bytesWritten = file_put_contents($filename, $this->jsonSerialize());
-
-		return $bytesWritten !== false;
-	}
 }

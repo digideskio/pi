@@ -20,6 +20,7 @@
 namespace Pi\Core\Repository;
 
 use Pi\Core\Page\Page;
+use Pi\Core\Page\PageOutputter;
 use Pi\Lib\FileSystem;
 use Pi\Lib\Json;
 
@@ -140,7 +141,11 @@ class PageRepository implements IRepository {
 		if (!is_dir($dir))
 			mkdir($dir, 0777, true);
 
-		return $page->saveToFile(PI_DIR_PAGES . $slug . '/' . time() . '.json');
+		$outputter = new PageOutputter($page);
+		$fileName = PI_DIR_PAGES . $slug . '/' . time() . '.json';
+		$bytesWritter = file_put_contents($fileName, $outputter->json());
+
+		return $bytesWritter !== false;
 	}
 
 	/**
