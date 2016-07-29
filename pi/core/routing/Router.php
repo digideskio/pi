@@ -21,7 +21,7 @@ declare(strict_types=1);
 
 namespace Pi\Core\Routing;
 
-class Router implements IRouter {
+class Router {
 	/** @var string Chemin */
 	private $path;
 

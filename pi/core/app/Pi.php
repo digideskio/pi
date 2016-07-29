@@ -23,7 +23,7 @@ namespace Pi\Core\App;
 
 use Pi\Core\Model\Field;
 use Pi\Core\Model\Model;
-use Pi\Core\Routing\IRouter;
+use Pi\Core\Routing\Router;
 use Pi\Core\User\Role;
 use Pi\Core\User\User;
 use Pi\Core\View\Renderer;
@@ -72,7 +72,7 @@ class Pi {
 	/** @var \stdClass Paramètres du site */
 	protected $settings;
 
-	/** @var IRouter Routeur */
+	/** @var Router Routeur */
 	protected $router;
 
 	/** @var Session Gestionnaire de session */
@@ -156,11 +156,11 @@ class Pi {
 	/**
 	 * Contruction de l'application
 	 *
-	 * @param IRouter $router Routeur
+	 * @param Router $router Routeur
 	 * @param Session $session Session
 	 * @param Flash $flash Flash
 	 */
-	public function __construct(IRouter $router,
+	public function __construct(Router $router,
 	                            Session $session,
 	                            Flash $flash) {
 		Twig\AutoLoader::register();
