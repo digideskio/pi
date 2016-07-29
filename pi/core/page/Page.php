@@ -23,7 +23,7 @@ namespace Pi\Core\Page;
 
 use Pi\Lib\Str;
 
-class Page implements \JsonSerializable {
+class Page {
 	/** @var string Slug de la page */
 	private $slug;
 
@@ -189,25 +189,5 @@ class Page implements \JsonSerializable {
 		$bytesWritten = file_put_contents($filename, $this->jsonSerialize());
 
 		return $bytesWritten !== false;
-	}
-
-	/**
-	 * Représentation JSON de la page
-	 *
-	 * @return string Représentation JSON de la page
-	 */
-	public function jsonSerialize(): string {
-		$arr = [];
-
-		$arr['title'] = $this->getTitle();
-		$arr['model'] = $this->getModel();
-		$arr['created_at'] = $this->getCreatedAt()->format(\DateTime::ISO8601);
-		$arr['updated_at'] = $this->getUpdatedAt()->format(\DateTime::ISO8601);
-		$arr['fields'] = [];
-
-		foreach ($this->getFields() as $fieldName => $field)
-			$arr['fields'][$fieldName] = (string) $field;
-
-		return json_encode($arr);
 	}
 }
