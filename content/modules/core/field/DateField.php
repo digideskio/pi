@@ -31,7 +31,7 @@ class DateField extends Field {
 	public function __construct(array $data = []) {
 		parent::__construct($data);
 
-		if ($this->default == 'today')
+		if (in_array($this->default, [ 'today', '' ]))
 			$this->default = strftime('%Y-%m-%d', time());
 	}
 
