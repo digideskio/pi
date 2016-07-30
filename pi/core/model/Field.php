@@ -89,7 +89,7 @@ abstract class Field {
 	public function __construct(array $data = []) {
 		$this->id = ++static::$globalId;
 
-		$this->name        = $data['name']        ?? '';
+		$this->name        = $data['name']        ?? 'input-' . $this->id;
 		$this->label       = $data['label']       ?? '';
 		$this->default     = $data['default']     ?? '';
 		$this->required    = $data['required']    ?? false;

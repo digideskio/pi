@@ -2,7 +2,6 @@
 
 require 'init.php';
 
-use Pi\Core\Page\Page;
 use Pi\Core\Model\Form;
 
 if (!isset($_GET['page']))
@@ -10,25 +9,26 @@ if (!isset($_GET['page']))
 
 $pageSlug = $_GET['page'];
 
+$page = $app->getPagesRepository()->findBySlug($pageSlug);
+
 if (isset($_POST)) {
 	if (isset($_POST['model'])) {
 		$model = $_POST['model'] ?? false;
 		$title = $_POST['title'] ?? '';
 
-		$page = new Page();
+		$fields = $_POST;
+		unset($fields['model']);
+		unset($fields['title']);
+
 		$page->setTitle($title, false);
-		$page->setModel($model);
-		$page->setCreatedAt(new DateTime());
+		$page->setFields($fields);
 		$page->setUpdatedAt(new DateTime());
-		$page->setFields([ 'content' => $_POST['content'] ]);
 
 		$app->getPagesRepository()->save($page);
 
 		header('Location: ' . PI_URL_SITE . 'admin/edit-page.php?page=' . $pageSlug);
 	}
 }
-
-$page = $app->getPagesRepository()->findBySlug($pageSlug);
 
 $models = $app->getModels();
 

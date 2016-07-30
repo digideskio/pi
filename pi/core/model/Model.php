@@ -96,11 +96,14 @@ class Model {
 	 * Ajoute un champ
 	 */
 	public function addField(string $fieldName, Field $field): Model {
-		if (!in_array($fieldName, array_keys($this->fields)))
+		if (!in_array($fieldName, array_keys($this->fields))) {
+			$field->setName($fieldName);
+
 			$this->fields[$fieldName] = $field;
-		else
-			throw new \Exception('Field "' . $fieldName .'" already exists in
+		} else {
+			throw new \Exception('Field "' . $fieldName . '" already exists in
 				model "' . $this->getTitle() . '"');
+		}
 
 		return $this;
 	}
