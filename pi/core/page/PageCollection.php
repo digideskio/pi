@@ -28,7 +28,7 @@ class PageCollection implements \IteratorAggregate {
 	private $pages;
 
 	/**
-	 * @param Page[] $pages
+	 * Constructeur
 	 */
 	public function __construct(array $pages) {
 		// Récupération des pages passées en paramètre
@@ -42,10 +42,6 @@ class PageCollection implements \IteratorAggregate {
 
 	/**
 	 * Pages dont le slug commence par
-	 *
-	 * @param string $name
-	 *
-	 * @return $this
 	 */
 	public function slugStartsWith(string $name): PageCollection {
 		$this->pages = array_filter($this->pages, function($slug) use ($name) {
@@ -57,10 +53,6 @@ class PageCollection implements \IteratorAggregate {
 
 	/**
 	 * Pages dont le slug finit par
-	 *
-	 * @param string $name
-	 *
-	 * @return $this
 	 */
 	public function slugEndsWith(string $name): PageCollection {
 		$this->pages = array_filter($this->pages, function($slug) use ($name) {
@@ -72,10 +64,6 @@ class PageCollection implements \IteratorAggregate {
 
 	/**
 	 * Pages dont le slug contient
-	 *
-	 * @param string $name
-	 *
-	 * @return $this
 	 */
 	public function slugContains(string $name): PageCollection {
 		$this->pages = array_filter($this->pages, function($slug) use ($name) {
@@ -87,10 +75,6 @@ class PageCollection implements \IteratorAggregate {
 
 	/**
 	 * Pages qui contiennent le champ
-	 *
-	 * @param string $fieldName
-	 *
-	 * @return $this
 	 */
 	public function containsField(string $fieldName): PageCollection {
 		$this->pages = array_filter($this->pages, function($page) use ($fieldName) {
@@ -103,11 +87,6 @@ class PageCollection implements \IteratorAggregate {
 
 	/**
 	 * @todo Pages dont le champ vaut
-	 *
-	 * @param string $fieldName
-	 * @param mixed $fieldValue
-	 *
-	 * @return $this
 	 */
 	public function fieldValueIs(string $fieldName, $fieldValue): PageCollection {
 		$this->pages = array_filter($this->pages, function($page) {
@@ -119,10 +98,6 @@ class PageCollection implements \IteratorAggregate {
 
 	/**
 	 * Pages dont le modèle est
-	 *
-	 * @param string $modelName
-	 *
-	 * @return $this
 	 */
 	public function withModel(string $modelName) {
 		$this->pages = array_filter($this->pages, function($page) use ($modelName) {
@@ -134,8 +109,6 @@ class PageCollection implements \IteratorAggregate {
 
 	/**
 	 * Itérateur : le slug de la page en clé et la page en valeur
-	 *
-	 * @return \Generator
 	 */
 	public function getIterator(): \Generator {
 		foreach ($this->pages as $slug => $page)

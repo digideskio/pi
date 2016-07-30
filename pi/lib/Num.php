@@ -24,12 +24,6 @@ namespace Pi\Lib;
 class Num {
 	/**
 	 * Le nombre $value est-il compris entre $min et $max (bornes incluses)
-	 *
-	 * @param $min
-	 * @param $max
-	 * @param $value
-	 * 
-	 * @return bool true si $value est entre $min et $max, false sinon
 	 */
 	public static function between(float $min, float $max, float $value): bool {
 		return ($min == 0 && $max == 0)

@@ -26,7 +26,7 @@ use Pi\Lib\Html\Tag;
 
 class RadioField extends Field {
 	/**
-	 * @param $data
+	 * Bouton radio, pour sélectionner une valeur parmi plusieurs
 	 */
 	public function __construct(array $data = []) {
 		parent::__construct($data);

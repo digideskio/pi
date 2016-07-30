@@ -29,7 +29,7 @@ class TextareaField extends Field {
 	protected static $formats = [ 'text', 'markdown', 'twig', 'html' ];
 
 	/**
-	 * @param $data
+	 * Zone de saisie d'une texte multiligne
 	 */
 	public function __construct(array $data = []) {
 		parent::__construct($data);

@@ -27,7 +27,7 @@ use Pi\Lib\Num;
 
 class PasswordField extends Field {
 	/**
-	 * @param $data
+	 * Zone de saisie d'un mot de passe (la valeur n'est pas affichée en clair)
 	 */
 	public function __construct(array $data = []) {
 		parent::__construct($data);

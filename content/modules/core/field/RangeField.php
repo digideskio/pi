@@ -27,7 +27,7 @@ use Pi\Lib\Num;
 
 class RangeField extends Field {
 	/**
-	 * @param $data
+	 * Sélectionner une valeur entre deux
 	 */
 	public function __construct(array $data = []) {
 		parent::__construct($data);

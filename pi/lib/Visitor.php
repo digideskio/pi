@@ -24,8 +24,6 @@ namespace Pi\Lib;
 class Visitor {
 	/**
 	 * IP du client
-	 *
-	 * @return string L'IP du client
 	 */
 	public static function ip(): string {
 		return $_SERVER['REMOTE_ADDR'] ?? '';
@@ -33,8 +31,6 @@ class Visitor {
 
 	/**
 	 * User-agent du client
-	 *
-	 * @return string L'user-agent du client
 	 */
 	public static function ua(): string {
 		return $_SERVER['HTTP_USER_AGENT'] ?? '';

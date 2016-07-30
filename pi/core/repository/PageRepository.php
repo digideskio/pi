@@ -33,9 +33,7 @@ class PageRepository implements IRepository {
 	private static $cacheAllPages = null;
 
 	/**
-	 * Récupérer tous les éléments
-	 *
-	 * @return array Liste de tous les éléments
+	 * Récupérer toutes les pages
 	 */
 	public function findAll(): array {
 		// Retourne les pages en cache s'il y en a
@@ -67,11 +65,7 @@ class PageRepository implements IRepository {
 	}
 
 	/**
-	 * @param string $slug
-	 *
-	 * @return mixed
-	 *
-	 * @throws \Exception
+	 * Récupérer une page par son slug
 	 */
 	public function findBySlug(string $slug) {
 		$fileName = $this->getLastVersionFileName($slug);
@@ -102,12 +96,6 @@ class PageRepository implements IRepository {
 
 	/**
 	 * Récupérer la dernière version de la page
-	 *
-	 * @param string $slug
-	 *
-	 * @return string
-	 *
-	 * @throws \Exception
 	 */
 	public function getLastVersionFileName(string $slug): string {
 		$versions = [];
@@ -128,9 +116,7 @@ class PageRepository implements IRepository {
 	}
 
 	/**
-	 * @param Page $page
-	 *
-	 * @return bool Succès
+	 * Enregistrer la page
 	 */
 	public function save($page): bool {
 		/** @var $page Page */
@@ -150,10 +136,6 @@ class PageRepository implements IRepository {
 
 	/**
 	 * Supprimer la page
-	 *
-	 * @param Page $page
-	 *
-	 * @return bool Succès
 	 */
 	public function remove($page): bool {
 		$dir = PI_DIR_PAGES . $page->getSlug();

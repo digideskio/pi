@@ -29,7 +29,7 @@ class ColorField extends Field {
 	protected static $formats = [ 'hex', 'rgb', 'rgba', 'hsl' ];
 
 	/**
-	 * @param $data
+	 * Zone de saisie d'une couleur
 	 */
 	public function __construct(array $data = []) {
 		parent::__construct($data);

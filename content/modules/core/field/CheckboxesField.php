@@ -27,7 +27,7 @@ use Pi\Lib\Html\Tag;
 
 class CheckboxesField extends Field {
 	/**
-	 * @param $data
+	 * Boîtes à cocher, permet de sélectionner plusieurs éléments
 	 */
 	public function __construct(array $data = []) {
 		parent::__construct($data);

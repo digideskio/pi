@@ -43,10 +43,6 @@ class Model {
 
 	/**
 	 * Construit un modèle
-	 *
-	 * @param array $array
-	 *
-	 * @return static
 	 */
 	public static function fromArray($array): Model {
 		$model = new Model($array['title']);
@@ -65,9 +61,6 @@ class Model {
 
 	/**
 	 * Constructeur du modèle
-	 *
-	 * @param Pi $app Application
-	 * @param string $title Titre du modèle
 	 */
 	public function __construct(Pi $app, string $title = '') {
 		$this->app = $app;
@@ -80,12 +73,6 @@ class Model {
 
 	/**
 	 * Définit le titre du modèle
-	 *
-	 * @param string $title Titre du modèle
-	 * @param bool $overrideSlug Si true, change le slug associé au modèle,
-	 *                           sinon celui-ci reste inchangé (true par défaut)
-	 *
-	 * @return $this
 	 */
 	public function setTitle(string $title, bool $overrideSlug = true): Model {
 		$this->title = $title;
@@ -98,10 +85,6 @@ class Model {
 
 	/**
 	 * Définit le slug du modèle
-	 *
-	 * @param string $slug
-	 *
-	 * @return $this
 	 */
 	public function setSlug(string $slug): Model {
 		$this->slug = Str::slug($slug);
@@ -111,13 +94,6 @@ class Model {
 
 	/**
 	 * Ajoute un champ
-	 *
-	 * @param string $fieldName
-	 * @param Field $field
-	 *
-	 * @return $this
-	 *
-	 * @throws \Exception
 	 */
 	public function addField(string $fieldName, Field $field): Model {
 		if (!in_array($fieldName, array_keys($this->fields)))
@@ -133,10 +109,6 @@ class Model {
 	 * @todo Supprimer la dépendance dangereuse envers une constante
 	 *
 	 * Définir la vue
-	 *
-	 * @param string $viewFilename
-	 *
-	 * @return $this
 	 */
 	public function setViewFilename(string $viewFilename): Model {
 		// Supprime le chemin racine
@@ -149,8 +121,6 @@ class Model {
 
 	/**
 	 * Récupérer le titre
-	 *
-	 * @return string Titre du modèle
 	 */
 	public function getTitle(): string {
 		return $this->title;
@@ -158,8 +128,6 @@ class Model {
 
 	/**
 	 * Récupérer le slug
-	 *
-	 * @return string Slug du modèle
 	 */
 	public function getSlug(): string {
 		return $this->slug;
@@ -167,8 +135,6 @@ class Model {
 
 	/**
 	 * Récupérer les champs
-	 *
-	 * @return Field[] Champs du modèles
 	 */
 	public function getFields(): array {
 		return $this->fields;
@@ -176,8 +142,6 @@ class Model {
 
 	/**
 	 * Récupérer le chemin vers la vue
-	 *
-	 * @return string Chemin vers la vue du modèle
 	 */
 	public function getViewFilename(): string {
 		return $this->viewFilename;
@@ -187,12 +151,6 @@ class Model {
 	 * @todo
 	 *
 	 * Créer un nouveau champ
-	 *
-	 * @param string $fieldName Nom du champ
-	 *
-	 * @return Field Champ créé
-	 *
-	 * @throws \Exception
 	 */
 	protected function newField(string $fieldName): Field {
 		return $this->app->getField($fieldName);

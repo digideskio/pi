@@ -39,8 +39,6 @@ abstract class Module {
 
 	/**
 	 * Constructeur
-	 *
-	 * @param $app App Application
 	 */
 	final public function __construct(App $app) {
 		$this->app = $app;
@@ -53,10 +51,6 @@ abstract class Module {
 
 	/**
 	 * Définir le nom du module
-	 *
-	 * @param string $name Nom du module
-	 *
-	 * @return $this L'instance du module
 	 */
 	public function setName(string $name): Module {
 		$this->name = $name;
@@ -66,10 +60,6 @@ abstract class Module {
 
 	/**
 	 * Définir la version du module
-	 *
-	 * @param string $version Nom du module
-	 *
-	 * @return $this L'instance du module
 	 */
 	public function setVersion(string $version): Module {
 		$this->version = $version;
@@ -79,10 +69,6 @@ abstract class Module {
 
 	/**
 	 * Définir la description du module
-	 *
-	 * @param string $description Nom du module
-	 *
-	 * @return $this L'instance du module
 	 */
 	public function setDescription(string $description): Module {
 		$this->description = $description;
@@ -92,10 +78,6 @@ abstract class Module {
 
 	/**
 	 * Définir l'auteur du module
-	 *
-	 * @param string $author Nom du module
-	 *
-	 * @return $this L'instance du module
 	 */
 	public function setAuthor(string $author): Module {
 		$this->author = $author;
@@ -105,8 +87,6 @@ abstract class Module {
 
 	/**
 	 * Récupérer le nom du module
-	 *
-	 * @return string Le nom du module
 	 */
 	public function getName(): string {
 		return $this->name;
@@ -114,8 +94,6 @@ abstract class Module {
 
 	/**
 	 * Récupérer la version du module
-	 *
-	 * @return string La version du module
 	 */
 	public function getVersion(): string {
 		return $this->version;
@@ -123,8 +101,6 @@ abstract class Module {
 
 	/**
 	 * Récupérer la description du module
-	 *
-	 * @return string La description du module
 	 */
 	public function getDescription(): string {
 		return $this->description;
@@ -132,8 +108,6 @@ abstract class Module {
 
 	/**
 	 * Récupérer l'auteur du module
-	 *
-	 * @return string L'auteur du module
 	 */
 	public function getAuthor(): string {
 		return $this->author;
@@ -141,11 +115,6 @@ abstract class Module {
 
 	/**
 	 * Enregistrer un nouveau modèle depuis une classe
-	 *
-	 * @param string $modelName Nom du modèle
-	 * @param string $modelClass Classe du modèle
-	 *
-	 * @throws \Exception
 	 */
 	protected function registerModel(string $modelName, string $modelClass) {
 		$this->app->registerModel(
@@ -155,11 +124,6 @@ abstract class Module {
 
 	/**
 	 * Surcharger un modèle
-	 *
-	 * @param string $modelName Nom du modèle
-	 * @param string $fieldClass Classe du modèle
-	 *
-	 * @throws \Exception
 	 */
 	protected function overrideModel(string $modelName, string $fieldClass) {
 		$this->app->overrideModel($modelName, $fieldClass);
@@ -167,11 +131,6 @@ abstract class Module {
 
 	/**
 	 * Surcharger la vue d'un modèle
-	 *
-	 * @param string $modelName Nom du modèle à surcharger
-	 * @param string $fileName Chemin vers la vue surchargée
-	 *
-	 * @throws \Exception
 	 */
 	protected function overrideViewModel(string $modelName, string $fileName) {
 		$this->app->overrideViewModel($modelName, $fileName);
@@ -179,11 +138,6 @@ abstract class Module {
 
 	/**
 	 * Enregistrer un nouveau champ
-	 *
-	 * @param string $fieldName Nom du champ
-	 * @param string $fieldClass Classe du champ
-	 *
-	 * @throws \Exception
 	 */
 	protected function registerField(string $fieldName, string $fieldClass) {
 		$this->app->registerField($fieldName, $fieldClass);
@@ -191,11 +145,6 @@ abstract class Module {
 
 	/**
 	 * Surcharger un champ
-	 *
-	 * @param string $fieldName Nom du champ
-	 * @param string $fieldClass Classe du champ
-	 *
-	 * @throws \Exception
 	 */
 	protected function overrideField(string $fieldName, string $fieldClass) {
 		$this->app->overrideField($fieldName, $fieldClass);
@@ -203,10 +152,6 @@ abstract class Module {
 
 	/**
 	 * Charger un fichier CSS dans le thème
-	 *
-	 * @param string $url Chemin vers le fichier CSS à charger
-	 *
-	 * @throws \Exception
 	 */
 	protected function registerCss(string $url) {
 		$this->app->registerCss($url);
@@ -214,10 +159,6 @@ abstract class Module {
 
 	/**
 	 * Charger un fichier JavaScript dans le thème
-	 *
-	 * @param string $url Chemin vers le fichier JavaScript à charger
-	 *
-	 * @throws \Exception
 	 */
 	protected function registerJs(string $url) {
 		$this->app->registerJs($url);
@@ -225,10 +166,6 @@ abstract class Module {
 
 	/**
 	 * Décharger un fichier CSS dans le thème
-	 *
-	 * @param string $url Chemin vers le fichier CSS à décharger
-	 *
-	 * @throws \Exception
 	 */
 	protected function unregisterCss(string $url) {
 		$this->app->unregisterCss($url);
@@ -236,10 +173,6 @@ abstract class Module {
 
 	/**
 	 * Décharger un fichier JavaScript dans le thème
-	 *
-	 * @param string $url Chemin vers le fichier JavaScript à décharger
-	 *
-	 * @throws \Exception
 	 */
 	protected function unregisterJs(string $url) {
 		$this->app->unregisterJs($url);

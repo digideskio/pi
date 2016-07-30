@@ -27,7 +27,8 @@ use Pi\Lib\Html\Tag;
 
 class SlugField extends Field {
 	/**
-	 * @param $data
+	 * Zone de saisie d'un « slug », valeur spéciale où seules les caractères
+	 * alphabétiques, les nombres et le tiret « - » sont acceptés
 	 */
 	public function __construct(array $data = []) {
 		parent::__construct($data);

@@ -23,9 +23,7 @@ namespace Pi\Lib;
 
 class Markdown {
 	/**
-	 * @param $txt
-	 * 
-	 * @return mixed|string
+	 * Chaine Markdown => HTML
 	 */
 	public static function html(string $txt) {
 		$parse = new \ParsedownExtra();
@@ -34,9 +32,7 @@ class Markdown {
 	}
 
 	/**
-	 * @param string $fileName
-	 *
-	 * @return mixed|string
+	 * Fichier Markdown => HTML
 	 */
 	public static function read(string $fileName) {
 		return static::html(file_get_contents($fileName));

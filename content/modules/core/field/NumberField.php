@@ -27,7 +27,7 @@ use Pi\Lib\Num;
 
 class NumberField extends Field {
 	/**
-	 * @param $data
+	 * Zone de saisie d'un nombre
 	 */
 	public function __construct(array $data = []) {
 		parent::__construct($data);

@@ -24,10 +24,6 @@ class FileSystem {
 	 * Supprimer un dossier
 	 *
 	 * @see http://stackoverflow.com/questions/7288029/php-delete-directory-that-is-not-empty#answer-7288067
-	 *
-	 * @param string $dir Dossier à supprimer
-	 *
-	 * @return bool Succès
 	 */
 	public static function removeDirectory(string $dir): bool {
 		$result = true;

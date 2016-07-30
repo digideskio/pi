@@ -219,9 +219,7 @@ class App extends Pi {
 	}
 
 	/**
-	 * @return array Fichiers CSS
-	 *
-	 * @throws \Exception
+	 * Fichiers CSS
 	 */
 	public function getCssUrls(): array {
 		$files = [];
@@ -246,9 +244,7 @@ class App extends Pi {
 	}
 
 	/**
-	 * @return array Fichiers JavaScript
-	 *
-	 * @throws \Exception
+	 * Fichiers JavaScript
 	 */
 	public function getJsUrls(): array {
 		$files = [];
@@ -276,12 +272,6 @@ class App extends Pi {
 	 * @todo
 	 *
 	 * Créer un nouveau champ
-	 *
-	 * @param string $fieldName Nom du champ
-	 *
-	 * @return Field Champ créé
-	 *
-	 * @throws \Exception
 	 */
 	protected function newField(string $fieldName): Field {
 		if ($field_does_not_exists)
@@ -292,8 +282,6 @@ class App extends Pi {
 
 	/**
 	 * Variables globales qui seront envoyées à toutes les vues
-	 *
-	 * @return array Variables utilisées pour les vues
 	 */
 	public function getVariables(): array {
 		return [
@@ -326,8 +314,6 @@ class App extends Pi {
 
 	/**
 	 * Récupérer la racine du site
-	 *
-	 * @return string Racine du site
 	 */
 	public function getRoot(): string {
 		return PI_DIR_SITE;
@@ -337,8 +323,6 @@ class App extends Pi {
 	 * @todo Avoir plus d'informations à propos du thème, pas seulement son slug
 	 *
 	 * Récupérer la liste des thèmes
-	 *
-	 * @return array
 	 */
 	public function getThemes(): array {
 		$scan = scandir(PI_DIR_THEMES);
@@ -354,7 +338,7 @@ class App extends Pi {
 	}
 
 	/**
-	 * @return PageRepository
+	 * Gestionnaire des pages
 	 */
 	public function getPagesRepository(): PageRepository {
 		return $this->pagesRepository;

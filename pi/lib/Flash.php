@@ -27,8 +27,6 @@ class Flash {
 
 	/**
 	 * Initilisation du flash
-	 *
-	 * @param Session
 	 */
 	public function __construct(Session $session) {
 		$this->session = $session;
@@ -45,14 +43,14 @@ class Flash {
 	}
 
 	/**
-	 * @param string $error Message d'erreur à insérer
+	 * Insérer un message d'erreur
 	 */
 	public function pushError(string $error) {
 		$this->session->push('errors', $error);
 	}
 
 	/**
-	 * @param string $success Message de succès à insérer
+	 * Insérer un message de succès
 	 */
 	public function pushSuccess(string $success) {
 		$this->session->push('successes', $success);
@@ -60,8 +58,6 @@ class Flash {
 
 	/**
 	 * Y a-t'-il des erreurs ?
-	 *
-	 * @return bool true s'il y a des erreurs, false sinon
 	 */
 	public function hasErrors(): bool {
 		return count($this->session->get('errors')) > 0;
@@ -69,8 +65,6 @@ class Flash {
 
 	/**
 	 * N'y a-t-il pas d'erreurs ?
-	 *
-	 * @return bool true s'il n'y a pas d'erreurs, false sinon
 	 */
 	public function hasNoErrors(): bool {
 		return !$this->hasErrors();
@@ -78,8 +72,6 @@ class Flash {
 
 	/**
 	 * Y a-t'-il des succès ?
-	 *
-	 * @return bool true s'il y a des succès, false sinon
 	 */
 	public function hasSuccesses(): bool {
 		return count($this->session->get('successes')) > 0;
@@ -87,8 +79,6 @@ class Flash {
 
 	/**
 	 * Récupérer les erreurs
-	 *
-	 * @return array La liste des erreurs
 	 */
 	public function getErrors(): array {
 		return $this->session->get('errors');
@@ -96,8 +86,6 @@ class Flash {
 
 	/**
 	 * Récupérer les succès
-	 *
-	 * @return array La liste des succès
 	 */
 	public function getSuccesses(): array {
 		return $this->session->get('successes');

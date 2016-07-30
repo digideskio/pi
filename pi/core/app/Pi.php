@@ -91,10 +91,6 @@ class Pi {
 	/**
 	 * Quand l'utilisation d'une classe est repérée, le fichier créant la
 	 * classe est chargé
-	 *
-	 * @param string $class Classe à charger
-	 *
-	 * @throws \Exception
 	 */
 	public static function autoload(string $class) {
 		// S'il s'agit d'une classe sans espace de nom, elle est ignorée
@@ -155,10 +151,6 @@ class Pi {
 
 	/**
 	 * Contruction de l'application
-	 *
-	 * @param Router $router Routeur
-	 * @param Session $session Session
-	 * @param Flash $flash Flash
 	 */
 	public function __construct(Router $router,
 	                            Session $session,
@@ -182,11 +174,6 @@ class Pi {
 
 	/**
 	 * Rendu du fichier
-	 *
-	 * @param string $file
-	 * @param array $variables
-	 *
-	 * @return string Rendu de la page
 	 */
 	public function render(string $file, array $variables = []): string {
 		return $this->renderer->render($file, $variables);
@@ -194,8 +181,6 @@ class Pi {
 
 	/**
 	 * Récupérer la liste des modèles
-	 *
-	 * @return array Liste des modèles
 	 */
 	public function getModels(): array {
 		return $this->models;
@@ -203,8 +188,6 @@ class Pi {
 
 	/**
 	 * Récupérer la liste des champs
-	 *
-	 * @return array Liste des champs
 	 */
 	public function getFields(): array {
 		return $this->fields;
@@ -212,8 +195,6 @@ class Pi {
 
 	/**
 	 * Récupérer la liste des pages
-	 *
-	 * @return PageCollection Liste des pages
 	 */
 	public function getPages(): PageCollection {
 		return $this->pages;
@@ -221,8 +202,6 @@ class Pi {
 
 	/**
 	 * Récupérer la liste des rôles
-	 *
-	 * @return Role[]
 	 */
 	public function getRoles(): array {
 		return $this->roles;
@@ -230,8 +209,6 @@ class Pi {
 
 	/**
 	 * Récupérer la liste des utilisateurs
-	 *
-	 * @return User[]
 	 */
 	public function getUsers(): array {
 		return $this->users;
@@ -239,8 +216,6 @@ class Pi {
 
 	/**
 	 * Récupérer les paramètres du site
-	 *
-	 * @return \stdClass Paramètres du site
 	 */
 	public function getSettings(): \stdClass {
 		return $this->settings;
@@ -248,8 +223,6 @@ class Pi {
 
 	/**
 	 * Récupérer le thème du site
-	 *
-	 * @return string Slug du thème
 	 */
 	public function getTheme(): string {
 		return $this->theme;
@@ -257,12 +230,6 @@ class Pi {
 
 	/**
 	 * Récupérer la liste des utilisateurs
-	 *
-	 * @param string $username Pseudonyme
-	 * 
-	 * @return User Utilisateur
-	 *
-	 * @throws \Exception
 	 */
 	public function getUser(string $username): User {
 		if (!array_key_exists($username, $this->users))
@@ -272,9 +239,7 @@ class Pi {
 	}
 
 	/**
-	 * @param string $url Fichier CSS à charger
-	 *
-	 * @throws \Exception
+	 * Enregistrer un fichier CSS
 	 */
 	public function registerCss(string $url) {
 		if (in_array($url, $this->cssUrls))
@@ -285,9 +250,7 @@ class Pi {
 	}
 
 	/**
-	 * @param string $url Fichier JavaScript à charger
-	 *
-	 * @throws \Exception
+	 * Enregistrer un fichier JS
 	 */
 	public function registerJs(string $url) {
 		if (in_array($url, $this->jsUrls))
@@ -298,9 +261,7 @@ class Pi {
 	}
 
 	/**
-	 * @param string $url Fichier CSS à décharger
-	 *
-	 * @throws \Exception
+	 * Désenregistrer un fichier CSS
 	 */
 	public function unregisterCss(string $url) {
 		foreach ($this->cssUrls as $key => $cssUrl) {
@@ -316,9 +277,7 @@ class Pi {
 	}
 
 	/**
-	 * @param string $url Fichier JavaScript à décharger
-	 *
-	 * @throws \Exception
+	 * Désenregistrer un fichier JS
 	 */
 	public function unregisterJs(string $url) {
 		foreach ($this->jsUrls as $key => $jsUrl) {
@@ -333,14 +292,14 @@ class Pi {
 			. $url . '"');	}
 
 	/**
-	 * @return string[] Fichiers CSS
+	 * Récupérer la liste des fichiers CSS
 	 */
 	public function getCssUrls(): array {
 		return $this->cssUrls;
 	}
 
 	/**
-	 * @return string[] Fichiers JavaScript
+	 * Récupérer la liste des fichiers JavaScript
 	 */
 	public function getJsUrls(): array {
 		return $this->jsUrls;
@@ -348,8 +307,6 @@ class Pi {
 
 	/**
 	 * Récupérer le chemin
-	 *
-	 * @return string Chemin
 	 */
 	public function getPath(): string {
 		return $this->router->getPath();
@@ -357,11 +314,6 @@ class Pi {
 
 	/**
 	 * Enregistrer un nouveau modèle depuis une classe
-	 *
-	 * @param string $modelName Nom du modèle
-	 * @param string $modelClass Classe du modèle
-	 *
-	 * @throws \Exception
 	 */
 	public function registerModel(string $modelName, string $modelClass) {
 		if (array_key_exists($modelName, $this->models))
@@ -372,11 +324,6 @@ class Pi {
 
 	/**
 	 * Surcharger un modèle
-	 *
-	 * @param string $modelName Nom du modèle à surcharger
-	 * @param string $modelClass Classe du modèle
-	 *
-	 * @throws \Exception
 	 */
 	public function overrideModel(string $modelName, string $modelClass) {
 		if (!array_key_exists($modelName, $this->models))
@@ -391,11 +338,6 @@ class Pi {
 
 	/**
 	 * Surcharger la vue d'un modèle
-	 *
-	 * @param string $modelName Nom du modèle à surcharger
-	 * @param string $fileName Chemin vers la vue surchargée
-	 *
-	 * @throws \Exception
 	 */
 	public function overrideViewModel(string $modelName, string $fileName) {
 		if (!array_key_exists($modelName, $this->models))
@@ -413,11 +355,6 @@ class Pi {
 
 	/**
 	 * Enregistrer un nouveau champ
-	 *
-	 * @param string $fieldName Nom du champ
-	 * @param string $fieldClass Classe du champ
-	 *
-	 * @throws \Exception
 	 */
 	public function registerField(string $fieldName, string $fieldClass) {
 		if (array_key_exists($fieldName, $this->fields))
@@ -428,11 +365,6 @@ class Pi {
 
 	/**
 	 * Surcharger un champ
-	 *
-	 * @param string $fieldName Nom du champ à surcharger
-	 * @param string $fieldClass Classe du champ
-	 *
-	 * @throws \Exception
 	 */
 	public function overrideField(string $fieldName, string $fieldClass) {
 		if (!array_key_exists($fieldName, $this->fields))
@@ -446,11 +378,7 @@ class Pi {
 	}
 
 	/**
-	 * @param $fieldName
-	 *
-	 * @return string Champ
-	 *
-	 * @throws \Exception
+	 * Récupérer un champ
 	 */
 	public function getField(string $fieldName): Field {
 		if (array_key_exists($fieldName, $this->overridedFields))
@@ -463,11 +391,7 @@ class Pi {
 	}
 
 	/**
-	 * @param string $modelName
-	 *
-	 * @return Model Modèle
-	 *
-	 * @throws \Exception
+	 * Récupérer un modèle
 	 */
 	public function getModel(string $modelName): Model {
 		if (array_key_exists($modelName, $this->overridedModels))

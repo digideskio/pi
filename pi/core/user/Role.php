@@ -30,8 +30,6 @@ class Role {
 
 	/**
 	 * Créer le rôle à partir d'un tableau
-	 *
-	 * @param array $data Données fournies pour contruire le rôle
 	 */
 	public function __construct(array $data) {
 		$this->setName($data['name']);
@@ -40,11 +38,6 @@ class Role {
 
 	/**
 	 * Le rôle dispose t-il de la permission $permission ?
-	 *
-	 * @param string $permission Permission à tester
-	 *
-	 * @return bool Retourne true si le rôle dipose de la permission
-	 *              $permission, false sinon
 	 */
 	public function hasPermission(string $permission): bool {
 		return in_array($permission, $this->permissions);
@@ -52,10 +45,6 @@ class Role {
 
 	/**
 	 * Ajouter une permission
-	 *
-	 * @param string $permission Permission à ajouter
-	 *
-	 * @return $this L'instance du rôle
 	 */
 	public function addPermission(string $permission): Role {
 		$this->permissions[] = $permission;
@@ -65,10 +54,6 @@ class Role {
 
 	/**
 	 * Modifier le nom du rôle
-	 *
-	 * @param string $name Nouveau nom
-	 *
-	 * @return $this L'instance du rôle
 	 */
 	public function setName(string $name): Role {
 		$this->name = $name;
@@ -78,10 +63,6 @@ class Role {
 
 	/**
 	 * Modifier les permissions du rôle
-	 *
-	 * @param string[] $permissions Nouvelles permissions
-	 *
-	 * @return $this L'instance du rôle
 	 */
 	public function setPermissions(array $permissions): Role {
 		$this->permissions = $permissions;
@@ -91,8 +72,6 @@ class Role {
 
 	/**
 	 * Récupérer le nom du rôle
-	 *
-	 * @return string Nom du rôle
 	 */
 	public function getName(): string {
 		return $this->name;
@@ -100,8 +79,6 @@ class Role {
 
 	/**
 	 * Récupérer les permissions de l'utilisateur
-	 *
-	 * @return string[] Permissions de l'utilisateur
 	 */
 	public function getPermissions(): array {
 		return $this->permissions;

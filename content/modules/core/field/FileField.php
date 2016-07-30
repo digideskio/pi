@@ -26,7 +26,7 @@ use Pi\Lib\Html\Tag;
 
 class FileField extends Field {
 	/**
-	 * @param $data
+	 * Sélection d'un fichier
 	 */
 	public function __construct(array $data = []) {
 		parent::__construct($data);

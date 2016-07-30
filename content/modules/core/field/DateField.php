@@ -26,7 +26,7 @@ use Pi\Lib\Html\Tag;
 
 class DateField extends Field {
 	/**
-	 * @param $data
+	 * Zone de saisie d'une date
 	 */
 	public function __construct(array $data = []) {
 		parent::__construct($data);

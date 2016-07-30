@@ -27,7 +27,7 @@ use Pi\Lib\Html\Tag;
 
 class TelField extends Field {
 	/**
-	 * @param $data
+	 * Zone de saisie d'un numéro de téléphone
 	 */
 	public function __construct(array $data = []) {
 		parent::__construct($data);

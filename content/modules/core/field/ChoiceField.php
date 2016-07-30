@@ -23,9 +23,12 @@ namespace Module\Core\Field;
 
 use Pi\Core\Model\Field;
 
+/**
+ * @todo Différence avec RadioField ?
+ */
 class ChoiceField extends Field {
 	/**
-	 * @param $data
+	 * Bouton radio, permet de sélectionner une valeur parmi plusieurs
 	 */
 	public function __construct(array $data = []) {
 		parent::__construct($data);

@@ -33,8 +33,6 @@ class User {
 
 	/**
 	 * Créer l'utilisateur à partir d'un tableau
-	 *
-	 * @param array $data Données fournies pour contruire l'utilisateur
 	 */
 	public function __construct(array $data) {
 		$this->setUsername($data['username']);
@@ -44,11 +42,6 @@ class User {
 
 	/**
 	 * L'utilisateur dispose t-il de la permission $permission ?
-	 *
-	 * @param string $permission Permission à tester
-	 *
-	 * @return bool Retourne true si l'utilisateur dipose de la permission
-	 *              $permission, false sinon
 	 */
 	public function hasPermission(string $permission): bool {
 		return $this->role->hasPermission($permission);
@@ -56,10 +49,6 @@ class User {
 
 	/**
 	 * Modifier le pseudonyme de l'utilisateur
-	 *
-	 * @param string $username Nouveau pseudonyme
-	 *
-	 * @return $this L'instance de l'utilisateur.
 	 */
 	public function setUsername(string $username): User {
 		$this->username = $username;
@@ -69,10 +58,6 @@ class User {
 
 	/**
 	 * Modifier le mot de passe de l'utilisateur
-	 *
-	 * @param string $password Nouveau mot de passe
-	 *
-	 * @return $this L'instance de l'utilisateur.
 	 */
 	public function setPassword(string $password): User {
 		$this->password = $password;
@@ -82,10 +67,6 @@ class User {
 
 	/**
 	 * Modifier le rôle de l'utilisateur
-	 *
-	 * @param Role $role Nouveau rôle
-	 *
-	 * @return $this L'instance de l'utilisateur.
 	 */
 	public function setRole(Role $role): User {
 		$this->role = $role;
@@ -95,8 +76,6 @@ class User {
 
 	/**
 	 * Récupérer le pseudonyme de l'utilisateur
-	 *
-	 * @return string Pseudonyme de l'utilisateur
 	 */
 	public function getUsername(): string {
 		return $this->username;
@@ -104,8 +83,6 @@ class User {
 
 	/**
 	 * Récupérer le mot de passe de l'utilisateur
-	 *
-	 * @return string Mot de passe de l'utilisateur
 	 */
 	public function getPassword(): string {
 		return $this->password;
@@ -113,8 +90,6 @@ class User {
 
 	/**
 	 * Récupérer le rôle de l'utilisateur
-	 *
-	 * @return string Rôle de l'utilisateur
 	 */
 	public function getRole(): string {
 		return $this->role;
@@ -122,8 +97,6 @@ class User {
 
 	/**
 	 * Récupérer les permissions de l'utilisateur
-	 *
-	 * @return string[] Permissions de l'utilisateur
 	 */
 	public function getPermissions(): array {
 		return $this->role->getPermissions();

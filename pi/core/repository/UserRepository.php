@@ -21,36 +21,28 @@ namespace Pi\Core\Repository;
 
 class UserRepository implements IRepository {
 	/**
-	 * Récupérer tous les éléments
-	 *
-	 * @return array Liste de tous les éléments
+	 * Récupérer tous les utilisateurs
 	 */
 	public function findAll(): array {
 		return [];
 	}
 
 	/**
-	 * @param string $slug
-	 *
-	 * @return mixed
+	 * Récupérer un utilisateur par son slug
 	 */
 	public function findBySlug(string $slug) {
 		return null;
 	}
 
 	/**
-	 * @param $user
-	 *
-	 * @return bool Succès
+	 * Enregistrer l'utilisateur
 	 */
 	public function save($user): bool {
 		return false;
 	}
 
 	/**
-	 * @param $user
-	 *
-	 * @return bool Succès
+	 * Supprimer l'utilisateur
 	 */
 	public function remove($user): bool {
 		return false;

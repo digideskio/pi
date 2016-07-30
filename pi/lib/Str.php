@@ -24,10 +24,6 @@ namespace Pi\Lib;
 class Str {
 	/**
 	 * Prend une chaine et la retourne sans les accents
-	 *
-	 * @param string $txt La chaine dont on veut enlever les accents
-	 * 
-	 * @return string La chaine sans accent
 	 */
 	public static function stripAccents(string $txt): string {
 		return strtr(utf8_decode($txt), utf8_decode(
@@ -39,11 +35,6 @@ class Str {
 	 * « Slugifie » une chaine. C'est-à-dire qu'elle devient tout en minuscule,
 	 * que les espaces sont remplacés par des tirets et que seuls les caractères
 	 * A-Z, a-z et le tiret sont conservés
-	 *
-	 * @param string $txt Chaine à « sluger »
-	 * @param string $default Valeur à utiliser si le slug final est vide
-	 *
-	 * @return string La chaine « slugée »
 	 */
 	public static function slug(string $txt,
 	                            string $default = 'unnamed'): string {
@@ -72,10 +63,7 @@ class Str {
 	}
 
 	/**
-	 * @param string $txt La chaine à découper
-	 *
-	 * @return array Découpe les lignes d'une chaine et les retournent sous forme de
-	 *               tableau
+	 * Découpe une chaine
 	 */
 	public static function lines(string $txt): array {
 		$txt = str_replace("\r\n", "\n", $txt);
@@ -85,9 +73,7 @@ class Str {
 	}
 
 	/**
-	 * @param string $string La chaine à tester
-	 *
-	 * @return bool true si la chaine est une URL, false sinon
+	 * La chaine est-elle une URL ?
 	 */
 	public static function isURL(string $string): bool {
 		return (bool) filter_var($string, FILTER_VALIDATE_URL);
@@ -95,10 +81,6 @@ class Str {
 
 	/**
 	 * Générer une chaine aléatoirement avec une longueur donnée
-	 *
-	 * @param int $length Longueur de la chaine à générer
-	 *
-	 * @return string Chaine générée aléatoirement
 	 */
 	public static function random(int $length): string {
 		$chars = array_merge(range('a', 'z'), range('A', 'Z'), range(0, 9));
@@ -113,11 +95,7 @@ class Str {
 	}
 
 	/**
-	 * @param string $txt
-	 * @param int $nbWords
-	 * @param string $after
-	 *
-	 * @return string Garde $nbWords de la chaine $txt
+	 * Découper une chaine à un nombre de mots définit
 	 */
 	public static function splitWords(string $txt,
 	                                  int $nbWords = 50,
@@ -141,11 +119,7 @@ class Str {
 	}
 
 	/**
-	 * @param string $txt La chaine à tester
-	 * @param string $needle La chaine interne à tester
-	 * @param bool $insensitive Sensibilité à la casse
-	 *
-	 * @return bool true si $txt contient $needle, false sinon
+	 * La chaine $txt contient-t-elle $needle ?
 	 */
 	public static function contains(string $txt,
 	                                string $needle,
@@ -159,20 +133,14 @@ class Str {
 	}
 
 	/**
-	 * @param string $str La chaine à tester
-	 * @param string $needle La chaine interne à tester
-	 *
-	 * @return bool true si $str commence par $needle, false sinon
+	 * La chaine $str commence-t-elle par $needle ?
 	 */
 	public static function startsWith(string $str, string $needle): bool {
 		return $needle === '' || strpos($str, $needle) === 0;
 	}
 
 	/**
-	 * @param string $str La chaine à tester
-	 * @param string $needle La chaine interne à tester
-	 *
-	 * @return bool true si $str se termine par $needle, false sinon
+	 * La chaine $str se termine-t-elle par $needle ?
 	 */
 	public static function endsWith(string $str, string $needle): bool {
 		return $needle === '' || substr($str, -strlen($needle)) === $needle;

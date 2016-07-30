@@ -48,11 +48,6 @@ class Pagination implements \IteratorAggregate {
 
 	/**
 	 * Construit une pagination
-	 *
-	 * @param int $nbTotal Nombre total d'éléments
-	 * @param int $nbByPage Nombre d'éléments par page
-	 * @param int $actual Page actuellement ouverte
-	 * @param int $firstPage Numéro de la première page
 	 */
 	public function __construct(int $nbTotal,
 	                            int $nbByPage,
@@ -69,72 +64,70 @@ class Pagination implements \IteratorAggregate {
 	}
 
 	/**
-	 * @return int Numéro de la première page
+	 * Numéro de la première page
 	 */
 	public function getFirstPage(): int {
 		return $this->first;
 	}
 
 	/**
-	 * @return int Numéro de la dernière page
+	 * Numéro de la dernière page
 	 */
 	public function getLastPage(): int {
 		return $this->last;
 	}
 
 	/**
-	 * @return int Numéro de la page précédente
+	 * Numéro de la page précédente
 	 */
 	public function getPreviousPage(): int {
 		return $this->prev;
 	}
 
 	/**
-	 * @return int Numéro de la page actuelle
+	 * Numéro de la page actuelle
 	 */
 	public function getActualPage(): int {
 		return $this->actual;
 	}
 
 	/**
-	 * @return int Numéro de la page suivante
+	 * Numéro de la page suivante
 	 */
 	public function getNextPage(): int {
 		return $this->next;
 	}
 
 	/**
-	 * @return int Nombre d'éléments
+	 * Nombre d'éléments
 	 */
 	public function getNbTotal(): int {
 		return $this->nbTotal;
 	}
 
 	/**
-	 * @return int Nombre d'éléments par page
+	 * Nombre d'éléments par page
 	 */
 	public function getNbByPage(): int {
 		return $this->nbByPage;
 	}
 
 	/**
-	 * @return int Nombre de pages
+	 * Nombre de pages
 	 */
 	public function getNbPages(): int {
 		return $this->nbPages;
 	}
 
 	/**
-	 * @param int $i La page $i est-elle la page actuelle ?
-	 *
-	 * @return bool true si la page $i est la page actuelle, false sinon
+	 * La page $i est-elle la page actuelle ?
 	 */
 	public function isActualPage(int $i): bool {
 		return $this->actual == $i;
 	}
 
 	/**
-	 * @return \Generator
+	 * Générateur
 	 */
 	public function getIterator(): \Generator {
 		for ($i = $this->first ; $i <= $this->last ; $i++)

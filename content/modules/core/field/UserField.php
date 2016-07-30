@@ -26,7 +26,7 @@ use Pi\Lib\Html\Tag;
 
 class UserField extends Field {
 	/**
-	 * @param $data
+	 * Zone de saisie d'un utilisateur (par ex. pour un auteur, etc.)
 	 */
 	public function __construct(array $data = []) {
 		parent::__construct($data);

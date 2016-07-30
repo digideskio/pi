@@ -55,13 +55,7 @@ class Page {
 	}
 
 	/**
-	 * Définit le titre du modèle
-	 *
-	 * @param string $title Titre de la page
-	 * @param bool $overrideSlug Si true, change le slug associé à la page,
-	 *                           sinon celui-ci reste inchangé (true par défaut)
-	 *
-	 * @return $this
+	 * Définir le titre du modèle
 	 */
 	public function setTitle(string $title, bool $overrideSlug = true): Page {
 		$this->title = $title;
@@ -74,10 +68,6 @@ class Page {
 
 	/**
 	 * Définir le modèle utilisé
-	 *
-	 * @param string $model
-	 *
-	 * @return $this
 	 */
 	public function setModel(string $model): Page {
 		$this->model = $model;
@@ -87,10 +77,6 @@ class Page {
 
 	/**
 	 * Définir la date de création
-	 *
-	 * @param \DateTime $createdAt
-	 *
-	 * @return $this
 	 */
 	public function setCreatedAt(\DateTime $createdAt): Page {
 		$this->createdAt = $createdAt;
@@ -100,10 +86,6 @@ class Page {
 
 	/**
 	 * Définir la date de dernière mise à jour
-	 *
-	 * @param \DateTime $updatedAt
-	 *
-	 * @return $this
 	 */
 	public function setUpdatedAt(\DateTime $updatedAt): Page {
 		$this->updatedAt = $updatedAt;
@@ -113,10 +95,6 @@ class Page {
 
 	/**
 	 * Définir les champs
-	 *
-	 * @param array $fields
-	 *
-	 * @return $this
 	 */
 	public function setFields(array $fields): Page {
 		$this->fields = $fields;
@@ -126,8 +104,6 @@ class Page {
 
 	/**
 	 * Récupérer le slug
-	 *
-	 * @return string
 	 */
 	public function getSlug(): string {
 		return $this->slug;
@@ -135,8 +111,6 @@ class Page {
 
 	/**
 	 * Récupérer le titre
-	 *
-	 * @return string
 	 */
 	public function getTitle(): string {
 		return $this->title;
@@ -144,8 +118,6 @@ class Page {
 
 	/**
 	 * Récupérer le modèle utilisé
-	 *
-	 * @return string
 	 */
 	public function getModel(): string {
 		return $this->model;
@@ -153,8 +125,6 @@ class Page {
 
 	/**
 	 * Récupérer la date de création de la page
-	 *
-	 * @return \DateTime
 	 */
 	public function getCreatedAt(): \DateTime {
 		return $this->createdAt;
@@ -162,8 +132,6 @@ class Page {
 
 	/**
 	 * Récupérer la date de dernière mise à jour de la page
-	 *
-	 * @return \DateTime
 	 */
 	public function getUpdatedAt(): \DateTime {
 		return $this->updatedAt;
@@ -171,8 +139,6 @@ class Page {
 
 	/**
 	 * Récupérer les champs
-	 *
-	 * @return array
 	 */
 	public function getFields(): array {
 		return $this->fields;

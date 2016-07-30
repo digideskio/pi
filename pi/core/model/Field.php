@@ -67,12 +67,6 @@ abstract class Field {
 
 	/**
 	 * Construit un champ
-	 *
-	 * @param $array
-	 *
-	 * @return static
-	 *
-	 * @throws \Exception
 	 */
 	public static function fromArray(array $array): Field {
 		$field = new static();
@@ -90,7 +84,7 @@ abstract class Field {
 	}
 
 	/**
-	 * @param $data
+	 * Constructeur
 	 */
 	public function __construct(array $data = []) {
 		$this->id = ++static::$globalId;
@@ -122,7 +116,7 @@ abstract class Field {
 	}
 
 	/**
-	 * @return true si le champ est valide (respecte toutes les conditions), false sinon
+	 * Vérifie si la valeur du champ est valide selon les conditions définies
 	 */
 	public function validate(): bool {
 		if ($this->required)
@@ -132,7 +126,7 @@ abstract class Field {
 	}
 
 	/**
-	 * @return string Valeur du champ
+	 * Valeur du champ
 	 */
 	public function save(): string {
 		return $this->value();
@@ -140,10 +134,6 @@ abstract class Field {
 
 	/**
 	 * Définir le nom du champ
-	 *
-	 * @param string $name Nom du champ
-	 *
-	 * @return $this L'instance du champ
 	 */
 	public function setName(string $name): Field {
 		$this->name = $name;
@@ -153,10 +143,6 @@ abstract class Field {
 
 	/**
 	 * Définir le label du champ
-	 *
-	 * @param string $label Label du champ
-	 *
-	 * @return $this L'instance du champ
 	 */
 	public function setLabel(string $label): Field {
 		$this->label = $label;
@@ -166,10 +152,6 @@ abstract class Field {
 
 	/**
 	 * Définir la valeur par défaut
-	 *
-	 * @param string $default Valeur par défaut du champ
-	 *
-	 * @return $this L'instance du champ
 	 */
 	public function setDefault(string $default): Field {
 		$this->default = $default;
@@ -179,10 +161,6 @@ abstract class Field {
 
 	/**
 	 * Définir si le champ est obligatoire ou non
-	 *
-	 * @param bool $required true si le champ est requis, false sinon
-	 *
-	 * @return $this L'instance du champ
 	 */
 	public function setRequired(bool $required): Field {
 		$this->required = $required;
@@ -192,10 +170,6 @@ abstract class Field {
 
 	/**
 	 * Définir le message du champ
-	 *
-	 * @param string $message Message du champ
-	 *
-	 * @return $this L'instance du champ
 	 */
 	public function setMessage(string $message): Field {
 		$this->message = $message;
@@ -205,10 +179,6 @@ abstract class Field {
 
 	/**
 	 * Définir la largeur du champ
-	 *
-	 * @param string $width Largeur du champ
-	 *
-	 * @return $this L'instance du champ
 	 */
 	public function setWidth(string $width): Field {
 		$this->width = $width;
@@ -218,10 +188,6 @@ abstract class Field {
 
 	/**
 	 * Définir le « placeholder » du champ
-	 *
-	 * @param string $placeholder
-	 *
-	 * @return $this L'instance du champ
 	 */
 	public function setPlaceholder(string $placeholder): Field {
 		$this->placeholder = $placeholder;
@@ -231,10 +197,6 @@ abstract class Field {
 
 	/**
 	 * Définir les valeurs disponibles pour ce champ
-	 *
-	 * @param array $options Valeurs disponibles pour ce champ
-	 *
-	 * @return $this L'instance du champ
 	 */
 	public function setOptions(array $options): Field {
 		$this->options = $options;
@@ -244,10 +206,6 @@ abstract class Field {
 
 	/**
 	 * Définir la valeur minimale que pour avoir le champ
-	 *
-	 * @param int|float $min Valeur minimale que pour avoir le champ
-	 *
-	 * @return $this L'instance du champ
 	 */
 	public function setMin(float $min): Field {
 		$this->min = $min;
@@ -257,10 +215,6 @@ abstract class Field {
 
 	/**
 	 * Définir la valeur maximale que peut avoir le champ
-	 *
-	 * @param int|float $max Valeur maximale que peut avoir le champ
-	 *
-	 * @return $this L'instance du champ
 	 */
 	public function setMax(float $max): Field {
 		$this->max = $max;
@@ -270,10 +224,6 @@ abstract class Field {
 
 	/**
 	 * Définir le pas du champ
-	 *
-	 * @param int|float $step Pas du champ
-	 *
-	 * @return $this L'instance du champ
 	 */
 	public function setStep(float $step): Field {
 		$this->step = $step;
@@ -283,10 +233,6 @@ abstract class Field {
 
 	/**
 	 * Définir le format du champ
-	 *
-	 * @param string $format Format du champ
-	 *
-	 * @return $this L'instance du champ
 	 */
 	public function setFormat(string $format): Field {
 		$this->format = $format;

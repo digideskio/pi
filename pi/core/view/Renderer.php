@@ -38,8 +38,6 @@ class Renderer {
 
 	/**
 	 * Constructeur
-	 *
-	 * @param App $app Application
 	 */
 	public function __construct(App $app) {
 		// Application
@@ -75,21 +73,13 @@ class Renderer {
 
 	/**
 	 * Ajout un chemin vers des vues
-	 *
-	 * @param string $path Chemin vers le dossier
-	 * @param string $namespace Espace de noms
-	 *
-	 * @throws Twig\Error\Loader
 	 */
 	public function addPath(string $path, string $namespace = null) {
 		$this->loader->addPath($path, $namespace);
 	}
 
 	/**
-	 * @param string $file
-	 * @param array $variables
-	 *
-	 * @return string Le rendu
+	 * Rendu
 	 */
 	public function render(string $file, array $variables): string {
 		$variables = array_merge($this->app->getVariables(), $variables);

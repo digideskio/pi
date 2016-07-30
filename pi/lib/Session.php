@@ -24,9 +24,6 @@ namespace Pi\Lib;
 class Session {
 	/**
 	 * Définir une valeur à une clé
-	 *
-	 * @param string $key Clé
-	 * @param mixed $value Valeur de la clé
 	 */
 	public function set(string $key, $value) {
 		$_SESSION[$key] = $value;
@@ -34,9 +31,6 @@ class Session {
 
 	/**
 	 * Ajouter une valeur à une clé
-	 *
-	 * @param string $key Clé
-	 * @param mixed $value Valeur à ajouter
 	 */
 	public function push(string $key, $value) {
 		if (!$this->exists($key))
@@ -47,10 +41,6 @@ class Session {
 
 	/**
 	 * Récupérer la valeur associée à une clé
-	 *
-	 * @param string $key Clé à récupérer
-	 *
-	 * @return mixed
 	 */
 	public function get(string $key) {
 		return $_SESSION[$key];
@@ -58,8 +48,6 @@ class Session {
 
 	/**
 	 * Supprimer une clé
-	 *
-	 * @param string $key Clé à supprimer
 	 */
 	public function remove(string $key) {
 		unset($_SESSION[$key]);
@@ -67,10 +55,6 @@ class Session {
 
 	/**
 	 * La clé $key existe-t-elle ?
-	 *
-	 * @param string $key Clé à vérifier
-	 *
-	 * @return bool true si la clé est enregistrée dans la session, false sinon
 	 */
 	public function exists(string $key): bool {
 		return isset($_SESSION[$key]);

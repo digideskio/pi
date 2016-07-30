@@ -24,11 +24,6 @@ namespace Pi\Lib;
 class Input {
 	/**
 	 * Récupérer la valeur d'un champ POST
-	 *
-	 * @param $name
-	 * @param $default
-	 *
-	 * @return string La valeur du champ
 	 */
 	public static function get(string $name, string $default = ''): string {
 		return $_POST[$name] ?? $default;

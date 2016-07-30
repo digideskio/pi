@@ -40,9 +40,7 @@ class Tag {
 	private $content;
 
 	/**
-	 * @param $name
-	 * @param $attrs
-	 * @param $content
+	 * Constructeur
 	 */
 	public function __construct(string $name,
 	                            array $attrs = [],
@@ -53,15 +51,14 @@ class Tag {
 	}
 
 	/**
-	 * @param $key
-	 * @param mixed $value
+	 * Ajouter un attribut à la balise
 	 */
 	public function addAttr(string $key, $value = true) {
 		$this->attrs[$key] = $value;
 	}
 
 	/**
-	 * @param $attrs
+	 * Ajouter plusieurs attributs à la balise
 	 */
 	public function addAttrs(array $attrs) {
 		foreach ($attrs as $key => $value)
@@ -69,9 +66,7 @@ class Tag {
 	}
 
 	/**
-	 * @param $key
-	 *
-	 * @return bool true si l'attribut a été supprimé, false sinon
+	 * Supprimer un attribut
 	 */
 	public function removeAttr(string $key): bool {
 		if (isset($this->attrs[$key])) {
@@ -84,7 +79,7 @@ class Tag {
 	}
 
 	/**
-	 * @param $attrs
+	 * Supprimer plusieurs attributs
 	 */
 	public function removeAttrs(array $attrs) {
 		foreach ($attrs as $key => $value)
@@ -92,14 +87,14 @@ class Tag {
 	}
 
 	/**
-	 * @param $content
+	 * Définir le contenu
 	 */
 	public function setContent(string $content) {
 		$this->content = $content;
 	}
 
 	/**
-	 * @return string La balise au format HTML
+	 * Récupérer la balise au format HTML
 	 */
 	public function __toString(): string {
 		$html = '<' . $this->name;

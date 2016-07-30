@@ -26,7 +26,7 @@ use Pi\Lib\Html\Tag;
 
 class VersionField extends Field {
 	/**
-	 * @param $data
+	 * Zone de saisie d'une version
 	 */
 	public function __construct(array $data = []) {
 		parent::__construct($data);

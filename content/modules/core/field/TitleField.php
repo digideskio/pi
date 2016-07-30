@@ -25,9 +25,12 @@ use Pi\Core\Model\Field;
 use Pi\Lib\Num;
 use Pi\Lib\Html\Tag;
 
+/**
+ * @todo Utile ?
+ */
 class TitleField extends Field {
 	/**
-	 * @param $data
+	 * Zone de saisie d'un titre
 	 */
 	public function __construct(array $data = []) {
 		parent::__construct($data);

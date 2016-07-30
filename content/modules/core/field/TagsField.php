@@ -26,7 +26,7 @@ use Pi\Lib\Html\Tag;
 
 class TagsField extends Field {
 	/**
-	 * @param $data
+	 * Zone de saisie d'étiquettes, comme ceci : « design, programming, test »
 	 */
 	public function __construct(array $data = []) {
 		parent::__construct($data);

@@ -26,7 +26,7 @@ use Pi\Lib\Html\Tag;
 
 class EmailField extends Field {
 	/**
-	 * @param $data
+	 * Zone de saisie d'une adresse électronique
 	 */
 	public function __construct(array $data = []) {
 		parent::__construct($data);

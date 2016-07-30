@@ -29,7 +29,7 @@ class TimeField extends Field {
 	protected static $formats = [ 'hh:mm', 'hh:mm:ss' ];
 
 	/**
-	 * @param $data
+	 * Zone de saisie d'une heure
 	 */
 	public function __construct(array $data = []) {
 		parent::__construct($data);

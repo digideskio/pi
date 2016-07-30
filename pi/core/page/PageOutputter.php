@@ -27,8 +27,6 @@ class PageOutputter {
 
 	/**
 	 * Constructeur
-	 *
-	 * @param Page $page
 	 */
 	public function __construct(Page $page) {
 		$this->page = $page;
@@ -36,8 +34,6 @@ class PageOutputter {
 
 	/**
 	 * Représentation JSON de la page
-	 *
-	 * @return string Représentation JSON de la page
 	 */
 	public function json(): string {
 		$arr = [];

@@ -27,7 +27,7 @@ use Pi\Lib\Html\Tag;
 
 class TextField extends Field {
 	/**
-	 * @param $data
+	 * Zone de saisie standard
 	 */
 	public function __construct(array $data = []) {
 		parent::__construct($data);
