@@ -138,6 +138,7 @@ class PageRepository implements IRepository {
 	 * Supprimer la page
 	 */
 	public function remove($page): bool {
+		/** @var Page $page */
 		$dir = PI_DIR_PAGES . $page->getSlug();
 
 		return FileSystem::removeDirectory($dir);

@@ -23,6 +23,7 @@ namespace Pi\Core\Model;
 
 use Pi\Core\App\App;
 use Pi\Core\App\Pi;
+use Pi\Core\Page\Page;
 use Pi\Lib\Str;
 
 class Model {
@@ -69,6 +70,14 @@ class Model {
 
 		$this->fields = [];
 		$this->viewFilename = '';
+	}
+
+	/**
+	 * Complète les valeurs des champs
+	 */
+	public function fillFieldsWithPage(Page $page) {
+		foreach ($page->getFields() as $name => $value)
+			$this->fields[$name]->setValue($value);
 	}
 
 	/**

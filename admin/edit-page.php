@@ -2,6 +2,7 @@
 
 require 'init.php';
 
+use Pi\Core\Model\Model;
 use Pi\Core\Model\Form;
 
 if (!isset($_GET['page']))
@@ -32,7 +33,9 @@ if (isset($_POST)) {
 
 $models = $app->getModels();
 
+/** @var Model $model */
 $model = $models[$page->getModel()];
+$model->fillFieldsWithPage($page);
 
 $form = new Form($model, $page);
 

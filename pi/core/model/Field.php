@@ -65,6 +65,9 @@ abstract class Field {
 	/** @var string */
 	public $format;
 
+	/** @var string */
+	public $value;
+
 	/**
 	 * Construit un champ
 	 */
@@ -101,6 +104,7 @@ abstract class Field {
 		$this->max         = $data['max']         ?? 0;
 		$this->step        = $data['step']        ?? 0;
 		$this->format      = $data['format']      ?? '';
+		$this->value       = $data['value']       ?? '';
 	}
 
 	/**
@@ -112,7 +116,7 @@ abstract class Field {
 	 * Récupérer la valeur du champ
 	 */
 	public function value() {
-		return $_POST[$this->name] ?? $this->default;
+		return $this->value ?? $this->default;
 	}
 
 	/**
@@ -236,6 +240,15 @@ abstract class Field {
 	 */
 	public function setFormat(string $format): Field {
 		$this->format = $format;
+
+		return $this;
+	}
+
+	/**
+	 * Définir la valeur du champ
+	 */
+	public function setValue($value): Field {
+		$this->value = $value;
 
 		return $this;
 	}

@@ -39,8 +39,8 @@ class RadioField extends Field {
 	 * @inheritdoc
 	 */
 	public function value(): string {
-		if (!empty($_POST))
-			return $_POST[$this->name] ?? '-';
+		if (!empty($this->value))
+			return $this->value ?? '-';
 		else
 			return $this->default;
 	}

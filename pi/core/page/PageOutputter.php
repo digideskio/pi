@@ -45,7 +45,7 @@ class PageOutputter {
 		$arr['fields'] = [];
 
 		foreach ($this->page->getFields() as $fieldName => $field)
-			$arr['fields'][$fieldName] = (string) $field;
+			$arr['fields'][$fieldName] = $field;
 
 		return json_encode($arr);
 	}
