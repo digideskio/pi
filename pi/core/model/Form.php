@@ -21,15 +21,21 @@ declare(strict_types=1);
 
 namespace Pi\Core\Model;
 
+use Pi\Core\Page\Page;
+
 class Form {
 	/** @var Model */
 	private $model;
 
+	/** @var Page */
+	private $page;
+
 	/**
 	 * Constructeur
 	 */
-	public function __construct(Model $model) {
+	public function __construct(Model $model, Page $page) {
 		$this->model = $model;
+		$this->page = $page;
 	}
 
 	/**
@@ -42,7 +48,7 @@ class Form {
 
 		$html .= '<input type="hidden" name="model" value="' . $this->model->getSlug() . '" />';
 
-		$html .= '<input type="text" name="title" value="todo" />';
+		$html .= '<input type="text" name="title" value="' . $this->page->getTitle() . '" />';
 
 		$accum = 0;
 

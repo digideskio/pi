@@ -34,7 +34,7 @@ $models = $app->getModels();
 
 $model = $models[$page->getModel()];
 
-$form = new Form($model);
+$form = new Form($model, $page);
 
 echo $app->render('@theme/admin/edit-page.html', [
 	'menu_items' => $menuItems,
