@@ -44,74 +44,74 @@ class PageCollection implements \IteratorAggregate {
 	 * Pages dont le slug commence par
 	 */
 	public function slugStartsWith(string $name): PageCollection {
-		$this->pages = array_filter($this->pages, function($slug) use ($name) {
+		$pages = array_filter($this->pages, function($slug) use ($name) {
 			return Str::startsWith($slug, $name);
 		}, ARRAY_FILTER_USE_KEY);
 
-		return $this;
+		return new static($pages);
 	}
 
 	/**
 	 * Pages dont le slug finit par
 	 */
 	public function slugEndsWith(string $name): PageCollection {
-		$this->pages = array_filter($this->pages, function($slug) use ($name) {
+		$pages = array_filter($this->pages, function($slug) use ($name) {
 			return Str::endsWith($slug, $name);
 		}, ARRAY_FILTER_USE_KEY);
 
-		return $this;
+		return new static($pages);
 	}
 
 	/**
 	 * Pages dont le slug contient
 	 */
 	public function slugContains(string $name): PageCollection {
-		$this->pages = array_filter($this->pages, function($slug) use ($name) {
+		$pages = array_filter($this->pages, function($slug) use ($name) {
 			return Str::contains($slug, $name);
 		}, ARRAY_FILTER_USE_KEY);
 
-		return $this;
+		return new static($pages);
 	}
 
 	/**
 	 * Pages qui contiennent le champ
 	 */
 	public function containsField(string $fieldName): PageCollection {
-		$this->pages = array_filter($this->pages, function($page) use ($fieldName) {
+		$pages = array_filter($this->pages, function($page) use ($fieldName) {
 			/** @var Page $page */
 			return array_key_exists($fieldName, $page->getFields());
 		});
 
-		return $this;
+		return new static($pages);
 	}
 
 	/**
 	 * @todo Pages dont le champ vaut
 	 */
 	public function fieldValueIs(string $fieldName, $fieldValue): PageCollection {
-		$this->pages = array_filter($this->pages, function($page) {
+		$pages = array_filter($this->pages, function($page) {
 			return true;
 		});
 
-		return $this;
+		return new static($pages);
 	}
 
 	/**
 	 * Pages dont le modèle est
 	 */
 	public function withModel(string $modelName) {
-		$this->pages = array_filter($this->pages, function($page) use ($modelName) {
-			return $page['model'] == $modelName;
+		$pages = array_filter($this->pages, function($page) use ($modelName) {
+			/** @var $page Page */
+			return $page->getModel() == $modelName;
 		});
 
-		return $this;
+		return new static($pages);
 	}
 
 	/**
 	 * Itérateur : le slug de la page en clé et la page en valeur
 	 */
-	public function getIterator(): \Generator {
-		foreach ($this->pages as $slug => $page)
-			yield $slug => $page;
+	public function getIterator(): \ArrayIterator {
+		return new \ArrayIterator($this->pages);
 	}
 }

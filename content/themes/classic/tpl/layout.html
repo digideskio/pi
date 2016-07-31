@@ -24,7 +24,7 @@
 
 					<nav>
 						<ul>
-							{% for slug, page in pages.containsField('content') %}
+							{% for slug, page in pages.withModel('page') %}
 								<li{% if is_current_page(slug) %} class="active"{% endif %}>
 									<a href="{{ url.site ~ slug }}">{{ page.title }}</a>
 								</li>
