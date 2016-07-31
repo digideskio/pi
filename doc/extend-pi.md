@@ -1,4 +1,13 @@
-# Modules
+# Pi
+
+Pi est un CMS qui se veut extensible. Pour cela, vous avez la possibilité de
+créer des champs, des modèles et des thèmes.
+
+Vous avez aussi la possibilité de surcharger un champ ou un modèle existant.
+
+Les thèmes fonctionnent pas héritage.
+
+## Modules
 
 Il est possible de modifier l'affichage d'un modèle de trois façons
 différentes :

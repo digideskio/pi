@@ -15,10 +15,10 @@ Dans la fonction `initialize` du module, inscrivez ceci :
 
 ```php
 public function initialize() {
-$this->registerModelFromJson(
-  'nom_du_modele',
-  __DIR__ . '/model.json',
-  __DIR__ . '/view.html');
+  $this->registerModelFromJson(
+    'nom_du_modele',
+    __DIR__ . '/model.json',
+    __DIR__ . '/view.html');
 }
 ```
 
