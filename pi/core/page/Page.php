@@ -67,6 +67,15 @@ class Page {
 	}
 
 	/**
+	 * Définir le slug de la page
+	 */
+	public function setSlug(string $slug): Page {
+		$this->slug = Str::slug($slug);
+
+		return $this;
+	}
+
+	/**
 	 * Définir le modèle utilisé
 	 */
 	public function setModel(string $model): Page {

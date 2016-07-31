@@ -86,6 +86,7 @@ class PageRepository implements IRepository {
 		$page = new Page();
 
 		$page->setTitle($json->title);
+		$page->setSlug($slug);
 		$page->setModel($json->model);
 		$page->setCreatedAt($createdAt);
 		$page->setUpdatedAt($updatedAt);
