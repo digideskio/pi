@@ -209,6 +209,7 @@ class App extends Pi {
 		$modelObject = $this->getModel($model);
 
 		$meta = [
+			'slug' => $this->currentPage->getSlug(),
 			'title' => $this->currentPage->getTitle(),
 			'model' => $model,
 			'created_at' => $this->currentPage->getCreatedAt(),
@@ -263,7 +264,7 @@ class App extends Pi {
 
 	/**
 	 * @todo Répétition avec le code de chargement CSS
-	 * 
+	 *
 	 * Fichiers JavaScript
 	 */
 	public function getJsUrls(): array {
