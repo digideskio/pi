@@ -21,6 +21,8 @@ declare(strict_types=1);
 
 namespace Pi\Core\App;
 
+use Pi\Core\Page\Page;
+
 abstract class Module {
 	/** @var App */
 	private $app;
@@ -114,6 +116,21 @@ abstract class Module {
 	}
 
 	/**
+	 * Récupérer le slug du module (par ex. « TestModule » => « test »)
+	 */
+	public function getSlug(): string {
+		$className = static::class;
+
+		$parts = explode('\\', $className);
+
+		$slug = array_pop($parts);
+		$slug = preg_replace('/Module$/', '', $slug);
+		$slug = strtolower($slug);
+
+		return $slug;
+	}
+
+	/**
 	 * Enregistrer un nouveau modèle depuis une classe
 	 */
 	protected function registerModel(string $modelName, string $modelClass) {
@@ -154,7 +171,7 @@ abstract class Module {
 	 * Charger un fichier CSS dans le thème
 	 */
 	protected function registerCss(string $url) {
-		$this->app->registerCss($url);
+		$this->app->registerCss($url, $this);
 	}
 
 	/**
@@ -176,5 +193,12 @@ abstract class Module {
 	 */
 	protected function unregisterJs(string $url) {
 		$this->app->unregisterJs($url);
+	}
+
+	/**
+	 * Récupérer la page courange
+	 */
+	protected function getCurrentPage(): Page {
+		return $this->app->getCurrentPage();
 	}
 }

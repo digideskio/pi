@@ -21,6 +21,7 @@ declare(strict_types=1);
 
 namespace Pi\Core\App;
 
+use Pi\Core\FileCollection\File;
 use Pi\Core\Model\Field;
 use Pi\Core\Model\Model;
 use Pi\Core\Page\PageCollection;
@@ -96,6 +97,16 @@ class App extends Pi {
 	 */
 	private function initializePages() {
 		$this->pages = new PageCollection($this->pagesRepository->findAll());
+
+		try {
+			$this->currentPage = $this
+				->pagesRepository
+				->findBySlug($this->router->getPath());
+		} catch (\Exception $e) {
+			$this->currentPage = $this
+				->pagesRepository
+				->findBySlug('error');
+		}
 	}
 
 	/**
@@ -178,6 +189,8 @@ class App extends Pi {
 				/** @var Module $module */
 				$module = new $classname($this);
 				$module->initialize();
+
+				$this->modules[] = $module;
 			} else {
 				throw new \Exception('Missing "' . $dir . 'Module.php" in module
 					"' . $dir . '"');
@@ -189,23 +202,17 @@ class App extends Pi {
 	 * Lance la recherche de la page et la retourne
 	 */
 	public function run() {
-		try {
-			$content = $this->pagesRepository->findBySlug($this->router->getPath());
-		} catch (\Exception $e) {
-			$content = $this->pagesRepository->findBySlug('error');
-		}
-
-		$model = $content->getModel();
-		$fields = $content->getFields();
+		$model = $this->currentPage->getModel();
+		$fields = $this->currentPage->getFields();
 
 		/** @var Model $modelObject */
 		$modelObject = $this->getModel($model);
 
 		$meta = [
-			'title' => $content->getTitle(),
+			'title' => $this->currentPage->getTitle(),
 			'model' => $model,
-			'created_at' => $content->getCreatedAt(),
-			'updated_at' => $content->getUpdatedAt()
+			'created_at' => $this->currentPage->getCreatedAt(),
+			'updated_at' => $this->currentPage->getUpdatedAt()
 		];
 
 		echo $this->render($modelObject->getViewFilename(), [
@@ -225,37 +232,61 @@ class App extends Pi {
 		$files = [];
 
 		foreach ($this->cssUrls as $file) {
-			foreach ($this->treeThemes as $theme) {
-				$fileName = $theme['folder'] . $file;
+			/** @var $file File */
 
-				if (file_exists($fileName)) {
-					$files[$file] = $theme['url'] . $file;
-					break;
+			if (!$file->isAssociatedToModule()) {
+				foreach ($this->treeThemes as $theme) {
+					$fileName = $theme['folder'] . (string) $file;
+
+					if (file_exists($fileName)) {
+						$files[(string) $file] = $theme['url'] . $file;
+						break;
+					}
+				}
+			} else {
+				foreach ($this->modules as $module) {
+					$fileName = PI_DIR_MODULES . $module->getSlug() . '/' . $file;
+
+					if (file_exists($fileName))
+						$files[(string) $file] = PI_URL_MODULES . $module->getSlug() . '/' . $file;
 				}
 			}
 		}
 
 		foreach ($this->cssUrls as $file) {
 			if (!in_array($file, array_keys($files)))
-				throw new \Exception('Unable to load theme CSS "' . $file . '"');
+				throw new \Exception('Unable to load CSS "' . $file . '"');
 		}
 
 		return $files;
 	}
 
 	/**
+	 * @todo Répétition avec le code de chargement CSS
+	 * 
 	 * Fichiers JavaScript
 	 */
 	public function getJsUrls(): array {
 		$files = [];
 
 		foreach ($this->jsUrls as $file) {
-			foreach ($this->treeThemes as $theme) {
-				$fileName = $theme['folder'] . $file;
+			/** @var $file File */
 
-				if (file_exists($fileName)) {
-					$files[$file] = $theme['url'] . $file;
-					break;
+			if (!$file->isAssociatedToModule()) {
+				foreach ($this->treeThemes as $theme) {
+					$fileName = $theme['folder'] . (string) $file;
+
+					if (file_exists($fileName)) {
+						$files[(string) $file] = $theme['url'] . $file;
+						break;
+					}
+				}
+			} else {
+				foreach ($this->modules as $module) {
+					$fileName = PI_DIR_MODULES . $module->getSlug() . '/' . $file;
+
+					if (file_exists($fileName))
+						$files[(string) $file] = PI_URL_MODULES . $module->getSlug() . '/' . $file;
 				}
 			}
 		}

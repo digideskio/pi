@@ -21,8 +21,10 @@ declare(strict_types=1);
 
 namespace Pi\Core\App;
 
+use Pi\Core\FileCollection\FileCollection;
 use Pi\Core\Model\Field;
 use Pi\Core\Model\Model;
+use Pi\Core\Page\Page;
 use Pi\Core\Routing\Router;
 use Pi\Core\User\Role;
 use Pi\Core\User\User;
@@ -42,6 +44,9 @@ class Pi {
 	/** @var Theme Thème */
 	protected $theme;
 
+	/** @var Module[] Modules chargés */
+	protected $modules;
+
 	/** @var Model[] Modèles enregistrés */
 	protected $models;
 
@@ -54,6 +59,9 @@ class Pi {
 	/** @var array Champs enregistrés */
 	protected $overridedFields;
 
+	/** @var Page Page courante */
+	protected $currentPage;
+
 	/** @var PageCollection Pages enregistrées */
 	protected $pages;
 
@@ -63,10 +71,10 @@ class Pi {
 	/** @var User[] Utilisateurs enregistrés */
 	protected $users;
 
-	/** @var string[] Fichiers CSS enregistrés */
+	/** @var FileCollection Fichiers CSS enregistrés */
 	protected $cssUrls;
 
-	/** @var string[] Fichiers JavaScript enregistrés */
+	/** @var FileCollection Fichiers JavaScript enregistrés */
 	protected $jsUrls;
 
 	/** @var \stdClass Paramètres du site */
@@ -150,6 +158,8 @@ class Pi {
 	}
 
 	/**
+	 * @todo Sortir la création des instances de FileCollection d'ici
+	 *
 	 * Contruction de l'application
 	 */
 	public function __construct(Router $router,
@@ -157,6 +167,7 @@ class Pi {
 	                            Flash $flash) {
 		Twig\AutoLoader::register();
 
+		$this->modules = [];
 		$this->fields = [];
 		$this->overridedFields = [];
 		$this->models = [];
@@ -164,8 +175,8 @@ class Pi {
 		$this->pages = null;
 		$this->roles = [];
 		$this->users = [];
-		$this->cssUrls = [];
-		$this->jsUrls = [];
+		$this->cssUrls = new FileCollection();
+		$this->jsUrls = new FileCollection();
 		$this->settings = new \stdClass();
 		$this->router = $router;
 		$this->session = $session;
@@ -191,6 +202,13 @@ class Pi {
 	 */
 	public function getFields(): array {
 		return $this->fields;
+	}
+
+	/**
+	 * Récupérer la page courante
+	 */
+	public function getCurrentPage(): Page {
+		return $this->currentPage;
 	}
 
 	/**
@@ -241,12 +259,12 @@ class Pi {
 	/**
 	 * Enregistrer un fichier CSS
 	 */
-	public function registerCss(string $url) {
-		if (in_array($url, $this->cssUrls))
+	public function registerCss(string $url, Module $module = null) {
+		if ($this->cssUrls->hasFile($url))
 			throw new \Exception('Try to load an already loaded CSS "'
 				. $url . '"');
 
-		$this->cssUrls[] = $url;
+		$this->cssUrls->addFile($url, $module);
 	}
 
 	/**
