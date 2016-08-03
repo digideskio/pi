@@ -42,6 +42,8 @@ Voici une liste non-exhaustive des choses à faire après la version 1.0.
 - Thèmes & modules :
   - Possibilité d'enregistrer des évènements pour exécuter du code ou un
     affichage à un endroit ou un moment précis ;
+  - Possibilité de créer des filtres et fonctions pour les utiliser dans les
+    vues ;
 
 - Autre :
   - Ajouter des tests unitaires ;
