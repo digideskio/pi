@@ -6,7 +6,7 @@ require 'init.php';
 
 $pages = $app->getPagesRepository()->findAll();
 
-echo $app->render('@theme/admin/dashboard.html', [
+echo $app->render('@theme/admin-pages/dashboard.html', [
 	'pages' => $pages,
 	'menu_items' => $menuItems
 ]);

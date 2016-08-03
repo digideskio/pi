@@ -41,7 +41,7 @@ $model->fillFieldsWithPage($page);
 
 $form = new Form($model, $page);
 
-echo $app->render('@theme/admin/edit-page.html', [
+echo $app->render('@theme/admin-pages/edit-page.html', [
 	'menu_items' => $menuItems,
 	'form' => $form->html()
 ]);

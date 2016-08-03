@@ -167,7 +167,7 @@ class App extends Pi {
 
 		foreach ($this->treeThemes as $theme)
 			if (is_dir($theme['folder']))
-				$this->renderer->addPath($theme['folder'] . 'tpl/', 'theme');
+				$this->renderer->addPath($theme['folder'], 'theme');
 	}
 
 	/**

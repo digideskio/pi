@@ -29,7 +29,7 @@ class ArticleModel extends Model {
 		parent::__construct($app);
 
 		$this->setTitle('Article');
-		$this->setViewFilename(__DIR__ . '/views/article.html');
+		$this->setViewFilename(__DIR__ . '/views/article.html.twig');
 
 		$categories = $this->newField('checkboxes');
 		$categories->setLabel('Catégories');

@@ -29,7 +29,7 @@ class PageModel extends Model {
 		parent::__construct($app);
 
 		$this->setTitle('Page');
-		$this->setViewFilename(__DIR__ . '/views/page.html');
+		$this->setViewFilename(__DIR__ . '/views/page.html.twig');
 
 		$content = $this->newField('textarea');
 		$content->setLabel('Contenu');

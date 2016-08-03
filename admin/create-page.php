@@ -30,7 +30,7 @@ if (isset($_POST)) {
 
 $models = $app->getModels();
 
-echo $app->render('@theme/admin/create-page.html', [
+echo $app->render('@theme/admin-pages/create-page.html', [
 	'menu_items' => $menuItems,
 	'models' => $models
 ]);
