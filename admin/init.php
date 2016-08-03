@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 require '../settings.php';
 
 use Pi\Core\App\App;

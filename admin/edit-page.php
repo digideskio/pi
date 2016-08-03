@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 require 'init.php';
 
 use Pi\Core\Model\Model;

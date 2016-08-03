@@ -17,6 +17,8 @@
  * along with Pi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 const DS = DIRECTORY_SEPARATOR;
 const EOL = PHP_EOL;
 
