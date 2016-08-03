@@ -25,14 +25,14 @@ class RoleRepository implements IRepository {
 	/**
 	 * Récupérer tous les rôles
 	 */
-	public function findAll(): array {
+	public function getAll(): array {
 		return [];
 	}
 
 	/**
 	 * Récupérer un rôle par son slug
 	 */
-	public function findBySlug(string $slug) {
+	public function getBySlug(string $slug) {
 		return null;
 	}
 

@@ -37,7 +37,7 @@ class PageRepository implements IRepository {
 	/**
 	 * Récupérer toutes les pages
 	 */
-	public function findAll(): array {
+	public function getAll(): array {
 		// Retourne les pages en cache s'il y en a
 		if (static::$cacheAllPages != null)
 			return static::$cacheAllPages;
@@ -57,7 +57,7 @@ class PageRepository implements IRepository {
 		$pages = [];
 
 		foreach ($dirs as $dir)
-			$pages[$dir] = static::findBySlug($dir);
+			$pages[$dir] = static::getBySlug($dir);
 
 		// Complète le cache avec les pages récupérées
 		static::$cacheAllPages = $pages;
@@ -69,7 +69,7 @@ class PageRepository implements IRepository {
 	/**
 	 * Récupérer une page par son slug
 	 */
-	public function findBySlug(string $slug) {
+	public function getBySlug(string $slug) {
 		$fileName = $this->getLastVersionFileName($slug);
 
 		if (!file_exists($fileName))

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 require 'init.php';
 
-$pages = $app->getPagesRepository()->findAll();
+$pages = $app->getPagesRepository()->getAll();
 
 echo $app->render('@theme/admin-pages/dashboard.html', [
 	'pages' => $pages,

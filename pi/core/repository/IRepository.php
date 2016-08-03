@@ -25,12 +25,12 @@ interface IRepository {
 	/**
 	 * Récupérer tous les éléments
 	 */
-	public function findAll(): array;
+	public function getAll(): array;
 
 	/**
 	 * Récupérer un élément par son slug
 	 */
-	public function findBySlug(string $slug);
+	public function getBySlug(string $slug);
 
 	/**
 	 * Enregistrer l'élément

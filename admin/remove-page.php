@@ -13,7 +13,7 @@ if (!isset($_GET['page']))
 $pageSlug = $_GET['page'];
 
 if ($pageSlug) {
-	$page = $app->getPagesRepository()->findBySlug($pageSlug);
+	$page = $app->getPagesRepository()->getBySlug($pageSlug);
 
 	if ($page) {
 		$app->getPagesRepository()->remove($page);

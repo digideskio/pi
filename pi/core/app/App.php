@@ -96,16 +96,16 @@ class App extends Pi {
 	 * Initialise les pages
 	 */
 	private function initializePages() {
-		$this->pages = new PageCollection($this->pagesRepository->findAll());
+		$this->pages = new PageCollection($this->pagesRepository->getAll());
 
 		try {
 			$this->currentPage = $this
 				->pagesRepository
-				->findBySlug($this->router->getPath());
+				->getBySlug($this->router->getPath());
 		} catch (\Exception $e) {
 			$this->currentPage = $this
 				->pagesRepository
-				->findBySlug('error');
+				->getBySlug('error');
 		}
 	}
 

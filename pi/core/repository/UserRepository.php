@@ -25,14 +25,14 @@ class UserRepository implements IRepository {
 	/**
 	 * Récupérer tous les utilisateurs
 	 */
-	public function findAll(): array {
+	public function getAll(): array {
 		return [];
 	}
 
 	/**
 	 * Récupérer un utilisateur par son slug
 	 */
-	public function findBySlug(string $slug) {
+	public function getBySlug(string $slug) {
 		return null;
 	}
 

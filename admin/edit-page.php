@@ -12,7 +12,7 @@ if (!isset($_GET['page']))
 
 $pageSlug = $_GET['page'];
 
-$page = $app->getPagesRepository()->findBySlug($pageSlug);
+$page = $app->getPagesRepository()->getBySlug($pageSlug);
 
 if (isset($_POST)) {
 	if (isset($_POST['model'])) {
